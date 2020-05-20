@@ -11,10 +11,10 @@
 import { CommonBase } from '@core/interfaces/common-base';
 export const appApiUrl: CommonBase = {
     auth: {
-        login: 'user/login',
-        register: 'user/register',
+        login: 'login',
+        register: 'register',
         emailVerification: 'user/emailVerification',
-        forgotPassword: 'user/forgotPassword',
+        forgotPassword: 'forgot-password',
         emailCheck: 'user/emailValidation',
         confirmToken: 'user/confirmToken',
         resetPassword: 'user/resetPassword',

@@ -13,7 +13,9 @@ export class ResetPasswordComponent implements OnInit {
   message: any;
   status: any;
   data: any;
-  userType:string="employer";
+  userType: string = "employer";
+  submitted = false;
+  error: any;
   constructor(private fb: FormBuilder,
     private authService: AuthService, private loader: LoaderService, private router: Router,
     private route: ActivatedRoute) { }
@@ -24,25 +26,30 @@ export class ResetPasswordComponent implements OnInit {
         Validators.required
       ]]
     });
-    if(localStorage.getItem("userType")){
-      this.userType=localStorage.getItem("userType");
+    if (localStorage.getItem("userType")) {
+      this.userType = localStorage.getItem("userType");
     }
   }
+  get f() { return this.forgotForm.controls; }
 
   onSubmit() {
+    this.submitted = true;
+    if (this.forgotForm.invalid) {
+      return;
+    }
     let formModel = this.forgotForm.value;
     this.loader.startLoading();
     this.authService.forgotPassword(formModel)
-      .subscribe((result) => {
+      .subscribe((result: any) => {
         this.loader.stopLoading();
-        this.forgotForm.reset();
-        if (result.status === 'success') {
+        //  this.forgotForm.reset();
+        if (result.payload.success) {
           this.status = '';
-          this.message = 'Reset password instructions has been sent to your email address. Please check your email';
-        } else if (result.status === 'notActive') {
+          this.message = result.payload.success
+        } else if (result.payload.error) {
           this.status = 'notActive';
           this.data = result.record;
-          this.message = "Your email address is inactive please check your inbox and activate account.";
+          this.error = result.payload.error;
         }
         else {
           this.status = '';

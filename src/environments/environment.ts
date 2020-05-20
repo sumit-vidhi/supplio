@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   env: 'local',
-  //host: 'https://api.guaranteedownlineclub.com/'
-  host: 'http://localhost/downlineclub-api/' // Add the api url here with slash at the end
+  host: 'https://supplio.resolvehost.com/backoffice/public/api/'
+  //host: 'http://localhost/downlineclub-api/' // Add the api url here with slash at the end
 };
 
 /*

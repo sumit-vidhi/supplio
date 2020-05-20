@@ -76,16 +76,16 @@ export class UserDashboardComponent implements OnInit {
     const formData = this.mmeFreeurlForm.value;
     formData.userId = this.loginService.getLoginUserId();
     this.loader.startLoading();
-    this.userService.addUrl(formData).subscribe((result) => {
-      this.loader.stopLoading();
-      if (result.status == 'success') {
-        result.record.authToken = result.record.accessToken;
-        this.loginService.setLoginUserDetail(result.record);
-        alert("Setting Saved");
-      } else {
-        alert(result.message);
-      }
-    })
+    // this.userService.addUrl(formData).subscribe((result) => {
+    //   this.loader.stopLoading();
+    //   if (result.status == 'success') {
+    //     result.record.authToken = result.record.accessToken;
+    //     this.loginService.setLoginUserDetail(result.record);
+    //     alert("Setting Saved");
+    //   } else {
+    //     alert(result.message);
+    //   }
+    // })
   }
 
   open(content) {

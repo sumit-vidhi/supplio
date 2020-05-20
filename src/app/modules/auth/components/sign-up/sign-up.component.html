@@ -1,154 +1,177 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-9">
-
-            <div class="login-form shadow rounded mt-5 mb-5">
-                <div class="card-body">
-                    <div class="card-title text-center mb-4">
-                        <h3>New User Sign up here!</h3>
-                        <h5>Already have an account <a href="javascript:void(0)" routerLink="/auth/login/{{userType}}">Login here</a>
-                        </h5>
-                    </div>
-                    <div class="card-text">
-
-                        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="first_name">First Name</label>
-                                        <input type="text" formControlName="firstName" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
-                                        <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                            <div *ngIf="f.firstName.errors.required">First Name is required</div>
-                                        </div>
-                                    </div>
-
+<div class="login-page">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-1"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4 mx-auto kt-login-box">
+                <div class="card card-signin my-5 shadow-sm">
+                    <div class="card-body">
+                        <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success nav-tabs-line-2x" role="tablist">
+                            <li class="nav-item"> <a class="nav-link" data-toggle="tab"
+                                    routerLink="/auth/login/{{userType}}" role="tab" aria-selected="true">
+                                    Login
+                                </a>
+                            </li>
+                            <li class="nav-item"> <a class="nav-link active" data-toggle="tab"
+                                    routerLink="/auth/signup/{{userType}}" role="tab" aria-selected="false">
+                                    Signup
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <!-- <div class="alert alert-danger fade show" role="alert">
+                                <div class="alert-icon"> <i class="{{ alertMsg.icon }}"></i>
                                 </div>
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="last_name">Last Name</label>
-                                        <input type="text" formControlName="lastName" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
-                                        <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
-                                        </div>
-                                    </div>
-
+                                <div class="alert-text">Failed Msg</div>
+                            </div>
+                            <div class="alert alert-success fade show" role="alert">
+                                <div class="alert-icon"> <i class="{{ alertMsg.icon }}"></i>
                                 </div>
+                                <div class="alert-text">Success Msg</div>
+                            </div> -->
 
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="companyName">Company Name</label>
-                                        <input type="text" formControlName="companyName" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" />
-                                        <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
-                                            <div *ngIf="f.companyName.errors.required">Company name is required</div>
-                                            <div *ngIf="f.companyName.errors.minlength">Company name must be at least 6
-                                                characters</div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" formControlName="password" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                            <div *ngIf="f.password.errors.required">Password is required</div>
-                                            <div *ngIf="f.password.errors.minlength">Password must be at least 6
-                                                characters</div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="confirm_password">Confirm Password</label>
-                                        <input type="password" formControlName="confirmPassword" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
-                                        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-                                            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required
+                            <div class="tab-pane active" id="signupTab" role="tabpanel">
+                                <div class="signup-card">
+                                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" formControlName="companyName" class="form-control"  placeholder="Company Name"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.companyName.errors }" />
+                                                <div *ngIf="submitted && f.companyName.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.companyName.errors.required">Company name is required
+                                                    </div>
+                                                    <div *ngIf="f.companyName.errors.minlength">Company name must be at
+                                                        least 6
+                                                        characters</div>
+                                                </div>
                                             </div>
-                                            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
                                         </div>
-                                    </div>
 
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" formControlName="firstName" class="form-control"  placeholder="First Name"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                                                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.firstName.errors.required">First Name is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                                                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="text" formControlName="email"   placeholder="Email" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+
+                                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                                    <div *ngIf="f.email.errors.email">Email must be a valid email
+                                                        address</div>
+                                                </div>
+                                                <div *ngIf="f.email.errors && f.email.errors.isEmailUnique"
+                                                    class="invalid-feedback">
+                                                    *Email already exists.
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="password" formControlName="password" class="form-control"  placeholder="Password"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6
+                                                        characters</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="input-group mb-3">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1"><i
+                                                            class="fas fa-user"></i></span>
+                                                </div>
+                                                <input type="password" formControlName="confirmPassword"
+                                                    class="form-control"  placeholder="Confirm Password"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                                                <div *ngIf="submitted && f.confirmPassword.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f.confirmPassword.errors.required">Confirm Password
+                                                        is required
+                                                    </div>
+                                                    <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must
+                                                        match</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="kt-login__extra">
+                                            <a  routerLink="/auth/login/{{userType}}"  id="kt_login_forgot">Already have an account?</a>
+                                        </div>
+                                        <div class="kt-login__actions">
+                                            <div class="form-group">
+                                                <button class="btn btn-primary btn-elevate kt-login__btn-primary"
+                                                    id="kt_login_signin_submit">
+                                                    Register
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="email_address">E-mail Address</label>
-                                        <input type="text" formControlName="email" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-
-                                            <div *ngIf="f.email.errors.required">Email is required</div>
-                                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
-                                        </div>
-                                        <div *ngIf="f.email.errors && f.email.errors.isEmailUnique"
-                                            class="invalid-feedback">
-                                            *Email already exists.
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-6">
-
-                                    <div class="form-group">
-                                        <label for="confirm_email_address">Confirm E-mail Address</label>
-                                        <input type="text" formControlName="confirmEmail" class="form-control"
-                                            [ngClass]="{ 'is-invalid': submitted && f.confirmEmail.errors }" />
-                                        <div *ngIf="submitted && f.confirmEmail.errors" class="invalid-feedback">
-                                            <div *ngIf="f.confirmEmail.errors.email">Confirm Email must be a valid email
-                                                address</div>
-                                            <div *ngIf="f.confirmEmail.errors.required">Confirm Email is required</div>
-                                            <div *ngIf="f.confirmEmail.errors.mustMatch">Email must match</div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
                             </div>
-
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" formControlName="accept"
-                                    id="remember_me">
-                                <label class="form-check-label" for="remember_me">I agree to the <a
-                                        href="javascript:void(0)" routerLink="/terms-of-use">Terms of Use</a></label>
-                                <div class="help-block text-danger" *ngIf="accept.invalid && submitted">
-                                    Accept terms of use.
-                                </div>
-                            </div>
-
-                            <div class="mt-4 text-center">
-                                <button class="btn btn-md btn-orange btn-submit btn-radius">Register Now</button>
-                            </div>
-
-                        </form>
-
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6 col-md-6 col-lg-6 mx-auto">
+                <div class="kt-login__block kt-login__section mt-5 my-5">
+                    <h3 class="kt-login__title">Create an Account</h3>
 
+                    <div class="kt-login__desc">
+                        Add your {{(userType=='employer')?'Company':'Agency'}} to <strong>Supplio!</strong><br />You’ll
+                        be
+                        directed to complete your {{(userType=='employer')?'Company':'Agency'}} profile. <br />
+                        &nbsp;
+                    </div>
 
-
+                    <div class="kt-intro-img">
+                        <img alt="login image" src="/assets/img/login-image.png" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
-
     </div>
-
 </div>

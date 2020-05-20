@@ -23,13 +23,14 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   userType: string;
+  error: string = '';
   constructor(private fb: FormBuilder, private authService: AuthService, private userservice: UserService,
     private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', [
-        Validators.required
+      email: ['', [
+        Validators.required, Validators.email
       ]],
       password: ['', Validators.required],
       rememberMe: ['']
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
       const userType = params.get("user");
       if (userType == "employer" || userType == "agency") {
         this.userType = userType;
+        console.log(this.userType);
         localStorage.setItem("userType", userType);
       } else {
         console.log(userType);
@@ -55,14 +57,14 @@ export class LoginComponent implements OnInit {
     }
     let formModal = this.loginForm.value;
     this.loader.startLoading();
-    this.authService.login(formModal).subscribe(result => {
+    this.authService.login(formModal).subscribe((result: any) => {
       this.loader.stopLoading();
-      if (result.status === 'success') {
+      if (result.payload.success) {
         result.record.authToken = result.record.accessToken;
         this.loginService.setLoginUserDetail(result.record);
         this.blogData();
-      } else if (result.status === 'notActive') {
-        alert("Your email address is inactive. Please check your inbox and activate account.");
+      } else if (result.payload.error) {
+        this.error = result.payload.error;
       } else {
         alert("Email and password is wrong");
       }
@@ -75,8 +77,8 @@ export class LoginComponent implements OnInit {
     if (this.loginService.getUserAccessToken()) {
       plan = this.loginService.getPlan();
     }
-    this.userservice.getBlogPage({ plan: plan }).subscribe((result) => {
-      this.loader.addblog(result.record);
-    })
+    // this.userservice.getBlogPage({ plan: plan }).subscribe((result) => {
+    //   this.loader.addblog(result.record);
+    // })
   }
 }
