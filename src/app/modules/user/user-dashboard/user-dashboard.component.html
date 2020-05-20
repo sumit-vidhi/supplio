@@ -1,0 +1,264 @@
+<!-- <app-user-header></app-user-header> -->
+
+<div class="container mt-4 mb-5">
+
+  <h1 *ngIf='dashboardData && dashboardData.totalUser>0'>{{(dashboardData.totalUser)?dashboardData.totalUser:'0'}}
+    Members Joined After You!</h1>
+  <br />
+  <!-- <app-user-nav></app-user-nav> -->
+
+
+  <!-- <form [formGroup]="formCard" (ngSubmit)="onFormSubmit()" novalidate>
+    <input id="cc-number" formControlName="creditCard" type="tel" autocomplete="cc-number" ccNumber>
+    <input id="cc-exp-date" formControlName="expirationDate" type="tel" autocomplete="cc-exp" ccExp>
+    <input id="cc-cvc" formControlName="cvc" type="tel" autocomplete="off" ccCvc>
+    <button class="btn btn-lg btn-primary btn-submit btn-radius">Save Url</button>
+  </form> -->
+
+  <div class="row dashboard-cards mt-4 mb-5" *ngIf='dashboardData && dashboardData.referral'>
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3 h-100">
+        <div class="card-body">
+          <h2 class="card-title mb-0">
+            {{(dashboardData.referral.totalReferral)?dashboardData.referral.totalReferral:'0'}}</h2>
+          <p class="card-text mb-0">Total Referrals</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3 h-100">
+        <div class="card-body">
+          <h2 class="card-title mb-0">{{(dashboardData.referral.passUp)?dashboardData.referral.passUp:'0'}}</h2>
+          <p class="card-text mb-0">Pass Referrals</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-orange mb-3 h-100">
+        <div class="card-body">
+          <h2 class="card-title mb-0" *ngIf="dashboardData.commisssion">{{ dashboardData.commisssion | currency }}</h2>
+          <h2 class="card-title mb-0" *ngIf="!dashboardData.commisssion">{{'0' | currency}}</h2>
+          <p class="card-text mb-0">Your Earnings by Now (total Transactions)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-cyan mb-3 h-100">
+        <div class="card-body">
+          <h2 class="card-title mb-0" *ngIf="dashboardData.commisssion">{{ dashboardData.commisssion | currency }}</h2>
+          <h2 class="card-title mb-0" *ngIf="!dashboardData.commisssion">{{'0' | currency}}</h2>
+          <p class="card-text mb-0">Your Current Balance</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">My Memberships</h5>
+    </div>
+    <div class="card-body" *ngIf="dashboardData && dashboardData.userData">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Level</th>
+            <th>Billing</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{dashboardData.userData.type}}</td>
+            <td>${{(dashboardData.userData.type=='basic')?'0':'17'}}</td>
+            <th><span class="text-success">Active</span></th>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <a href="javascript:void(0)" class="btn btn-primary btn-radius">Upgrade to VIP Marketer</a> -->
+      <a href="javascript:void(0)" *ngIf="loginService.getPlan()=='basic'" (click)='buyMoneyPlugin(content)'
+        class="btn btn-success btn-radius ml-3">Buy Money Plugin ($17)</a>
+    </div>
+  </div>
+
+  <div class="card mt-4" *ngIf="dashboardData && dashboardData.userData">
+    <div class="card-header">
+      <h5 class="mb-0">My Account</h5>
+    </div>
+    <div class="card-body">
+      <h5>{{dashboardData.userData.firstName}} {{dashboardData.userData.lastName}}</h5>
+      <div class="row mt-3">
+        <!-- <div class="col-md-6">
+            <p class="mb-0"><strong>Username:</strong> ianmsoki</p>      
+        </div> -->
+        <div class="col-md-6">
+          <p class="mb-0"><strong>Email:</strong> {{dashboardData.userData.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mt-4" *ngIf='dashboardData && dashboardData.sponserData.userName!="superadmin"'>
+    <div class="card-header">
+      <h5 class="mb-0">My Sponsor</h5>
+    </div>
+    <div class="card-body">
+      <h5>{{dashboardData.sponserData.firstName}} {{dashboardData.sponserData.lastName}}</h5>
+      <div class="row my-3">
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Email:</strong> {{dashboardData.sponserData.email}}</p>
+        </div>
+      </div>
+      <!-- <a href="javascript:void(0)" class="btn btn-success btn-radius" (click)="sendMessage = true">Send Message to Sponser</a> -->
+    </div>
+  </div>
+
+
+  <div class="card mt-4">
+    <div class="card-header">
+      <h5 class="mb-0">Promotion Urls</h5>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="mmeFreeurlForm" (ngSubmit)="onSubmit()">
+
+        <div class="card">
+          <div class="card-body">
+
+            <div class="row">
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label for="amount">MME Url</label>
+                  <input type="text" formControlName="mmeUrl" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.mmeUrl.errors }" />
+                  <div *ngIf="submitted && f.mmeUrl.errors" class="invalid-feedback">
+                    <div *ngIf="f.mmeUrl.errors.required">MME Url is required</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+
+                <div class="form-group">
+                  <label for="description">Free Lead system</label>
+                  <input type="text" formControlName="freeUrl" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.freeUrl.errors }" />
+                  <div *ngIf="submitted && f.freeUrl.errors" class="invalid-feedback">
+                    <div *ngIf="f.freeUrl.errors.required">FreeUrl is required</div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class="mt-4">
+          <button class="btn btn-lg btn-primary btn-submit btn-radius">Save Url</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
+
+  <div class="card mt-4">
+    <div class="card-header">
+      <h5 class="mb-0">Past Invoices</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-striped mb-0">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Level</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody *ngIf='dashboardData && dashboardData.memberuser && dashboardData.memberuser.length>0'>
+          <tr *ngFor='let data of dashboardData.memberuser'>
+            <td>{{data.createdDate | date: 'mediumDate'}}</td>
+            <td>{{data.plan}}</td>
+            <td>${{data.price}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+<div id="send-message-popup" *ngIf="sendMessage == true">
+
+  <div class="modal fade show" style="display:block;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Send Message to Sponser</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="sendMessage = false">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-group">
+            <label for="toMessage">To</label>
+            <input type="password" class="form-control" id="toMessage" value="andrewdacosta@rhyta.com">
+          </div>
+
+          <div class="form-group">
+            <label for="subjectMessage">Subject</label>
+            <input type="password" class="form-control" id="subjectMessage">
+          </div>
+
+          <div class="form-group">
+            <label for="yourMessage">Your Message *</label>
+            <textarea name="yourMessage" id="yourMessage" cols="10" class="form-control"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-radius btn-success">Send Message</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show">
+
+  </div>
+
+</div>
+
+
+<ng-template #content let-modal>
+
+  <div class="modal fade show" style="display:block;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ng-payment-card (formSaved)="processPayment(cc)"></ng-payment-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click ')">Save</button>
+    </div> -->
+</ng-template>

@@ -1,0 +1,43 @@
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+@include font-face("Gt Walsheim Regular", fonts/gt-walshiem-regular/gt-walsheim-web, 400, normal);
+@include font-face("Gt Walsheim Regular Italic", fonts/gt-walsheim-regular-italic/gt-walsheim-regular-oblique-web, 400, italic);
+@include font-face("Gt Walsheim Medium", fonts/gt-walshiem-medium/gt-walsheim-medium-web, 600, normal);
+@include font-face("Gt Walsheim Light", fonts/gt-walshiem-light/gt-walsheim-light-web, 300, normal);
+@include font-face("Gt Walsheim Light Italic", fonts/gt-walshiem-light-italic/gt-walsheim-light-oblique-web, 300, italic);
+@include font-face("Gt Walsheim Bold", fonts/gt-walshiem-bold/gt-walsheim-bold-web, 700, normal);
+@include font-face("Gt Walsheim Bold Italic", fonts/gt-walshiem-bold-italic/gt-walsheim-bold-oblique-web, 700, italic);
+
+
+$font-regular      : 'Gt Walsheim Regular';
+$font-italic       : 'Gt Walsheim Regular Italic';
+$font-medium       : 'Gt Walsheim Medium';
+$font-light        : 'Gt Walsheim Light';
+$font-light-italic : 'Gt Walsheim Light Italic';
+$font-bold         : 'Gt Walsheim Bold';
+$font-bold-italic  : 'Gt Walsheim Bold Italic';
