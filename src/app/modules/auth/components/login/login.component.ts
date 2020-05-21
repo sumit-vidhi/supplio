@@ -55,13 +55,15 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
+    this.error = "";
     let formModal = this.loginForm.value;
     this.loader.startLoading();
     this.authService.login(formModal).subscribe((result: any) => {
       this.loader.stopLoading();
-      if (result.payload.success) {
-        result.record.authToken = result.record.accessToken;
-        this.loginService.setLoginUserDetail(result.record);
+      if (result.payload.token) {
+     //   result.payload["authToken"] = result.payload.token;
+        result.payload.user["authToken"]= result.payload.token;
+        this.loginService.setLoginUserDetail(result.payload.user);
         this.blogData();
       } else if (result.payload.error) {
         this.error = result.payload.error;

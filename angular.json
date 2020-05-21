@@ -28,10 +28,11 @@
               "src/.htaccess"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/styles.scss"
             ],
-            "scripts": [
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

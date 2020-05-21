@@ -12,5 +12,5 @@
 export const environment = {
   production: true,
   env: 'prod',
-  host: 'https://api.guaranteedownlineclub.com/' // Add the api url here with slash at the end
+  host: 'https://supplio.resolvehost.com/backoffice/public/api/' // Add the api url here with slash at the end
 };

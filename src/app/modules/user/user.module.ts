@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
@@ -17,6 +17,9 @@ import { NgPaymentCardModule } from 'ng-payment-card';
     ReactiveFormsModule,
     CreditCardDirectivesModule,
     NgPaymentCardModule
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [UserRoutingModule.providers]
 })

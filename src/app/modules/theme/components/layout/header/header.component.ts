@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     let plan = 'basic';
     this._trialEndsAt = "2020-02-15";
-
+    //console.log(this.loginService.get)
     interval(3000).pipe(map((x) => {
       this._diff = Date.parse(this._trialEndsAt) - Date.parse(new Date().toString());
     })).subscribe((x) => {
@@ -66,6 +66,11 @@ export class HeaderComponent implements OnInit {
       this.blogPage = value;
     });
   }
+
+  capitalize(s) {
+    if (typeof s !== 'string') return ''
+    return s.charAt(0).toUpperCase();
+}
 
   openUserDropdown() {
     this.user_dropdown = !this.user_dropdown;

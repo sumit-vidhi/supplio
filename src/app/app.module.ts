@@ -3,7 +3,7 @@
  */
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 // Importing App Component
 import { AppComponent } from '@app/app.component';
@@ -13,6 +13,10 @@ import { CoreModule } from '@core/core.module';
 import { BasicThemeModule } from '@modules/theme/basic-theme.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+
+
 
 
 @NgModule({
@@ -24,8 +28,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     CoreModule,
     BasicThemeModule,
+    BsDropdownModule.forRoot(),
+    NgxIntlTelInputModule,
     NgbModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })

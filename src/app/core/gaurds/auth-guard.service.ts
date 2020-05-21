@@ -21,11 +21,8 @@ export class AuthGuard implements CanActivate {
 	}
 
 	checkLogin(url: string): boolean {
-		if (this.authService.IsAuthUser() && this.authService.getUserStatus() == '1') {
+		if (this.authService.IsAuthUser()) {
 			return true;
-		}else if(this.authService.IsAuthUser() && this.authService.getUserStatus() == '0'){
-			this.router.navigate(['user/edit-profile']);
-			return false;
 		}
 		this.router.navigate(['auth/login']);
 		return false;

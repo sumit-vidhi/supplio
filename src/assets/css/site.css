@@ -426,3 +426,23 @@ span.mat-checkbox-label {
     margin-right: 0 !important;
     text-align: center;
 }
+
+.kt-wizard-v2 .kt-wizard-v2__wrapper .kt-form {
+    width: 100%;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.locationAdd {
+    margin-top: 30px;
+    height: 40px;
+    width: 40px;
+    /* font-size: 40px !important; */
+}
+.kt-wizard-v2__review-title .fa-edit {
+    margin-left: 10px;
+    color: #0a8e9e;
+    font-size: 16px;
+}

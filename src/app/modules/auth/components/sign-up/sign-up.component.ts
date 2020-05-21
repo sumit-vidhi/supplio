@@ -39,22 +39,23 @@ export class SignUpComponent implements OnInit {
     referralId: any;
     referralEmail: any;
     userType: string;
+    message: string = '';
+    error: string = "";
     constructor(private formBuilder: FormBuilder, private authService: AuthService,
         private router: Router, private loader: LoaderService,
         private route: ActivatedRoute, ) { }
 
     ngOnInit() {
         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            companyName: ['', [Validators.required, Validators.minLength(6)]],
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
+            agency_name: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email], this.isEmailUnique.bind(this)],
-            confirmEmail: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            confirmPassword: ['', Validators.required],
+            confirm_password: ['', Validators.required],
             accept: ['', Validators.requiredTrue]
         }, {
-            validator: [MustMatch('password', 'confirmPassword'), MustMatch('email', 'confirmEmail')]
+            validator: [MustMatch('password', 'confirm_password')]
         });
         this.route.paramMap.subscribe(params => {
             const userType = params.get("user");
@@ -111,17 +112,24 @@ export class SignUpComponent implements OnInit {
         if (this.registerForm.invalid) {
             return;
         }
+        this.message = '';
+        this.error = '';
         const formData = this.registerForm.value;
-
+        formData.role = this.capitalize(this.userType);
         this.loader.startLoading();
-        this.authService.register(formData).subscribe((result) => {
+        this.authService.register(formData).subscribe((result: any) => {
             this.loader.stopLoading();
-            if (result.status == 'success') {
-                this.router.navigate(['auth/thankyou']);
-            } else {
-                alert(result.message);
+            if (result.payload.message) {
+                this.message = result.payload.message;
+            } else if (result.payload.error) {
+                this.error = result.payload.error;
             }
         })
+    }
+
+    capitalize(s) {
+        if (typeof s !== 'string') return ''
+        return s.charAt(0).toUpperCase() + s.slice(1)
     }
 
 }

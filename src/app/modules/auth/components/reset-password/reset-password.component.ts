@@ -37,15 +37,17 @@ export class ResetPasswordComponent implements OnInit {
     if (this.forgotForm.invalid) {
       return;
     }
+    this.message = '';
+    this.error = '';
     let formModel = this.forgotForm.value;
     this.loader.startLoading();
     this.authService.forgotPassword(formModel)
       .subscribe((result: any) => {
         this.loader.stopLoading();
         //  this.forgotForm.reset();
-        if (result.payload.success) {
+        if (result.payload.message) {
           this.status = '';
-          this.message = result.payload.success
+          this.message = result.payload.message
         } else if (result.payload.error) {
           this.status = 'notActive';
           this.data = result.record;
