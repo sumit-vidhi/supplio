@@ -34,7 +34,7 @@
                     <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
                         <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile">
                             <ul class="kt-menu__nav" *ngIf="loginService.getRole() === 'Employer'">
-                                <li class="kt-menu__item"> <a routerLink="/home"
+                                <li class="kt-menu__item"> <a routerLink="/user"
                                         class="kt-menu__link kt-menu__toggle"><span
                                             class="kt-menu__link-text">Dashboard</span></a>
                                 </li>
@@ -94,7 +94,7 @@
 
                                 <!--begin: Navigation -->
                                 <div class="kt-notification">
-                                    <a href="custom/apps/user/profile-1/personal-information.html"
+                                    <a  routerLink="/user/edit-profile"
                                         class="kt-notification__item">
                                         <div class="kt-notification__item-icon">
                                             <i class="flaticon2-calendar-3 kt-font-success"></i>

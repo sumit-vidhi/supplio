@@ -16,9 +16,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,

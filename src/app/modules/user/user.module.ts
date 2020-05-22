@@ -6,17 +6,16 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserNavComponent } from './user-nav/user-nav.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { CreditCardDirectivesModule } from 'angular-cc-library';
-import { NgPaymentCardModule } from 'ng-payment-card';
+import { CKEditorModule } from 'ng2-ckeditor';
+import { AutocompleteComponent } from './edit-profile/google-places.component';
 @NgModule({
-  declarations: [EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
+  declarations: [AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    CreditCardDirectivesModule,
-    NgPaymentCardModule
+    CKEditorModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

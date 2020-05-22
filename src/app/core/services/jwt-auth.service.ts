@@ -146,9 +146,9 @@ export class JWTAuthService {
   * Get login user id
   * @returns {CommonBase}
   */
-  getmmeUrl(): CommonBase {
+  getCompany(): CommonBase {
     if (window.localStorage[APP_USER]) {
-      return JSON.parse(window.localStorage[APP_USER]).mmeUrl;
+      return JSON.parse(window.localStorage[APP_USER]).agency_name;
     }
   }
 

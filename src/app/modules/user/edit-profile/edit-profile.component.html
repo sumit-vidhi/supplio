@@ -18,82 +18,42 @@
       </div>
     </div>
 
+
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
     <div class="kt-container kt-grid__item kt-grid__item--fluid">
       <div class="kt-portlet">
         <div class="kt-portlet__body kt-portlet__body--fit">
-          <div class="kt-grid kt-wizard-v2 kt-wizard-v2--white" id="kt_wizard_v2" data-ktwizard-state="first">
-            <div class="kt-grid__item kt-wizard-v2__aside">
-              <!--begin: Form Wizard Nav -->
-              <div class="kt-wizard-v2__nav">
-                <!--doc: Remove "kt-wizard-v2__nav-items--clickable" class and also set 'clickableSteps: false' in the JS init to disable manually clicking step titles -->
-                <div class="kt-wizard-v2__nav-items kt-wizard-v2__nav-items--clickable">
-                  <div class="kt-wizard-v2__nav-item" data-ktwizard-type="step" data-ktwizard-state="current">
-                    <div class="kt-wizard-v2__nav-body">
-                      <div class="kt-wizard-v2__nav-label">
-                        <div class="kt-wizard-v2__nav-label-title">
-                          Basic Information
-                        </div>
-                      </div>
-                      <div class="kt-wizard-v2__nav-icon first">
-                        <i class="fas fa-check-circle"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="kt-wizard-v2__nav-item" data-ktwizard-type="step" data-ktwizard-state="pending">
-                    <div class="kt-wizard-v2__nav-body">
-                      <div class="kt-wizard-v2__nav-label">
-                        <div class="kt-wizard-v2__nav-label-title">
-                          Locations
-                        </div>
-                      </div>
-                      <div class="kt-wizard-v2__nav-icon">
-                        <i class="fa fa-circle"></i>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="kt-wizard-v2__nav-item" href="#" data-ktwizard-type="step" data-ktwizard-state="pending">
-                    <div class="kt-wizard-v2__nav-body">
-                      <div class="kt-wizard-v2__nav-label">
-                        <div class="kt-wizard-v2__nav-label-title">
-                          About
-                        </div>
-                      </div>
-                      <div class="kt-wizard-v2__nav-icon">
-                        <i class="fa fa-circle"></i>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="kt-wizard-v2__nav-item" data-ktwizard-type="step" data-ktwizard-state="pending">
-                    <div class="kt-wizard-v2__nav-body">
-                      <div class="kt-wizard-v2__nav-label">
-                        <div class="kt-wizard-v2__nav-label-title">
-                          Review and Submit
-                        </div>
-                      </div>
-                      <div class="kt-wizard-v2__nav-icon">
-                        <i class="fa fa-circle"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!--end: Form Wizard Nav -->
+          <div class="row stepsWizard">
+            <div class="col-md-3 stepsList">
+              <ul class="steps">
+                <li (click)="changeStep('step1')" [ngClass]="{ 'active': isTabActive(1),'disabled':isTabDisabled(1) }">
+                  <a (click)="showTab(1)" role="tab" title="Step 1"> Basic Information <span class="first icon"><i
+                        class="fa fa-circle"></i> </span>
+                  </a></li>
+                <li (click)="changeStep('step2')" [ngClass]="{ 'active': isTabActive(2),'disabled':isTabDisabled(2) }"
+                  class=""> <a (click)="showTab(2)" role="tab" title="Step 1">Locations <span class="icon"><i
+                        class="fa fa-circle"></i>
+                    </span></a></li>
+                <li (click)="changeStep('step3')" [ngClass]="{ 'active': isTabActive(3),'disabled':isTabDisabled(3) }">
+                  <a (click)="showTab(3)" role="tab" title="Step 1">About <span class="icon"><i
+                        class="fa fa-circle"></i> </span></a></li>
+                <li (click)="changeStep('step4')"
+                  [ngClass]="{ 'completed': isTabActive(4),'disabled':isTabDisabled(4) }" class=""><a
+                    (click)="showTab(4)" role="tab" title="Step 1">Document <span class="icon"><i
+                        class="fa fa-circle"></i>
+                    </span></a></li>
+              </ul>
             </div>
-            <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v2__wrapper">
-              <!--begin: Form Wizard Form-->
-              <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="editForm" (ngSubmit)="onSubmit()">
-                <!--begin: Form Wizard Step 1-->
-                <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+            <div class="col-md-9">
+              <div class="stepContainer" id="step1"
+                [ngClass]="{ 'is-display': isTabActive(1),'is-hide': !isTabActive(1)}">
 
+                <h3>Basic Information</h3>
+                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="editForm"
+                  (ngSubmit)="onSubmit()">
 
-                  <div class="kt-heading kt-heading--md">
-                    Basic Information
-                  </div>
                   <div class="kt-form__section kt-form__section--first">
                     <div class="kt-wizard-v2__form">
                       <div class="row">
@@ -145,10 +105,10 @@
                             <select class="form-control" formControlName="company_size"
                               [ngClass]="{ 'is-invalid': submitted && f.company_size.errors }">
                               <option value="">Select Company Size</option>
-                              <option>Small 50 </option>
-                              <option>Medium 50-500</option>
-                              <option>Large 500-2000</option>
-                              <option>Enterprise 2000+</option>
+                              <option value="Small < 50">Small 50 </option>
+                              <option value="Medium 50-500">Medium 50-500</option>
+                              <option value="Large 500-2000">Large 500-2000</option>
+                              <option value="Enterprise 2000+"> Enterprise 2000+</option>
                             </select>
 
                             <div *ngIf="submitted && f.company_size.errors" class="invalid-feedback">
@@ -194,59 +154,105 @@
                           </div>
                         </div>
                       </div>
-                      <button class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      <button type="submit"
+                        class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
                         data-ktwizard-type="action-next">
                         Next Step
                       </button>
                     </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              </div>
+
               <!--end: Form Wizard Step 1-->
 
               <!--begin: Form Wizard Step 2-->
-              <div class="kt-wizard-v2__content" data-ktwizard-type="step-content">
-                <div class="kt-heading kt-heading--md">
-                  Locations
-                </div>
-                <div class="kt-form__section kt-form__section--first">
-                  <div class="kt-wizard-v2__form">
-                    <div class="row">
-                      <div class="col-xl-10">
-                        <div class="form-group">
-                          <label>Address</label>
-                          <input type="text" class="form-control" name="address1" placeholder="Type in your address"
-                            value="Address Line 1" aria-describedby="address1-error" />
-                          <span class="form-text text-muted">Please enter your Address.</span>
+              <div class="stepContainer" id="step1"
+                [ngClass]="{ 'is-display': isTabActive(2),'is-hide': !isTabActive(2)}">
+                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="locationForm"
+                  (ngSubmit)="locationSubmit()">
+                  <div class="kt-heading kt-heading--md">
+                    Locations
+                  </div>
+                  <div class="kt-form__section kt-form__section--first">
+                    <div class="kt-wizard-v2__form">
+
+                      <div class="row">
+                        <div class="col-xl-10">
+                          <div class="form-group">
+                            <label>Address</label>
+                            <div formArrayName="location"
+                              *ngFor="let arrayItem of locationForm.controls['location'].controls; let i=index">
+                              <div [formGroupName]="i" [ngClass]="{ 'is-invalid': locationSubmitted && getValidity(i)}">
+                                <AutocompleteComponent (setAddress)="getAddress($event,i)" adressType="geocode">
+                                </AutocompleteComponent>
+                                <!-- <input type="text" class="form-control" formControlName="address"
+                                  placeholder="Type in your address" aria-describedby="address1-error" /> -->
+                                <a class="" *ngIf="locationForm.controls['location'].controls.length>1"
+                                  (click)="removeItem(i)">Delete</a>
+                                <div class="form-text text-muted invalid-feedback"
+                                  *ngIf="locationSubmitted && getValidity(i)">
+                                  Please enter your
+                                  Address.</div>
+
+                              </div>
+
+                            </div>
+
+                          </div>
                         </div>
-                      </div>
-                      <div class="col-xl-2">
-                        <div>
-                          <a href="#" class="btn btn-primary locationAdd"><i class="fa fa-plus"></i></a>
+                        <div class="col-xl-2">
+                          <div>
+                            <a (click)="addItem(1)" class="btn btn-primary locationAdd"><i class="fa fa-plus"></i></a>
+                          </div>
                         </div>
+
                       </div>
+                      <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                        (click)="goPrevious()" data-ktwizard-type="action-prev">
+                        Previous
+                      </button>
+                      <button type="submit"
+                        class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                        data-ktwizard-type="action-next">
+                        Next Step
+                      </button>
 
                     </div>
-
                   </div>
-                </div>
+                </form>
               </div>
 
               <!--end: Form Wizard Step 2-->
 
               <!--begin: Form Wizard Step 3-->
-              <div class="kt-wizard-v2__content" data-ktwizard-type="step-content">
+              <div class="stepContainer" id="step1"
+                [ngClass]="{ 'is-display': isTabActive(3),'is-hide': !isTabActive(3)}">
                 <div class="kt-heading kt-heading--md">
                   Tell us about your company (Optional)
                 </div>
                 <div class="kt-form__section kt-form__section--first">
-                  <div class="kt-wizard-v2__form">
-                    <div class="form-group">
-                      <label>About</label>
-                      <textarea placeholder="Tell us about your company " class="form-control" rows="15"></textarea>
+                  <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="aboutForm"
+                    (ngSubmit)="aboutSubmit()">
+                    <div class="kt-wizard-v2__form">
+                      <div class="form-group">
+                        <label>About</label>
+                        <ckeditor formControlName="about_company" [config]="ckeConfig" debounce="500"
+                          (paste)="onPaste($event)" (change)="onChange($event)">
+                        </ckeditor>
+                      </div>
+                      <button (click)="goPrevious()"
+                        class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                        data-ktwizard-type="action-prev">
+                        Previous
+                      </button>
+                      <button type="submit"
+                        class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                        data-ktwizard-type="action-next">
+                        Next Step
+                      </button>
                     </div>
-
-                  </div>
+                  </form>
                 </div>
               </div>
 
@@ -255,7 +261,8 @@
 
 
               <!--begin: Form Wizard Step 6-->
-              <div class="kt-wizard-v2__content" data-ktwizard-type="step-content">
+              <div class="stepContainer" id="step1"
+                [ngClass]="{ 'is-display': isTabActive(4),'is-hide': !isTabActive(4)}">
                 <div class="kt-heading kt-heading--md">
                   Review your Details and Submit
                 </div>
@@ -266,9 +273,9 @@
                         Basic Information <i class="far fa-edit"></i>
                       </div>
                       <div class="kt-wizard-v2__review-content">
-                        John Wick<br />
-                        Phone: +61412345678<br />
-                        Email: johnwick@reeves.com
+                        {{appData.first_name}}{{appData.last_name}}<br />
+                        Phone: {{appData.phone_number}}<br />
+                        Email: {{appData.email}}
                       </div>
                     </div>
                     <div class="kt-wizard-v2__review-item">
@@ -291,30 +298,21 @@
                         asleep,' he said.
                       </div>
                     </div>
-
+                    <button (click)="goPrevious()"
+                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      data-ktwizard-type="action-prev">
+                      Previous
+                    </button>
+                    <button type="submit"
+                      class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      data-ktwizard-type="action-submit">
+                      Submit
+                    </button>
                   </div>
                 </div>
               </div>
 
               <!--end: Form Wizard Step 6-->
-
-              <!--begin: Form Actions -->
-              <div class="kt-form__actions">
-                <button class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                  data-ktwizard-type="action-prev">
-                  Previous
-                </button>
-                <button class="btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                  data-ktwizard-type="action-submit">
-                  Submit
-                </button>
-
-              </div>
-
-              <!--end: Form Actions -->
-
-
-              <!--end: Form Wizard Form-->
             </div>
           </div>
         </div>
@@ -323,11 +321,3 @@
     <!-- end:: Content -->
   </div>
 </div>
-
-
-<!-- <input type="text" formControlName="address" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
-        <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-          <div *ngIf="f.address.errors.required">Address is required</div>
-          <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        </div> -->

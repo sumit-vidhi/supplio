@@ -18,7 +18,7 @@ export const appApiUrl: CommonBase = {
         emailCheck: 'user/emailValidation',
         confirmToken: 'user/confirmToken',
         resetPassword: 'user/resetPassword',
-        editProfile: 'user/updateProfile',
+        editProfile: 'basic-information',
         getdata: 'user/getProfile',
         getdashboradData: 'user/getdashboradData',
         updatePassword: 'user/updatePassword',

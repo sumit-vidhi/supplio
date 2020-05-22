@@ -1,19 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
+/// <reference types="@types/googlemaps" />
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { UserService } from '@modules/user/services/user.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
-
+import { ElementRef, NgZone } from '@angular/core';
+import { APP_USER } from '@configs/app-settings.config';
+import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss']
 })
 export class EditProfileComponent implements OnInit {
+
+  address: Object;
+  establishmentAddress: Object;
+
+  formattedAddress: string;
+  formattedEstablishmentAddress: string;
+  modalReference: NgbModalRef;
+  phone: string;
   editForm: FormGroup;
+  aboutForm: FormGroup;
   submitted = false;
+  locationSubmitted = false;
   message: any;
   referral: any;
   email: any;
@@ -21,19 +34,33 @@ export class EditProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<any> = [];
-  constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private router: Router, private loader: LoaderService, public loginService: JWTAuthService) {
+  minTab = 1;      //Minimum Tab Step
+  maxTab = 4       //Maximum Tab Step
+
+  activeTab = this.minTab;
+  disabledTabs: any = [2, 3, 4];
+  appData: any;
+  locationForm: FormGroup;
+  ckeConfig: any;
+  @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
+  @ViewChild("myckeditor", { static: false }) ckeditor: any;
+  constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
+    private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
     for (let i = 2020; i >= 1950; i--) {
-      console.log(i);
       this.years.push(i);
     }
-    console.log(this.years);
+    this.ckeConfig = {
+      allowedContent: false,
+      extraPlugins: 'divarea',
+      forcePasteAsPlainText: true
+    };
   }
+
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
       agency_name: ['', Validators.required],
-      phone_code: ['', Validators.required],
+      phone_code: ['91', Validators.required],
       phone_number: ['', [Validators.required, Validators.pattern("[+-]?([0-9]*[.])?[0-9]+")]],
       year_of_establishment: ['', Validators.required],
       company_size: ['', Validators.required],
@@ -42,9 +69,40 @@ export class EditProfileComponent implements OnInit {
       designation: ['', Validators.required],
 
     });
-
+    const locationForm = this.formBuilder.group({
+      location: this.formBuilder.array([])
+    });
+    this.aboutForm = this.formBuilder.group({
+      about_company: ['']
+    });
+    const arrayControl = <FormArray>locationForm.controls['location'];
+    let newGroup = this.formBuilder.group({
+      address: ['', [Validators.required]]
+    });
+    arrayControl.push(newGroup);
+    this.locationForm = locationForm;
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
+    //  this.open(content);
   }
 
+
+  open(content) {
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: 'ticket-modal' });
+  }
+  get location() {
+    return this.locationForm.get('location') as FormArray;
+  }
+  addItem() {
+    const arrayControl = <FormArray>this.locationForm.controls['location'];
+    let newGroup = this.formBuilder.group({
+      address: ['', [Validators.required]]
+    });
+    arrayControl.push(newGroup);
+  }
+  removeItem(index) {
+    const arrayControl = <FormArray>this.locationForm.controls['location'];
+    arrayControl.removeAt(index);
+  }
 
 
   get f() { return this.editForm.controls; }
@@ -73,18 +131,120 @@ export class EditProfileComponent implements OnInit {
       return;
     }
 
+
     const formdata = this.editForm.value;
-    formdata.updateStatus = this.loginService.getUserStatus();
-    formdata.userId = this.loginService.getLoginUserId();
+    formdata.form_step = 1;
+
     this.loader.startLoading();
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        this.loginService.setLoginUserDetail(result.record);
+        //this.loginService.setLoginUserDetail(result.record);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
       }
     });
 
   }
+  changeStep(step) {
+
+  }
+
+  makeActive(tabId: number) {
+    let i = this.disabledTabs.indexOf(tabId);
+    if (i >= 0) {
+      this.disabledTabs.splice(i, 1);
+    }
+    this.activeTab = tabId;
+  }
+
+  showTab(tabId: number) {
+    if (!this.isTabDisabled(tabId))
+      this.activeTab = tabId;
+  }
+
+
+	/*
+    function name : isTabDisabled
+	Explain :this function use for active previous tab"
+    */
+  goPrevious() {
+    let prevTab = this.activeTab - 1;
+    if (prevTab >= this.minTab) {
+      this.makeActive(prevTab);
+    }
+  }
+
+  isTabActive(tabId: number) {
+    return this.activeTab === tabId;
+  }
+
+  isTabDisabled(tabId: number): boolean {
+    return this.disabledTabs.indexOf(tabId) >= 0;
+  }
+
+  locationSubmit() {
+    this.locationSubmitted = true;
+    if (this.locationForm.invalid) {
+      return;
+    }
+    const address = this.locationForm.value.location.map((value, index) => {
+      return this.locationForm.value.location[index].address;
+    })
+
+    this.loader.startLoading();
+    const data = {
+      locations: address
+    }
+    this.userService.editProfile(data).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        // this.loginService.setLoginUserDetail(result.record);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+
+  }
+  aboutSubmit() {
+
+    const formdata = this.aboutForm.value;
+    this.loader.startLoading();
+    this.userService.editProfile(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        // this.loginService.setLoginUserDetail(result.record);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+  }
+
+  getAddress(place: object, i) {
+    console.log(place);
+    if (Object.keys(place).length > 0) {
+      this.address = place['formatted_address'];
+      this.formattedAddress = place['formatted_address'];
+      this.zone.run(() => this.formattedAddress = place['formatted_address']);
+      this.addressForm.controls[i].setValue({ address: this.address });
+    } else {
+      this.addressForm.controls[i].setValue({ address: "" });
+    }
+    console.log(this.addressForm);
+  }
+  get addressForm(): FormArray {
+    return this.locationForm.get('location') as FormArray;
+  }
+  getValidity(i) {
+    return (<FormArray>this.locationForm.get('location')).controls[i].invalid;
+  }
 
 
 }
+

@@ -15,19 +15,38 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types": [
+      "googlemaps"
+    ],
     "lib": [
       "es2018",
       "dom"
     ],
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@configs/*": ["src/app/configs/*"],
-      "@core/*": ["src/app/core/*"],
-      "@interceptors/*": ["src/app/core/interceptors/*"],
-      "@theme/*": ["src/app/modules/theme/*"],
-      "@modules/*": ["src/app/modules/*"],
-      "@environment/*": ["src/environments/*"],
-      "@shared/*": ["src/app/modules/shared/*"]
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@configs/*": [
+        "src/app/configs/*"
+      ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@interceptors/*": [
+        "src/app/core/interceptors/*"
+      ],
+      "@theme/*": [
+        "src/app/modules/theme/*"
+      ],
+      "@modules/*": [
+        "src/app/modules/*"
+      ],
+      "@environment/*": [
+        "src/environments/*"
+      ],
+      "@shared/*": [
+        "src/app/modules/shared/*"
+      ]
     }
   }
 }
