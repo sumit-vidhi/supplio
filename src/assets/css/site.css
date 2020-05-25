@@ -467,11 +467,17 @@ span.mat-checkbox-label {
   vertical-align: middle;
   float: none;
 }
-.deleteLocation {
+.deleteLocation,
+.deleteDemandRow {
   float: right;
   margin: 2px 0;
 }
-
+.demandRow {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
+}
 .kt-wizard-v2__review-title .fa-edit {
   margin-left: 10px;
   color: #0a8e9e;
@@ -534,7 +540,9 @@ span.mat-checkbox-label {
   border-left: 1px solid #e2e5ec;
 }
 .stepButtons {
-  margin-top: 20px;
+  margin-top: 40px;
+  border-top: 1px solid #eeeef4;
+  padding: 30px 0;
 }
 .modal-open .modal {
   display: flex !important;
