@@ -303,8 +303,9 @@ export class DemandComponent implements OnInit {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
-  demandId:any;
+  demandId: any;
   hireDemand: any = "locally";
+  error: any;
   constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
     for (let i = 2020; i >= 1950; i--) {
@@ -320,8 +321,8 @@ export class DemandComponent implements OnInit {
 
   ngOnInit() {
     this.userService.checkDemand().subscribe((result: any) => {
-      if (result.payload.message) {
-        this.demandId = result.payload.message
+      if (result.payload.demand) {
+        this.demandId = result.payload.demand.id
       }
 
     });
@@ -351,9 +352,10 @@ export class DemandComponent implements OnInit {
     } else {
       this.mySelectForm.form.markAllAsTouched();
       if (this.mySelectForm.form.invalid) {
-        console.log('Please fill valid details!');
+        this.error = 'Please fill valid details!';
         return false;
       } else {
+        this.error = "";
         this.userService.checkDemand().subscribe((result: any) => {
 
 

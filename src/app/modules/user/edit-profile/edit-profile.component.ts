@@ -177,7 +177,8 @@ export class EditProfileComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user["authToken"] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -195,7 +196,8 @@ export class EditProfileComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user["authToken"] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
 
     });
@@ -255,7 +257,8 @@ export class EditProfileComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user["authToken"] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -273,7 +276,8 @@ export class EditProfileComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user["authToken"] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {

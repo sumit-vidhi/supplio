@@ -59,7 +59,8 @@
                     <label class="kt-option">
                       <span class="kt-option__control">
                         <span class="kt-radio kt-radio--bold kt-radio--brand">
-                          <input type="radio" name="demand" [(ngModel)]="hireDemand" value="locally" (change)="checkDemand($event)">
+                          <input type="radio" name="demand" [(ngModel)]="hireDemand" value="locally"
+                            (change)="checkDemand($event)">
                           <span></span>
                         </span>
                       </span>
@@ -82,7 +83,8 @@
                     <label class="kt-option">
                       <span class="kt-option__control">
                         <span class="kt-radio kt-radio--bold kt-radio--brand">
-                          <input type="radio" name="demand" [(ngModel)]="hireDemand" value="overseas" (change)="checkDemand($event)">
+                          <input type="radio" name="demand" [(ngModel)]="hireDemand" value="overseas"
+                            (change)="checkDemand($event)">
                           <span></span>
                         </span>
                       </span>
@@ -102,9 +104,10 @@
                     </label>
                   </div>
                   <div class="col-md-12" [ngClass]="{'isActive':isActive(),'is-hide':!isActive()}">
-                    <ng-select [items]="countries" name="country" required bindValue="code" bindLabel="name" appendTo="body"
-                      [(ngModel)]="selectedCity">
+                    <ng-select [items]="countries" name="country" required bindValue="code" bindLabel="name"
+                      appendTo="body" [(ngModel)]="selectedCity">
                     </ng-select>
+                    <span *ngIf="error" style="color:red">{{error}}</span>
                   </div>
                   <button type="submit" class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
                     data-ktwizard-type="action-next">
