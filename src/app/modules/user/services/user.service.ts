@@ -45,6 +45,12 @@ export class UserService {
   checkDemand(): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.creatDemand, '');
   }
+  createDemand(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.updateDemand, data);
+  }
+  getSubcategoies(): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getSubcategory);
+  }
 
 
   imageUpload(data): Observable<ApiResponseModel> {

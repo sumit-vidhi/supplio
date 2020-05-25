@@ -21,7 +21,8 @@ export class DemandComponent implements OnInit {
 
   address: Object;
   establishmentAddress: Object;
-
+  termForm: FormGroup;
+  termsubmitted = false;
   formattedAddress: string;
   formattedEstablishmentAddress: string;
   modalReference: NgbModalRef;
@@ -36,15 +37,17 @@ export class DemandComponent implements OnInit {
   userName: any;
   firstName: any;
   lastName: any;
+  benefitForm: FormGroup;
   years: Array<number> = [];
   minTab = 1;      //Minimum Tab Step
-  maxTab = 4       //Maximum Tab Step
+  maxTab = 5       //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
-  disabledTabs: any = [2, 3, 4];
+  disabledTabs: any = [2, 3, 4, 5];
   appData: any;
   locationForm: FormGroup;
   ckeConfig: any;
+  postDemand = 1;
   @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
   @ViewChild("myckeditor", { static: false }) ckeditor: any;
   @ViewChild('MySelectForm', { static: false })
@@ -306,6 +309,8 @@ export class DemandComponent implements OnInit {
   demandId: any;
   hireDemand: any = "locally";
   error: any;
+  demandCategory: any;
+  category: any;
   constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
     for (let i = 2020; i >= 1950; i--) {
@@ -320,35 +325,157 @@ export class DemandComponent implements OnInit {
 
 
   ngOnInit() {
-    this.userService.checkDemand().subscribe((result: any) => {
-      if (result.payload.demand) {
-        this.demandId = result.payload.demand.id
-      }
-
-    });
     const locationForm = this.formBuilder.group({
       location: this.formBuilder.array([])
     });
     this.aboutForm = this.formBuilder.group({
       about_company: ['']
     });
+    this.termForm = this.formBuilder.group({
+      // address: ['', [Validators.required]]
+      mode_of_interview: ['', [Validators.required]],
+      recruitment_fee: ['', [Validators.required]],
+      no_of_delegates: ['2', [Validators.required]],
+      flights_for_delegates: ['', [Validators.required]],
+      hotels_for_delegates: ['', [Validators.required]]
+    });
     const arrayControl = <FormArray>locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
-      address: ['', [Validators.required]]
+      // address: ['', [Validators.required]]
+      category_id: [null, [Validators.required]],
+      quantity: ['', [Validators.required]],
+      salary: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      nationality: ['', [Validators.required]],
+      age_bracket: [''],
+      qualification: [''],
+      years_of_experience: [''],
+      driver_license: [''],
+      job_desc: ['']
+    });
+    this.benefitForm = this.formBuilder.group({
+      // address: ['', [Validators.required]]
+      accommodation: [null, [Validators.required]],
+      visa_sponsorship: ['', [Validators.required]],
+      transportation: ['', [Validators.required]],
+      food: ['', [Validators.required]],
+      employment_location: ['', [Validators.required]],
+      employment_country: ['', [Validators.required]],
+      employment_city: ['', [Validators.required]],
+      contract_duration: ['', [Validators.required]],
+      contract_type: ['', [Validators.required]],
+      working_hours_day: ['', [Validators.required]],
+      working_hours_week: [null, [Validators.required]],
+      probation_period: ['', [Validators.required]],
+      overtime: ['', [Validators.required]],
+      medical_insurance: ['', [Validators.required]],
+      joining_ticket: ['', [Validators.required]],
+      paid_leaves: ['', [Validators.required]],
+      paid_leaves_duration: ['', [Validators.required]],
+      leave_ticket: ['', [Validators.required]],
+      uniform: ['', [Validators.required]],
+      other_benefits: [''],
     });
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    //this.setFormdata();
-    //this.setLocation(locationForm, arrayControl);
     this.phoneForm = this.formBuilder.group({
       phone: ['']
+    });
+    this.userService.getSubcategoies().subscribe((result: any) => {
+      this.category = result.payload.categories;
+    })
+    this.userService.checkDemand().subscribe((result: any) => {
+      if (result.payload.demand) {
+
+        this.demandId = result.payload.demand.id
+        this.hireDemand = result.payload.demand.hire_type;
+        this.hire = this.hireDemand;
+        this.demandCategory = result.payload.demand.demand_category;
+        this.selectedCity = result.payload.demand.hire_country;
+        if (result.payload.demand.demand_category.length) {
+          this.setLocation();
+          this.setBenifit(result.payload.demand);
+          this.setTerm(result.payload.demand);
+          this.postDemand = result.payload.demand.demand_type;
+        }
+
+      }
+
+    });
+
+
+  }
+
+
+  setBenifit(data) {
+    const newData = {
+      "accommodation": data.accommodation,
+      "visa_sponsorship": data.visa_sponsorship,
+      "transportation": data.transportation,
+      "food": data.food,
+      "employment_location": data.employment_location,
+      "employment_country": data.employment_country,
+      "employment_city": data.employment_city,
+      "contract_duration": data.contract_duration,
+      "contract_type": data.contract_type,
+      "working_hours_day": data.working_hours_day,
+      "working_hours_week": data.working_hours_week,
+      "probation_period": data.probation_period,
+      "overtime": data.overtime,
+      "medical_insurance": data.medical_insurance,
+      "joining_ticket": data.joining_ticket,
+      "paid_leaves": data.paid_leaves,
+      "paid_leaves_duration": data.paid_leaves_duration,
+      "leave_ticket": data.leave_ticket,
+      "uniform": data.uniform,
+      "other_benefits": data.other_benefits
+
+    }
+    this.benefitForm.setValue(newData);
+
+  }
+
+  setTerm(data) {
+    const newData = {
+      "mode_of_interview": data.mode_of_interview,
+      "recruitment_fee": data.recruitment_fee,
+      "no_of_delegates": data.no_of_delegates,
+      "flights_for_delegates": data.flights_for_delegates,
+      "hotels_for_delegates": data.hotels_for_delegates,
+
+    }
+    this.termForm.setValue(newData);
+    console.log(this.termForm.value);
+  }
+
+  updateDemand() {
+    const data = {
+      id: this.demandId,
+      form_step: 5,
+      demand_type: Number(this.postDemand)
+    };
+    this.loader.startLoading();
+    this.userService.createDemand(data).subscribe((result: any) => {
+      if (result.payload.demand) {
+        this.loader.stopLoading();
+      }
     });
   }
 
   demandFirst() {
     if (this.hireDemand == "locally") {
-
+      const data = {
+        id: this.demandId,
+        form_step: 1,
+        hire_type: this.hireDemand
+      };
+      this.loader.startLoading();
+      this.userService.createDemand(data).subscribe((result: any) => {
+        if (result.payload.demand) {
+          this.loader.stopLoading();
+        }
+      });
     } else {
       this.mySelectForm.form.markAllAsTouched();
       if (this.mySelectForm.form.invalid) {
@@ -356,9 +483,21 @@ export class DemandComponent implements OnInit {
         return false;
       } else {
         this.error = "";
-        this.userService.checkDemand().subscribe((result: any) => {
-
-
+        const data = {
+          id: this.demandId,
+          form_step: 1,
+          hire_type: this.hireDemand,
+          hire_country: this.selectedCity
+        };
+        this.loader.startLoading();
+        this.userService.createDemand(data).subscribe((result: any) => {
+          if (result.payload.demand) {
+            this.loader.stopLoading();
+          }
+          let nextTab = this.activeTab + 1;
+          if (nextTab <= this.maxTab) {
+            this.makeActive(nextTab);
+          }
         });
       }
 
@@ -367,7 +506,6 @@ export class DemandComponent implements OnInit {
   }
 
   checkDemand(event) {
-    console.log(2323);
     this.hire = event.target.value;
   }
   isActive() {
@@ -378,13 +516,23 @@ export class DemandComponent implements OnInit {
     }
   }
 
-  setLocation(locationForm, newGroup) {
-    const location = this.appData.users_locations.map((value, index) => {
-      return this.appData.users_locations[index].address;
-    })
+  setLocation() {
+    console.log(this.demandCategory);
     let groupArr = []
-    for (let i = 0; i < location.length; i++) {
-      groupArr.push(this.formBuilder.group({ 'address': [location[i], Validators.required] }));
+    for (let i = 0; i < this.demandCategory.length; i++) {
+      groupArr.push(this.formBuilder.group({
+        category_id: [this.demandCategory[i].category_id, [Validators.required]],
+        quantity: [this.demandCategory[i].quantity, [Validators.required]],
+        salary: [this.demandCategory[i].salary, [Validators.required]],
+        gender: [this.demandCategory[i].gender, [Validators.required]],
+        nationality: [this.demandCategory[i].nationality, [Validators.required]],
+        age_bracket: [''],
+        qualification: [''],
+        years_of_experience: [''],
+        driver_license: [''],
+        job_desc: ['']
+      }
+      ));
     }
 
     this.locationForm.setControl('location', this.formBuilder.array(groupArr));
@@ -415,7 +563,11 @@ export class DemandComponent implements OnInit {
   addItem() {
     const arrayControl = <FormArray>this.locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
-      address: ['', [Validators.required]]
+      category_id: [null, [Validators.required]],
+      quantity: ['', [Validators.required]],
+      salary: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      nationality: ['', [Validators.required]]
     });
     arrayControl.push(newGroup);
   }
@@ -425,7 +577,7 @@ export class DemandComponent implements OnInit {
   }
 
 
-  get f() { return this.editForm.controls; }
+  get f() { return this.benefitForm.controls; }
 
 
   getEmail() {
@@ -446,8 +598,6 @@ export class DemandComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.editForm);
-    this.submitted = true;
     if (this.editForm.invalid) {
       return;
     }
@@ -526,20 +676,20 @@ export class DemandComponent implements OnInit {
     if (this.locationForm.invalid) {
       return;
     }
+    console.log(this.locationForm.value.location);
     const address = this.locationForm.value.location.map((value, index) => {
       return this.locationForm.value.location[index].address;
     })
 
     this.loader.startLoading();
     const data = {
-      locations: address,
-      form_step: 2
+      demands: this.locationForm.value.location,
+      form_step: 2,
+      id: this.demandId
     }
-    this.userService.editProfile(data).subscribe((result: any) => {
+    this.userService.createDemand(data).subscribe((result: any) => {
       this.loader.stopLoading();
-      if (result.payload.message) {
-        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
+      if (result.payload.demand) {
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -548,22 +698,49 @@ export class DemandComponent implements OnInit {
     });
 
   }
-  aboutSubmit() {
-
-    const formdata = this.aboutForm.value;
+  benfitSubmit() {
+    this.submitted = true;
+    if (this.benefitForm.invalid) {
+      return;
+    }
+    const formdata = this.benefitForm.value;
     formdata.form_step = 3;
+    formdata.id = this.demandId;
     this.loader.startLoading();
-    this.userService.editProfile(formdata).subscribe((result: any) => {
+    this.userService.createDemand(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
-      if (result.payload.message) {
-        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
+      if (result.payload.demand) {
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
       }
     });
+  }
+
+  termSubmit() {
+    console.log(121212);
+    let nextTab = this.activeTab + 1;
+    if (nextTab <= this.maxTab) {
+      this.makeActive(nextTab);
+    }
+    // this.termsubmitted = true;
+    // if (this.termForm.invalid) {
+    //   return;
+    // }
+    // const formdata = this.termForm.value;
+    // formdata.form_step = 4;
+    // formdata.id = this.demandId;
+    // this.loader.startLoading();
+    // this.userService.createDemand(formdata).subscribe((result: any) => {
+    //   this.loader.stopLoading();
+    //   if (result.payload.demand) {
+    //   }
+    //   let nextTab = this.activeTab + 1;
+    //   if (nextTab <= this.maxTab) {
+    //     this.makeActive(nextTab);
+    //   }
+    // });
   }
 
   getAddress(place: object, i) {
