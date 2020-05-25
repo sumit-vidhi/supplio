@@ -5,12 +5,12 @@ import { AuthGuard } from '@core/gaurds/auth-guard.service';
 import { UserService } from '@modules/user/services/user.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-
+import { DemandComponent } from './demand/demand.component';
 const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
-    data: { title: 'My account' }
-    // canActivate: [AuthGuard]  
+    data: { title: 'My account' },
+     canActivate: [AuthGuard]
   },
   {
     path: '', component: UserDashboardComponent,
@@ -22,7 +22,12 @@ const routes: Routes = [
     data: { title: 'Change Password' },
     canActivate: [AuthGuard]
   },
-  
+  {
+    path: 'demand', component: DemandComponent,
+    data: { title: 'Demand' },
+    canActivate: [AuthGuard]
+  },
+
 ];
 
 @NgModule({

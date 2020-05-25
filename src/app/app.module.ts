@@ -13,21 +13,20 @@ import { CoreModule } from '@core/core.module';
 import { BasicThemeModule } from '@modules/theme/basic-theme.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { NgxIntlTelInputModule } from 'projects/ngx-intl-tel-input/src/lib/ngx-intl-tel-input.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     BasicThemeModule,
-    BsDropdownModule.forRoot(),
-    NgxIntlTelInputModule,
-    NgbModule
+    NgbModule,
+    NgxIntlTelInputModule
+    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

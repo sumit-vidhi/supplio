@@ -116,6 +116,9 @@ body
 body span.required {
   color: red;
 }
+.hidden{
+  display: none;
+}
 .tab-content {
   padding: 20px;
 }
@@ -487,9 +490,15 @@ span.mat-checkbox-label {
 .stepsWizard .steps .active > .icon{
   color: #074a79;
 }
-.stepsWizard .steps  .completed > .icon i:before {
-    content: "\f058";
+.stepsWizard .steps  .completed > a .icon i:before {
+    content: "\f058" !important;
     color: #074a79;
+}
+.stepsWizard .steps a {
+    color: #505050 !important;
+}
+.stepsWizard .steps .active > a .icon {
+    color: #074a79 !important;
 }
 
     

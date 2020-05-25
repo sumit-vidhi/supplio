@@ -5,7 +5,7 @@
       <div class="kt-container">
         <div class="kt-subheader__main">
           <h3 class="kt-subheader__title">
-            Stepper
+            Create Demand
           </h3>
 
         </div>
@@ -30,21 +30,21 @@
               <ul class="steps">
                 <li (click)="changeStep('step1')"
                   [ngClass]="{ 'completed': isTabActive(1),'disabled':isTabDisabled(1) }">
-                  <a (click)="showTab(1)" role="tab" title="Step 1"> Basic Information <span class="first icon"><i
+                  <a (click)="showTab(1)" role="tab" title="Step 1"> Create Demand <span class="first icon"><i
                         class="fa fa-circle"></i> </span>
                   </a></li>
                 <li (click)="changeStep('step2')"
                   [ngClass]="{ 'completed': isTabActive(2),'disabled':isTabDisabled(2) }" class=""> <a
-                    (click)="showTab(2)" role="tab" title="Step 1">Locations <span class="icon"><i
+                    (click)="showTab(2)" role="tab" title="Step 1">Benefits <span class="icon"><i
                         class="fa fa-circle"></i>
                     </span></a></li>
                 <li (click)="changeStep('step3')"
                   [ngClass]="{ 'completed': isTabActive(3),'disabled':isTabDisabled(3) }">
-                  <a (click)="showTab(3)" role="tab" title="Step 1">About <span class="icon"><i
+                  <a (click)="showTab(3)" role="tab" title="Step 1">Terms & Conditions <span class="icon"><i
                         class="fa fa-circle"></i> </span></a></li>
                 <li (click)="changeStep('step4')"
                   [ngClass]="{ 'completed': isTabActive(4),'disabled':isTabDisabled(4) }" class=""><a
-                    (click)="showTab(4)" role="tab" title="Step 1">Document <span class="icon"><i
+                    (click)="showTab(4)" role="tab" title="Step 1">Post Demand <span class="icon"><i
                         class="fa fa-circle"></i>
                     </span></a></li>
               </ul>
@@ -53,119 +53,63 @@
               <div class="stepContainer" id="step1"
                 [ngClass]="{ 'is-display': isTabActive(1),'is-hide': !isTabActive(1)}">
 
-                <h3>Basic Information</h3>
-                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="editForm"
-                  (ngSubmit)="onSubmit()">
-
-                  <div class="kt-form__section kt-form__section--first">
-                    <div class="kt-wizard-v2__form">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Company Legal Name *</label>
-                            <input type="text" class="form-control" formControlName="agency_name"
-                              placeholder="Company Legal Name" aria-describedby="fname-error"
-                              [ngClass]="{ 'is-invalid': submitted && f.agency_name.errors }" />
-                            <div *ngIf="submitted && f.agency_name.errors" class="invalid-feedback">
-                              <div *ngIf="f.agency_name.errors.required">Company name is required</div>
-                            </div>
-                            <!-- <span class="form-text text-muted">Please enter your first name.</span> -->
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Phone Number *</label>
-
-
-                            <input type="text" class="form-control" formControlName="phone_number"
-                              placeholder="Phone number with country code" aria-describedby="fname-error"
-                              [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }" />
-                            <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
-                              <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Year of establishment *</label>
-                            <select class="form-control" formControlName="year_of_establishment"
-                              [ngClass]="{ 'is-invalid': submitted && f.year_of_establishment.errors }">
-                              <option [ngValue]="null" disabled>Select year</option>
-
-                              <option *ngFor='let data of years' [ngValue]="data">{{data}}</option>
-
-                            </select>
-                            <div *ngIf="submitted && f.year_of_establishment.errors" class="invalid-feedback">
-                              <div *ngIf="f.year_of_establishment.errors.required">Year of establishment is required
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Company Size *</label>
-                            <select class="form-control" formControlName="company_size"
-                              [ngClass]="{ 'is-invalid': submitted && f.company_size.errors }">
-                              <option [ngValue]="null" disabled>Select Company Size</option>
-                              <option value="Small < 50">Small 50 </option>
-                              <option value="Medium 50-500">Medium 50-500</option>
-                              <option value="Large 500-2000">Large 500-2000</option>
-                              <option value="Enterprise 2000+"> Enterprise 2000+</option>
-                            </select>
-
-                            <div *ngIf="submitted && f.company_size.errors" class="invalid-feedback">
-                              <div *ngIf="f.company_size.errors.required">Company size is required</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Website *</label>
-                            <input type="text" class="form-control" formControlName="website"
-                              placeholder="Company Website" aria-describedby="fname-error"
-                              [ngClass]="{ 'is-invalid': submitted && f.website.errors }" />
-                            <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
-                              <div *ngIf="f.website.errors.required">Website is required</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Company Owner Name/ Authorized Signatory *</label>
-                            <input type="text" class="form-control" formControlName="owner_name"
-                              placeholder="Company Owner Name/ Authorized Signatory" aria-describedby="fname-error"
-                              [ngClass]="{ 'is-invalid': submitted && f.owner_name.errors }" />
-                            <div *ngIf="submitted && f.owner_name.errors" class="invalid-feedback">
-                              <div *ngIf="f.owner_name.errors.required">Owner name is required</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Designation of Authorized Signatory *</label>
-                            <input type="text" class="form-control" formControlName="designation"
-                              placeholder="Designation of Authorized Signatory " aria-describedby="fname-error"
-                              [ngClass]="{ 'is-invalid': submitted && f.designation.errors }" />
-                            <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
-                              <div *ngIf="f.designation.errors.required">Designation is required</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <button type="submit"
-                        class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-next">
-                        Next Step
-                      </button>
-                    </div>
+                <h3>Create Demand</h3>
+                <form role="form" #MySelectForm="ngForm" (submit)="demandFirst()">
+                  <div class="col-md-6 pull-left">
+                    <label class="kt-option">
+                      <span class="kt-option__control">
+                        <span class="kt-radio kt-radio--bold kt-radio--brand">
+                          <input type="radio" name="demand" [(ngModel)]="hireDemand" value="locally" (change)="checkDemand($event)">
+                          <span></span>
+                        </span>
+                      </span>
+                      <span class="kt-option__label">
+                        <span class="kt-option__head">
+                          <span class="kt-option__title">
+                            Hire locally
+                          </span>
+                          <span class="kt-option__focus">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                          </span>
+                        </span>
+                        <span class="kt-option__body">
+                          If you want to post your demand for local region
+                        </span>
+                      </span>
+                    </label>
                   </div>
+                  <div class="col-md-6 pull-right">
+                    <label class="kt-option">
+                      <span class="kt-option__control">
+                        <span class="kt-radio kt-radio--bold kt-radio--brand">
+                          <input type="radio" name="demand" [(ngModel)]="hireDemand" value="overseas" (change)="checkDemand($event)">
+                          <span></span>
+                        </span>
+                      </span>
+                      <span class="kt-option__label">
+                        <span class="kt-option__head">
+                          <span class="kt-option__title">
+                            Hire Overseas
+                          </span>
+                          <span class="kt-option__focus">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                          </span>
+                        </span>
+                        <span class="kt-option__body">
+                          If you want to post your demand for globally
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-md-12" [ngClass]="{'isActive':isActive(),'is-hide':!isActive()}">
+                    <ng-select [items]="countries" name="country" required bindValue="code" bindLabel="name" appendTo="body"
+                      [(ngModel)]="selectedCity">
+                    </ng-select>
+                  </div>
+                  <button type="submit" class="btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                    data-ktwizard-type="action-next">
+                    Next Step
+                  </button>
                 </form>
               </div>
 
@@ -297,7 +241,7 @@
                         About <a (click)="showTab(3)"><i class="far fa-edit"></i></a>
                       </div>
                       <div class="kt-wizard-v2__review-content" [innerHtml]="appData.about_company">
-                      
+
                       </div>
                     </div>
                     <button (click)="goPrevious()"

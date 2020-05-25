@@ -16,11 +16,12 @@ export class AutocompleteComponent implements OnInit, AfterViewInit {
     @Input() adressType: string;
     @Output() setAddress: EventEmitter<any> = new EventEmitter();
     @ViewChild('addresstext', { static: false }) addresstext: any;
-
+    @Input() address: string;
     autocompleteInput: string;
     queryWait: boolean;
 
     constructor() {
+
     }
     demo() {
         if (this.autocompleteInput == '') {
@@ -34,6 +35,10 @@ export class AutocompleteComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+
+        if (this.address) {
+            this.autocompleteInput = this.address;
+        }
     }
 
     ngAfterViewInit() {

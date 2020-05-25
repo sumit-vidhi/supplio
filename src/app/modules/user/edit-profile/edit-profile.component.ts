@@ -9,6 +9,8 @@ import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { ElementRef, NgZone } from '@angular/core';
 import { APP_USER } from '@configs/app-settings.config';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -33,10 +35,10 @@ export class EditProfileComponent implements OnInit {
   userName: any;
   firstName: any;
   lastName: any;
-  years: Array<any> = [];
+  years: Array<number> = [];
   minTab = 1;      //Minimum Tab Step
   maxTab = 4       //Maximum Tab Step
-
+  phoneForm: FormGroup;
   activeTab = this.minTab;
   disabledTabs: any = [2, 3, 4];
   appData: any;
@@ -44,6 +46,9 @@ export class EditProfileComponent implements OnInit {
   ckeConfig: any;
   @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
   @ViewChild("myckeditor", { static: false }) ckeditor: any;
+  separateDialCode = true;
+
+
   constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
     for (let i = 2020; i >= 1950; i--) {
@@ -82,7 +87,38 @@ export class EditProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    //  this.open(content);
+    this.setFormdata();
+    this.setLocation(locationForm, arrayControl);
+    this.phoneForm = this.formBuilder.group({
+      phone: ['']
+    });
+  }
+
+  setLocation(locationForm, newGroup) {
+    const location = this.appData.users_locations.map((value, index) => {
+      return this.appData.users_locations[index].address;
+    })
+    let groupArr = []
+    for (let i = 0; i < location.length; i++) {
+      groupArr.push(this.formBuilder.group({ 'address': [location[i], Validators.required] }));
+    }
+
+    this.locationForm.setControl('location', this.formBuilder.array(groupArr));
+    console.log(this.locationForm.get('location')['controls'][0].value.address);
+  }
+  setFormdata() {
+    var data = {
+      agency_name: this.appData.agency_name,
+      company_size: this.appData.company_size,
+      designation: this.appData.designation,
+      owner_name: this.appData.owner_name,
+      phone_code: this.appData.phone_code || "+91",
+      phone_number: this.appData.phone_number,
+      website: this.appData.website,
+      year_of_establishment: (this.appData.year_of_establishment) ? Number(this.appData.year_of_establishment) : null
+    }
+    this.editForm.setValue(data);
+    this.aboutForm.setValue({ about_company: this.appData.about_company });
   }
 
 
@@ -126,6 +162,7 @@ export class EditProfileComponent implements OnInit {
 
 
   onSubmit() {
+    console.log(this.editForm);
     this.submitted = true;
     if (this.editForm.invalid) {
       return;
@@ -139,7 +176,8 @@ export class EditProfileComponent implements OnInit {
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        //this.loginService.setLoginUserDetail(result.record);
+        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetail(result.payload.user);
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -147,6 +185,20 @@ export class EditProfileComponent implements OnInit {
       }
     });
 
+  }
+
+  reviewSubmit() {
+    const formdata = { form_step: 5 };
+
+    this.loader.startLoading();
+    this.userService.editProfile(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetail(result.payload.user);
+      }
+
+    });
   }
   changeStep(step) {
 
@@ -196,12 +248,14 @@ export class EditProfileComponent implements OnInit {
 
     this.loader.startLoading();
     const data = {
-      locations: address
+      locations: address,
+      form_step: 2
     }
     this.userService.editProfile(data).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        // this.loginService.setLoginUserDetail(result.record);
+        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetail(result.payload.user);
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -213,11 +267,13 @@ export class EditProfileComponent implements OnInit {
   aboutSubmit() {
 
     const formdata = this.aboutForm.value;
+    formdata.form_step = 3;
     this.loader.startLoading();
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        // this.loginService.setLoginUserDetail(result.record);
+        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetail(result.payload.user);
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {

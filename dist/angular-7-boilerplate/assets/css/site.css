@@ -426,3 +426,70 @@ span.mat-checkbox-label {
     margin-right: 0 !important;
     text-align: center;
 }
+
+.kt-wizard-v2 .kt-wizard-v2__wrapper .kt-form {
+    width: 100%;
+}
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.locationAdd {
+    margin-top: 30px;
+    height: 40px;
+    width: 40px;
+    /* font-size: 40px !important; */
+}
+.kt-wizard-v2__review-title .fa-edit {
+    margin-left: 10px;
+    color: #0a8e9e;
+    font-size: 16px;
+}
+.stepsWizard {
+    padding: 40px;
+}
+.stepsWizard  .steps {
+    list-style: none;
+    padding-left: 0;
+}
+.stepsWizard .steps li {
+    padding: 20px 10px;
+    text-align: right;
+    position: relative;
+}
+.stepsWizard  .stepsList{
+  border-right: 1px solid #eee;
+}
+.stepsWizard ul.steps li i {
+    font-size: 30px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.stepsWizard .steps .icon:before {
+    position: absolute;
+    border: 1px solid #999;
+    width: 0;
+    height: 42px;
+    display: block;
+    content: "";
+    right: 25px;
+    z-index: 1;
+    top: -21px;
+    margin-left: -1px;
+}
+
+.stepsWizard .steps .icon.first:before{
+  display: none;
+}
+
+.stepsWizard .steps .active > .icon{
+  color: #074a79;
+}
+.stepsWizard .steps  .completed > .icon i:before {
+    content: "\f058";
+    color: #074a79;
+}
+
+    

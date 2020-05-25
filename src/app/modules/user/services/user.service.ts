@@ -42,8 +42,11 @@ export class UserService {
   changepassword(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.updatePassword, data);
   }
+  checkDemand(): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.creatDemand, '');
+  }
 
- 
+
   imageUpload(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.imageUpload, data);
   }
