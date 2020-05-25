@@ -11,8 +11,8 @@
 import { CommonBase } from '@core/interfaces/common-base';
 
 export const appSettings: CommonBase = {
-  appTitle: 'Easy Start. More Earning. Better Business.',
-  appLogo: ''
+  appTitle: 'Supplio - A Modern Manpower Solution',
+  appLogo: '',
 };
 
 export const TOKEN_NAME = 'api_token'; // Local storage Key where user JWT token stored

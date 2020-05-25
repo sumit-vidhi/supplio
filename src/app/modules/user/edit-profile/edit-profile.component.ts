@@ -1,6 +1,13 @@
 /// <reference types="@types/googlemaps" />
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  FormArray,
+  AbstractControl,
+} from '@angular/forms';
 import { UserService } from '@modules/user/services/user.service';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
@@ -8,16 +15,19 @@ import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { ElementRef, NgZone } from '@angular/core';
 import { APP_USER } from '@configs/app-settings.config';
-import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbModal,
+  ModalDismissReasons,
+  NgbModalRef,
+} from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
 })
 export class EditProfileComponent implements OnInit {
-
   address: Object;
   establishmentAddress: Object;
 
@@ -36,8 +46,8 @@ export class EditProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<number> = [];
-  minTab = 1;      //Minimum Tab Step
-  maxTab = 4       //Maximum Tab Step
+  minTab = 1; //Minimum Tab Step
+  maxTab = 4; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
   disabledTabs: any = [2, 3, 4];
@@ -45,44 +55,54 @@ export class EditProfileComponent implements OnInit {
   locationForm: FormGroup;
   ckeConfig: any;
   @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
-  @ViewChild("myckeditor", { static: false }) ckeditor: any;
+  @ViewChild('myckeditor', { static: false }) ckeditor: any;
   separateDialCode = true;
 
-
-  constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
-    private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    public zone: NgZone,
+    public modalService: NgbModal,
+    private router: Router,
+    private loader: LoaderService,
+    public loginService: JWTAuthService,
+    private ngZone: NgZone
+  ) {
     for (let i = 2020; i >= 1950; i--) {
       this.years.push(i);
     }
     this.ckeConfig = {
       allowedContent: false,
       extraPlugins: 'divarea',
-      forcePasteAsPlainText: true
+      removePlugins: 'horizontalrule,tabletools,specialchar,about,list,others',
+      removeButtons:
+        'Save,NewPage,Preview,Print,Templates,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Find,Select,Button,ImageButton,HiddenField,CopyFormatting,CreateDiv,BidiLtr,BidiRtl,Language,Flash,Smiley,PageBreak,Iframe,ShowBlocks,Cut,Copy,Paste,Table,Image,Format,Source,Maximize,Styles,Anchor,SpecialChar,PasteFromWord,PasteText,Scayt,Undo,Redo,Strike,RemoveFormat,Indent,Outdent',
     };
   }
-
 
   ngOnInit() {
     this.editForm = this.formBuilder.group({
       agency_name: ['', Validators.required],
       phone_code: ['91', Validators.required],
-      phone_number: ['', [Validators.required, Validators.pattern("[+-]?([0-9]*[.])?[0-9]+")]],
+      phone_number: [
+        '',
+        [Validators.required, Validators.pattern('[+-]?([0-9]*[.])?[0-9]+')],
+      ],
       year_of_establishment: ['', Validators.required],
       company_size: ['', Validators.required],
       website: ['', Validators.required],
       owner_name: ['', Validators.required],
       designation: ['', Validators.required],
-
     });
     const locationForm = this.formBuilder.group({
-      location: this.formBuilder.array([])
+      location: this.formBuilder.array([]),
     });
     this.aboutForm = this.formBuilder.group({
-      about_company: ['']
+      about_company: [''],
     });
     const arrayControl = <FormArray>locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
-      address: ['', [Validators.required]]
+      address: ['', [Validators.required]],
     });
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
@@ -90,17 +110,19 @@ export class EditProfileComponent implements OnInit {
     this.setFormdata();
     this.setLocation(locationForm, arrayControl);
     this.phoneForm = this.formBuilder.group({
-      phone: ['']
+      phone: [''],
     });
   }
 
   setLocation(locationForm, newGroup) {
     const location = this.appData.users_locations.map((value, index) => {
       return this.appData.users_locations[index].address;
-    })
-    let groupArr = []
+    });
+    let groupArr = [];
     for (let i = 0; i < location.length; i++) {
-      groupArr.push(this.formBuilder.group({ 'address': [location[i], Validators.required] }));
+      groupArr.push(
+        this.formBuilder.group({ address: [location[i], Validators.required] })
+      );
     }
 
     this.locationForm.setControl('location', this.formBuilder.array(groupArr));
@@ -112,18 +134,22 @@ export class EditProfileComponent implements OnInit {
       company_size: this.appData.company_size,
       designation: this.appData.designation,
       owner_name: this.appData.owner_name,
-      phone_code: this.appData.phone_code || "+91",
+      phone_code: this.appData.phone_code || '+91',
       phone_number: this.appData.phone_number,
       website: this.appData.website,
-      year_of_establishment: (this.appData.year_of_establishment) ? Number(this.appData.year_of_establishment) : null
-    }
+      year_of_establishment: this.appData.year_of_establishment
+        ? Number(this.appData.year_of_establishment)
+        : null,
+    };
     this.editForm.setValue(data);
     this.aboutForm.setValue({ about_company: this.appData.about_company });
   }
 
-
   open(content) {
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: 'ticket-modal' });
+    this.modalReference = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      windowClass: 'ticket-modal',
+    });
   }
   get location() {
     return this.locationForm.get('location') as FormArray;
@@ -131,7 +157,7 @@ export class EditProfileComponent implements OnInit {
   addItem() {
     const arrayControl = <FormArray>this.locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
-      address: ['', [Validators.required]]
+      address: ['', [Validators.required]],
     });
     arrayControl.push(newGroup);
   }
@@ -140,14 +166,13 @@ export class EditProfileComponent implements OnInit {
     arrayControl.removeAt(index);
   }
 
-
-  get f() { return this.editForm.controls; }
-
+  get f() {
+    return this.editForm.controls;
+  }
 
   getEmail() {
     return this.loginService.getLoginUserEmail();
   }
-
 
   getUserName() {
     return this.loginService.getLoginUserName();
@@ -160,14 +185,12 @@ export class EditProfileComponent implements OnInit {
     return this.loginService.getLastUserName();
   }
 
-
   onSubmit() {
     console.log(this.editForm);
     this.submitted = true;
     if (this.editForm.invalid) {
       return;
     }
-
 
     const formdata = this.editForm.value;
     formdata.form_step = 1;
@@ -176,7 +199,9 @@ export class EditProfileComponent implements OnInit {
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
@@ -185,7 +210,6 @@ export class EditProfileComponent implements OnInit {
         this.makeActive(nextTab);
       }
     });
-
   }
 
   reviewSubmit() {
@@ -195,16 +219,15 @@ export class EditProfileComponent implements OnInit {
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
-
     });
   }
-  changeStep(step) {
-
-  }
+  changeStep(step) {}
 
   makeActive(tabId: number) {
     let i = this.disabledTabs.indexOf(tabId);
@@ -215,12 +238,10 @@ export class EditProfileComponent implements OnInit {
   }
 
   showTab(tabId: number) {
-    if (!this.isTabDisabled(tabId))
-      this.activeTab = tabId;
+    if (!this.isTabDisabled(tabId)) this.activeTab = tabId;
   }
 
-
-	/*
+  /*
     function name : isTabDisabled
 	Explain :this function use for active previous tab"
     */
@@ -246,17 +267,19 @@ export class EditProfileComponent implements OnInit {
     }
     const address = this.locationForm.value.location.map((value, index) => {
       return this.locationForm.value.location[index].address;
-    })
+    });
 
     this.loader.startLoading();
     const data = {
       locations: address,
-      form_step: 2
-    }
+      form_step: 2,
+    };
     this.userService.editProfile(data).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
@@ -265,17 +288,17 @@ export class EditProfileComponent implements OnInit {
         this.makeActive(nextTab);
       }
     });
-
   }
   aboutSubmit() {
-
     const formdata = this.aboutForm.value;
     formdata.form_step = 3;
     this.loader.startLoading();
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
-        result.payload.user["authToken"] = this.loginService.getUserAccessToken();
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
       }
@@ -291,10 +314,10 @@ export class EditProfileComponent implements OnInit {
     if (Object.keys(place).length > 0) {
       this.address = place['formatted_address'];
       this.formattedAddress = place['formatted_address'];
-      this.zone.run(() => this.formattedAddress = place['formatted_address']);
+      this.zone.run(() => (this.formattedAddress = place['formatted_address']));
       this.addressForm.controls[i].setValue({ address: this.address });
     } else {
-      this.addressForm.controls[i].setValue({ address: "" });
+      this.addressForm.controls[i].setValue({ address: '' });
     }
     console.log(this.addressForm);
   }
@@ -304,7 +327,4 @@ export class EditProfileComponent implements OnInit {
   getValidity(i) {
     return (<FormArray>this.locationForm.get('location')).controls[i].invalid;
   }
-
-
 }
-
