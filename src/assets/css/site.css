@@ -7,7 +7,25 @@ body {
   font-weight: 400;
   line-height: 26px;
   background-color: #f9f9fc !important;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  height: 100vh;
 }
+app-root {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  display: block;
+}
+.container-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
 .body-bg {
   background-image: url(../media/demos/demo4/header.jpg);
   background-position: center top;
@@ -449,12 +467,11 @@ span.mat-checkbox-label {
   vertical-align: middle;
   float: none;
 }
-.locationAdd {
-  margin-top: 30px;
-  height: 40px;
-  width: 40px;
-  /* font-size: 40px !important; */
+.deleteLocation {
+  float: right;
+  margin: 2px 0;
 }
+
 .kt-wizard-v2__review-title .fa-edit {
   margin-left: 10px;
   color: #0a8e9e;
@@ -518,4 +535,20 @@ span.mat-checkbox-label {
 }
 .stepButtons {
   margin-top: 20px;
+}
+.modal-open .modal {
+  display: flex !important;
+  align-items: center !important;
+}
+.modal-dialog {
+  flex-grow: 1;
+}
+.stepEditLink {
+  cursor: pointer;
+}
+
+.kt-wizard-v2__review-title {
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  margin: 10px 0;
 }

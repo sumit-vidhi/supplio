@@ -8,13 +8,10 @@ import { JWTAuthService } from '@core/services/jwt-auth.service';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
+  constructor(public _router: Router, public loginService: JWTAuthService) {}
 
-  constructor(public _router: Router,public loginService: JWTAuthService,) { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

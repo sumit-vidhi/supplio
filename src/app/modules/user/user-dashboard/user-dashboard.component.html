@@ -1,5 +1,11 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<div
+  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
+  id="kt_body"
+>
+  <div
+    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+    id="kt_content"
+  >
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -7,13 +13,9 @@
           <h3 class="kt-subheader__title">
             Dashboard
           </h3>
-
         </div>
         <div class="kt-subheader__toolbar">
-          <div class="kt-subheader__wrapper">
-
-
-          </div>
+          <div class="kt-subheader__wrapper"></div>
         </div>
       </div>
     </div>
@@ -103,7 +105,6 @@
         </div>
       </div>
 
-
       <!--End::Row-->
 
       <!--End::Dashboard 3-->
@@ -113,22 +114,35 @@
   </div>
 </div>
 <div #myDiv id="tutor-price" (click)="open(content)"></div>
-<ng-template #content let-modal>
+<ng-template #content let-modal class="modal-dialog-centered">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">
-      <span>Welcome to {{loginService.getCompany()}} page!</span>
+      <span>Welcome to {{ loginService.getCompany() }} page!</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <div class="ticket-content mb-4">You’re just a couple of steps away from finding the right agency.
-      Please update your company information including company trade license
-      and identity that will help us verify your company before we take your
-      demand.
-      Please, add your basic information first to unlock the following tabs</div>
-    <br>
+    <div class="ticket-content mb-4">
+      <p>
+        You’re just a couple of steps away from finding the right agency.
+      </p>
+      <p>
+        Please update your company information including company trade license
+        and identity that will help us verify your company before we take your
+        demand.
+      </p>
+      <p>
+        Please, add your basic information first to unlock the following tabs
+      </p>
+    </div>
+    <br />
     <a (click)="editPage()" class="btn">Get Started</a>
   </div>
   <!-- <div class="modal-footer">

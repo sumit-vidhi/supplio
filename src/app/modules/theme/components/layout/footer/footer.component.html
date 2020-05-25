@@ -1,20 +1,23 @@
-
-  <div class="kt-footer kt-footer--extended kt-grid__item" id="kt_footer" *ngIf='loginService.IsAuthUser()'>
-
-    <div class="kt-footer__bottom">
-      <div class="kt-container">
-        <div class="kt-footer__wrapper">
-          <div class="kt-footer__logo">
-            <a class="kt-header__brand-logo" href="javascript:;"> </a>
-            <div class="kt-footer__copyright">2020&nbsp;&copy;&nbsp; <a href="javascript:;">{{ siteTitle }}</a>
-            </div>
+<div
+  class="kt-footer kt-footer--extended kt-grid__item"
+  id="kt_footer"
+  *ngIf="loginService.IsAuthUser()"
+>
+  <div class="kt-footer__bottom">
+    <div class="kt-container">
+      <div class="kt-footer__wrapper">
+        <div class="kt-footer__logo">
+          <a class="kt-header__brand-logo" href="javascript:;"> </a>
+          <div class="kt-footer__copyright">
+            2020&nbsp;&copy;&nbsp; <a href="javascript:;">{{ siteTitle }}</a>
           </div>
-          <div class="kt-footer__menu"> <a href="javscript:;">Terms & Conditions</a>
-            <a href="javscript:;">Help</a>
-            <a href="javscript:;">Blog</a>
-          </div>
+        </div>
+        <div class="kt-footer__menu">
+          <a href="javscript:;">Terms & Conditions</a>
+          <a href="javscript:;">Help</a>
+          <a href="javscript:;">Blog</a>
         </div>
       </div>
     </div>
   </div>
- 
+</div>
