@@ -21,6 +21,7 @@ import {
   NgbModalRef,
 } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-edit-profile',
@@ -57,7 +58,7 @@ export class EditProfileComponent implements OnInit {
   @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
   @ViewChild('myckeditor', { static: false }) ckeditor: any;
   separateDialCode = true;
-
+  confirmMessage: any;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -212,7 +213,7 @@ export class EditProfileComponent implements OnInit {
     });
   }
 
-  reviewSubmit() {
+  reviewSubmit(content) {
     const formdata = { form_step: 5 };
 
     this.loader.startLoading();
@@ -223,11 +224,15 @@ export class EditProfileComponent implements OnInit {
           'authToken'
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
+        this.confirmMessage = result.message;
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.open(content)
       }
     });
   }
-  changeStep(step) {}
+
+
+  changeStep(step) { }
 
   makeActive(tabId: number) {
     let i = this.disabledTabs.indexOf(tabId);

@@ -17,6 +17,7 @@ export const appApiUrl: CommonBase = {
         forgotPassword: 'forgot-password',
         emailCheck: 'user/emailValidation',
         creatDemand: 'demands/createEmptyDemand',
+        demandList:'demands/myList',
         updateDemand: 'demands/update',
         resetPassword: 'user/resetPassword',
         editProfile: 'basic-information',

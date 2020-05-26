@@ -56,6 +56,9 @@ export class UserService {
   imageUpload(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.imageUpload, data);
   }
+  demandList(data): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?hire_type="+data.hire_type+"&hire_country="+data.hire_country+"&demand_type="+data.demand_type+"&status="+data.status);
+  }
 
 
 }

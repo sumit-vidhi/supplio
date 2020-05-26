@@ -8,11 +8,12 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AutocompleteComponent } from './edit-profile/google-places.component';
+import { demandListComponent } from './demandlist/demandlist.component';
 import { DemandComponent } from './demand/demand.component';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
-  declarations: [DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
+  declarations: [demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

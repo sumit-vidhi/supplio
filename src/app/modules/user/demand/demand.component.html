@@ -69,7 +69,7 @@
                   'is-hide': !isTabActive(1)
                 }">
                 <h3>Create Demand</h3>
-                <form role="form" #MySelectForm="ngForm" (submit)="demandFirst()">
+                <form role="form" #MySelectForm="ngForm" (submit)="demandFirst(content)">
                   <div class="row">
                     <div class="col-md-6 pull-left">
                       <label class="kt-option">
@@ -482,7 +482,8 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <!-- <label for="accommodation">&nbsp;</label> -->
-                                    <a class="btn btn-priamry" (click)="showDetail(i)"> {{(isValidDetail[i])?'Hide':'Show'}}
+                                    <a class="btn btn-priamry" (click)="showDetail(i)">
+                                      {{(isValidDetail[i])?'Hide':'Show'}}
                                       Details</a>
                                   </div>
                                 </div>
@@ -494,10 +495,7 @@
                                   <div class="row">
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Age Bracket</label>
-                                      <select class="form-control" formControlName="age_bracket" [ngClass]="{
-                                        'is-invalid':
-                                          submitted && f.year_of_establishment.errors
-                                      }">
+                                      <select class="form-control" formControlName="age_bracket">
                                         <option [ngValue]="null">Select Age Bracket</option>
                                         <option value="16-18">16-18</option>
                                         <option value="19-25">19-25</option>
@@ -508,31 +506,19 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Qualification</label>
-                                      <input type="text" class="form-control" formControlName="qualification" [ngClass]="{
-                                        'is-invalid':
-                                          submitted && f.qualification.errors
-                                      }" placeholder="Qualification" />
+                                      <input type="text" class="form-control" formControlName="qualification"  />
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Years of Experience</label>
-                                      <input type="text" formControlName="years_of_experience" [ngClass]="{
-                                        'is-invalid':
-                                          submitted && f.years_of_experience.errors
-                                      }" class="form-control" placeholder="Years of Experience" />
+                                      <input type="text" formControlName="years_of_experience" class="form-control" placeholder="Years of Experience" />
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Driver License</label>
-                                      <input type="text" formControlName="driver_license" [ngClass]="{
-                                        'is-invalid':
-                                          submitted && f.driver_license.errors
-                                      }" class="form-control" placeholder="Driver License" />
+                                      <input type="text" formControlName="driver_license" class="form-control" placeholder="Driver License" />
                                     </div>
                                     <div class="form-group col-md-12">
                                       <label for="accommodation">Job Description</label>
-                                      <textarea class="form-control" formControlName="job_desc" [ngClass]="{
-                                        'is-invalid':
-                                          submitted && f.job_desc.errors
-                                      }" placeholder="Job Description"></textarea>
+                                      <textarea class="form-control" formControlName="job_desc" placeholder="Job Description"></textarea>
                                     </div>
                                     <div class="form-group col-md-12">
                                       <label for="accommodation">Job Description</label>
@@ -1122,7 +1108,7 @@
                   </a>
                   <button type="submit"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-next" (click)="updateDemand()">
+                    data-ktwizard-type="action-next" (click)="updateDemand(content)">
                     <span>
                       <span> Post Demand</span>
                       <i class="la la-angle-right"></i>
@@ -1141,3 +1127,27 @@
     <!-- end:: Content -->
   </div>
 </div>
+
+<ng-template #content let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Demand Created</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="ticket-content mb-4">
+      <p>
+        {{confirmMessage}}
+      </p>
+
+    </div>
+    <br />
+    <a (click)="createDemand()" class="btn">Create New Demand</a>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click ')">Ok</button>
+  </div>
+</ng-template>

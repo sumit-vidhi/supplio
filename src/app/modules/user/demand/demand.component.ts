@@ -55,7 +55,7 @@ export class DemandComponent implements OnInit {
   hire: any;
   separateDialCode = true;
   selectedCity: any;
- // isValidDetail = false;
+  // isValidDetail = false;
   countries = [
     { "name": "Afghanistan", "code": "AF" },
     { "name": "Åland Islands", "code": "AX" },
@@ -313,6 +313,7 @@ export class DemandComponent implements OnInit {
   error: any;
   demandCategory: any;
   category: any;
+  confirmMessage: any;
   constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
     for (let i = 2020; i >= 1950; i--) {
@@ -455,7 +456,7 @@ export class DemandComponent implements OnInit {
     this.isValidDetail[i] = !this.isValidDetail[i];
   }
 
-  updateDemand() {
+  updateDemand(content) {
     const data = {
       id: this.demandId,
       form_step: 5,
@@ -465,11 +466,13 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(data).subscribe((result: any) => {
       if (result.payload.demand) {
         this.loader.stopLoading();
+        this.confirmMessage = result.message;
+        this.open(content);
       }
     });
   }
 
-  demandFirst() {
+  demandFirst(content) {
     if (this.hireDemand == "locally") {
       const data = {
         id: this.demandId,
@@ -480,6 +483,8 @@ export class DemandComponent implements OnInit {
       this.userService.createDemand(data).subscribe((result: any) => {
         if (result.payload.demand) {
           this.loader.stopLoading();
+          this.confirmMessage = result.message;
+          this.open(content);
         }
       });
     } else {
@@ -525,7 +530,7 @@ export class DemandComponent implements OnInit {
   setLocation() {
     let groupArr = []
     for (let i = 0; i < this.demandCategory.length; i++) {
-      this.isValidDetail[i]=false;
+      this.isValidDetail[i] = false;
       groupArr.push(this.formBuilder.group({
         category_id: [this.demandCategory[i].category_id, [Validators.required]],
         quantity: [this.demandCategory[i].quantity, [Validators.required]],
@@ -726,28 +731,24 @@ export class DemandComponent implements OnInit {
   }
 
   termSubmit() {
-    console.log(121212);
-    let nextTab = this.activeTab + 1;
-    if (nextTab <= this.maxTab) {
-      this.makeActive(nextTab);
+
+    this.termsubmitted = true;
+    if (this.termForm.invalid) {
+      return;
     }
-    // this.termsubmitted = true;
-    // if (this.termForm.invalid) {
-    //   return;
-    // }
-    // const formdata = this.termForm.value;
-    // formdata.form_step = 4;
-    // formdata.id = this.demandId;
-    // this.loader.startLoading();
-    // this.userService.createDemand(formdata).subscribe((result: any) => {
-    //   this.loader.stopLoading();
-    //   if (result.payload.demand) {
-    //   }
-    //   let nextTab = this.activeTab + 1;
-    //   if (nextTab <= this.maxTab) {
-    //     this.makeActive(nextTab);
-    //   }
-    // });
+    const formdata = this.termForm.value;
+    formdata.form_step = 4;
+    formdata.id = this.demandId;
+    this.loader.startLoading();
+    this.userService.createDemand(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.demand) {
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
   }
 
   getAddress(place: object, i) {
@@ -768,7 +769,9 @@ export class DemandComponent implements OnInit {
   getValidity(i) {
     return (<FormArray>this.locationForm.get('location')).controls[i].invalid;
   }
-
+  createDemand() {
+    this.ngOnInit();
+  }
 
 }
 
