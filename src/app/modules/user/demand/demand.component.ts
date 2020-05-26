@@ -55,6 +55,7 @@ export class DemandComponent implements OnInit {
   hire: any;
   separateDialCode = true;
   selectedCity: any;
+ // isValidDetail = false;
   countries = [
     { "name": "Afghanistan", "code": "AF" },
     { "name": "Åland Islands", "code": "AX" },
@@ -306,6 +307,7 @@ export class DemandComponent implements OnInit {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
+  isValidDetail = [false];
   demandId: any;
   hireDemand: any = "locally";
   error: any;
@@ -449,6 +451,10 @@ export class DemandComponent implements OnInit {
     console.log(this.termForm.value);
   }
 
+  showDetail(i) {
+    this.isValidDetail[i] = !this.isValidDetail[i];
+  }
+
   updateDemand() {
     const data = {
       id: this.demandId,
@@ -517,20 +523,20 @@ export class DemandComponent implements OnInit {
   }
 
   setLocation() {
-    console.log(this.demandCategory);
     let groupArr = []
     for (let i = 0; i < this.demandCategory.length; i++) {
+      this.isValidDetail[i]=false;
       groupArr.push(this.formBuilder.group({
         category_id: [this.demandCategory[i].category_id, [Validators.required]],
         quantity: [this.demandCategory[i].quantity, [Validators.required]],
         salary: [this.demandCategory[i].salary, [Validators.required]],
         gender: [this.demandCategory[i].gender, [Validators.required]],
         nationality: [this.demandCategory[i].nationality, [Validators.required]],
-        age_bracket: [''],
-        qualification: [''],
-        years_of_experience: [''],
-        driver_license: [''],
-        job_desc: ['']
+        age_bracket: [this.demandCategory[i].age_bracket],
+        qualification: [this.demandCategory[i].qualification],
+        years_of_experience: [this.demandCategory[i].years_of_experience],
+        driver_license: [this.demandCategory[i].driver_license],
+        job_desc: [this.demandCategory[i].job_desc]
       }
       ));
     }
@@ -579,6 +585,7 @@ export class DemandComponent implements OnInit {
 
   get f() { return this.benefitForm.controls; }
 
+  get m() { return this.termForm.controls; }
 
   getEmail() {
     return this.loginService.getLoginUserEmail();

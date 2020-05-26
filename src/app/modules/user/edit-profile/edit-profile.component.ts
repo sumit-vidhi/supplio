@@ -230,7 +230,6 @@ export class EditProfileComponent implements OnInit {
   changeStep(step) {}
 
   makeActive(tabId: number) {
-    debugger;
     let i = this.disabledTabs.indexOf(tabId);
     if (i >= 0) {
       this.disabledTabs.splice(i, 1);
@@ -247,7 +246,6 @@ export class EditProfileComponent implements OnInit {
 	Explain :this function use for active previous tab"
     */
   goPrevious() {
-    debugger
     let prevTab = this.activeTab - 1;
     if (prevTab >= this.minTab) {
       this.makeActive(prevTab);
@@ -255,7 +253,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   isTabActive(tabId: number) {
-    console.log(this.activeTab)
     return this.activeTab === tabId;
   }
 

@@ -6,6 +6,30 @@ body {
   font-size: 15px !important;
   font-weight: 400;
   line-height: 26px;
+  background-color: #f9f9fc !important;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  align-items: stretch;
+  height: 100vh;
+}
+app-root {
+  order: 0;
+  flex: 1 1 auto;
+  align-self: auto;
+  display: block;
+}
+.container-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.body-bg {
+  background-image: url(../media/demos/demo4/header.jpg);
+  background-position: center top;
+  background-size: 100% 350px;
 }
 body button {
   font-size: 14px !important;
@@ -65,7 +89,7 @@ body h5,
 body h6,
 body .font-mon,
 body .mat-tab-label-content {
-  font-family: "Montserrat", sans-serif !important;
+  font-family: 'Montserrat', sans-serif !important;
 }
 body .mat-input-element,
 body mat-label,
@@ -115,6 +139,15 @@ body
 }
 body span.required {
   color: red;
+}
+.hidden {
+  display: none;
+}
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
 }
 .tab-content {
   padding: 20px;
@@ -218,7 +251,7 @@ body span.required {
 .modal .modal-content .modal-header .close {
   outline: none !important;
   color: #fff;
-  font-family: "LineAwesome";
+  font-family: 'LineAwesome';
   text-decoration: inherit;
   text-rendering: optimizeLegibility;
   text-transform: none;
@@ -239,7 +272,7 @@ body span.required {
   width: 0;
   height: 41px;
   display: block;
-  content: "";
+  content: '';
   left: 50%;
   z-index: 1;
   top: -41px;
@@ -253,7 +286,7 @@ body span.required {
   .kt-wizard-v2__aside
   .kt-wizard-v2__nav
   .kt-wizard-v2__nav-items
-  .kt-wizard-v2__nav-item[data-ktwizard-state="current"] {
+  .kt-wizard-v2__nav-item[data-ktwizard-state='current'] {
   background: none;
 }
 .kt-wizard-v2
@@ -269,7 +302,6 @@ body span.required {
   float: right;
   margin-right: 40px;
 }
-
 
 .login-page {
   background-image: url(../img/admin-login-bg.png);
@@ -422,74 +454,109 @@ span.mat-checkbox-label {
   min-height: 500px;
 }
 .login-page .nav-tabs .nav-item {
-    width: 50%;
-    margin-right: 0 !important;
-    text-align: center;
+  width: 50%;
+  margin-right: 0 !important;
+  text-align: center;
 }
 
 .kt-wizard-v2 .kt-wizard-v2__wrapper .kt-form {
-    width: 100%;
+  width: 100%;
 }
 .vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+  display: inline-block;
+  vertical-align: middle;
+  float: none;
 }
-.locationAdd {
-    margin-top: 30px;
-    height: 40px;
-    width: 40px;
-    /* font-size: 40px !important; */
+.deleteLocation,
+.deleteDemandRow {
+  float: right;
+  margin: 2px 0;
+}
+.demandRow {
+  background: #f7f7f7;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 10px;
 }
 .kt-wizard-v2__review-title .fa-edit {
-    margin-left: 10px;
-    color: #0a8e9e;
-    font-size: 16px;
+  margin-left: 10px;
+  color: #0a8e9e;
+  font-size: 16px;
 }
 .stepsWizard {
-    padding: 40px;
+  padding: 40px;
 }
-.stepsWizard  .steps {
-    list-style: none;
-    padding-left: 0;
+.stepsWizard .steps {
+  list-style: none;
+  padding-left: 0;
 }
 .stepsWizard .steps li {
-    padding: 20px 10px;
-    text-align: right;
-    position: relative;
+  padding: 20px 10px;
+  text-align: right;
+  position: relative;
 }
-.stepsWizard  .stepsList{
+.stepsWizard .stepsList {
   border-right: 1px solid #eee;
 }
 .stepsWizard ul.steps li i {
-    font-size: 30px;
-    vertical-align: middle;
-    margin-left: 10px;
+  font-size: 30px;
+  vertical-align: middle;
+  margin-left: 10px;
 }
 
 .stepsWizard .steps .icon:before {
-    position: absolute;
-    border: 1px solid #999;
-    width: 0;
-    height: 42px;
-    display: block;
-    content: "";
-    right: 25px;
-    z-index: 1;
-    top: -21px;
-    margin-left: -1px;
+  position: absolute;
+  border: 1px solid #999;
+  width: 0;
+  height: 42px;
+  display: block;
+  content: '';
+  right: 25px;
+  z-index: 1;
+  top: -21px;
+  margin-left: -1px;
 }
 
-.stepsWizard .steps .icon.first:before{
+.stepsWizard .steps .icon.first:before {
   display: none;
 }
-
-.stepsWizard .steps .active > .icon{
+.stepsWizard .steps .active > .icon {
   color: #074a79;
 }
-.stepsWizard .steps  .completed > .icon i:before {
-    content: "\f058";
-    color: #074a79;
+.stepsWizard .steps .completed > a .icon i:before {
+  content: '\f058' !important;
+  color: #074a79;
+}
+.stepsWizard .steps a {
+  color: #505050 !important;
+}
+.stepsWizard .steps .active > a .icon {
+  color: #074a79 !important;
+}
+.kt-portlet .kt-portlet__body {
+  padding: 25px !important;
+}
+.input-daterange.input-group .form-control {
+  border-left: 1px solid #e2e5ec;
+}
+.stepButtons {
+  margin-top: 40px;
+  border-top: 1px solid #eeeef4;
+  padding: 30px 0;
+}
+.modal-open .modal {
+  display: flex !important;
+  align-items: center !important;
+}
+.modal-dialog {
+  flex-grow: 1;
+}
+.stepEditLink {
+  cursor: pointer;
 }
 
-    
+.kt-wizard-v2__review-title {
+  font-size: 18px;
+  border-bottom: 1px solid #eee;
+  margin: 10px 0;
+}

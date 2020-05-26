@@ -16,7 +16,12 @@
     min-height: 0px;
     border-radius: 0;
 }
-
+.showDetail{
+display: block;;
+}
+.hideDetail{
+    display: none;;
+    }
 /* Border Color */
 .ng-select.ng-invalid.ng-touched .ng-select-container{
     border-color: red;
