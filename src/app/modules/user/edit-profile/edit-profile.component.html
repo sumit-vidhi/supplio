@@ -14,6 +14,7 @@
       </div>
     </div>
 
+
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
@@ -90,13 +91,26 @@
                           <div class="form-group">
                             <label>Phone Number *</label>
 
-                            <input type="text" class="form-control" formControlName="phone_number"
+
+                            <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
+                              [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                              [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                              [selectFirstCountry]="false" [selectedCountryISO]="this.countryCode" [maxLength]="15"
+                              [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
+                              [separateDialCode]="separateDialCode" formControlName="phone_number" [ngClass]="{
+                              'is-invalid': submitted && f.phone_number.errors
+                            }">
+                            </ngx-intl-tel-input>
+                            <!-- <input type="text" class="form-control" formControlName="phone_number"
                               placeholder="Phone number with country code" aria-describedby="fname-error" [ngClass]="{
                                 'is-invalid': submitted && f.phone_number.errors
-                              }" />
+                              }" /> -->
                             <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
                               <div *ngIf="f.phone_number.errors.required">
                                 Phone number is required
+                              </div>
+                              <div *ngIf="!f.phone_number.errors.validatePhoneNumber.valid">
+                               Please enter correct phone number.
                               </div>
                             </div>
                           </div>

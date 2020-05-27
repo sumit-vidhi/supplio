@@ -13,9 +13,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { JWTAuthService } from './core/services/jwt-auth.service';
 
-import { SearchCountryField } from 'ngx-intl-tel-input';
-import { TooltipLabel } from 'ngx-intl-tel-input';
-import { CountryISO } from 'ngx-intl-tel-input';
 interface User {
   userId: number;
   id: number;
@@ -35,7 +32,10 @@ interface LoginPayload {
 export class AppComponent implements OnInit {
   title = appSettings.appTitle;
   logo = appSettings.appLogo;
-
+	separateDialCode = true;
+	phoneForm = new FormGroup({
+		phone: new FormControl(undefined, [Validators.required])
+	});
 
   constructor(private authService: AuthService, private loginService: JWTAuthService, private router: Router, private bnIdle: BnNgIdleService) {
     this.bnIdle.startWatching(1800).subscribe((res) => {

@@ -13,6 +13,7 @@ import { demandViewComponent } from './demandview/demandview.component';
 import { DemandComponent } from './demand/demand.component';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 @NgModule({
   declarations: [demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
   imports: [
@@ -22,7 +23,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ReactiveFormsModule,
     CKEditorModule,
     NgOptionHighlightModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxIntlTelInputModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

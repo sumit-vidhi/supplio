@@ -15,6 +15,9 @@ import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { ElementRef, NgZone } from '@angular/core';
 import { APP_USER } from '@configs/app-settings.config';
+import { SearchCountryField } from 'projects/ngx-intl-tel-input/src/lib/enums/search-country-field.enum';
+import { TooltipLabel } from 'projects/ngx-intl-tel-input/src/lib/enums/tooltip-label.enum';
+import { CountryISO } from 'projects/ngx-intl-tel-input/src/lib/enums/country-iso.enum';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -31,7 +34,11 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
 export class EditProfileComponent implements OnInit {
   address: Object;
   establishmentAddress: Object;
-
+  separateDialCode = true;
+  SearchCountryField = SearchCountryField;
+  TooltipLabel = TooltipLabel;
+  CountryISO = CountryISO;
+  preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
   formattedAddress: string;
   formattedEstablishmentAddress: string;
   modalReference: NgbModalRef;
@@ -55,10 +62,11 @@ export class EditProfileComponent implements OnInit {
   appData: any;
   locationForm: FormGroup;
   ckeConfig: any;
+  countryCode = "IN";
   @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
   @ViewChild('myckeditor', { static: false }) ckeditor: any;
-  separateDialCode = true;
   confirmMessage: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -84,10 +92,10 @@ export class EditProfileComponent implements OnInit {
   ngOnInit() {
     this.editForm = this.formBuilder.group({
       agency_name: ['', Validators.required],
-      phone_code: ['91', Validators.required],
+      phone_code: ['IN', Validators.required],
       phone_number: [
         '',
-        [Validators.required, Validators.pattern('[+-]?([0-9]*[.])?[0-9]+')],
+        [Validators.required],
       ],
       year_of_establishment: ['', Validators.required],
       company_size: ['', Validators.required],
@@ -135,13 +143,15 @@ export class EditProfileComponent implements OnInit {
       company_size: this.appData.company_size,
       designation: this.appData.designation,
       owner_name: this.appData.owner_name,
-      phone_code: this.appData.phone_code || '+91',
+      phone_code: this.appData.phone_code,
       phone_number: this.appData.phone_number,
       website: this.appData.website,
       year_of_establishment: this.appData.year_of_establishment
         ? Number(this.appData.year_of_establishment)
         : null,
     };
+    this.countryCode = data.phone_code;
+    console.log(data);
     this.editForm.setValue(data);
     this.aboutForm.setValue({ about_company: this.appData.about_company });
   }
@@ -195,7 +205,9 @@ export class EditProfileComponent implements OnInit {
 
     const formdata = this.editForm.value;
     formdata.form_step = 1;
-
+    formdata.phone_code = formdata.phone_number.countryCode;
+    formdata.phone_number = formdata.phone_number.number;
+    console.log(formdata);
     this.loader.startLoading();
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();

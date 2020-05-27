@@ -5,6 +5,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // Importing App Component
 import { AppComponent } from '@app/app.component';
 
@@ -13,7 +14,8 @@ import { CoreModule } from '@core/core.module';
 import { BasicThemeModule } from '@modules/theme/basic-theme.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgxIntlTelInputModule } from 'projects/ngx-intl-tel-input/src/lib/ngx-intl-tel-input.module';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 
 @NgModule({
   declarations: [
@@ -21,11 +23,12 @@ import { NgxIntlTelInputModule } from 'projects/ngx-intl-tel-input/src/lib/ngx-i
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
     BasicThemeModule,
     NgbModule,
-    NgxIntlTelInputModule
+    BsDropdownModule.forRoot()
     
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

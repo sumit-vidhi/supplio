@@ -115,6 +115,18 @@ export class SignUpComponent implements OnInit {
         this.message = '';
         this.error = '';
         const formData = this.registerForm.value;
+        if (this.userType == "employer") {
+            const domainArray = ["@gmail.", "@demo."];
+            for (let index = 0; index < domainArray.length; index++) {
+                if (formData.email.indexOf(domainArray[index]) > -1) {
+                    this.error = 'Please enter your company  email address.';
+                    return;
+                }
+
+            }
+
+
+        }
         formData.role = this.capitalize(this.userType);
         this.loader.startLoading();
         this.authService.register(formData).subscribe((result: any) => {
