@@ -1,0 +1,458 @@
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <!-- begin:: Subheader -->
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+      <div class="kt-container">
+        <div class="kt-subheader__main">
+          <h3 class="kt-subheader__title">
+            Dashboard
+          </h3>
+
+        </div>
+        <div class="kt-subheader__toolbar">
+          <div class="kt-subheader__wrapper">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- end:: Subheader -->
+
+    <!-- begin:: Content -->
+    <div class="kt-container kt-grid__item kt-grid__item--fluid" *ngIf="demandData">
+      <!--Begin::Dashboard 3-->
+      <div class="kt-portlet ">
+        <div class="kt-portlet__body">
+          <div class="kt-widget kt-widget--user-profile-3">
+            <div class="kt-widget__top">
+              <div class="kt-widget__media kt-hidden-">
+                <img src="/assets/media/project-logos/3.png" alt="image">
+              </div>
+              <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
+                JM
+              </div>
+              <div class="kt-widget__content">
+                <div class="kt-widget__head">
+                  <a href="#" class="kt-widget__username kt-hidden">
+                    Jason Muller
+                    <i class="flaticon2-correct"></i>
+                  </a>
+                  <a href="#" class="kt-widget__title">Company Name</a>
+                  <div class="kt-widget__action">
+                    <button type="button" class="btn btn-sm btn-upper" style="background: #edeff6">Edit</button>&nbsp;
+                    <button type="button" class="btn btn-success btn-sm btn-upper">Bid</button>
+                  </div>
+                </div>
+                <div class="kt-widget__subhead kt-hidden">
+                  <a href="#"><i class="flaticon2-new-email"></i>jason@siastudio.com</a>
+                  <a href="#"><i class="flaticon2-calendar-3"></i>PR Manager </a>
+                  <a href="#"><i class="flaticon2-placeholder"></i>Melbourne</a>
+                </div>
+                <div class="kt-widget__info">
+                  <div class="kt-widget__desc" *ngIf="demandData && demandData['user']">
+                    {{ demandData["user"]['agency_name'] }}
+                  </div>
+                  <div class="kt-widget__progress kt-hidden">
+                    <div class="kt-widget__text">
+                      Progress
+                    </div>
+                    <div class="progress" style="height: 5px;width: 100%;">
+                      <div class="progress-bar kt-bg-success" role="progressbar" style="width: 65%;" aria-valuenow="65"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="kt-widget__stats">
+                      78%
+                    </div>
+                  </div>
+                  <div class="kt-widget__stats d-flex pull-right align-items-center flex-fill">
+                    <div class="kt-widget__item">
+                      <span class="kt-widget__date">
+                        Posted Date
+                      </span>
+                      <div class="kt-widget__label">
+                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">{{
+                          demandData.created_at | date: 'mediumDate'
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="kt-widget__item">
+                      <span class="kt-widget__date">
+                        Hiring
+                      </span>
+                      <div class="kt-widget__label">
+                        <span class="btn btn-label-danger btn-sm btn-bold btn-upper">{{
+                          demandData.hire_type ? demandData.hire_type : '-'
+                        }}</span>
+                      </div>
+                    </div>
+
+                    <div class="kt-widget__item">
+                      <span class="kt-widget__date">
+                        Country
+                      </span>
+                      <div class="kt-widget__label">
+                        <span class="btn btn-label-info btn-sm btn-bold btn-upper">{{
+                          demandData.hire_country
+                            ? getcountry(demandData.hire_country)
+                            : '-'
+                        }}</span>
+                      </div>
+                    </div>
+
+                    <div class="kt-widget__item">
+                      <span class="kt-widget__date">
+                        Type
+                      </span>
+                      <div class="kt-widget__label">
+                        <span class="btn btn-label-warning btn-sm btn-bold btn-upper">{{ getType() }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="kt-widget__bottom">
+              <div class="kt-widget__item">
+                <div class="kt-widget__icon">
+                  <i class="flaticon-piggy-bank"></i>
+                </div>
+                <div class="kt-widget__details">
+                  <span class="kt-widget__title">Recruitment Fee</span>
+                  <span class="kt-widget__value"><span>$</span> {{
+                    demandData.recruitment_fee
+                      ? demandData.recruitment_fee
+                      : '-'
+                  }}</span>
+                </div>
+              </div>
+              <div class="kt-widget__item">
+                <div class="kt-widget__icon">
+                  <i class="flaticon-confetti"></i>
+                </div>
+                <div class="kt-widget__details">
+                  <span class="kt-widget__title">Place</span>
+                  <span class="kt-widget__value">Location, City, Country</span>
+                </div>
+              </div>
+
+              <div class="kt-widget__item">
+                <div class="kt-widget__icon">
+                  <i class="flaticon-file-2"></i>
+                </div>
+                <div class="kt-widget__details">
+                  <span class="kt-widget__title">{{
+                    demandData.recruitment_fee
+                      ? demandData.recruitment_fee
+                      : '-'
+                  }} Total Requirement</span>
+                  <a href="#" class="kt-widget__value kt-font-brand">View</a>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-3">
+          <div class="kt-portlet">
+            <div class="kt-portlet__body">
+              <div class="kt-widget1 kt-widget1--fit">
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Accommodation</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.accommodation
+                        ? demandData.accommodation
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Visa Sponsorship</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.recruitment_fee
+                        ? demandData.recruitment_fee
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Transportation</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.transportation
+                        ? demandData.transportation
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Food</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.food
+                        ? demandData.food
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Contract duration</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.contract_duration
+                        ? demandData.contract_duration
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Working hours per day</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.working_hours_day
+                        ? demandData.working_hours_day
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Working days per week</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.working_hours_week
+                        ? demandData.working_hours_week
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Probation period</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.probation_period
+                        ? demandData.probation_period
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Overtime</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.overtime
+                        ? demandData.overtime
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="kt-portlet">
+            <div class="kt-portlet__body">
+              <div class="kt-widget1 kt-widget1--fit">
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Medical Insurance</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.medical_insurance
+                        ? demandData.medical_insurance
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Joining Ticket</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.joining_ticket
+                        ? demandData.joining_ticket
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Paid leaves</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.paid_leaves
+                        ? demandData.paid_leaves
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Leave ticket</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.leave_ticket
+                        ? demandData.leave_ticket
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Uniform & PPEs</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.uniform
+                        ? demandData.uniform
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Other benefits</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.other_benefits
+                        ? demandData.other_benefits
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Mode of interview</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.mode_of_interview
+                        ? demandData.mode_of_interview
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">No. of delegates for interview</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.no_of_delegates
+                        ? demandData.no_of_delegates
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Flights for delegates</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.flights_for_delegates
+                        ? demandData.flights_for_delegates
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+                <div class="kt-widget1__item">
+                  <div class="kt-widget1__info">
+                    <h3 class="kt-widget1__title">Hotels for delegates</h3>
+                    <span class="kt-widget1__desc">{{
+                      demandData.hotels_for_delegates
+                        ? demandData.hotels_for_delegates
+                        : '-'
+                    }}</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="kt-portlet">
+            <div class="kt-portlet__head">
+              <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                  Demand Details
+                </h3>
+              </div>
+            </div>
+            <div class="kt-portlet__body" *ngIf="demandData && demandData.demand_category.length>0">
+              <div class="kt-widget5">
+                <div class="kt-widget5__item" *ngFor="let array of demandData.demand_category">
+                  <div class="kt-widget5__content">
+                    <div class="kt-widget5__section">
+                      <a href="#" class="kt-widget5__title">
+                        {{array.category_name}}
+                      </a>
+                      <p class="kt-widget5__desc">
+                        {{array.nationality}}
+                      </p>
+                      <div class="kt-widget5__info">
+                        <span>Gender:</span>
+                        <span class="kt-font-info"> {{array.gender}}</span>
+                        <span>Age Bracket:</span>
+                        <span class="kt-font-info"> {{(array.age_bracket)?array.age_bracket:'-'}}</span>
+
+                      </div>
+                      <div class="kt-widget5__info">
+                        <span>Qualification:</span>
+                        <span class="kt-font-info"> {{(array.qualification)?array.qualification:'-'}}</span>
+                        <span>Experience:</span>
+                        <span class="kt-font-info"> {{(array.years_of_experience)?years_of_experience:'-'}}</span>
+                      </div>
+                      <div class="kt-widget5__info">
+                        <span>Driver's License:</span>
+                        <span class="kt-font-info"> {{(array.driver_license)?array.driver_license:'-'}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kt-widget5__content">
+                    <div class="kt-widget5__stats">
+                      <span class="kt-widget5__number"> {{array.salary}}</span>
+                      <span class="kt-widget5__sales">Salary</span>
+                    </div>
+                    <div class="kt-widget5__stats">
+                      <span class="kt-widget5__number"> {{array.quantity}}</span>
+                      <span class="kt-widget5__votes">Quantity</span>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End::Dashboard 3-->
+    </div>
+
+    <!-- end:: Content -->
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { DemandComponent } from './demand/demand.component';
 import { demandListComponent } from './demandlist/demandlist.component';
+import { demandViewComponent } from './demandview/demandview.component';
 const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'demand/:id', component: DemandComponent,
     data: { title: 'Edit Demand' },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'demandview/:id', component: demandViewComponent,
+    data: { title: 'View Demand' },
     canActivate: [AuthGuard]
   },
   {

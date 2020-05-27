@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UserService } from '@modules/user/services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
@@ -9,11 +9,11 @@ import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-boo
 
 import * as $ from 'jquery';
 @Component({
-  selector: 'app-demandlist-dashboard',
-  templateUrl: './demandlist.component.html',
-  styleUrls: ['./demandlist.component.scss']
+  selector: 'app-demandview-dashboard',
+  templateUrl: './demandview.component.html',
+  styleUrls: ['./demandview.component.scss']
 })
-export class demandListComponent implements OnInit {
+export class demandViewComponent implements OnInit {
 
   public sendMessage: boolean;
   dashboardData: any;
@@ -276,69 +276,32 @@ export class demandListComponent implements OnInit {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
-  constructor(private formBuilder: FormBuilder, private userService: UserService,
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
-    this.searchForm = this.formBuilder.group({
-      // address: ['', [Validators.required]]
-      hire_type: [''],
-      hire_country: [''],
-      demand_type: [''],
-      status: ['']
-    });
-    this.loader.startLoading();
-    const data = {
-      "hire_type": "",
-      "hire_country": "",
-      "demand_type": "",
-      "status": ""
-    }
-    this.userService.demandList(data).subscribe((result: any) => {
-      this.loader.stopLoading();
-      if (result.payload.demand) {
-        this.demandData = result.payload.demand;
-        this.category = this.demandData.map((value, index) => {
-          return value.demand_category.map((v, i) => {
-            return v.category_name;
-          })
-        })
-        console.log(this.category);
-      }
+    this.route.params.subscribe(params => {
+      this.loader.startLoading();
+      this.userService.getDemand(params.id).subscribe((result: any) => {
+        if (result.payload.demand) {
+          this.loader.stopLoading();
+          this.demandData = result.payload.demand[0];
+        }
+
+      });
     })
 
-
   }
 
-  searchSubmit() {
-    const data = this.searchForm.value;
-    this.loader.startLoading();
-    this.userService.demandList(data).subscribe((result: any) => {
-      this.loader.stopLoading();
-      if (result.payload.demand) {
-        this.demandData = result.payload.demand;
-        this.category = this.demandData.map((value, index) => {
-          return value.demand_category.map((v, i) => {
-            return v.category_name;
-          })
-        })
-        console.log(this.category);
-      }
-    })
-  }
 
-  reset() {
-    this.searchForm.reset();
-    this.ngOnInit();
-  }
 
-  getType(i) {
-    if (this.demandData.length > 0 && this.demandData[i].demand_type) {
-      if (this.demandData[i].demand_type == 1) {
+  getType() {
+    if (this.demandData) {
+      if (this.demandData.demand_type == 1) {
         return "PSL";
       }
-      if (this.demandData[i].demand_type == 2) {
+      if (this.demandData.demand_type == 2) {
         return "Context";
       }
     } else {
@@ -350,11 +313,6 @@ export class demandListComponent implements OnInit {
       return value.code == code;
     })
     return this.countries[counrty]["name"];
-  }
-  open(content) {
-
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: 'ticket-modal' });
-
   }
 
 
