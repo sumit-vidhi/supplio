@@ -1,5 +1,11 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<div
+  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
+  id="kt_body"
+>
+  <div
+    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+    id="kt_content"
+  >
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -23,60 +29,100 @@
           <div class="row stepsWizard">
             <div class="col-md-3 stepsList">
               <ul class="steps">
-                <li (click)="changeStep('step1')" [ngClass]="{
+                <li
+                  (click)="changeStep('step1')"
+                  [ngClass]="{
                     completed: isTabActive(1),
                     disabled: isTabDisabled(1)
-                  }">
+                  }"
+                >
                   <a (click)="showTab(1)" role="tab" title="Step 1">
                     Create Demand
-                    <span class="first icon"><i class="fa fa-circle"></i>
+                    <span class="first icon"
+                      ><i class="fa fa-circle"></i>
                     </span>
                   </a>
                 </li>
-                <li (click)="changeStep('step2')" [ngClass]="{
+                <li
+                  (click)="changeStep('step2')"
+                  [ngClass]="{
                     completed: isTabActive(2),
                     disabled: isTabDisabled(2)
-                  }" class="">
-                  <a (click)="showTab(2)" role="tab" title="Step 1">Demand Details
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(2)" role="tab" title="Step 1"
+                    >Demand Details
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step2')" [ngClass]="{
+                <li
+                  (click)="changeStep('step2')"
+                  [ngClass]="{
                     completed: isTabActive(3),
                     disabled: isTabDisabled(3)
-                  }" class="">
-                  <a (click)="showTab(3)" role="tab" title="Step 1">Benefits
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(3)" role="tab" title="Step 1"
+                    >Benefits
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step3')" [ngClass]="{
+                <li
+                  (click)="changeStep('step3')"
+                  [ngClass]="{
                     completed: isTabActive(4),
                     disabled: isTabDisabled(4)
-                  }">
-                  <a (click)="showTab(4)" role="tab" title="Step 1">Terms & Conditions
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                >
+                  <a (click)="showTab(4)" role="tab" title="Step 1"
+                    >Terms & Conditions
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step4')" [ngClass]="{
+                <li
+                  (click)="changeStep('step4')"
+                  [ngClass]="{
                     completed: isTabActive(5),
                     disabled: isTabDisabled(5)
-                  }" class="">
-                  <a (click)="showTab(5)" role="tab" title="Step 1">Post Demand
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(5)" role="tab" title="Step 1"
+                    >Post Demand
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
               </ul>
             </div>
             <div class="col-md-9">
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(1),
                   'is-hide': !isTabActive(1)
-                }">
+                }"
+              >
                 <h3>Create Demand</h3>
-                <form role="form" #MySelectForm="ngForm" (submit)="demandFirst(content)">
+                <form
+                  role="form"
+                  #MySelectForm="ngForm"
+                  (submit)="demandFirst(content)"
+                >
                   <div class="row">
                     <div class="col-md-6 pull-left">
                       <label class="kt-option">
                         <span class="kt-option__control">
                           <span class="kt-radio kt-radio--bold kt-radio--brand">
-                            <input type="radio" name="demand" [(ngModel)]="hireDemand" value="locally"
-                              (change)="checkDemand($event)" />
+                            <input
+                              type="radio"
+                              name="demand"
+                              [(ngModel)]="hireDemand"
+                              value="locally"
+                              (change)="checkDemand($event)"
+                            />
                             <span></span>
                           </span>
                         </span>
@@ -86,7 +132,10 @@
                               Hire locally
                             </span>
                             <span class="kt-option__focus">
-                              <i class="fa fa-map-marker" aria-hidden="true"></i>
+                              <i
+                                class="fa fa-map-marker"
+                                aria-hidden="true"
+                              ></i>
                             </span>
                           </span>
                           <span class="kt-option__body">
@@ -99,8 +148,13 @@
                       <label class="kt-option">
                         <span class="kt-option__control">
                           <span class="kt-radio kt-radio--bold kt-radio--brand">
-                            <input type="radio" name="demand" [(ngModel)]="hireDemand" value="overseas"
-                              (change)="checkDemand($event)" />
+                            <input
+                              type="radio"
+                              name="demand"
+                              [(ngModel)]="hireDemand"
+                              value="overseas"
+                              (change)="checkDemand($event)"
+                            />
                             <span></span>
                           </span>
                         </span>
@@ -120,16 +174,28 @@
                       </label>
                     </div>
                   </div>
-                  <div class="col-md-12" [ngClass]="{ isActive: isActive(), 'is-hide': !isActive() }">
-                    <ng-select [items]="countries" name="country" required bindValue="code" bindLabel="name"
-                      appendTo="body" [(ngModel)]="selectedCity">
+                  <div
+                    class="col-md-12"
+                    [ngClass]="{ isActive: isActive(), 'is-hide': !isActive() }"
+                  >
+                    <ng-select
+                      [items]="countries"
+                      name="country"
+                      required
+                      bindValue="code"
+                      bindLabel="name"
+                      appendTo="body"
+                      [(ngModel)]="selectedCity"
+                    >
                     </ng-select>
                     <span *ngIf="error" style="color: red;">{{ error }}</span>
                   </div>
                   <div class="stepButtons">
-                    <button type="submit"
+                    <button
+                      type="submit"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next">
+                      data-ktwizard-type="action-next"
+                    >
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -142,12 +208,21 @@
               <!--end: Form Wizard Step 1-->
 
               <!--begin: Form Wizard Step 2-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(2),
                   'is-hide': !isTabActive(2)
-                }">
-                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="locationForm"
-                  (ngSubmit)="locationSubmit()">
+                }"
+              >
+                <form
+                  class="kt-form"
+                  id="kt_form"
+                  novalidate="novalidate"
+                  [formGroup]="locationForm"
+                  (ngSubmit)="locationSubmit()"
+                >
                   <div class="kt-heading kt-heading--md">
                     Demand
                   </div>
@@ -158,38 +233,56 @@
                           <div class="form-group">
                             <!-- <label>Demand </label> -->
 
-                            <div class="demandRow" formArrayName="location" *ngFor="
+                            <div
+                              class="demandRow"
+                              formArrayName="location"
+                              *ngFor="
                                 let arrayItem of locationForm.get('location')[
                                   'controls'
                                 ];
                                 let i = index
-                              ">
-                              <div [formGroupName]="i" [ngClass]="{
+                              "
+                            >
+                              <div
+                                [formGroupName]="i"
+                                [ngClass]="{
                                   'is-invalid':
                                     locationSubmitted && getValidity(i)
-                                }">
+                                }"
+                              >
                                 <div class="row">
                                   <div class="form-group col-md-4">
                                     <label for="accommodation">Category</label>
-                                    <select class="categoriesSelect form-control" formControlName="category_id"
+                                    <select
+                                      class="categoriesSelect form-control"
+                                      formControlName="category_id"
                                       [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.category_id
                                             .valid
-                                      }">
-                                      <option [ngValue]="null" disbled>Select Category</option>
+                                      }"
+                                    >
+                                      <option [ngValue]="null" disbled
+                                        >Select Category</option
+                                      >
 
-                                      <option *ngFor="let value of category" value="{{ value.id }}">{{ value.name }}
+                                      <option
+                                        *ngFor="let value of category"
+                                        value="{{ value.id }}"
+                                        >{{ value.name }}
                                       </option>
                                     </select>
-                                    <div *ngIf="
+                                    <div
+                                      *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.category_id.valid
-                                      " class="invalid-feedback">
+                                      "
+                                      class="invalid-feedback"
+                                    >
                                       <div>
                                         Category name is required
                                       </div>
@@ -197,39 +290,57 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <label for="accommodation">Quantity</label>
-                                    <input type="text" class="form-control" placeholder="quantity"
-                                      formControlName="quantity" [ngClass]="{
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="quantity"
+                                      formControlName="quantity"
+                                      [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.quantity.valid
-                                      }" />
-                                    <div *ngIf="
+                                      }"
+                                    />
+                                    <div
+                                      *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.quantity.valid
-                                      " class="invalid-feedback">
+                                      "
+                                      class="invalid-feedback"
+                                    >
                                       <div>
                                         Quantity is required
                                       </div>
                                     </div>
                                   </div>
                                   <div class="form-group col-md-4">
-                                    <label for="accommodation">Basic Salary</label>
-                                    <input type="text" class="form-control" placeholder="Salary"
-                                      formControlName="salary" [ngClass]="{
+                                    <label for="accommodation"
+                                      >Basic Salary</label
+                                    >
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Salary"
+                                      formControlName="salary"
+                                      [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.salary.valid
-                                      }" />
-                                    <div *ngIf="
+                                      }"
+                                    />
+                                    <div
+                                      *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.salary.valid
-                                      " class="invalid-feedback">
+                                      "
+                                      class="invalid-feedback"
+                                    >
                                       <div>
                                         Salary is required
                                       </div>
@@ -237,12 +348,16 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <label for="accommodation">Gender</label>
-                                    <select class="form-control" formControlName="gender" [ngClass]="{
+                                    <select
+                                      class="form-control"
+                                      formControlName="gender"
+                                      [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.gender.valid
-                                      }">
+                                      }"
+                                    >
                                       <option [ngValue]="null" disbled>
                                         Select Gender
                                       </option>
@@ -254,88 +369,148 @@
                                         Others
                                       </option>
                                     </select>
-                                    <div *ngIf="
+                                    <div
+                                      *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.gender.valid
-                                      " class="invalid-feedback">
+                                      "
+                                      class="invalid-feedback"
+                                    >
                                       <div>
                                         Gender is required
                                       </div>
                                     </div>
                                   </div>
                                   <div class="form-group col-md-4">
-                                    <label for="accommodation">Nationality</label>
-                                    <select class="nationalitySelect form-control" formControlName="nationality"
+                                    <label for="accommodation"
+                                      >Nationality</label
+                                    >
+                                    <select
+                                      class="nationalitySelect form-control"
+                                      formControlName="nationality"
                                       [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.nationality
                                             .valid
-                                      }">
-                                      <option value="">Select Nationality</option>
+                                      }"
+                                    >
+                                      <option value=""
+                                        >Select Nationality</option
+                                      >
                                       <option value="afghan">Afghan</option>
                                       <option value="albanian">Albanian</option>
                                       <option value="algerian">Algerian</option>
                                       <option value="american">American</option>
                                       <option value="andorran">Andorran</option>
                                       <option value="angolan">Angolan</option>
-                                      <option value="antiguans">Antiguans</option>
-                                      <option value="argentinean">Argentinean</option>
+                                      <option value="antiguans"
+                                        >Antiguans</option
+                                      >
+                                      <option value="argentinean"
+                                        >Argentinean</option
+                                      >
                                       <option value="armenian">Armenian</option>
-                                      <option value="australian">Australian</option>
+                                      <option value="australian"
+                                        >Australian</option
+                                      >
                                       <option value="austrian">Austrian</option>
-                                      <option value="azerbaijani">Azerbaijani</option>
+                                      <option value="azerbaijani"
+                                        >Azerbaijani</option
+                                      >
                                       <option value="bahamian">Bahamian</option>
                                       <option value="bahraini">Bahraini</option>
-                                      <option value="bangladeshi">Bangladeshi</option>
-                                      <option value="barbadian">Barbadian</option>
-                                      <option value="barbudans">Barbudans</option>
+                                      <option value="bangladeshi"
+                                        >Bangladeshi</option
+                                      >
+                                      <option value="barbadian"
+                                        >Barbadian</option
+                                      >
+                                      <option value="barbudans"
+                                        >Barbudans</option
+                                      >
                                       <option value="batswana">Batswana</option>
-                                      <option value="belarusian">Belarusian</option>
+                                      <option value="belarusian"
+                                        >Belarusian</option
+                                      >
                                       <option value="belgian">Belgian</option>
                                       <option value="belizean">Belizean</option>
                                       <option value="beninese">Beninese</option>
-                                      <option value="bhutanese">Bhutanese</option>
+                                      <option value="bhutanese"
+                                        >Bhutanese</option
+                                      >
                                       <option value="bolivian">Bolivian</option>
                                       <option value="bosnian">Bosnian</option>
-                                      <option value="brazilian">Brazilian</option>
+                                      <option value="brazilian"
+                                        >Brazilian</option
+                                      >
                                       <option value="british">British</option>
                                       <option value="bruneian">Bruneian</option>
-                                      <option value="bulgarian">Bulgarian</option>
-                                      <option value="burkinabe">Burkinabe</option>
+                                      <option value="bulgarian"
+                                        >Bulgarian</option
+                                      >
+                                      <option value="burkinabe"
+                                        >Burkinabe</option
+                                      >
                                       <option value="burmese">Burmese</option>
-                                      <option value="burundian">Burundian</option>
-                                      <option value="cambodian">Cambodian</option>
-                                      <option value="cameroonian">Cameroonian</option>
+                                      <option value="burundian"
+                                        >Burundian</option
+                                      >
+                                      <option value="cambodian"
+                                        >Cambodian</option
+                                      >
+                                      <option value="cameroonian"
+                                        >Cameroonian</option
+                                      >
                                       <option value="canadian">Canadian</option>
-                                      <option value="cape verdean">Cape Verdean</option>
-                                      <option value="central african">Central African</option>
+                                      <option value="cape verdean"
+                                        >Cape Verdean</option
+                                      >
+                                      <option value="central african"
+                                        >Central African</option
+                                      >
                                       <option value="chadian">Chadian</option>
                                       <option value="chilean">Chilean</option>
                                       <option value="chinese">Chinese</option>
-                                      <option value="colombian">Colombian</option>
+                                      <option value="colombian"
+                                        >Colombian</option
+                                      >
                                       <option value="comoran">Comoran</option>
-                                      <option value="congolese">Congolese</option>
-                                      <option value="costa rican">Costa Rican</option>
+                                      <option value="congolese"
+                                        >Congolese</option
+                                      >
+                                      <option value="costa rican"
+                                        >Costa Rican</option
+                                      >
                                       <option value="croatian">Croatian</option>
                                       <option value="cuban">Cuban</option>
                                       <option value="cypriot">Cypriot</option>
                                       <option value="czech">Czech</option>
                                       <option value="danish">Danish</option>
                                       <option value="djibouti">Djibouti</option>
-                                      <option value="dominican">Dominican</option>
+                                      <option value="dominican"
+                                        >Dominican</option
+                                      >
                                       <option value="dutch">Dutch</option>
-                                      <option value="east timorese">East Timorese</option>
-                                      <option value="ecuadorean">Ecuadorean</option>
+                                      <option value="east timorese"
+                                        >East Timorese</option
+                                      >
+                                      <option value="ecuadorean"
+                                        >Ecuadorean</option
+                                      >
                                       <option value="egyptian">Egyptian</option>
                                       <option value="emirian">Emirian</option>
-                                      <option value="equatorial guinean">Equatorial Guinean</option>
+                                      <option value="equatorial guinean"
+                                        >Equatorial Guinean</option
+                                      >
                                       <option value="eritrean">Eritrean</option>
                                       <option value="estonian">Estonian</option>
-                                      <option value="ethiopian">Ethiopian</option>
+                                      <option value="ethiopian"
+                                        >Ethiopian</option
+                                      >
                                       <option value="fijian">Fijian</option>
                                       <option value="filipino">Filipino</option>
                                       <option value="finnish">Finnish</option>
@@ -346,18 +521,32 @@
                                       <option value="german">German</option>
                                       <option value="ghanaian">Ghanaian</option>
                                       <option value="greek">Greek</option>
-                                      <option value="grenadian">Grenadian</option>
-                                      <option value="guatemalan">Guatemalan</option>
-                                      <option value="guinea-bissauan">Guinea-Bissauan</option>
+                                      <option value="grenadian"
+                                        >Grenadian</option
+                                      >
+                                      <option value="guatemalan"
+                                        >Guatemalan</option
+                                      >
+                                      <option value="guinea-bissauan"
+                                        >Guinea-Bissauan</option
+                                      >
                                       <option value="guinean">Guinean</option>
                                       <option value="guyanese">Guyanese</option>
                                       <option value="haitian">Haitian</option>
-                                      <option value="herzegovinian">Herzegovinian</option>
+                                      <option value="herzegovinian"
+                                        >Herzegovinian</option
+                                      >
                                       <option value="honduran">Honduran</option>
-                                      <option value="hungarian">Hungarian</option>
-                                      <option value="icelander">Icelander</option>
+                                      <option value="hungarian"
+                                        >Hungarian</option
+                                      >
+                                      <option value="icelander"
+                                        >Icelander</option
+                                      >
                                       <option value="indian">Indian</option>
-                                      <option value="indonesian">Indonesian</option>
+                                      <option value="indonesian"
+                                        >Indonesian</option
+                                      >
                                       <option value="iranian">Iranian</option>
                                       <option value="iraqi">Iraqi</option>
                                       <option value="irish">Irish</option>
@@ -366,10 +555,16 @@
                                       <option value="ivorian">Ivorian</option>
                                       <option value="jamaican">Jamaican</option>
                                       <option value="japanese">Japanese</option>
-                                      <option value="jordanian">Jordanian</option>
-                                      <option value="kazakhstani">Kazakhstani</option>
+                                      <option value="jordanian"
+                                        >Jordanian</option
+                                      >
+                                      <option value="kazakhstani"
+                                        >Kazakhstani</option
+                                      >
                                       <option value="kenyan">Kenyan</option>
-                                      <option value="kittian and nevisian">Kittian and Nevisian</option>
+                                      <option value="kittian and nevisian"
+                                        >Kittian and Nevisian</option
+                                      >
                                       <option value="kuwaiti">Kuwaiti</option>
                                       <option value="kyrgyz">Kyrgyz</option>
                                       <option value="laotian">Laotian</option>
@@ -377,104 +572,199 @@
                                       <option value="lebanese">Lebanese</option>
                                       <option value="liberian">Liberian</option>
                                       <option value="libyan">Libyan</option>
-                                      <option value="liechtensteiner">Liechtensteiner</option>
-                                      <option value="lithuanian">Lithuanian</option>
-                                      <option value="luxembourger">Luxembourger</option>
-                                      <option value="macedonian">Macedonian</option>
+                                      <option value="liechtensteiner"
+                                        >Liechtensteiner</option
+                                      >
+                                      <option value="lithuanian"
+                                        >Lithuanian</option
+                                      >
+                                      <option value="luxembourger"
+                                        >Luxembourger</option
+                                      >
+                                      <option value="macedonian"
+                                        >Macedonian</option
+                                      >
                                       <option value="malagasy">Malagasy</option>
                                       <option value="malawian">Malawian</option>
-                                      <option value="malaysian">Malaysian</option>
+                                      <option value="malaysian"
+                                        >Malaysian</option
+                                      >
                                       <option value="maldivan">Maldivan</option>
                                       <option value="malian">Malian</option>
                                       <option value="maltese">Maltese</option>
-                                      <option value="marshallese">Marshallese</option>
-                                      <option value="mauritanian">Mauritanian</option>
-                                      <option value="mauritian">Mauritian</option>
+                                      <option value="marshallese"
+                                        >Marshallese</option
+                                      >
+                                      <option value="mauritanian"
+                                        >Mauritanian</option
+                                      >
+                                      <option value="mauritian"
+                                        >Mauritian</option
+                                      >
                                       <option value="mexican">Mexican</option>
-                                      <option value="micronesian">Micronesian</option>
+                                      <option value="micronesian"
+                                        >Micronesian</option
+                                      >
                                       <option value="moldovan">Moldovan</option>
                                       <option value="monacan">Monacan</option>
-                                      <option value="mongolian">Mongolian</option>
+                                      <option value="mongolian"
+                                        >Mongolian</option
+                                      >
                                       <option value="moroccan">Moroccan</option>
                                       <option value="mosotho">Mosotho</option>
                                       <option value="motswana">Motswana</option>
-                                      <option value="mozambican">Mozambican</option>
+                                      <option value="mozambican"
+                                        >Mozambican</option
+                                      >
                                       <option value="namibian">Namibian</option>
                                       <option value="nauruan">Nauruan</option>
                                       <option value="nepalese">Nepalese</option>
-                                      <option value="new zealander">New Zealander</option>
-                                      <option value="ni-vanuatu">Ni-Vanuatu</option>
-                                      <option value="nicaraguan">Nicaraguan</option>
+                                      <option value="new zealander"
+                                        >New Zealander</option
+                                      >
+                                      <option value="ni-vanuatu"
+                                        >Ni-Vanuatu</option
+                                      >
+                                      <option value="nicaraguan"
+                                        >Nicaraguan</option
+                                      >
                                       <option value="nigerien">Nigerien</option>
-                                      <option value="north korean">North Korean</option>
-                                      <option value="northern irish">Northern Irish</option>
-                                      <option value="norwegian">Norwegian</option>
+                                      <option value="north korean"
+                                        >North Korean</option
+                                      >
+                                      <option value="northern irish"
+                                        >Northern Irish</option
+                                      >
+                                      <option value="norwegian"
+                                        >Norwegian</option
+                                      >
                                       <option value="omani">Omani</option>
-                                      <option value="pakistani">Pakistani</option>
+                                      <option value="pakistani"
+                                        >Pakistani</option
+                                      >
                                       <option value="palauan">Palauan</option>
-                                      <option value="panamanian">Panamanian</option>
-                                      <option value="papua new guinean">Papua New Guinean</option>
-                                      <option value="paraguayan">Paraguayan</option>
+                                      <option value="panamanian"
+                                        >Panamanian</option
+                                      >
+                                      <option value="papua new guinean"
+                                        >Papua New Guinean</option
+                                      >
+                                      <option value="paraguayan"
+                                        >Paraguayan</option
+                                      >
                                       <option value="peruvian">Peruvian</option>
                                       <option value="polish">Polish</option>
-                                      <option value="portuguese">Portuguese</option>
+                                      <option value="portuguese"
+                                        >Portuguese</option
+                                      >
                                       <option value="qatari">Qatari</option>
                                       <option value="romanian">Romanian</option>
                                       <option value="russian">Russian</option>
                                       <option value="rwandan">Rwandan</option>
-                                      <option value="saint lucian">Saint Lucian</option>
-                                      <option value="salvadoran">Salvadoran</option>
+                                      <option value="saint lucian"
+                                        >Saint Lucian</option
+                                      >
+                                      <option value="salvadoran"
+                                        >Salvadoran</option
+                                      >
                                       <option value="samoan">Samoan</option>
-                                      <option value="san marinese">San Marinese</option>
-                                      <option value="sao tomean">Sao Tomean</option>
+                                      <option value="san marinese"
+                                        >San Marinese</option
+                                      >
+                                      <option value="sao tomean"
+                                        >Sao Tomean</option
+                                      >
                                       <option value="saudi">Saudi</option>
                                       <option value="scottish">Scottish</option>
-                                      <option value="senegalese">Senegalese</option>
+                                      <option value="senegalese"
+                                        >Senegalese</option
+                                      >
                                       <option value="serbian">Serbian</option>
-                                      <option value="seychellois">Seychellois</option>
-                                      <option value="sierra leonean">Sierra Leonean</option>
-                                      <option value="singaporean">Singaporean</option>
-                                      <option value="slovakian">Slovakian</option>
-                                      <option value="slovenian">Slovenian</option>
-                                      <option value="solomon islander">Solomon Islander</option>
+                                      <option value="seychellois"
+                                        >Seychellois</option
+                                      >
+                                      <option value="sierra leonean"
+                                        >Sierra Leonean</option
+                                      >
+                                      <option value="singaporean"
+                                        >Singaporean</option
+                                      >
+                                      <option value="slovakian"
+                                        >Slovakian</option
+                                      >
+                                      <option value="slovenian"
+                                        >Slovenian</option
+                                      >
+                                      <option value="solomon islander"
+                                        >Solomon Islander</option
+                                      >
                                       <option value="somali">Somali</option>
-                                      <option value="south african">South African</option>
-                                      <option value="south korean">South Korean</option>
+                                      <option value="south african"
+                                        >South African</option
+                                      >
+                                      <option value="south korean"
+                                        >South Korean</option
+                                      >
                                       <option value="spanish">Spanish</option>
-                                      <option value="sri lankan">Sri Lankan</option>
+                                      <option value="sri lankan"
+                                        >Sri Lankan</option
+                                      >
                                       <option value="sudanese">Sudanese</option>
-                                      <option value="surinamer">Surinamer</option>
+                                      <option value="surinamer"
+                                        >Surinamer</option
+                                      >
                                       <option value="swazi">Swazi</option>
                                       <option value="swedish">Swedish</option>
                                       <option value="swiss">Swiss</option>
                                       <option value="syrian">Syrian</option>
-                                      <option value="taiwanese">Taiwanese</option>
+                                      <option value="taiwanese"
+                                        >Taiwanese</option
+                                      >
                                       <option value="tajik">Tajik</option>
-                                      <option value="tanzanian">Tanzanian</option>
+                                      <option value="tanzanian"
+                                        >Tanzanian</option
+                                      >
                                       <option value="thai">Thai</option>
                                       <option value="togolese">Togolese</option>
                                       <option value="tongan">Tongan</option>
-                                      <option value="trinidadian or tobagonian">Trinidadian or Tobagonian</option>
+                                      <option value="trinidadian or tobagonian"
+                                        >Trinidadian or Tobagonian</option
+                                      >
                                       <option value="tunisian">Tunisian</option>
                                       <option value="turkish">Turkish</option>
                                       <option value="tuvaluan">Tuvaluan</option>
                                       <option value="ugandan">Ugandan</option>
-                                      <option value="ukrainian">Ukrainian</option>
-                                      <option value="uruguayan">Uruguayan</option>
-                                      <option value="uzbekistani">Uzbekistani</option>
-                                      <option value="venezuelan">Venezuelan</option>
-                                      <option value="vietnamese">Vietnamese</option>
+                                      <option value="ukrainian"
+                                        >Ukrainian</option
+                                      >
+                                      <option value="uruguayan"
+                                        >Uruguayan</option
+                                      >
+                                      <option value="uzbekistani"
+                                        >Uzbekistani</option
+                                      >
+                                      <option value="venezuelan"
+                                        >Venezuelan</option
+                                      >
+                                      <option value="vietnamese"
+                                        >Vietnamese</option
+                                      >
                                       <option value="welsh">Welsh</option>
                                       <option value="yemenite">Yemenite</option>
                                       <option value="zambian">Zambian</option>
-                                      <option value="zimbabwean">Zimbabwean</option>
+                                      <option value="zimbabwean"
+                                        >Zimbabwean</option
+                                      >
                                     </select>
-                                    <div *ngIf="
+                                    <div
+                                      *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.nationality.valid
-                                      " class="invalid-feedback">
+                                      "
+                                      class="invalid-feedback"
+                                    >
                                       <div>
                                         Nationality is required
                                       </div>
@@ -482,21 +772,37 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <!-- <label for="accommodation">&nbsp;</label> -->
-                                    <a class="btn btn-priamry" (click)="showDetail(i)">
-                                      {{(isValidDetail[i])?'Hide':'Show'}}
-                                      Details</a>
+                                    <a
+                                      class="btn btn-priamry"
+                                      (click)="showDetail(i)"
+                                    >
+                                      {{ isValidDetail[i] ? 'Hide' : 'Show' }}
+                                      Details</a
+                                    >
                                   </div>
                                 </div>
                                 <!--ROW-->
                                 <!--Addtional Fields-->
-                                <div class="additionalDemandFields"
-                                  [ngClass]="{'showDetail':isValidDetail[i],'hideDetail':!isValidDetail[i]}">
+                                <div
+                                  class="additionalDemandFields"
+                                  [ngClass]="{
+                                    showDetail: isValidDetail[i],
+                                    hideDetail: !isValidDetail[i]
+                                  }"
+                                >
                                   <h4>Details</h4>
                                   <div class="row">
                                     <div class="form-group col-md-3">
-                                      <label for="accommodation">Age Bracket</label>
-                                      <select class="form-control" formControlName="age_bracket">
-                                        <option [ngValue]="null">Select Age Bracket</option>
+                                      <label for="accommodation"
+                                        >Age Bracket</label
+                                      >
+                                      <select
+                                        class="form-control"
+                                        formControlName="age_bracket"
+                                      >
+                                        <option [ngValue]="null"
+                                          >Select Age Bracket</option
+                                        >
                                         <option value="16-18">16-18</option>
                                         <option value="19-25">19-25</option>
                                         <option value="26-45">26-45</option>
@@ -505,23 +811,51 @@
                                       </select>
                                     </div>
                                     <div class="form-group col-md-3">
-                                      <label for="accommodation">Qualification</label>
-                                      <input type="text" class="form-control" formControlName="qualification"  />
+                                      <label for="accommodation"
+                                        >Qualification</label
+                                      >
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="qualification"
+                                      />
                                     </div>
                                     <div class="form-group col-md-3">
-                                      <label for="accommodation">Years of Experience</label>
-                                      <input type="text" formControlName="years_of_experience" class="form-control" placeholder="Years of Experience" />
+                                      <label for="accommodation"
+                                        >Years of Experience</label
+                                      >
+                                      <input
+                                        type="text"
+                                        formControlName="years_of_experience"
+                                        class="form-control"
+                                        placeholder="Years of Experience"
+                                      />
                                     </div>
                                     <div class="form-group col-md-3">
-                                      <label for="accommodation">Driver License</label>
-                                      <input type="text" formControlName="driver_license" class="form-control" placeholder="Driver License" />
+                                      <label for="accommodation"
+                                        >Driver License</label
+                                      >
+                                      <input
+                                        type="text"
+                                        formControlName="driver_license"
+                                        class="form-control"
+                                        placeholder="Driver License"
+                                      />
                                     </div>
                                     <div class="form-group col-md-12">
-                                      <label for="accommodation">Job Description</label>
-                                      <textarea class="form-control" formControlName="job_desc" placeholder="Job Description"></textarea>
+                                      <label for="accommodation"
+                                        >Job Description</label
+                                      >
+                                      <textarea
+                                        class="form-control"
+                                        formControlName="job_desc"
+                                        placeholder="Job Description"
+                                      ></textarea>
                                     </div>
                                     <div class="form-group col-md-12">
-                                      <label for="accommodation">Job Description</label>
+                                      <label for="accommodation"
+                                        >Job Description</label
+                                      >
                                       <input type="file" />
                                     </div>
                                     <!-- <div class="form-group col-md-12">
@@ -534,11 +868,19 @@
                                 <!--Addtional Fields-->
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <a href="javscript:;" class="deleteDemandRow" *ngIf="
+                                    <a
+                                      href="javscript:;"
+                                      class="deleteDemandRow"
+                                      *ngIf="
                                         locationForm.controls['location']
                                           .controls.length > 1
-                                      " (click)="removeItem(i)">
-                                      <i class="fa fa-trash" aria-hidden="true"></i>
+                                      "
+                                      (click)="removeItem(i)"
+                                    >
+                                      <i
+                                        class="fa fa-trash"
+                                        aria-hidden="true"
+                                      ></i>
                                     </a>
                                   </div>
                                 </div>
@@ -548,21 +890,28 @@
                         </div>
                         <div class="col-md-4">
                           <div>
-                            <a (click)="addItem()" class="btn btn-primary"><i class="fa fa-plus"></i>Add Demand Row</a>
+                            <a (click)="addItem()" class="btn btn-primary"
+                              ><i class="fa fa-plus"></i>Add Demand Row</a
+                            >
                           </div>
                         </div>
                       </div>
                       <div class="stepButtons">
-                        <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          (click)="goPrevious()" data-ktwizard-type="action-prev">
+                        <a
+                          class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                          (click)="goPrevious()"
+                          data-ktwizard-type="action-prev"
+                        >
                           <span>
                             <i class="la la-angle-left"></i>
                             <span>Previous</span>
                           </span>
                         </a>
-                        <button type="submit"
+                        <button
+                          type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
+                          data-ktwizard-type="action-next"
+                        >
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -577,27 +926,48 @@
               <!--end: Form Wizard Step 2-->
 
               <!--begin: Form Wizard Step 3-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(3),
                   'is-hide': !isTabActive(3)
-                }">
+                }"
+              >
                 <h3>
                   Benefits
                 </h3>
-                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="benefitForm"
-                  (ngSubmit)="benfitSubmit()">
+                <form
+                  class="kt-form"
+                  id="kt_form"
+                  novalidate="novalidate"
+                  [formGroup]="benefitForm"
+                  (ngSubmit)="benfitSubmit()"
+                >
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Accommodation</label>
-                      <select id="accommodation" class="form-control" formControlName="accommodation" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="accommodation"
+                        [ngClass]="{
                           'is-invalid': submitted && f.accommodation.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.accommodation.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.accommodation.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.accommodation.errors.required">
                           Accommodation is required
                         </div>
@@ -605,14 +975,24 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="accommodation">Visa Sponsorship</label>
-                      <select id="accommodation" class="form-control" formControlName="visa_sponsorship" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="visa_sponsorship"
+                        [ngClass]="{
                           'is-invalid': submitted && f.visa_sponsorship.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Directly by employer">Directly by employer</option>
+                        <option value="Directly by employer"
+                          >Directly by employer</option
+                        >
                         <option value="Outsourced">Outsourced</option>
                       </select>
-                      <div *ngIf="submitted && f.visa_sponsorship.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.visa_sponsorship.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.visa_sponsorship.errors.required">
                           Visa sponsorship is required
                         </div>
@@ -623,15 +1003,27 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Transportation</label>
-                      <select id="accommodation" class="form-control" formControlName="transportation" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="transportation"
+                        [ngClass]="{
                           'is-invalid': submitted && f.transportation.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.transportation.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.transportation.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.transportation.errors.required">
                           Visa sponsorship is required
                         </div>
@@ -639,15 +1031,27 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="accommodation">Food</label>
-                      <select id="accommodation" class="form-control" formControlName="food" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="food"
+                        [ngClass]="{
                           'is-invalid': submitted && f.food.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.food.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.food.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.food.errors.required">
                           Food is required
                         </div>
@@ -658,12 +1062,22 @@
                   <div class="row">
                     <div class="form-group col-md-4">
                       <label for="accommodation">Place of employment</label>
-                      <input type="text" class="form-control" id="" placeholder="Location"
-                        formControlName="employment_location" aria-describedby="fname-error" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Location"
+                        formControlName="employment_location"
+                        aria-describedby="fname-error"
+                        [ngClass]="{
                           'is-invalid':
                             submitted && f.employment_location.errors
-                        }" />
-                      <div *ngIf="submitted && f.employment_location.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.employment_location.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.employment_location.errors.required">
                           Location is required
                         </div>
@@ -671,11 +1085,21 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="accommodation">City</label>
-                      <input type="text" class="form-control" id="" placeholder="City" formControlName="employment_city"
-                        aria-describedby="fname-error" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="City"
+                        formControlName="employment_city"
+                        aria-describedby="fname-error"
+                        [ngClass]="{
                           'is-invalid': submitted && f.employment_city.errors
-                        }" />
-                      <div *ngIf="submitted && f.employment_city.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.employment_city.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.employment_city.errors.required">
                           Employment city is required
                         </div>
@@ -683,11 +1107,21 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="accommodation">Country</label>
-                      <input type="text" class="form-control" id="" placeholder="Country"
-                        formControlName="employment_country" aria-describedby="fname-error" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Country"
+                        formControlName="employment_country"
+                        aria-describedby="fname-error"
+                        [ngClass]="{
                           'is-invalid': submitted && f.employment_country.errors
-                        }" />
-                      <div *ngIf="submitted && f.employment_country.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.employment_country.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.employment_country.errors.required">
                           Employment country is required
                         </div>
@@ -698,11 +1132,21 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Contract Duration</label>
-                      <input type="text" class="form-control" id="" placeholder="Contract Duration"
-                        formControlName="contract_duration" aria-describedby="fname-error" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Contract Duration"
+                        formControlName="contract_duration"
+                        aria-describedby="fname-error"
+                        [ngClass]="{
                           'is-invalid': submitted && f.contract_duration.errors
-                        }" />
-                      <div *ngIf="submitted && f.contract_duration.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.contract_duration.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.contract_duration.errors.required">
                           Contract duration is required
                         </div>
@@ -710,14 +1154,22 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="accommodation">Contract Type</label>
-                      <select id="accommodation" class="form-control" formControlName="contract_type" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="contract_type"
+                        [ngClass]="{
                           'is-invalid': submitted && f.contract_type.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
                         <option value="Renewable">Renewable</option>
                         <option value="Nonrenewable">Nonrenewable</option>
                       </select>
-                      <div *ngIf="submitted && f.contract_type.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.contract_type.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.contract_type.errors.required">
                           Contract type is required
                         </div>
@@ -728,11 +1180,20 @@
                   <div class="row">
                     <div class="form-group col-md-4">
                       <label for="accommodation">Working hours per day</label>
-                      <input type="text" class="form-control" id="" placeholder="x hours"
-                        formControlName="working_hours_day" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="x hours"
+                        formControlName="working_hours_day"
+                        [ngClass]="{
                           'is-invalid': submitted && f.working_hours_day.errors
-                        }" />
-                      <div *ngIf="submitted && f.working_hours_day.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.working_hours_day.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.working_hours_day.errors.required">
                           Working hours day is required
                         </div>
@@ -740,11 +1201,20 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="accommodation">Working days per week</label>
-                      <input type="text" class="form-control" id="" placeholder="x days"
-                        formControlName="working_hours_week" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="x days"
+                        formControlName="working_hours_week"
+                        [ngClass]="{
                           'is-invalid': submitted && f.working_hours_week.errors
-                        }" />
-                      <div *ngIf="submitted && f.working_hours_week.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.working_hours_week.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.working_hours_week.errors.required">
                           Working hours week is required
                         </div>
@@ -752,11 +1222,20 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="accommodation">Probation period</label>
-                      <input type="text" class="form-control" id="" placeholder="x months"
-                        formControlName="probation_period" [ngClass]="{
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="x months"
+                        formControlName="probation_period"
+                        [ngClass]="{
                           'is-invalid': submitted && f.probation_period.errors
-                        }" />
-                      <div *ngIf="submitted && f.probation_period.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.probation_period.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.probation_period.errors.required">
                           Probation period is required
                         </div>
@@ -767,11 +1246,20 @@
                   <div class="row">
                     <div class="form-group col-md-4">
                       <label for="accommodation">Overtime</label>
-                      <input type="text" class="form-control" id="" placeholder="Paid Leaves" formControlName="overtime"
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Paid Leaves"
+                        formControlName="overtime"
                         [ngClass]="{
                           'is-invalid': submitted && f.overtime.errors
-                        }" />
-                      <div *ngIf="submitted && f.overtime.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.overtime.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.overtime.errors.required">
                           Overtime is required
                         </div>
@@ -779,15 +1267,27 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="accommodation">Medical Insurance</label>
-                      <select id="accommodation" class="form-control" formControlName="medical_insurance" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="medical_insurance"
+                        [ngClass]="{
                           'is-invalid': submitted && f.medical_insurance.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.medical_insurance.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.medical_insurance.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.medical_insurance.errors.required">
                           Medical insurance is required
                         </div>
@@ -795,15 +1295,27 @@
                     </div>
                     <div class="form-group col-md-4">
                       <label for="accommodation">Joining Ticket</label>
-                      <select id="accommodation" class="form-control" formControlName="joining_ticket" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="joining_ticket"
+                        [ngClass]="{
                           'is-invalid': submitted && f.joining_ticket.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.joining_ticket.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.joining_ticket.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.joining_ticket.errors.required">
                           Joining_ticket is required
                         </div>
@@ -814,11 +1326,20 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Paid Leaves</label>
-                      <input type="text" class="form-control" id="" placeholder="Overtime" formControlName="paid_leaves"
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Overtime"
+                        formControlName="paid_leaves"
                         [ngClass]="{
                           'is-invalid': submitted && f.paid_leaves.errors
-                        }" />
-                      <div *ngIf="submitted && f.paid_leaves.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.paid_leaves.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.paid_leaves.errors.required">
                           Paid leaves is required
                         </div>
@@ -826,15 +1347,23 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="accommodation">Frequency</label>
-                      <select id="accommodation" class="form-control" formControlName="paid_leaves_duration" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="paid_leaves_duration"
+                        [ngClass]="{
                           'is-invalid':
                             submitted && f.paid_leaves_duration.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
                         <option value="Per year">Per year </option>
                         <option value="Per 2 years">Per 2 years</option>
                       </select>
-                      <div *ngIf="submitted && f.paid_leaves_duration.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.paid_leaves_duration.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.paid_leaves_duration.errors.required">
                           Paid leaves duration is required
                         </div>
@@ -845,15 +1374,27 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Leave ticket</label>
-                      <select id="accommodation" class="form-control" formControlName="leave_ticket" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="leave_ticket"
+                        [ngClass]="{
                           'is-invalid': submitted && f.leave_ticket.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.leave_ticket.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.leave_ticket.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.leave_ticket.errors.required">
                           Leave ticket is required
                         </div>
@@ -861,15 +1402,27 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="accommodation">Uniform & PPEs</label>
-                      <select id="accommodation" class="form-control" formControlName="uniform" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="uniform"
+                        [ngClass]="{
                           'is-invalid': submitted && f.uniform.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="submitted && f.uniform.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="submitted && f.uniform.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="f.uniform.errors.required">
                           Uniform is required
                         </div>
@@ -880,20 +1433,29 @@
                   <div class="row">
                     <div class="form-group col-md-12">
                       <label for="accommodation">Other benefits</label>
-                      <textarea class="form-control" rows="2" formControlName="other_benefits"></textarea>
+                      <textarea
+                        class="form-control"
+                        rows="2"
+                        formControlName="other_benefits"
+                      ></textarea>
                     </div>
                   </div>
                   <div class="stepButtons">
-                    <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      (click)="goPrevious()" data-ktwizard-type="action-prev">
+                    <a
+                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      (click)="goPrevious()"
+                      data-ktwizard-type="action-prev"
+                    >
                       <span>
                         <i class="la la-angle-left"></i>
                         <span>Previous</span>
                       </span>
                     </a>
-                    <button type="submit"
+                    <button
+                      type="submit"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next">
+                      data-ktwizard-type="action-next"
+                    >
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -906,49 +1468,88 @@
               <!--end: Form Wizard Step 3-->
 
               <!--begin: Form Wizard Step 6-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(4),
                   'is-hide': !isTabActive(4)
-                }">
+                }"
+              >
                 <h3>
                   Terms and Conditions
                 </h3>
-                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
-                  (ngSubmit)="termSubmit()">
+                <form
+                  class="kt-form"
+                  id="kt_form"
+                  novalidate="novalidate"
+                  [formGroup]="termForm"
+                  (ngSubmit)="termSubmit()"
+                >
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Mode of interview</label>
-                      <select id="accommodation" class="form-control" formControlName="mode_of_interview" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="mode_of_interview"
+                        [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.mode_of_interview.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
                         <option value="In person">In person</option>
                         <option value="Online">Online</option>
                         <option value="CV Selection">CV Selection</option>
                       </select>
-                      <div *ngIf="termsubmitted && m.mode_of_interview.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="termsubmitted && m.mode_of_interview.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="m.mode_of_interview.errors.required">
                           Mode of interview is required
                         </div>
                       </div>
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="accommodation">No. of delegates for interview</label>
-                      <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
-                        <span class="input-group-btn input-group-prepend"><button
-                            class="btn btn-default bootstrap-touchspin-down" type="button">
+                      <label for="accommodation"
+                        >No. of delegates for interview</label
+                      >
+                      <div
+                        class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+                      >
+                        <span class="input-group-btn input-group-prepend"
+                          ><button
+                            class="btn btn-default bootstrap-touchspin-down"
+                            type="button"
+                          >
                             -
-                          </button></span><input id="kt_touchspin_1" type="text" class="form-control" value="55"
-                          placeholder="Select time" formControlName="no_of_delegates" aria-describedby="fname-error"
+                          </button></span
+                        ><input
+                          id="kt_touchspin_1"
+                          type="text"
+                          class="form-control"
+                          value="55"
+                          placeholder="Select time"
+                          formControlName="no_of_delegates"
+                          aria-describedby="fname-error"
                           [ngClass]="{
                             'is-invalid':
                               termsubmitted && m.no_of_delegates.errors
-                          }" /><span class="input-group-btn input-group-append"><button
-                            class="btn btn-secondary bootstrap-touchspin-up" type="button">
+                          }"
+                        /><span class="input-group-btn input-group-append"
+                          ><button
+                            class="btn btn-secondary bootstrap-touchspin-up"
+                            type="button"
+                          >
                             +
-                          </button></span>
-                        <div *ngIf="termsubmitted && m.no_of_delegates.errors" class="invalid-feedback">
+                          </button></span
+                        >
+                        <div
+                          *ngIf="termsubmitted && m.no_of_delegates.errors"
+                          class="invalid-feedback"
+                        >
                           <div *ngIf="m.no_of_delegates.errors.required">
                             No of delegates is required
                           </div>
@@ -960,16 +1561,28 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Flights for delegates</label>
-                      <select id="accommodation" class="form-control" formControlName="flights_for_delegates" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="flights_for_delegates"
+                        [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.flights_for_delegates.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="termsubmitted && m.flights_for_delegates.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="termsubmitted && m.flights_for_delegates.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="m.flights_for_delegates.errors.required">
                           Flights for delegates is required
                         </div>
@@ -977,16 +1590,28 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="accommodation">Hotels for delegate</label>
-                      <select id="accommodation" class="form-control" formControlName="hotels_for_delegates" [ngClass]="{
+                      <select
+                        id="accommodation"
+                        class="form-control"
+                        formControlName="hotels_for_delegates"
+                        [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.hotels_for_delegates.errors
-                        }">
+                        }"
+                      >
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company">Provided by company</option>
-                        <option value="Not provided by company">Not provided by company</option>
+                        <option value="Provided by company"
+                          >Provided by company</option
+                        >
+                        <option value="Not provided by company"
+                          >Not provided by company</option
+                        >
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div *ngIf="termsubmitted && m.hotels_for_delegates.errors" class="invalid-feedback">
+                      <div
+                        *ngIf="termsubmitted && m.hotels_for_delegates.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="m.hotels_for_delegates.errors.required">
                           Hotels for delegates is required
                         </div>
@@ -997,12 +1622,22 @@
                   <div class="row">
                     <div class="form-group col-md-6">
                       <label for="accommodation">Recruitment Fee</label>
-                      <input type="text" name="" class="form-control" placeholder="Recruitment Fee"
-                        formControlName="recruitment_fee" aria-describedby="fname-error" [ngClass]="{
+                      <input
+                        type="text"
+                        name=""
+                        class="form-control"
+                        placeholder="Recruitment Fee"
+                        formControlName="recruitment_fee"
+                        aria-describedby="fname-error"
+                        [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.recruitment_fee.errors
-                        }" />
-                      <div *ngIf="termsubmitted && m.recruitment_fee.errors" class="invalid-feedback">
+                        }"
+                      />
+                      <div
+                        *ngIf="termsubmitted && m.recruitment_fee.errors"
+                        class="invalid-feedback"
+                      >
                         <div *ngIf="m.recruitment_fee.errors.required">
                           Recruitment fee is required
                         </div>
@@ -1010,16 +1645,21 @@
                     </div>
                   </div>
                   <div class="stepButtons">
-                    <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      (click)="goPrevious()" data-ktwizard-type="action-prev">
+                    <a
+                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      (click)="goPrevious()"
+                      data-ktwizard-type="action-prev"
+                    >
                       <span>
                         <i class="la la-angle-left"></i>
                         <span>Previous</span>
                       </span>
                     </a>
-                    <button type="submit"
+                    <button
+                      type="submit"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next">
+                      data-ktwizard-type="action-next"
+                    >
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -1029,10 +1669,14 @@
                 </form>
               </div>
 
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(5),
                   'is-hide': !isTabActive(5)
-                }">
+                }"
+              >
                 <h3>Post Demand</h3>
                 <div class="text-center">
                   <h2>Two ways to get manpower?</h2>
@@ -1046,8 +1690,16 @@
                   <div class="col-md-6 pull-left">
                     <label class="kt-option">
                       <span class="kt-option__control">
-                        <span class="kt-radio kt-radio--bold kt-radio--brand" checked="">
-                          <input type="radio" name="m_option_1" [(ngModel)]="postDemand" value="1" />
+                        <span
+                          class="kt-radio kt-radio--bold kt-radio--brand"
+                          checked=""
+                        >
+                          <input
+                            type="radio"
+                            name="m_option_1"
+                            [(ngModel)]="postDemand"
+                            value="1"
+                          />
                           <span></span>
                         </span>
                       </span>
@@ -1072,8 +1724,16 @@
                   <div class="col-md-6 pull-right">
                     <label class="kt-option">
                       <span class="kt-option__control">
-                        <span class="kt-radio kt-radio--bold kt-radio--brand" checked="">
-                          <input type="radio" name="m_option_1" [(ngModel)]="postDemand" value="2" />
+                        <span
+                          class="kt-radio kt-radio--bold kt-radio--brand"
+                          checked=""
+                        >
+                          <input
+                            type="radio"
+                            name="m_option_1"
+                            [(ngModel)]="postDemand"
+                            value="2"
+                          />
                           <span></span>
                         </span>
                       </span>
@@ -1099,16 +1759,22 @@
                 <!-- <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
                 (ngSubmit)="termSubmit()"> -->
                 <div class="stepButtons">
-                  <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    (click)="goPrevious()" data-ktwizard-type="action-prev">
+                  <a
+                    class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                    (click)="goPrevious()"
+                    data-ktwizard-type="action-prev"
+                  >
                     <span>
                       <i class="la la-angle-left"></i>
                       <span>Previous</span>
                     </span>
                   </a>
-                  <button type="submit"
+                  <button
+                    type="submit"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-next" (click)="updateDemand(content)">
+                    data-ktwizard-type="action-next"
+                    (click)="updateDemand(content)"
+                  >
                     <span>
                       <span> Post Demand</span>
                       <i class="la la-angle-right"></i>
@@ -1133,21 +1799,30 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Demand Created</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="ticket-content mb-4">
       <p>
-        {{confirmMessage}}
+        {{ confirmMessage }}
       </p>
-
     </div>
-    <br />
-    <a (click)="createDemand()" class="btn">Create New Demand</a>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click ')">Ok</button>
+    <a (click)="createDemand()" class="btn">Create New Demand</a> &nbsp;
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close('Save click ')"
+    >
+      Ok
+    </button>
   </div>
 </ng-template>
