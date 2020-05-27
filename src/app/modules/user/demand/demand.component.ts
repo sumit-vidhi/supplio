@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { UserService } from '@modules/user/services/user.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
@@ -314,7 +314,7 @@ export class DemandComponent implements OnInit {
   demandCategory: any;
   category: any;
   confirmMessage: any;
-  constructor(private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService, public zone: NgZone, public modalService: NgbModal,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, private ngZone: NgZone) {
     for (let i = 2020; i >= 1950; i--) {
       this.years.push(i);
@@ -388,26 +388,54 @@ export class DemandComponent implements OnInit {
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     })
-    this.userService.checkDemand().subscribe((result: any) => {
-      if (result.payload.demand) {
+    let id;
+    this.route.params.subscribe(params => {
+      id = params.id
 
-        this.demandId = result.payload.demand.id
-        this.hireDemand = result.payload.demand.hire_type;
-        this.hire = this.hireDemand;
-        this.demandCategory = result.payload.demand.demand_category;
-        this.selectedCity = result.payload.demand.hire_country;
-        if (result.payload.demand.demand_category.length) {
-          this.setLocation();
-          this.setBenifit(result.payload.demand);
-          this.setTerm(result.payload.demand);
-          this.postDemand = result.payload.demand.demand_type;
+    })
+    console.log(id);
+    if (id) {
+      this.loader.startLoading();
+      this.userService.getDemand(id).subscribe((result: any) => {
+        if (result.payload.demand) {
+          this.loader.stopLoading();
+          this.demandId = result.payload.demand[0].id
+          this.hireDemand = result.payload.demand[0].hire_type;
+          this.hire = this.hireDemand;
+          this.demandCategory = result.payload.demand[0].demand_category;
+          this.selectedCity = result.payload.demand[0].hire_country;
+          if (result.payload.demand[0].demand_category.length) {
+            this.setLocation();
+            this.setBenifit(result.payload.demand[0]);
+            this.setTerm(result.payload.demand[0]);
+            this.postDemand = result.payload.demand[0].demand_type;
+          }
+
         }
 
-      }
+      });
+    } else {
+      this.loader.startLoading();
+      this.userService.checkDemand().subscribe((result: any) => {
+        if (result.payload.demand) {
+          this.loader.stopLoading();
+          this.demandId = result.payload.demand.id
+          this.hireDemand = result.payload.demand.hire_type;
+          this.hire = this.hireDemand;
+          this.demandCategory = result.payload.demand.demand_category;
+          this.selectedCity = result.payload.demand.hire_country;
+          if (result.payload.demand.demand_category.length) {
+            this.setLocation();
+            this.setBenifit(result.payload.demand);
+            this.setTerm(result.payload.demand);
+            this.postDemand = result.payload.demand.demand_type;
+          }
 
-    });
+        }
 
+      });
 
+    }
   }
 
 

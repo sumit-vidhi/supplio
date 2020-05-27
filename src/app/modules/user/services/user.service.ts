@@ -59,6 +59,9 @@ export class UserService {
   demandList(data): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?hire_type="+data.hire_type+"&hire_country="+data.hire_country+"&demand_type="+data.demand_type+"&status="+data.status);
   }
+  getDemand(id): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getDemand + "?id="+id);
+  }
 
 
 }

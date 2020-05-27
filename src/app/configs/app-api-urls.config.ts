@@ -19,6 +19,7 @@ export const appApiUrl: CommonBase = {
         creatDemand: 'demands/createEmptyDemand',
         demandList:'demands/myList',
         updateDemand: 'demands/update',
+        getDemand: 'demands/get',
         resetPassword: 'user/resetPassword',
         editProfile: 'basic-information',
         getSubcategory:"master/getAllSubCategories",

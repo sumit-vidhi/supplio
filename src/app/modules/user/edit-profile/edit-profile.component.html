@@ -25,7 +25,8 @@
               <ul class="steps">
                 <li (click)="changeStep('step1')" [ngClass]="{
                     completed: isTabActive(1),
-                    disabled: isTabDisabled(1)
+                    disabled: isTabDisabled(1),
+                    active: !isTabDisabled(1)
                   }">
                   <a (click)="showTab(1)" role="tab" title="Step 1">
                     Basic Information
@@ -35,21 +36,24 @@
                 </li>
                 <li (click)="changeStep('step2')" [ngClass]="{
                     completed: isTabActive(2),
-                    disabled: isTabDisabled(2)
+                    disabled: isTabDisabled(2),
+                    active: !isTabDisabled(2)
                   }" class="">
                   <a (click)="showTab(2)" role="tab" title="Step 1">Locations
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
                 <li (click)="changeStep('step3')" [ngClass]="{
                     completed: isTabActive(3),
-                    disabled: isTabDisabled(3)
+                    disabled: isTabDisabled(3),
+                    active: !isTabDisabled(3)
                   }">
                   <a (click)="showTab(3)" role="tab" title="Step 1">About
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
                 <li (click)="changeStep('step4')" [ngClass]="{
                     completed: isTabActive(4),
-                    disabled: isTabDisabled(4)
+                    disabled: isTabDisabled(4),
+                    active: !isTabDisabled(4)
                   }" class="">
                   <a (click)="showTab(4)" role="tab" title="Step 1">Documents
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>

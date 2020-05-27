@@ -25,7 +25,8 @@
               <ul class="steps">
                 <li (click)="changeStep('step1')" [ngClass]="{
                     completed: isTabActive(1),
-                    disabled: isTabDisabled(1)
+                    disabled: isTabDisabled(1),
+                    active: !isTabDisabled(1)
                   }">
                   <a (click)="showTab(1)" role="tab" title="Step 1">
                     Create Demand
@@ -35,28 +36,32 @@
                 </li>
                 <li (click)="changeStep('step2')" [ngClass]="{
                     completed: isTabActive(2),
-                    disabled: isTabDisabled(2)
+                    disabled: isTabDisabled(2),
+                    active: !isTabDisabled(2)
                   }" class="">
                   <a (click)="showTab(2)" role="tab" title="Step 1">Demand Details
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
                 <li (click)="changeStep('step2')" [ngClass]="{
                     completed: isTabActive(3),
-                    disabled: isTabDisabled(3)
+                    disabled: isTabDisabled(3),
+                    active: !isTabDisabled(3)
                   }" class="">
                   <a (click)="showTab(3)" role="tab" title="Step 1">Benefits
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
                 <li (click)="changeStep('step3')" [ngClass]="{
                     completed: isTabActive(4),
-                    disabled: isTabDisabled(4)
+                    disabled: isTabDisabled(4),
+                    active: !isTabDisabled(4)
                   }">
                   <a (click)="showTab(4)" role="tab" title="Step 1">Terms & Conditions
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
                 <li (click)="changeStep('step4')" [ngClass]="{
                     completed: isTabActive(5),
-                    disabled: isTabDisabled(5)
+                    disabled: isTabDisabled(5),
+                    active: !isTabDisabled(5)
                   }" class="">
                   <a (click)="showTab(5)" role="tab" title="Step 1">Post Demand
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
@@ -181,7 +186,7 @@
                                       }">
                                       <option [ngValue]="null" disbled>Select Category</option>
 
-                                      <option *ngFor="let value of category" value="{{ value.id }}">{{ value.name }}
+                                      <option *ngFor="let value of category" [ngValue]="value.id">{{ value.name }}
                                       </option>
                                     </select>
                                     <div *ngIf="
@@ -506,19 +511,22 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Qualification</label>
-                                      <input type="text" class="form-control" formControlName="qualification"  />
+                                      <input type="text" class="form-control" formControlName="qualification" />
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Years of Experience</label>
-                                      <input type="text" formControlName="years_of_experience" class="form-control" placeholder="Years of Experience" />
+                                      <input type="text" formControlName="years_of_experience" class="form-control"
+                                        placeholder="Years of Experience" />
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label for="accommodation">Driver License</label>
-                                      <input type="text" formControlName="driver_license" class="form-control" placeholder="Driver License" />
+                                      <input type="text" formControlName="driver_license" class="form-control"
+                                        placeholder="Driver License" />
                                     </div>
                                     <div class="form-group col-md-12">
                                       <label for="accommodation">Job Description</label>
-                                      <textarea class="form-control" formControlName="job_desc" placeholder="Job Description"></textarea>
+                                      <textarea class="form-control" formControlName="job_desc"
+                                        placeholder="Job Description"></textarea>
                                     </div>
                                     <div class="form-group col-md-12">
                                       <label for="accommodation">Job Description</label>

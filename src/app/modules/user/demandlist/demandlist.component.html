@@ -8,7 +8,7 @@
           </h3>
         </div>
         <div class="kt-subheader__main">
-          <a routerLink="user/demand" class="btn btn-primary btn-brand--icon" id="kt_search">
+          <a routerLink="/user/demand" class="btn btn-primary btn-brand--icon" id="kt_search">
             <span>
               <span>Create Demand</span>
             </span>
@@ -107,7 +107,7 @@
                   <div class="kt-widget__label">
                     <div class="kt-widget__media">
                       <span class="kt-media kt-media--lg kt-media--circle">
-                        <img src="assets/media/project-logos/3.png" alt="image">
+                        <img src="/assets/media/project-logos/3.png" alt="image">
                       </span>
                     </div>
                     <div class="kt-widget__info kt-margin-t-5">
@@ -133,7 +133,7 @@
                           </a>
                         </li>
                         <li class="kt-nav__item">
-                          <a href="#" class="kt-nav__link">
+                          <a routerLink="/user/demand/{{arrayItem.id}}" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-send"></i>
                             <span class="kt-nav__link-text">Edit</span>
                           </a>

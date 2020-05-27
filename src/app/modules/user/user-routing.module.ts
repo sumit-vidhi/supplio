@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
     data: { title: 'My account' },
-     canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: '', component: UserDashboardComponent,
@@ -26,6 +26,11 @@ const routes: Routes = [
   {
     path: 'demand', component: DemandComponent,
     data: { title: 'Demand' },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'demand/:id', component: DemandComponent,
+    data: { title: 'Edit Demand' },
     canActivate: [AuthGuard]
   },
   {
