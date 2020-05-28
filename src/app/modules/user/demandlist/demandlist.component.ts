@@ -276,13 +276,17 @@ export class demandListComponent implements OnInit {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
+  myDateValue: Date;
+  myDateValue2: Date;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
+    // this.myDateValue = new Date();
     this.searchForm = this.formBuilder.group({
-      // address: ['', [Validators.required]]
+      startDate: [''],
+      postDate: [''],
       hire_type: [''],
       hire_country: [''],
       demand_type: [''],
@@ -311,8 +315,25 @@ export class demandListComponent implements OnInit {
 
   }
 
+  onDateChange(newDate: Date) {
+    console.log(newDate);
+  }
   searchSubmit() {
     const data = this.searchForm.value;
+ 
+    if (data.startDate) {
+      var today = data.startDate;
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      var potoday = data.postDate;
+      var podd = String(potoday.getDate()).padStart(2, '0');
+      var pomm = String(potoday.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var poyyyy = today.getFullYear();
+      data.startDate = mm + '/' + dd + '/' + yyyy;
+      data.postDate = pomm + '/' + podd + '/' + poyyyy;
+    }
+    console.log(data);  
     this.loader.startLoading();
     this.userService.demandList(data).subscribe((result: any) => {
       this.loader.stopLoading();

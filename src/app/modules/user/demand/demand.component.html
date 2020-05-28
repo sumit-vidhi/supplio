@@ -958,7 +958,7 @@
                         formControlName="accommodation"
                         [ngClass]="{
                           'is-invalid': submitted && f.accommodation.errors
-                        }"
+                        }" (change)="changeAccomdation($event)"
                       >
                         <option [ngValue]="null">Select</option>
                         <option value="Provided by company"
@@ -975,6 +975,29 @@
                       >
                         <div *ngIf="f.accommodation.errors.required">
                           Accommodation is required
+                        </div>
+                      </div>
+                      <div class="form-group col-md-12" *ngIf="accomdation==='Allowance'">
+                        <label for="accommodation">Accommodation Allowance</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id=""
+                          placeholder="Accomdation Allowance"
+                          formControlName="accomdationAllowance"
+                          aria-describedby="fname-error"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && f.accomdationAllowance.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && f.accomdationAllowance.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.accomdationAllowance.errors.required">
+                            Accomdation Allowance is required
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1014,7 +1037,7 @@
                         formControlName="transportation"
                         [ngClass]="{
                           'is-invalid': submitted && f.transportation.errors
-                        }"
+                        }" (change)="changeTransportation($event)"
                       >
                         <option [ngValue]="null">Select</option>
                         <option value="Provided by company"
@@ -1030,7 +1053,30 @@
                         class="invalid-feedback"
                       >
                         <div *ngIf="f.transportation.errors.required">
-                          Visa sponsorship is required
+                          Transportation is required
+                        </div>
+                      </div>
+                      <div class="form-group col-md-12" *ngIf="transportation=='Allowance'">
+                        <label for="accommodation">Transportation Allowance</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id=""
+                          placeholder="Transportation Allowance"
+                          formControlName="transportationAllowance"
+                          aria-describedby="fname-error"
+                          [ngClass]="{
+                            'is-invalid':
+                              submitted && f.transportationAllowance.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="submitted && f.transportationAllowance.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="f.transportationAllowance.errors.required">
+                            Transportation Allowance is required
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1042,8 +1088,8 @@
                         formControlName="food"
                         [ngClass]="{
                           'is-invalid': submitted && f.food.errors
-                        }"
-                      >
+                        }" (change)="changeFood($event)"
+                      > 
                         <option [ngValue]="null">Select</option>
                         <option value="Provided by company"
                           >Provided by company</option
@@ -1059,6 +1105,29 @@
                       >
                         <div *ngIf="f.food.errors.required">
                           Food is required
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-12" *ngIf="food=='Allowance'">
+                      <label for="accommodation">Food Allowance</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id=""
+                        placeholder="Food Allowance"
+                        formControlName="foodAllowance"
+                        aria-describedby="fname-error"
+                        [ngClass]="{
+                          'is-invalid':
+                            submitted && f.foodAllowance.errors
+                        }"
+                      />
+                      <div
+                        *ngIf="submitted && f.foodAllowance.errors"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f.foodAllowance.errors.required">
+                          Food Allowance is required
                         </div>
                       </div>
                     </div>

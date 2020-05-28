@@ -50,9 +50,13 @@
                     <input
                       type="text"
                       class="form-control kt-input"
-                      name="start"
+                      [minDate]="minDate"
+                      [maxDate]="maxDate"
+                      #dp="bsDatepicker"
+                      bsDatepicker [(bsValue)]="myDateValue"
                       placeholder="From"
                       data-col-index="5"
+                      formControlName="startDate"
                     />
                     <div class="input-group-append">
                       <span class="input-group-text"
@@ -62,9 +66,13 @@
                     <input
                       type="text"
                       class="form-control kt-input"
-                      name="end"
+                      [minDate]="minDate"
+                      [maxDate]="maxDate"
+                      #dp="bsDatepicker"
+                      bsDatepicker [(bsValue)]="myDateValue2"
                       placeholder="To"
                       data-col-index="5"
+                      formControlName="postDate"
                     />
                   </div>
                 </div>

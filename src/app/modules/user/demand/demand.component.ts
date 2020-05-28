@@ -326,6 +326,9 @@ export class DemandComponent implements OnInit {
   demandCategory: any;
   category: any;
   confirmMessage: any;
+  accomdation: any;
+  transportation: any;
+  food: any
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -379,9 +382,12 @@ export class DemandComponent implements OnInit {
     this.benefitForm = this.formBuilder.group({
       // address: ['', [Validators.required]]
       accommodation: [null, [Validators.required]],
+      accomdationAllowance: [''],
       visa_sponsorship: ['', [Validators.required]],
       transportation: ['', [Validators.required]],
+      transportationAllowance: [''],
       food: ['', [Validators.required]],
+      foodAllowance: [''],
       employment_location: ['', [Validators.required]],
       employment_country: ['', [Validators.required]],
       employment_city: ['', [Validators.required]],
@@ -452,12 +458,45 @@ export class DemandComponent implements OnInit {
     }
   }
 
+  changeAccomdation(event) {
+    this.accomdation = event.target.value;
+    if (this.accomdation == "Allowance") {
+      this.benefitForm.controls.accomdationAllowance.setValidators(Validators.required);
+      this.benefitForm.controls.accomdationAllowance.updateValueAndValidity();
+    } else {
+      this.benefitForm.controls.accomdationAllowance.clearValidators();
+      this.benefitForm.controls.accomdationAllowance.updateValueAndValidity();
+    }
+  }
+  changeTransportation(event) {
+    this.transportation = event.target.value;
+    if (this.transportation == "Allowance") {
+      this.benefitForm.controls.transportationAllowance.setValidators(Validators.required);
+      this.benefitForm.controls.transportationAllowance.updateValueAndValidity();
+    } else {
+      this.benefitForm.controls.transportationAllowance.clearValidators();
+      this.benefitForm.controls.transportationAllowance.updateValueAndValidity();
+    }
+  }
+  changeFood(event) {
+    this.food = event.target.value;
+    if (this.food == "Allowance") {
+      this.benefitForm.controls.foodAllowance.setValidators(Validators.required);
+      this.benefitForm.controls.foodAllowance.updateValueAndValidity();
+    } else {
+      this.benefitForm.controls.foodAllowance.clearValidators();
+      this.benefitForm.controls.foodAllowance.updateValueAndValidity();
+    }
+  }
+
+
   setBenifit(data) {
     const newData = {
       accommodation: data.accommodation,
       visa_sponsorship: data.visa_sponsorship,
       transportation: data.transportation,
       food: data.food,
+      foodAllowance: '',
       employment_location: data.employment_location,
       employment_country: data.employment_country,
       employment_city: data.employment_city,
@@ -474,7 +513,30 @@ export class DemandComponent implements OnInit {
       leave_ticket: data.leave_ticket,
       uniform: data.uniform,
       other_benefits: data.other_benefits,
+      accomdationAllowance: '',
+      transportationAllowance: ''
     };
+    let newvar = Object.assign({}, newData);
+    if (newData.accommodation != "Provided by company" && newData.accommodation != "Not provided by company") {
+      newData.accomdationAllowance = newvar.accommodation;
+      newData.accommodation = "Allowance";
+      this.accomdation = "Allowance";
+    }
+
+    if (newData.transportation != "Provided by company" && newData.transportation != "Not provided by company") {
+      newData.transportationAllowance = newvar.transportation;
+      newData.transportation = "Allowance";
+      this.transportation = "Allowance";
+    }
+
+    if (newData.food != "Provided by company" && newData.food != "Not provided by company") {
+      newData.foodAllowance = newvar.transportation;
+      newData.food = "Allowance";
+      this.food = "Allowance";
+    }
+
+
+    console.log(newData)
     this.benefitForm.setValue(newData);
   }
 
@@ -696,7 +758,7 @@ export class DemandComponent implements OnInit {
       }
     });
   }
-  changeStep(step) {}
+  changeStep(step) { }
 
   makeActive(tabId: number) {
     let i = this.disabledTabs.indexOf(tabId);
@@ -761,6 +823,17 @@ export class DemandComponent implements OnInit {
       return;
     }
     const formdata = this.benefitForm.value;
+    if (formdata.accommodation == "Allowance") {
+      formdata.accommodation = formdata.accomdationAllowance;
+    }
+    if (formdata.transportation == "Allowance") {
+      formdata.transportation = formdata.transportationAllowance;
+    }
+    if (formdata.food == "Allowance") {
+      formdata.transportation = formdata.foodAllowance;
+    }
+
+    console.log(formdata);
     formdata.form_step = 3;
     formdata.id = this.demandId;
     this.loader.startLoading();
