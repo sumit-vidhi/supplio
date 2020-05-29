@@ -1,5 +1,11 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<div
+  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
+  id="kt_body"
+>
+  <div
+    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+    id="kt_content"
+  >
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -7,13 +13,9 @@
           <h3 class="kt-subheader__title">
             Dashboard
           </h3>
-
         </div>
         <div class="kt-subheader__toolbar">
-          <div class="kt-subheader__wrapper">
-
-
-          </div>
+          <div class="kt-subheader__wrapper"></div>
         </div>
       </div>
     </div>
@@ -21,58 +23,62 @@
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
-    <div class="kt-container kt-grid__item kt-grid__item--fluid" *ngIf="demandData">
+    <div
+      class="kt-container kt-grid__item kt-grid__item--fluid"
+      *ngIf="demandData"
+    >
       <!--Begin::Dashboard 3-->
-      <div class="kt-portlet ">
+      <div class="kt-portlet">
         <div class="kt-portlet__body">
           <div class="kt-widget kt-widget--user-profile-3">
             <div class="kt-widget__top">
               <div class="kt-widget__media kt-hidden-">
-                <img src="/assets/media/project-logos/3.png" alt="image">
+                <img src="/assets/img/company.png" alt="image" />
               </div>
-              <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
+              <div
+                class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden"
+              >
                 JM
               </div>
               <div class="kt-widget__content">
                 <div class="kt-widget__head">
-                  <a href="#" class="kt-widget__username kt-hidden">
-                    Jason Muller
-                    <i class="flaticon2-correct"></i>
-                  </a>
-                  <a href="#" class="kt-widget__title">Company Name</a>
+                  <a href="#" class="kt-widget__title"
+                    >{{ demandData['user']['agency_name'] }}e</a
+                  >
                   <div class="kt-widget__action">
-                    <button type="button" class="btn btn-sm btn-upper" style="background: #edeff6">Edit</button>&nbsp;
-                    <button type="button" class="btn btn-success btn-sm btn-upper">Bid</button>
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-upper"
+                      style="background: #edeff6;"
+                    >
+                      Edit</button
+                    >&nbsp;
+                    <button
+                      type="button"
+                      class="btn btn-success btn-sm btn-upper"
+                    >
+                      Bid
+                    </button>
                   </div>
                 </div>
-                <div class="kt-widget__subhead kt-hidden">
-                  <a href="#"><i class="flaticon2-new-email"></i>jason@siastudio.com</a>
-                  <a href="#"><i class="flaticon2-calendar-3"></i>PR Manager </a>
-                  <a href="#"><i class="flaticon2-placeholder"></i>Melbourne</a>
-                </div>
+
                 <div class="kt-widget__info">
-                  <div class="kt-widget__desc" *ngIf="demandData && demandData['user']">
-                    {{ demandData["user"]['agency_name'] }}
+                  <div
+                    class="kt-widget__desc"
+                    *ngIf="demandData && demandData['user']"
+                  >
+                    {{ demandData['user']['about_company'] }}
                   </div>
-                  <div class="kt-widget__progress kt-hidden">
-                    <div class="kt-widget__text">
-                      Progress
-                    </div>
-                    <div class="progress" style="height: 5px;width: 100%;">
-                      <div class="progress-bar kt-bg-success" role="progressbar" style="width: 65%;" aria-valuenow="65"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div class="kt-widget__stats">
-                      78%
-                    </div>
-                  </div>
-                  <div class="kt-widget__stats d-flex pull-right align-items-center flex-fill">
+
+                  <div
+                    class="kt-widget__stats d-flex pull-right align-items-center flex-fill"
+                  >
                     <div class="kt-widget__item">
                       <span class="kt-widget__date">
                         Posted Date
                       </span>
                       <div class="kt-widget__label">
-                        <span class="btn btn-label-brand btn-sm btn-bold btn-upper">{{
+                        <span class="">{{
                           demandData.created_at | date: 'mediumDate'
                         }}</span>
                       </div>
@@ -82,7 +88,7 @@
                         Hiring
                       </span>
                       <div class="kt-widget__label">
-                        <span class="btn btn-label-danger btn-sm btn-bold btn-upper">{{
+                        <span class="">{{
                           demandData.hire_type ? demandData.hire_type : '-'
                         }}</span>
                       </div>
@@ -93,7 +99,7 @@
                         Country
                       </span>
                       <div class="kt-widget__label">
-                        <span class="btn btn-label-info btn-sm btn-bold btn-upper">{{
+                        <span class="">{{
                           demandData.hire_country
                             ? getcountry(demandData.hire_country)
                             : '-'
@@ -106,7 +112,7 @@
                         Type
                       </span>
                       <div class="kt-widget__label">
-                        <span class="btn btn-label-warning btn-sm btn-bold btn-upper">{{ getType() }}</span>
+                        <span class="">{{ getType() }}</span>
                       </div>
                     </div>
                   </div>
@@ -120,11 +126,14 @@
                 </div>
                 <div class="kt-widget__details">
                   <span class="kt-widget__title">Recruitment Fee</span>
-                  <span class="kt-widget__value"><span>$</span> {{
-                    demandData.recruitment_fee
-                      ? demandData.recruitment_fee
-                      : '-'
-                  }}</span>
+                  <span class="kt-widget__value"
+                    ><span>$</span>
+                    {{
+                      demandData.recruitment_fee
+                        ? demandData.recruitment_fee
+                        : '-'
+                    }}</span
+                  >
                 </div>
               </div>
               <div class="kt-widget__item">
@@ -142,23 +151,23 @@
                   <i class="flaticon-file-2"></i>
                 </div>
                 <div class="kt-widget__details">
-                  <span class="kt-widget__title">{{
-                    demandData.recruitment_fee
-                      ? demandData.recruitment_fee
-                      : '-'
-                  }} Total Requirement</span>
+                  <span class="kt-widget__title"
+                    >{{
+                      demandData.recruitment_fee
+                        ? demandData.recruitment_fee
+                        : '-'
+                    }}
+                    Total Requirement</span
+                  >
                   <a href="#" class="kt-widget__value kt-font-brand">View</a>
                 </div>
               </div>
-
-
             </div>
           </div>
         </div>
       </div>
 
       <div class="row">
-
         <div class="col-md-3">
           <div class="kt-portlet">
             <div class="kt-portlet__body">
@@ -167,9 +176,7 @@
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Accommodation</h3>
                     <span class="kt-widget1__desc">{{
-                      demandData.accommodation
-                        ? demandData.accommodation
-                        : '-'
+                      demandData.accommodation ? demandData.accommodation : '-'
                     }}</span>
                   </div>
                 </div>
@@ -200,9 +207,7 @@
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Food</h3>
                     <span class="kt-widget1__desc">{{
-                      demandData.food
-                        ? demandData.food
-                        : '-'
+                      demandData.food ? demandData.food : '-'
                     }}</span>
                   </div>
                 </div>
@@ -251,21 +256,14 @@
                   </div>
                 </div>
 
-
-
                 <div class="kt-widget1__item">
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Overtime</h3>
                     <span class="kt-widget1__desc">{{
-                      demandData.overtime
-                        ? demandData.overtime
-                        : '-'
+                      demandData.overtime ? demandData.overtime : '-'
                     }}</span>
                   </div>
                 </div>
-
-
-
               </div>
             </div>
           </div>
@@ -275,7 +273,6 @@
           <div class="kt-portlet">
             <div class="kt-portlet__body">
               <div class="kt-widget1 kt-widget1--fit">
-
                 <div class="kt-widget1__item">
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Medical Insurance</h3>
@@ -301,21 +298,16 @@
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Paid leaves</h3>
                     <span class="kt-widget1__desc">{{
-                      demandData.paid_leaves
-                        ? demandData.paid_leaves
-                        : '-'
+                      demandData.paid_leaves ? demandData.paid_leaves : '-'
                     }}</span>
                   </div>
                 </div>
-
 
                 <div class="kt-widget1__item">
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Leave ticket</h3>
                     <span class="kt-widget1__desc">{{
-                      demandData.leave_ticket
-                        ? demandData.leave_ticket
-                        : '-'
+                      demandData.leave_ticket ? demandData.leave_ticket : '-'
                     }}</span>
                   </div>
                 </div>
@@ -324,9 +316,7 @@
                   <div class="kt-widget1__info">
                     <h3 class="kt-widget1__title">Uniform & PPEs</h3>
                     <span class="kt-widget1__desc">{{
-                      demandData.uniform
-                        ? demandData.uniform
-                        : '-'
+                      demandData.uniform ? demandData.uniform : '-'
                     }}</span>
                   </div>
                 </div>
@@ -355,7 +345,9 @@
 
                 <div class="kt-widget1__item">
                   <div class="kt-widget1__info">
-                    <h3 class="kt-widget1__title">No. of delegates for interview</h3>
+                    <h3 class="kt-widget1__title">
+                      No. of delegates for interview
+                    </h3>
                     <span class="kt-widget1__desc">{{
                       demandData.no_of_delegates
                         ? demandData.no_of_delegates
@@ -385,7 +377,6 @@
                     }}</span>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -399,53 +390,75 @@
                 </h3>
               </div>
             </div>
-            <div class="kt-portlet__body" *ngIf="demandData && demandData.demand_category.length>0">
+            <div
+              class="kt-portlet__body"
+              *ngIf="demandData && demandData.demand_category.length > 0"
+            >
               <div class="kt-widget5">
-                <div class="kt-widget5__item" *ngFor="let array of demandData.demand_category">
+                <div
+                  class="kt-widget5__item"
+                  *ngFor="let array of demandData.demand_category"
+                >
                   <div class="kt-widget5__content">
                     <div class="kt-widget5__section">
                       <a href="#" class="kt-widget5__title">
-                        {{array.category_name}}
+                        {{ array.category_name }}
                       </a>
                       <p class="kt-widget5__desc">
-                        {{array.nationality}}
+                        {{ array.nationality }}
                       </p>
                       <div class="kt-widget5__info">
                         <span>Gender:</span>
-                        <span class="kt-font-info"> {{array.gender}}</span>
+                        <span class="kt-font-info"> {{ array.gender }}</span>
                         <span>Age Bracket:</span>
-                        <span class="kt-font-info"> {{(array.age_bracket)?array.age_bracket:'-'}}</span>
-
+                        <span class="kt-font-info">
+                          {{
+                            array.age_bracket ? array.age_bracket : '-'
+                          }}</span
+                        >
                       </div>
                       <div class="kt-widget5__info">
                         <span>Qualification:</span>
-                        <span class="kt-font-info"> {{(array.qualification)?array.qualification:'-'}}</span>
+                        <span class="kt-font-info">
+                          {{
+                            array.qualification ? array.qualification : '-'
+                          }}</span
+                        >
                         <span>Experience:</span>
-                        <span class="kt-font-info"> {{(array.years_of_experience)?years_of_experience:'-'}}</span>
+                        <span class="kt-font-info">
+                          {{
+                            array.years_of_experience
+                              ? years_of_experience
+                              : '-'
+                          }}</span
+                        >
                       </div>
                       <div class="kt-widget5__info">
                         <span>Driver's License:</span>
-                        <span class="kt-font-info"> {{(array.driver_license)?array.driver_license:'-'}}</span>
+                        <span class="kt-font-info">
+                          {{
+                            array.driver_license ? array.driver_license : '-'
+                          }}</span
+                        >
                       </div>
                     </div>
                   </div>
                   <div class="kt-widget5__content">
                     <div class="kt-widget5__stats">
-                      <span class="kt-widget5__number"> {{array.salary}}</span>
+                      <span class="kt-widget5__number">
+                        {{ array.salary }}</span
+                      >
                       <span class="kt-widget5__sales">Salary</span>
                     </div>
                     <div class="kt-widget5__stats">
-                      <span class="kt-widget5__number"> {{array.quantity}}</span>
+                      <span class="kt-widget5__number">
+                        {{ array.quantity }}</span
+                      >
                       <span class="kt-widget5__votes">Quantity</span>
                     </div>
                   </div>
                 </div>
-
-
-
-
               </div>
-
             </div>
           </div>
         </div>

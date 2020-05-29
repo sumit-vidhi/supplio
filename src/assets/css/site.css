@@ -654,3 +654,20 @@ span.mat-checkbox-label {
   font-weight: normal;
   display: block;
 }
+.theme-green .bs-datepicker-head {
+  background-color: #074a79 !important;
+}
+.theme-green .bs-datepicker-body table td.week span {
+  color: #074a79 !important;
+}
+.bs-datepicker-head button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.bs-datepicker-container {
+  padding: 0 !important;
+}
+
+.bs-datepicker-body {
+  border: none !important;
+}
