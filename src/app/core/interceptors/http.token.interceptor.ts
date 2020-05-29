@@ -25,12 +25,24 @@ export class HttpTokenInterceptor implements HttpInterceptor {
   constructor(private authService: JWTAuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const headersConfig: CommonBase = {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Cache-Control': 'no-cache', // Disable IE cache
-      'Pragma': 'no-cache', // Disable IE cache
-    };
+    let headersConfig: CommonBase = {};
+    if (req.headers.get('no-auth') != "true") {
+      headersConfig = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Cache-Control': 'no-cache', // Disable IE cache
+        'Pragma': 'no-cache', // Disable IE cache
+      };
+    } else {
+      headersConfig = {
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json',
+      };
+    }
+    console.log(headersConfig);
+
+
+
 
     const token: null | CommonBase = this.authService.getUserAccessToken();
     if (token) {

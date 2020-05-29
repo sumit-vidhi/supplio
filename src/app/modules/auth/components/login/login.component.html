@@ -23,12 +23,12 @@
                                 </div>
                                 <div class="alert-text">{{error}}</div>
                             </div>
-
-                            <!---   <div class="alert alert-success fade show" role="alert">
-                                <div class="alert-icon"> <i class="{{ alertMsg.icon }}"></i>
+{{message}}
+                              <div class="alert alert-success fade show" role="alert" *ngIf="message">
+                                <div class="alert-icon">
                                 </div>
-                                <div class="alert-text">Success Msg</div>
-                            </div> -->
+                                <div class="alert-text">{{message}}</div>
+                            </div>
                             <div class="tab-pane active" id="loginTab" role="tabpanel">
                                 <div class="login-card">
                                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">

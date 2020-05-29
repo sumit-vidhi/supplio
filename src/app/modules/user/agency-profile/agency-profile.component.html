@@ -56,7 +56,7 @@
                     disabled: isTabDisabled(4),
                     active: !isTabDisabled(4)
                   }" class="">
-                  <a (click)="showTab(4)" role="tab" title="Step 1">Documents
+                  <a (click)="showTab(4)" role="tab" title="Step 1">Your expertise
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
                 <li (click)="changeStep('step5')" [ngClass]="{
@@ -64,7 +64,79 @@
                   disabled: isTabDisabled(5),
                   active: !isTabDisabled(5)
                 }" class="">
-                  <a (click)="showTab(5)" role="tab" title="Step 1">Review & Submit
+                  <a (click)="showTab(5)" role="tab" title="Step 1">Your experience
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step6')" [ngClass]="{
+                  completed: isTabActive(6),
+                  disabled: isTabDisabled(6),
+                  active: !isTabDisabled(6)
+                }" class="">
+                  <a (click)="showTab(6)" role="tab" title="Step 1">Your work
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step7')" [ngClass]="{
+                  completed: isTabActive(7),
+                  disabled: isTabDisabled(7),
+                  active: !isTabDisabled(7)
+                }" class="">
+                  <a (click)="showTab(7)" role="tab" title="Step 1">Declarations
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step8')" [ngClass]="{
+                  completed: isTabActive(8),
+                  disabled: isTabDisabled(8),
+                  active: !isTabDisabled(8)
+                }" class="">
+                  <a (click)="showTab(8)" role="tab" title="Step 1">Associations
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step9')" [ngClass]="{
+                  completed: isTabActive(9),
+                  disabled: isTabDisabled(9),
+                  active: !isTabDisabled(9)
+                }" class="">
+                  <a (click)="showTab(9)" role="tab" title="Step 1">Certifications & Awards
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step10')" [ngClass]="{
+                  completed: isTabActive(10),
+                  disabled: isTabDisabled(10),
+                  active: !isTabDisabled(10)
+                }" class="">
+                  <a (click)="showTab(10)" role="tab" title="Step 1">Documents
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step11')" [ngClass]="{
+                  completed: isTabActive(11),
+                  disabled: isTabDisabled(11),
+                  active: !isTabDisabled(11)
+                }" class="">
+                  <a (click)="showTab(11)" role="tab" title="Step 1">Team
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step12')" [ngClass]="{
+                  completed: isTabActive(12),
+                  disabled: isTabDisabled(12),
+                  active: !isTabDisabled(12)
+                }" class="">
+                  <a (click)="showTab(12)" role="tab" title="Step 1">Company tour
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step13')" [ngClass]="{
+                  completed: isTabActive(13),
+                  disabled: isTabDisabled(13),
+                  active: !isTabDisabled(13)
+                }" class="">
+                  <a (click)="showTab(13)" role="tab" title="Step 1">Ask for reviews
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step14')" [ngClass]="{
+                  completed: isTabActive(14),
+                  disabled: isTabDisabled(14),
+                  active: !isTabDisabled(14)
+                }" class="">
+                  <a (click)="showTab(14)" role="tab" title="Step 1">Your badges
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
               </ul>
@@ -354,39 +426,9 @@
                 'is-hide': !isTabActive(4)
               }">
                 <div class="kt-heading kt-heading--md">
-                  <h3>Review your Details and Submit</h3>
+                  <h3>Your expertise </h3>
                 </div>
-                <div class="kt-form__section kt-form__section--first">
-                  <div class="kt-wizard-v2__form">
-                    <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="imageForm"
-                    (ngSubmit)="imageSubmit()">
-
-                      <div class="form-group">
-                        <label>Trade Licence</label>
-                        <input type="file" formControlName="myFile"
-                          (change)="fileEvent($event)" />
-                      </div>
-                      <div class="stepButtons">
-                        <a (click)="goPrevious()"
-                          class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-prev">
-                          <span>
-                            <i class="la la-angle-left"></i>
-                            <span>Previous</span>
-                          </span>
-                        </a>
-                        <button type="submit"
-                          class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
-                          <span>
-                            <span>Next Step</span>
-                            <i class="la la-angle-right"></i>
-                          </span>
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+              
               </div>
               <!--begin: Form Wizard Step 6-->
               <div class="stepContainer" id="step1" [ngClass]="{
@@ -394,63 +436,9 @@
                   'is-hide': !isTabActive(5)
                 }">
                 <div class="kt-heading kt-heading--md">
-                  <h3>Review your Details and Submit</h3>
+                  <h3>Your expertise </h3>
                 </div>
-                <div class="kt-form__section kt-form__section--first">
-                  <div class="kt-wizard-v2__review">
-                    <div class="kt-wizard-v2__review-item">
-                      <div class="kt-wizard-v2__review-title">
-                        Basic Information
-                        <a class="stepEditLink" (click)="showTab(1)"><i class="far fa-edit"></i></a>
-                      </div>
-                      <div class="kt-wizard-v2__review-content">
-                        <strong>Company Name:</strong> {{ appData.agency_name
-                        }}<br />
-                        <strong>Phone:</strong> {{ appData.phone_number }}<br />
-                        <strong>Year of Establishment:</strong>
-                        {{ appData.year_of_establishment }}<br />
-                        <strong>Website:</strong> {{ appData.website }}<br />
-                        <strong>Owner Name:</strong> {{ appData.owner_name
-                        }}<br />
-                        <strong>Designation:</strong> {{ appData.designation }}
-                      </div>
-                    </div>
-                    <div class="kt-wizard-v2__review-item">
-                      <div class="kt-wizard-v2__review-title">
-                        Locations
-                        <a class="stepEditLink" (click)="showTab(2)"><i class="far fa-edit"></i></a>
-                      </div>
-                      <div class="kt-wizard-v2__review-content" *ngFor="let location of appData.users_locations">
-                        {{ location.address }}<br />
-                      </div>
-                    </div>
-                    <div class="kt-wizard-v2__review-item">
-                      <div class="kt-wizard-v2__review-title">
-                        About
-                        <a class="stepEditLink" (click)="showTab(3)"><i class="far fa-edit"></i></a>
-                      </div>
-                      <div class="kt-wizard-v2__review-content" [innerHtml]="appData.about_company"></div>
-                    </div>
-                    <div class="stepButtons">
-                      <button (click)="goPrevious()"
-                        class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-prev">
-                        <span>
-                          <i class="la la-angle-left"></i>
-                          <span>Previous</span>
-                        </span>
-                      </button>
-                      <button type="submit"
-                        class="pull-right btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-submit" (click)="reviewSubmit(content)">
-                        <span>
-                          <span>Submit</span>
-                          <i class="la la-angle-right"></i>
-                        </span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
+               
               </div>
 
               <!--end: Form Wizard Step 6-->

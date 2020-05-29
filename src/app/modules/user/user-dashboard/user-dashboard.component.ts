@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { APP_USER } from '@configs/app-settings.config';
 
 import * as $ from 'jquery';
 @Component({
@@ -22,15 +23,28 @@ export class UserDashboardComponent implements OnInit {
   formCard: FormGroup;
   modalReference: NgbModalRef;
   submittedForm: boolean = false;
-
+  appData: any;
   @ViewChild('myDiv', { static: true }) myDiv: ElementRef<HTMLElement>;
+  @ViewChild('myDiv2', { static: true }) myDiv2: ElementRef<HTMLElement>;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
-    let el: HTMLElement = this.myDiv.nativeElement;
-    el.click();
+
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
+  
+    if (this.appData.role == 'Employer') {
+      console.log(this.appData);
+      let el: HTMLElement = this.myDiv.nativeElement;
+      el.click();
+    } else {
+      console.log(this.appData);
+      let el2: HTMLElement = this.myDiv2.nativeElement;
+      el2.click();
+    }
+
+
 
   }
 
@@ -42,6 +56,10 @@ export class UserDashboardComponent implements OnInit {
   editPage() {
     this.modalReference.close();
     this.router.navigate(["user/edit-profile"]);
+  }
+  editAgency() {
+    this.modalReference.close();
+    this.router.navigate(["user/agency-profile"]);
   }
 
 }

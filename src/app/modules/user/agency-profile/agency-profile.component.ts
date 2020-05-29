@@ -28,11 +28,11 @@ import { Location } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss'],
+  selector: 'app-agency-profile',
+  templateUrl: './agency-profile.component.html',
+  styleUrls: ['./agency-profile.component.scss'],
 })
-export class EditProfileComponent implements OnInit {
+export class AgencyProfileComponent implements OnInit {
   address: Object;
   establishmentAddress: Object;
   separateDialCode = true;
@@ -56,10 +56,10 @@ export class EditProfileComponent implements OnInit {
   lastName: any;
   years: Array<number> = [];
   minTab = 1; //Minimum Tab Step
-  maxTab = 5; //Maximum Tab Step
+  maxTab = 14; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
-  disabledTabs: any = [2, 3, 4, 5];
+  disabledTabs: any = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   appData: any;
   locationForm: FormGroup;
   ckeConfig: any;
@@ -121,11 +121,11 @@ export class EditProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    if (this.appData.phone_number) {
+    //if (this.appData.phone_number) {
 
-      this.setFormdata();
-      this.setLocation(locationForm, arrayControl);
-    }
+    this.setFormdata();
+    this.setLocation(locationForm, arrayControl);
+    //  }
     this.phoneForm = this.formBuilder.group({
       phone: [''],
     });
@@ -156,7 +156,7 @@ export class EditProfileComponent implements OnInit {
       company_size: this.appData.company_size,
       designation: this.appData.designation,
       owner_name: this.appData.owner_name,
-      phone_code: this.appData.phone_code || '+91',
+      phone_code: this.appData.phone_code || 'IN',
       phone_number: this.appData.phone_number,
       website: this.appData.website,
       year_of_establishment: this.appData.year_of_establishment

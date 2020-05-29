@@ -24,10 +24,12 @@ export class LoginComponent implements OnInit {
   submitted = false;
   userType: string;
   error: string = '';
+  message: string = "";
   constructor(private fb: FormBuilder, private authService: AuthService, private userservice: UserService,
     private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.message = "";
     this.loginForm = this.fb.group({
       email: ['', [
         Validators.required, Validators.email
@@ -36,11 +38,16 @@ export class LoginComponent implements OnInit {
       rememberMe: ['']
     });
     this.route.paramMap.subscribe(params => {
+
       const userType = params.get("user");
       if (userType == "employer" || userType == "agency") {
         this.userType = userType;
         console.log(this.userType);
         localStorage.setItem("userType", userType);
+        if (params.get("verified")) {
+          console.log("23232");
+          this.message = "Your email address has been verified successfully. Please login into your account for more detail.";
+        }
       } else {
         console.log(userType);
         this.router.navigateByUrl('/auth/login/employer');
@@ -61,8 +68,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(formModal).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.token) {
-     //   result.payload["authToken"] = result.payload.token;
-        result.payload.user["authToken"]= result.payload.token;
+        //   result.payload["authToken"] = result.payload.token;
+        result.payload.user["authToken"] = result.payload.token;
         this.loginService.setLoginUserDetail(result.payload.user);
         this.blogData();
       } else if (result.payload.error) {

@@ -55,6 +55,32 @@
                                             class="kt-menu__link-text">PSL</span></a>
                                 </li>
                             </ul>
+                            <ul class="kt-menu__nav" *ngIf="loginService.getRole() === 'Agency'">
+                                <li class="kt-menu__item"> <a routerLink="/user"
+                                        class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">Dashboard</span></a>
+                                </li>
+                                <li class="kt-menu__item"> <a routerLink="/user"
+                                    class="kt-menu__link kt-menu__toggle"><span
+                                        class="kt-menu__link-text">ATS</span></a>
+                            </li>
+                                <li class="kt-menu__item">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">Calender</span></a>
+                                </li>
+                                <li class="kt-menu__item">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">Documents</span></a>
+                                </li>
+                                <li class="kt-menu__item">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">PCL</span></a>
+                                </li>
+                                <li class="kt-menu__item">
+                                    <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">Certification</span></a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
 

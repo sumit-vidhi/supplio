@@ -8,9 +8,15 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { DemandComponent } from './demand/demand.component';
 import { demandListComponent } from './demandlist/demandlist.component';
 import { demandViewComponent } from './demandview/demandview.component';
+import { AgencyProfileComponent } from './agency-profile/agency-profile.component';
 const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
+    data: { title: 'My account' },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'agency-profile', component: AgencyProfileComponent,
     data: { title: 'My account' },
     canActivate: [AuthGuard]
   },

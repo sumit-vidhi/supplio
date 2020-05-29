@@ -87,7 +87,7 @@
                                                 </div>
                                                 <input type="text" formControlName="email" placeholder="Email"
                                                     class="form-control"
-                                                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                                    [ngClass]="{ 'is-invalid': (submitted && f.email.errors) ||  (f.email.errors && f.email.errors.isEmailUnique)}" />
                                                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
 
                                                     <div *ngIf="f.email.errors.required">Email is required</div>

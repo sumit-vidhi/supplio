@@ -89,7 +89,9 @@ export class SignUpComponent implements OnInit {
         const q = new Promise((resolve, reject) => {
             setTimeout(() => {
                 this.authService.checkEmailToken({ email: control.value }).subscribe((res) => {
-                    if (res.status == 'error') {
+              
+                    if (res.message == 'Error') {
+                        console.log(res);
                         resolve({ 'isEmailUnique': true });
                     } else {
                         resolve(null);

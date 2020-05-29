@@ -40,10 +40,26 @@ export class UpdatePasswordComponent implements OnInit {
   dismissible = true;
   message: any;
   token: any;
+  submitted = false;
+  error: string = "";
+  userType: string;
+  ngOnInit() {
+
+    this.createForm();
+    this.route.paramMap.subscribe(params => {
+      this.token = params.get("id");
+    })
+    if (localStorage.getItem('userType')) {
+      this.userType = localStorage.getItem('userType');
+    } else {
+      this.userType = "employer";
+    }
+  }
+  get f() { return this.resetForm.controls; }
 
   createForm() {
     this.resetForm = this.fb.group({
-      password: ['', [Validators.required,Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       confirm_password: ['', Validators.required]
     }, {
       validator: passwordMatchValidator
@@ -51,6 +67,7 @@ export class UpdatePasswordComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submitted = true;
     if (this.resetForm.invalid) {
       return;
     }
@@ -58,34 +75,15 @@ export class UpdatePasswordComponent implements OnInit {
     formModel.token = this.token;
     this.loader.startLoading();
     this.authService.reset(formModel)
-      .subscribe((res) => {
+      .subscribe((res: any) => {
+        this.submitted = false;
+        this.loader.stopLoading();
         this.resetForm.reset();
-        if (res.status === 'success') {
-          this.loader.stopLoading();
-          this.message = 'Your password has reset successfully';
+        if (res.payload.error) {
+          this.error = res.payload.error;
         } else {
-          this.message = 'Internal Server Error. Please try again';
+          this.message = res.message;
         }
       })
-  }
-
-  ngOnInit() {
-
-    this.isValidReset = false;
-    this.createForm();
-    this.loader.startLoading();
-    this.route.params.subscribe(params => {
-      this.token = params.code;
-      this.authService.confirmToken({
-        id: params.id,
-        token: params.code
-      })
-        .subscribe((response: any) => {
-          this.loader.stopLoading();
-          if (response.status == 'success') {
-            this.isValidReset = true
-          }
-        })
-    })
   }
 }

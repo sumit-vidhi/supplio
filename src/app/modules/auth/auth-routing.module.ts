@@ -31,6 +31,11 @@ const routes: Routes = [
         data: { title: 'Login' }
       },
       {
+        path: 'login/:user/:verified',
+        component: LoginComponent,
+        data: { title: 'Login' }
+      },
+      {
         path: 'signup/:user',
         component: SignUpComponent,
         data: { title: 'Sign Up' }
@@ -53,7 +58,7 @@ const routes: Routes = [
       },
 
       {
-        path: 'forgot_password/:id/:code',
+        path: 'reset/:id',
         component: UpdatePasswordComponent,
         data: { title: 'Forgot Password' }
       },
