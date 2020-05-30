@@ -51,16 +51,21 @@ export class UserService {
   getSubcategoies(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getSubcategory);
   }
+  siteSetting(): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.setting);
+  }
 
-
-  imageUpload(data,headers): Observable<ApiResponseModel> {
-    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.editProfile, data,headers);
+  imageUpload(data, headers): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.editProfile, data, headers);
   }
   demandList(data): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?hire_type="+data.hire_type+"&hire_country="+data.hire_country+"&demand_type="+data.demand_type+"&status="+data.status);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);
+  }
+  demandAllList(data): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandAllList + "?hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);
   }
   getDemand(id): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getDemand + "?id="+id);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getDemand + "?id=" + id);
   }
 
 

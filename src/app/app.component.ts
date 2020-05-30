@@ -12,6 +12,7 @@ import { AuthService } from '@modules/auth/services/auth.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { JWTAuthService } from './core/services/jwt-auth.service';
+import { UserService } from './modules/user/services/user.service';
 
 interface User {
   userId: number;
@@ -32,12 +33,12 @@ interface LoginPayload {
 export class AppComponent implements OnInit {
   title = appSettings.appTitle;
   logo = appSettings.appLogo;
-	separateDialCode = true;
-	phoneForm = new FormGroup({
-		phone: new FormControl(undefined, [Validators.required])
-	});
+  separateDialCode = true;
+  phoneForm = new FormGroup({
+    phone: new FormControl(undefined, [Validators.required])
+  });
 
-  constructor(private authService: AuthService, private loginService: JWTAuthService, private router: Router, private bnIdle: BnNgIdleService) {
+  constructor(private authService: AuthService, private userService: UserService, private loginService: JWTAuthService, private router: Router, private bnIdle: BnNgIdleService) {
     this.bnIdle.startWatching(1800).subscribe((res) => {
       if (res) {
         this.loginService.logout();
@@ -52,6 +53,11 @@ export class AppComponent implements OnInit {
       }
       window.scrollTo(0, 0)
     });
-
+    this.userService.siteSetting().subscribe((result: any) => {
+      if (result.payload.settings) {
+        console.log(232323);
+        window.localStorage.setItem("setting", JSON.stringify(result.payload.settings))
+      }
+    })
   }
 }

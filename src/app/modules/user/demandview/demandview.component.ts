@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-
+import { APP_USER } from '@configs/app-settings.config';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-demandview-dashboard',
@@ -276,11 +276,13 @@ export class demandViewComponent implements OnInit {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
+  appData:any;
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.route.params.subscribe(params => {
       this.loader.startLoading();
       this.userService.getDemand(params.id).subscribe((result: any) => {

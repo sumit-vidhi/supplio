@@ -124,8 +124,9 @@ export class AgencyProfileComponent implements OnInit {
     //if (this.appData.phone_number) {
 
     this.setFormdata();
-    this.setLocation(locationForm, arrayControl);
-    //  }
+    if (this.appData.users_locations.length > 0) {
+      this.setLocation(locationForm, arrayControl);
+    }
     this.phoneForm = this.formBuilder.group({
       phone: [''],
     });

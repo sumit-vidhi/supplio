@@ -46,14 +46,17 @@ export class SignUpComponent implements OnInit {
         private route: ActivatedRoute, ) { }
 
     ngOnInit() {
+        const restitData:any=JSON.parse(window.localStorage.getItem("setting"));
+
+        const domainArray =restitData.employer_restricted_domains.split(',');
+        console.log(domainArray);
         this.registerForm = this.formBuilder.group({
             first_name: ['', Validators.required],
             last_name: ['', Validators.required],
             agency_name: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email], this.isEmailUnique.bind(this)],
             password: ['', [Validators.required, Validators.minLength(6)]],
-            confirm_password: ['', Validators.required],
-            accept: ['', Validators.requiredTrue]
+            confirm_password: ['', Validators.required]
         }, {
             validator: [MustMatch('password', 'confirm_password')]
         });
@@ -111,6 +114,7 @@ export class SignUpComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        console.log(this.registerForm);
         if (this.registerForm.invalid) {
             return;
         }
@@ -118,7 +122,10 @@ export class SignUpComponent implements OnInit {
         this.error = '';
         const formData = this.registerForm.value;
         if (this.userType == "employer") {
-            const domainArray = ["@gmail.", "@demo."];
+            const restitData:any=JSON.parse(window.localStorage.getItem("setting"));
+
+            const domainArray =restitData.employer_restricted_domains.split(',');
+            console.log(domainArray);
             for (let index = 0; index < domainArray.length; index++) {
                 if (formData.email.indexOf(domainArray[index]) > -1) {
                     this.error = 'Please enter your company  email address.';

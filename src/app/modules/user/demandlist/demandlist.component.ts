@@ -7,6 +7,7 @@ import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
+import { APP_USER } from '@configs/app-settings.config';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-demandlist-dashboard',
@@ -278,12 +279,14 @@ export class demandListComponent implements OnInit {
   ];
   myDateValue: Date;
   myDateValue2: Date;
+  appData: any;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
-    // this.myDateValue = new Date();
+
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.searchForm = this.formBuilder.group({
       startDate: [''],
       postDate: [''],
@@ -297,20 +300,40 @@ export class demandListComponent implements OnInit {
       "hire_type": "",
       "hire_country": "",
       "demand_type": "",
-      "status": ""
+      "status": "",
+      "startDate": "",
+      "postDate": ""
     }
-    this.userService.demandList(data).subscribe((result: any) => {
-      this.loader.stopLoading();
-      if (result.payload.demand) {
-        this.demandData = result.payload.demand;
-        this.category = this.demandData.map((value, index) => {
-          return value.demand_category.map((v, i) => {
-            return v.category_name;
+    if (this.appData.role == 'Employer') {
+      this.userService.demandList(data).subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.demand) {
+          this.demandData = result.payload.demand;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            })
           })
-        })
-        console.log(this.category);
-      }
-    })
+          console.log(this.category);
+        }
+      })
+    }
+    if (this.appData.role == 'Agency') {
+      console.log(23232);
+      this.userService.demandAllList(data).subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.demand) {
+          this.demandData = result.payload.demand;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            })
+          })
+          console.log(this.category);
+        }
+      })
+    }
+
 
 
   }
@@ -320,7 +343,7 @@ export class demandListComponent implements OnInit {
   }
   searchSubmit() {
     const data = this.searchForm.value;
- 
+
     if (data.startDate) {
       var today = data.startDate;
       var dd = String(today.getDate()).padStart(2, '0');
@@ -333,7 +356,7 @@ export class demandListComponent implements OnInit {
       data.startDate = mm + '/' + dd + '/' + yyyy;
       data.postDate = pomm + '/' + podd + '/' + poyyyy;
     }
-    console.log(data);  
+    console.log(data);
     this.loader.startLoading();
     this.userService.demandList(data).subscribe((result: any) => {
       this.loader.stopLoading();

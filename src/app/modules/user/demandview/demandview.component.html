@@ -1,17 +1,11 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
         <div class="kt-subheader__main">
           <h3 class="kt-subheader__title">
-            Dashboard
+            Demand Detail
           </h3>
         </div>
         <div class="kt-subheader__toolbar">
@@ -23,10 +17,7 @@
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
-    <div
-      class="kt-container kt-grid__item kt-grid__item--fluid"
-      *ngIf="demandData"
-    >
+    <div class="kt-container kt-grid__item kt-grid__item--fluid" *ngIf="demandData">
       <!--Begin::Dashboard 3-->
       <div class="kt-portlet">
         <div class="kt-portlet__body">
@@ -35,44 +26,28 @@
               <div class="kt-widget__media kt-hidden-">
                 <img src="/assets/img/company.png" alt="image" />
               </div>
-              <div
-                class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden"
-              >
+              <div class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
                 JM
               </div>
               <div class="kt-widget__content">
                 <div class="kt-widget__head">
-                  <a href="#" class="kt-widget__title"
-                    >{{ demandData['user']['agency_name'] }}e</a
-                  >
+                  <a href="#" class="kt-widget__title">{{ demandData['user']['agency_name'] }}e</a>
                   <div class="kt-widget__action">
-                    <button
-                      type="button"
-                      class="btn btn-sm btn-upper"
-                      style="background: #edeff6;"
-                    >
-                      Edit</button
-                    >&nbsp;
-                    <button
-                      type="button"
-                      class="btn btn-success btn-sm btn-upper"
-                    >
+                    <button type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
+                      *ngIf="appData.role=='Employer'">
+                      Edit</button>&nbsp;
+                    <button type="button" class="btn btn-success btn-sm btn-upper" *ngIf="appData.role=='Agency'">
                       Bid
                     </button>
                   </div>
                 </div>
 
                 <div class="kt-widget__info">
-                  <div
-                    class="kt-widget__desc"
-                    *ngIf="demandData && demandData['user']"
-                  >
-                    {{ demandData['user']['about_company'] }}
+                  <div class="kt-widget__desc" [innerHtml]='demandData.user.about_company'>
+                  
                   </div>
 
-                  <div
-                    class="kt-widget__stats d-flex pull-right align-items-center flex-fill"
-                  >
+                  <div class="kt-widget__stats d-flex pull-right align-items-center flex-fill">
                     <div class="kt-widget__item">
                       <span class="kt-widget__date">
                         Posted Date
@@ -126,14 +101,12 @@
                 </div>
                 <div class="kt-widget__details">
                   <span class="kt-widget__title">Recruitment Fee</span>
-                  <span class="kt-widget__value"
-                    ><span>$</span>
+                  <span class="kt-widget__value"><span>$</span>
                     {{
                       demandData.recruitment_fee
                         ? demandData.recruitment_fee
                         : '-'
-                    }}</span
-                  >
+                    }}</span>
                 </div>
               </div>
               <div class="kt-widget__item">
@@ -151,14 +124,12 @@
                   <i class="flaticon-file-2"></i>
                 </div>
                 <div class="kt-widget__details">
-                  <span class="kt-widget__title"
-                    >{{
+                  <span class="kt-widget__title">{{
                       demandData.recruitment_fee
                         ? demandData.recruitment_fee
                         : '-'
                     }}
-                    Total Requirement</span
-                  >
+                    Total Requirement</span>
                   <a href="#" class="kt-widget__value kt-font-brand">View</a>
                 </div>
               </div>
@@ -390,15 +361,9 @@
                 </h3>
               </div>
             </div>
-            <div
-              class="kt-portlet__body"
-              *ngIf="demandData && demandData.demand_category.length > 0"
-            >
+            <div class="kt-portlet__body" *ngIf="demandData && demandData.demand_category.length > 0">
               <div class="kt-widget5">
-                <div
-                  class="kt-widget5__item"
-                  *ngFor="let array of demandData.demand_category"
-                >
+                <div class="kt-widget5__item" *ngFor="let array of demandData.demand_category">
                   <div class="kt-widget5__content">
                     <div class="kt-widget5__section">
                       <a href="#" class="kt-widget5__title">
@@ -414,46 +379,40 @@
                         <span class="kt-font-info">
                           {{
                             array.age_bracket ? array.age_bracket : '-'
-                          }}</span
-                        >
+                          }}</span>
                       </div>
                       <div class="kt-widget5__info">
                         <span>Qualification:</span>
                         <span class="kt-font-info">
                           {{
                             array.qualification ? array.qualification : '-'
-                          }}</span
-                        >
+                          }}</span>
                         <span>Experience:</span>
                         <span class="kt-font-info">
                           {{
                             array.years_of_experience
                               ? years_of_experience
                               : '-'
-                          }}</span
-                        >
+                          }}</span>
                       </div>
                       <div class="kt-widget5__info">
                         <span>Driver's License:</span>
                         <span class="kt-font-info">
                           {{
                             array.driver_license ? array.driver_license : '-'
-                          }}</span
-                        >
+                          }}</span>
                       </div>
                     </div>
                   </div>
                   <div class="kt-widget5__content">
                     <div class="kt-widget5__stats">
                       <span class="kt-widget5__number">
-                        {{ array.salary }}</span
-                      >
+                        {{ array.salary }}</span>
                       <span class="kt-widget5__sales">Salary</span>
                     </div>
                     <div class="kt-widget5__stats">
                       <span class="kt-widget5__number">
-                        {{ array.quantity }}</span
-                      >
+                        {{ array.quantity }}</span>
                       <span class="kt-widget5__votes">Quantity</span>
                     </div>
                   </div>

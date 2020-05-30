@@ -13,7 +13,7 @@
     </div>
 </div>
 <!-- end:: Header Mobile -->
-<div class="kt-grid kt-grid--hor kt-grid--root"  *ngIf="loginService.IsAuthUser()">
+<div class="kt-grid kt-grid--hor kt-grid--root" *ngIf="loginService.IsAuthUser()">
     <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
         <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
             <!-- begin:: Header -->
@@ -60,10 +60,14 @@
                                         class="kt-menu__link kt-menu__toggle"><span
                                             class="kt-menu__link-text">Dashboard</span></a>
                                 </li>
+                                <li class="kt-menu__item">
+                                    <a routerLink="/user/demandlist" class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">Demands</span></a>
+                                </li>
                                 <li class="kt-menu__item"> <a routerLink="/user"
-                                    class="kt-menu__link kt-menu__toggle"><span
-                                        class="kt-menu__link-text">ATS</span></a>
-                            </li>
+                                        class="kt-menu__link kt-menu__toggle"><span
+                                            class="kt-menu__link-text">ATS</span></a>
+                                </li>
                                 <li class="kt-menu__item">
                                     <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
                                             class="kt-menu__link-text">Calender</span></a>
@@ -120,7 +124,21 @@
 
                                 <!--begin: Navigation -->
                                 <div class="kt-notification">
-                                    <a  routerLink="/user/edit-profile"
+                                    <a *ngIf="loginService.getRole() === 'Employer'" routerLink="/user/edit-profile"
+                                        class="kt-notification__item">
+                                        <div class="kt-notification__item-icon">
+                                            <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                        </div>
+                                        <div class="kt-notification__item-details">
+                                            <div class="kt-notification__item-title kt-font-bold">
+                                                My Profile
+                                            </div>
+                                            <div class="kt-notification__item-time">
+                                                Account settings and more
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a *ngIf="loginService.getRole() === 'Agency'" routerLink="/user/agency-profile"
                                         class="kt-notification__item">
                                         <div class="kt-notification__item-icon">
                                             <i class="flaticon2-calendar-3 kt-font-success"></i>
@@ -145,7 +163,7 @@
                                         </div>
                                     </a>
                                     <div class="kt-notification__custom kt-space-between"> <a
-                                           (click)="loginService.logout()" target="_blank"
+                                            (click)="loginService.logout()" target="_blank"
                                             class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
                                         <a href="custom/user/login-v2.html" target="_blank"
                                             class="btn btn-clean btn-sm btn-bold">Upgrade Plan</a>
