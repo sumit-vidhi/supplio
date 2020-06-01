@@ -15,7 +15,7 @@ import { BasicThemeModule } from '@modules/theme/basic-theme.module';
 import { AppRoutingModule } from '@app/app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -28,8 +28,14 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     CoreModule,
     BasicThemeModule,
     NgbModule,
-    BsDropdownModule.forRoot()
-    
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton:true
+    }),
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],

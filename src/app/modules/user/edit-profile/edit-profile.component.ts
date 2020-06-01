@@ -26,7 +26,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -69,6 +69,36 @@ export class EditProfileComponent implements OnInit {
   confirmMessage: any;
   imageForm: FormGroup;
   filedata: any;
+  fileIdentity: any;
+  filelogo: any;
+  imageSubmitted = false;
+  image: any;
+  imageName: any;
+  iconList = [ // array of icon class list based on type
+    { type: "xlsx", icon: "fa fa-file-excel-o" },
+    { type: "pdf", icon: "fa fa-file-pdf-o" },
+    { type: "jpg", icon: "fa fa-file-image-o" },
+    { type: "png", icon: "fa fa-file-image-o" }
+  ];
+
+  getFileExtension(filename) { // this will give you icon class name
+    //console.log(filename);
+    if (filename) {
+      let ext = filename.split(".").pop();
+      let obj = this.iconList.filter(row => {
+        if (row.type === ext) {
+          return true;
+        }
+      });
+      if (obj.length > 0) {
+        let icon = obj[0].icon;
+        return icon;
+      } else {
+        return "";
+      }
+    }
+
+  }
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -77,7 +107,9 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private loader: LoaderService,
     public loginService: JWTAuthService,
-    private ngZone: NgZone, private http: HttpClient
+    private ngZone: NgZone, 
+    private http: HttpClient,
+    private toastr: ToastrService
   ) {
     for (let i = 2020; i >= 1950; i--) {
       this.years.push(i);
@@ -106,7 +138,9 @@ export class EditProfileComponent implements OnInit {
       designation: ['', Validators.required],
     });
     this.imageForm = this.formBuilder.group({
-      myFile: ['']
+      myFile: ['', Validators.required],
+      identity: ['', Validators.required],
+      logo: ['', Validators.required]
     })
     const locationForm = this.formBuilder.group({
       location: this.formBuilder.array([]),
@@ -121,6 +155,44 @@ export class EditProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    this.image = {
+      trade_license: "",
+      proof_of_identity: "",
+      company_logo: ""
+    };
+    this.imageName = {
+      trade_license: "",
+      proof_of_identity: "",
+      company_logo: ""
+    };
+    if (this.appData.files && this.appData.files.length) {
+      for (let i = 0; i < this.appData.files.length; i++) {
+        if (this.appData.files[i].file_key == "trade_license") {
+          this.image.trade_license = this.appData.files[i].filepath;
+          this.imageName.trade_license = this.appData.files[i].filename;
+          this.imageForm.patchValue({
+            myFile: this.image.trade_license
+          });
+        }
+        if (this.appData.files[i].file_key == "proof_of_identity") {
+          this.image.proof_of_identity = this.appData.files[i].filepath;
+          this.imageName.proof_of_identity = this.appData.files[i].filename;
+          this.imageForm.patchValue({
+            identity: this.image.proof_of_identity
+          });
+        }
+        if (this.appData.files[i].file_key == "company_logo") {
+          this.image.company_logo = this.appData.files[i].filepath;
+          this.imageName.company_logo = this.appData.files[i].filename;
+          this.imageForm.patchValue({
+            logo: this.image.company_logo
+          });
+        }
+        console.log(this.imageForm.value);
+      }
+
+    }
+    console.log(this.image);
     if (this.appData.phone_number) {
 
       this.setFormdata();
@@ -129,6 +201,12 @@ export class EditProfileComponent implements OnInit {
     this.phoneForm = this.formBuilder.group({
       phone: [''],
     });
+  }
+
+  deleteImage(name, image) {
+    this.image[name] = "";
+    this.imageForm.controls[image].setValue("");
+    this.imageForm.controls[image].updateValueAndValidity();
   }
 
   setLocation(locationForm, newGroup) {
@@ -150,6 +228,16 @@ export class EditProfileComponent implements OnInit {
     this.filedata = e.target.files[0];
     this.imageForm.get('myFile').setValue(this.filedata);
     console.log(this.filedata);
+  }
+  fileIdentityEvent(e) {
+    this.fileIdentity = e.target.files[0];
+    this.imageForm.get('identity').setValue(this.fileIdentity);
+    // console.log(this.filedata);
+  }
+  fileLogoEvent(e) {
+    this.filelogo = e.target.files[0];
+    this.imageForm.get('logo').setValue(this.filelogo);
+    //console.log(this.filedata);
   }
   setFormdata() {
     var data = {
@@ -194,6 +282,10 @@ export class EditProfileComponent implements OnInit {
     return this.editForm.controls;
   }
 
+  get i() {
+    return this.imageForm.controls;
+  }
+
   getEmail() {
     return this.loginService.getLoginUserEmail();
   }
@@ -210,13 +302,31 @@ export class EditProfileComponent implements OnInit {
   }
 
   imageSubmit() {
-
+    this.imageSubmitted = true;
+    if (this.imageForm.invalid) {
+      return;
+    }
     var myFormData = new FormData();
     myFormData.append('trade_license', this.imageForm.get('myFile').value);
+    myFormData.append('proof_of_identity', this.imageForm.get('identity').value);
+    myFormData.append('company_logo', this.imageForm.get('logo').value);
     myFormData.append('form_step', '4');
-    this.userService.imageUpload(myFormData
-    ).subscribe(data => {
-      console.log(data);
+    this.loader.startLoading();
+    this.userService.editProfile(myFormData
+    ).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
     });
   }
 
@@ -243,6 +353,7 @@ export class EditProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -325,6 +436,7 @@ export class EditProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -344,6 +456,7 @@ export class EditProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {

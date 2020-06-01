@@ -354,7 +354,7 @@
                 'is-hide': !isTabActive(4)
               }">
                 <div class="kt-heading kt-heading--md">
-                  <h3>Review your Details and Submit</h3>
+                  <h3>Documents</h3>
                 </div>
                 <div class="kt-form__section kt-form__section--first">
                   <div class="kt-wizard-v2__form">
@@ -363,15 +363,54 @@
 
                       <div class="form-group">
                         <label>Trade Licence</label>
-                        <input type="file" name="myFile" (change)="fileEvent($event)" />
+                        <input type="file" formControlName="myFile" (change)="fileEvent($event)" />
+                        <div *ngIf="imageSubmitted && i.myFile.errors" style="color:red;">
+                          <div *ngIf="i.myFile.errors.required">
+                            Trade Licence is required
+                          </div>
+                        </div>
+                        <div *ngIf="image.trade_license">
+                          <a href="{{image.trade_license}}" target="_blank"> <i
+                              class="{{getFileExtension(image.trade_license)}}" style="color:#5cb85c;"
+                              aria-hidden="true"></i>
+                            {{imageName.trade_license}}</a>
+                          <a class="deleteLocation" href="javscript:;" (click)="deleteImage('trade_license','myFile')"><i aria-hidden="true"
+                              class="fa fa-trash"></i></a>
+                        </div>
                       </div>
                       <div class="form-group">
                         <label>Proof of identity</label>
-                        <input type="file" name="identity" (change)="fileEvent($event)" />
+                        <input type="file" formControlName="identity" (change)="fileIdentityEvent($event)" />
+                        <div *ngIf="imageSubmitted && i.identity.errors" style="color:red;">
+                          <div *ngIf="i.identity.errors.required">
+                            Proof of identity is required
+                          </div>
+                        </div>
+                        <div *ngIf="image.proof_of_identity">
+                          <a href="{{image.proof_of_identity}}" target="_blank"><i
+                              class="{{getFileExtension(image.proof_of_identity)}}" style="color:#5cb85c;"
+                              aria-hidden="true"></i>
+                            {{imageName.proof_of_identity}}</a>
+                          <a class="deleteLocation" href="javscript:;" (click)="deleteImage('proof_of_identity','identity')"><i aria-hidden="true"
+                              class="fa fa-trash"></i></a>
+                        </div>
                       </div>
                       <div class="form-group">
-                        <label>Trade Licence</label>
-                        <input type="file" name="myFile" (change)="fileEvent($event)" />
+                        <label>Compony Logo</label>
+                        <input type="file" formControlName="logo" (change)="fileLogoEvent($event)" />
+                        <div *ngIf="imageSubmitted && i.logo.errors" style="color:red;">
+                          <div *ngIf="i.logo.errors.required">
+                            Company logo is required
+                          </div>
+                        </div>
+                        <div *ngIf="image.company_logo">
+                          <a href="{{image.company_logo}}" target="_blank"> <i
+                              class="{{getFileExtension(image.company_logo)}}" style="color:#5cb85c;"
+                              aria-hidden="true"></i>
+                            {{imageName.company_logo}}</a>
+                          <a class="deleteLocation" href="javscript:;" (click)="deleteImage('company_logo','logo')"><i aria-hidden="true"
+                              class="fa fa-trash"></i></a>
+                        </div>
                       </div>
                       <div class="stepButtons">
                         <a (click)="goPrevious()"

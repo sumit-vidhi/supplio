@@ -23,7 +23,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
 import { NgForm } from '@angular/forms';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-demand',
   templateUrl: './demand.component.html',
@@ -84,6 +84,7 @@ export class DemandComponent implements OnInit {
   food: any;
   currency: any;
   modeInterview: any;
+  id: any;
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -93,7 +94,8 @@ export class DemandComponent implements OnInit {
     private router: Router,
     private loader: LoaderService,
     public loginService: JWTAuthService,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private toastr: ToastrService
   ) {
     for (let i = 2020; i >= 1950; i--) {
       this.years.push(i);
@@ -103,6 +105,12 @@ export class DemandComponent implements OnInit {
       extraPlugins: 'divarea',
       forcePasteAsPlainText: true,
     };
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.params.subscribe((params) => {
+      this.id = params.id;
+    });
+    console.log(this.id);
+
   }
 
   ngOnInit() {
@@ -170,19 +178,13 @@ export class DemandComponent implements OnInit {
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     });
-
-    let id;
-    this.route.params.subscribe((params) => {
-      id = params.id;
-    });
-    console.log(id);
-    if (id) {
+    console.log(this.id);
+    if (this.id) {
       this.loader.startLoading();
-      this.userService.getDemand(id).subscribe((result: any) => {
+      this.userService.getDemand(this.id).subscribe((result: any) => {
 
         if (result.payload.demand) {
           this.loader.stopLoading();
-          debugger;
           this.demandId = result.payload.demand[0].id;
           this.hireDemand = result.payload.demand[0].hire_type;
           this.demandTitle = result.payload.demand[0].title;
@@ -288,7 +290,7 @@ export class DemandComponent implements OnInit {
 
       this.termForm.controls.hotels_for_delegates.setValidators(Validators.required);
       this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
-     
+
     } else {
 
       this.termForm.controls.no_of_delegates.clearValidators();
@@ -297,7 +299,7 @@ export class DemandComponent implements OnInit {
       this.termForm.controls.flights_for_delegates.updateValueAndValidity();
       this.termForm.controls.hotels_for_delegates.clearValidators();
       this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
-   
+
     }
   }
 
@@ -347,8 +349,6 @@ export class DemandComponent implements OnInit {
       this.food = "Allowance";
     }
 
-
-    console.log(newData)
     this.benefitForm.setValue(newData);
   }
 
@@ -370,7 +370,7 @@ export class DemandComponent implements OnInit {
       this.termForm.controls.hotels_for_delegates.clearValidators();
       this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
 
-     
+
     }
     const newData = {
       mode_of_interview: data.mode_of_interview,
@@ -380,7 +380,6 @@ export class DemandComponent implements OnInit {
       hotels_for_delegates: data.hotels_for_delegates,
     };
     this.termForm.setValue(newData);
-    console.log(this.termForm.value);
   }
 
   showDetail(i) {
@@ -416,6 +415,8 @@ export class DemandComponent implements OnInit {
         if (result.payload.demand) {
           this.loader.stopLoading();
         }
+
+        this.toastr.success(result.message, 'Update Demand');
         let nextTab = this.activeTab + 1;
         if (nextTab <= this.maxTab) {
           this.makeActive(nextTab);
@@ -423,7 +424,6 @@ export class DemandComponent implements OnInit {
       });
     } else {
       this.mySelectForm.form.markAllAsTouched();
-      console.log(this.mySelectForm.form.controls);
       if (this.mySelectForm.form.invalid) {
         this.error = 'Please fill valid details!';
         return false;
@@ -441,6 +441,7 @@ export class DemandComponent implements OnInit {
           if (result.payload.demand) {
             this.loader.stopLoading();
           }
+          this.toastr.success(result.message, 'Update Demand');
           let nextTab = this.activeTab + 1;
           if (nextTab <= this.maxTab) {
             this.makeActive(nextTab);
@@ -448,11 +449,9 @@ export class DemandComponent implements OnInit {
         });
       }
     }
-    console.log(this.selectedCity);
   }
 
   get t() {
-    //  console.log(this.mySelectForm.form.controls);
     return this.mySelectForm.form.controls;
   }
 
@@ -496,7 +495,6 @@ export class DemandComponent implements OnInit {
     }
 
     this.locationForm.setControl('location', this.formBuilder.array(groupArr));
-    console.log(this.locationForm.get('location')['controls'][0].value.address);
   }
   setFormdata() {
     var data = {
@@ -600,6 +598,7 @@ export class DemandComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetail(result.payload.user);
       }
+      this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
@@ -618,6 +617,7 @@ export class DemandComponent implements OnInit {
           'authToken'
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetail(result.payload.user);
+        this.toastr.success(result.message, 'Update Demand');
       }
     });
   }
@@ -659,7 +659,6 @@ export class DemandComponent implements OnInit {
     if (this.locationForm.invalid) {
       return;
     }
-    console.log(this.locationForm.value.location);
     const address = this.locationForm.value.location.map((value, index) => {
       return this.locationForm.value.location[index].address;
     });
@@ -675,6 +674,7 @@ export class DemandComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.demand) {
       }
+      this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
@@ -697,7 +697,6 @@ export class DemandComponent implements OnInit {
       formdata.transportation = formdata.foodAllowance;
     }
 
-    console.log(formdata);
     formdata.form_step = 3;
     formdata.id = this.demandId;
     this.loader.startLoading();
@@ -705,6 +704,7 @@ export class DemandComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.demand) {
       }
+      this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
@@ -725,6 +725,7 @@ export class DemandComponent implements OnInit {
       this.loader.stopLoading();
       if (result.payload.demand) {
       }
+      this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
@@ -738,7 +739,6 @@ export class DemandComponent implements OnInit {
   }
 
   getAddress(place: object, i) {
-    console.log(place);
     if (Object.keys(place).length > 0) {
       this.address = place['formatted_address'];
       this.formattedAddress = place['formatted_address'];
@@ -747,7 +747,6 @@ export class DemandComponent implements OnInit {
     } else {
       this.addressForm.controls[i].setValue({ address: '' });
     }
-    console.log(this.addressForm);
   }
   get addressForm(): FormArray {
     return this.locationForm.get('location') as FormArray;
@@ -765,11 +764,11 @@ export class DemandComponent implements OnInit {
       id: this.demandId
     }
     this.userService.createCopyDemand(data).subscribe((result: any) => {
-
       this.loader.stopLoading();
       this.modalReference.close();
       if (result.payload.demand) {
         this.router.navigate(['/user/demand/' + result.payload.demand.id]);
+        this.toastr.success("Denand created", 'Duplicate Demand');
       }
     })
   }
