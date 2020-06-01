@@ -401,5 +401,19 @@ export class demandListComponent implements OnInit {
 
   }
 
+  createDuplicateDemand(demandId) {
+    this.loader.startLoading();
+    const data = {
+      id: demandId
+    }
+    this.userService.createCopyDemand(data).subscribe((result: any) => {
+
+      this.loader.stopLoading();
+      if (result.payload.demand) {
+        this.router.navigate(['/user/demand/' + result.payload.demand.id]);
+      }
+    })
+  }
+
 
 }

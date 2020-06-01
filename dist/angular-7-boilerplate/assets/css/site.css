@@ -534,7 +534,7 @@ span.mat-checkbox-label {
   color: #074a79 !important;
 }
 .kt-portlet .kt-portlet__body {
-  padding: 25px !important;
+  padding: 10px 25px !important;
 }
 /* .input-daterange.input-group .form-control {
   border-left: 1px solid #e2e5ec;
@@ -620,12 +620,20 @@ span.mat-checkbox-label {
   .kt-widget__body
   .kt-widget__stats
   .kt-widget__item
+  .kt-widget__date,
+.kt-widget.kt-widget--user-profile-3
+  .kt-widget__top
+  .kt-widget__content
+  .kt-widget__info
+  .kt-widget__stats
+  .kt-widget__item
   .kt-widget__date {
   color: #595d6e;
   font-weight: normal;
   padding-bottom: 0;
   display: block;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 16px;
 }
 .demand-item .status {
   margin-right: 10px;
@@ -636,9 +644,36 @@ span.mat-checkbox-label {
 .kt-widget.kt-widget--project-1
   .kt-widget__body
   .kt-widget__stats
+  .kt-widget__item:not(:first-child):not(:last-child),
+.kt-widget.kt-widget--user-profile-3
+  .kt-widget__top
+  .kt-widget__content
+  .kt-widget__info
+  .kt-widget__stats
   .kt-widget__item:not(:first-child):not(:last-child) {
   margin: 0;
-  margin-left: 20px;
+  margin-left: 30px;
+}
+.kt-widget.kt-widget--project-1
+  .kt-widget__body
+  .kt-widget__stats
+  .kt-widget__item:last-child,
+.kt-widget.kt-widget--user-profile-3
+  .kt-widget__top
+  .kt-widget__content
+  .kt-widget__info
+  .kt-widget__stats
+  .kt-widget__item:last-child {
+  margin-left: 30px;
+  padding-left: 0;
+}
+.kt-widget.kt-widget--user-profile-3
+  .kt-widget__top
+  .kt-widget__content
+  .kt-widget__info
+  .kt-widget__stats
+  .kt-widget__item {
+  padding-top: 0;
 }
 .demand-item .kt-widget__desc span {
   font-size: 14px;
@@ -653,4 +688,44 @@ span.mat-checkbox-label {
   color: #595d6e;
   font-weight: normal;
   display: block;
+}
+.theme-green .bs-datepicker-head {
+  background-color: #074a79 !important;
+}
+.theme-green .bs-datepicker-body table td.week span {
+  color: #074a79 !important;
+}
+.bs-datepicker-head button:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.bs-datepicker-container {
+  padding: 0 !important;
+}
+
+.bs-datepicker-body {
+  border: none !important;
+}
+ngx-intl-tel-input {
+  display: block;
+  /* width: 100%; */
+}
+.intl-tel-input {
+  width: 100%;
+}
+.intl-tel-input input#phone {
+  width: 100% !important;
+  height: 38px;
+  border: 1px solid #e2e5ec;
+  border-radius: 4px;
+}
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 700px;
+    margin: 1.75rem auto;
+  }
+}
+ul.nostyle {
+  list-style: none;
+  padding-left: 0px;
 }

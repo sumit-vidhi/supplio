@@ -147,6 +147,12 @@
                           </a>
                         </li>
                         <li class="kt-nav__item" *ngIf="appData.role=='Employer'">
+                          <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
+                            <i class="kt-nav__link-icon flaticon-edit"></i>
+                            <span class="kt-nav__link-text">Duplicate Demand</span>
+                          </a>
+                        </li>
+                        <li class="kt-nav__item" *ngIf="appData.role=='Employer'">
                           <a href="#" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-trash"></i>
                             <span class="kt-nav__link-text">Delete</span>

@@ -191,8 +191,9 @@ export class DemandComponent implements OnInit {
           this.demandCategory = result.payload.demand[0].demand_category;
           this.selectedCity = result.payload.demand[0].hire_country;
           this.locationForm.patchValue({
-            currency: result.payload.demand.currency
+            currency: result.payload.demand[0].currency
           });
+          this.setCurrencyByData(result.payload.demand[0].currency)
           this.modeInterview = result.payload.demand[0].mode_of_interview;
           if (result.payload.demand[0].demand_category.length) {
             this.setLocation();
@@ -279,15 +280,6 @@ export class DemandComponent implements OnInit {
   changeMode(event) {
     this.modeInterview = event.target.value;
     if (this.modeInterview == "In person") {
-      this.termForm.controls.no_of_delegates.clearValidators();
-      this.termForm.controls.no_of_delegates.updateValueAndValidity();
-      this.termForm.controls.flights_for_delegates.clearValidators();
-      this.termForm.controls.flights_for_delegates.updateValueAndValidity();
-      this.termForm.controls.hotels_for_delegates.clearValidators();
-      this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
-    } else {
-
-
       this.termForm.controls.no_of_delegates.setValidators(Validators.required);
       this.termForm.controls.no_of_delegates.updateValueAndValidity();
 
@@ -296,6 +288,16 @@ export class DemandComponent implements OnInit {
 
       this.termForm.controls.hotels_for_delegates.setValidators(Validators.required);
       this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
+     
+    } else {
+
+      this.termForm.controls.no_of_delegates.clearValidators();
+      this.termForm.controls.no_of_delegates.updateValueAndValidity();
+      this.termForm.controls.flights_for_delegates.clearValidators();
+      this.termForm.controls.flights_for_delegates.updateValueAndValidity();
+      this.termForm.controls.hotels_for_delegates.clearValidators();
+      this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
+   
     }
   }
 
@@ -352,15 +354,6 @@ export class DemandComponent implements OnInit {
 
   setTerm(data) {
     if (this.modeInterview == "In person") {
-      this.termForm.controls.no_of_delegates.clearValidators();
-      this.termForm.controls.no_of_delegates.updateValueAndValidity();
-      this.termForm.controls.flights_for_delegates.clearValidators();
-      this.termForm.controls.flights_for_delegates.updateValueAndValidity();
-      this.termForm.controls.hotels_for_delegates.clearValidators();
-      this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
-    } else {
-
-
       this.termForm.controls.no_of_delegates.setValidators(Validators.required);
       this.termForm.controls.no_of_delegates.updateValueAndValidity();
 
@@ -369,6 +362,15 @@ export class DemandComponent implements OnInit {
 
       this.termForm.controls.hotels_for_delegates.setValidators(Validators.required);
       this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
+    } else {
+      this.termForm.controls.no_of_delegates.clearValidators();
+      this.termForm.controls.no_of_delegates.updateValueAndValidity();
+      this.termForm.controls.flights_for_delegates.clearValidators();
+      this.termForm.controls.flights_for_delegates.updateValueAndValidity();
+      this.termForm.controls.hotels_for_delegates.clearValidators();
+      this.termForm.controls.hotels_for_delegates.updateValueAndValidity();
+
+     
     }
     const newData = {
       mode_of_interview: data.mode_of_interview,
@@ -549,7 +551,10 @@ export class DemandComponent implements OnInit {
     const currneny = this.countriesCode.filter((value) => {
       return value.currency.code == targetcurrency;
     })
-    this.currency = currneny[0].currency.symbol;
+    if (currneny.length) {
+      this.currency = currneny[0].currency.symbol;
+    }
+
   }
 
   get f() {

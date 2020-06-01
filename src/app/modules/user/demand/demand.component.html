@@ -833,7 +833,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group col-md-6" *ngIf="modeInterview!='In person'">
+                    <div class="form-group col-md-6" *ngIf="modeInterview=='In person'">
                       <label for="accommodation">No. of delegates for interview</label>
                       <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
                         <!-- <span class="input-group-btn input-group-prepend"><button
@@ -860,7 +860,7 @@
                   </div>
 
                   <div class="row">
-                    <div class="form-group col-md-6" *ngIf="modeInterview!='In person'">
+                    <div class="form-group col-md-6" *ngIf="modeInterview=='In person'">
                       <label for="accommodation">Flights for delegates</label>
                       <select id="accommodation" class="form-control" formControlName="flights_for_delegates" [ngClass]="{
                           'is-invalid':
@@ -877,7 +877,7 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-group col-md-6" *ngIf="modeInterview!='In person'">
+                    <div class="form-group col-md-6" *ngIf="modeInterview=='In person'">
                       <label for="accommodation">Hotels for delegate</label>
                       <select id="accommodation" class="form-control" formControlName="hotels_for_delegates" [ngClass]="{
                           'is-invalid':
