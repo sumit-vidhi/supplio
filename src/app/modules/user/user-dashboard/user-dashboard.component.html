@@ -1,5 +1,11 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<div
+  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
+  id="kt_body"
+>
+  <div
+    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+    id="kt_content"
+  >
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -114,7 +120,12 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Welcome to {{ loginService.getCompany() }} page!</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -145,23 +156,57 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Welcome to {{ loginService.getCompany() }} page!</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="ticket-content mb-4">
-      <p>Congratulations! You have received $1,000 joining bonus from Supplio in your wallet. In order to
-        use this credit, please complete your profile. </p><br>
+      <p>
+        <strong>
+          Congratulations! You have received $1,000 joining bonus from Supplio
+          in your wallet. In order to use this credit, please complete your
+          profile.
+        </strong>
+      </p>
       <p>
         Welcome to your agency editing page!
       </p>
       <p>
-        Here, you'll be able to update all the information related to your agency, including data that will
-        help you refine your positioning in order to receive more relevant opportunities.
+        Here, you'll be able to update all the information related to your
+        agency, including data that will help you refine your positioning in
+        order to receive more relevant opportunities.
       </p>
       <p>
-        Kindly make sure you have the following handy with you to complete your agency profile.
+        Kindly make sure you have the following handy with you to complete your
+        agency profile.
+      </p>
+      <ul class="nostyle">
+        <li>✓ Company manpower license. <i class="fa fa-info"></i></li>
+        <li>
+          ✓ Proof of Identity/Owner passport copy. <i class="fa fa-info"></i>
+        </li>
+        <li>
+          ✓ Certifications (ISO, FLA, RBA, IRIS etc.), if any.
+          <i class="fa fa-info"></i>
+        </li>
+        <li>✓ Your team’s profiles & photos. <i class="fa fa-info"></i></li>
+        <li>✓ Your company photos. <i class="fa fa-info"></i></li>
+      </ul>
+      <p>
+        Please, add your basic information first unlock the following tabs.
+      </p>
+      <p>
+        If you find any difficulty during the sign-up process, please contact us
+        on our WhatsApp.
+      </p>
+      <p>
+        Best of Luck!
       </p>
     </div>
     <br />
