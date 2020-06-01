@@ -51,12 +51,18 @@ export class UserService {
   getSubcategoies(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getSubcategory);
   }
+  getAllSubcategoies(id): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getAllSubcategory+"?parent="+id);
+  }
+  createCopyDemand(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.duplicate,data);
+  }
   siteSetting(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.setting);
   }
 
-  imageUpload(data, headers): Observable<ApiResponseModel> {
-    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.editProfile, data, headers);
+  imageUpload(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>('fileTest', data);
   }
   demandList(data): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);

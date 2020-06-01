@@ -61,14 +61,8 @@ export class CommonHttpService {
    * @param  {CommonBase} [n]
    * @return {ApiResponseModel} Promise of type ApiResponseModel
    */
-  post<T>(url: string, params, headers: HttpHeaders = new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Cache-Control': 'no-cache', // Disable IE cache
-    'Pragma': 'no-cache', // Disable IE cache
-  })): Observable<any> {
-console.log(headers)
-    return this.http.post(url, params, { headers: headers });
+  post<T>(url: string, params): Observable<any> {
+    return this.http.post(url, params);
   }
 
   /**

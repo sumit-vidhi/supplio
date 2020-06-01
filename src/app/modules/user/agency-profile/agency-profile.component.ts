@@ -221,8 +221,7 @@ export class AgencyProfileComponent implements OnInit {
     //  myFormData.append('form_step', '4');
 
     console.log(headers);
-    this.userService.imageUpload(myFormData,
-      headers
+    this.userService.imageUpload(myFormData
     ).subscribe(data => {
       console.log(data);
     });

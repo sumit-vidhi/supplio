@@ -25,18 +25,17 @@ export class HttpTokenInterceptor implements HttpInterceptor {
   constructor(private authService: JWTAuthService) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    let headersConfig: CommonBase = {};
-    if (req.headers.get('no-auth') != "true") {
+    let headersConfig = {};
+    if (req.body instanceof FormData) {
+      headersConfig = {
+        'ContentType': 'multipart/form-data',
+      };
+    } else {
       headersConfig = {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Cache-Control': 'no-cache', // Disable IE cache
         'Pragma': 'no-cache', // Disable IE cache
-      };
-    } else {
-      headersConfig = {
-        'Content-Type': 'multipart/form-data',
-        'Accept': 'application/json',
       };
     }
     console.log(headersConfig);
@@ -44,7 +43,7 @@ export class HttpTokenInterceptor implements HttpInterceptor {
 
 
 
-    const token: null | CommonBase = this.authService.getUserAccessToken();
+    const token = this.authService.getUserAccessToken() || null;
     if (token) {
       headersConfig[TOKEN_HEADER_KEY] = `Bearer ${token}`;
     }

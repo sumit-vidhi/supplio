@@ -148,6 +148,7 @@ export class EditProfileComponent implements OnInit {
 
   fileEvent(e) {
     this.filedata = e.target.files[0];
+    this.imageForm.get('myFile').setValue(this.filedata);
     console.log(this.filedata);
   }
   setFormdata() {
@@ -211,17 +212,9 @@ export class EditProfileComponent implements OnInit {
   imageSubmit() {
 
     var myFormData = new FormData();
-    const headers: HttpHeaders = new HttpHeaders({
-      'Content-Type': 'multipart/form-data',
-      'Accept': 'application/json',
-      'no-auth': 'true'
-    });
-    myFormData.append('trade_license', this.filedata, this.filedata.name);
-    //  myFormData.append('form_step', '4');
-
-    console.log(headers);
-    this.userService.imageUpload(myFormData,
-      headers
+    myFormData.append('trade_license', this.imageForm.get('myFile').value);
+    myFormData.append('form_step', '4');
+    this.userService.imageUpload(myFormData
     ).subscribe(data => {
       console.log(data);
     });
