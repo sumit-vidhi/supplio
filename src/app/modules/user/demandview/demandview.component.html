@@ -462,6 +462,114 @@
         </div>
       </div>
       <!--End::Dashboard 3-->
+
+      <div class="kt-portlet kt-portlet--mobile">
+        <div class="kt-portlet__head">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+              Demand Details
+              <a
+                type="button"
+                class="collapseBtn"
+                data-toggle="collapse"
+                data-target="#demo"
+              >
+                <i class="fa"></i>
+              </a>
+            </h3>
+          </div>
+        </div>
+        <div class="kt-portlet__body collapse" id="demo">
+          <table
+            class="table table-bordered"
+            *ngIf="demandData && demandData.demand_category.length > 0"
+          >
+            <thead>
+              <th>Sno</th>
+              <th>Industry</th>
+              <th>Category</th>
+              <th>Quantity</th>
+              <th>Salary</th>
+              <th>Gender</th>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="let array of demandData.demand_category; let i = index"
+              >
+                <td>{{ i + 1 }}</td>
+                <td>Industry</td>
+                <td>{{ array.category_name }}</td>
+                <td>{{ array.quantity }}</td>
+                <td>{{ array.salary }}</td>
+                <td>{{ array.gender }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <ul class="nostyle">
+            <li>
+              <strong> Accommodation: </strong>
+              {{ demandData.accommodation ? demandData.accommodation : '-' }}
+            </li>
+
+            <li>
+              <strong> Visa Sponsorship:</strong>
+              {{
+                demandData.visa_sponsorship ? demandData.visa_sponsorship : '-'
+              }}
+            </li>
+
+            <li>
+              <strong> Transportation: </strong
+              >{{ demandData.transportation ? demandData.transportation : '-' }}
+            </li>
+
+            <li>
+              <strong> Food: </strong>
+              {{ demandData.food ? demandData.food : '-' }}
+            </li>
+
+            <li>
+              <strong>Contract duration: </strong
+              >{{
+                demandData.contract_duration
+                  ? demandData.contract_duration
+                  : '-'
+              }}
+            </li>
+
+            <li>
+              <strong>Working hours per day: </strong
+              >{{
+                demandData.working_hours_day
+                  ? demandData.working_hours_day
+                  : '-'
+              }}
+            </li>
+
+            <li>
+              <strong>Working days per week: </strong
+              >{{
+                demandData.working_hours_week
+                  ? demandData.working_hours_week
+                  : '-'
+              }}
+            </li>
+
+            <li>
+              <strong>Probation period: </strong
+              >{{
+                demandData.probation_period ? demandData.probation_period : '-'
+              }}
+            </li>
+
+            <li>
+              <strong>Overtime: </strong
+              >{{ demandData.overtime ? demandData.overtime : '-' }}
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- end:: Content -->

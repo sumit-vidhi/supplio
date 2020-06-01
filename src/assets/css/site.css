@@ -729,3 +729,16 @@ ul.nostyle {
   list-style: none;
   padding-left: 0px;
 }
+.showDetailsDemand {
+  margin-top: 34px;
+}
+[data-toggle='collapse'] .fa:before {
+  content: '\f139';
+}
+
+[data-toggle='collapse'].collapsed .fa:before {
+  content: '\f13a';
+}
+.collapse:not(.show) {
+  display: none !important;
+}
