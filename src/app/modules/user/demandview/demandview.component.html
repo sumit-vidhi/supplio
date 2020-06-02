@@ -15,7 +15,17 @@
           </h3>
         </div>
         <div class="kt-subheader__toolbar">
-          <div class="kt-subheader__wrapper"></div>
+          <div class="kt-subheader__wrapper">
+            <a
+              routerLink="/user/demandlist"
+              class="btn btn-primary btn-brand--icon"
+              id="kt_search"
+            >
+              <span>
+                <span>Demand List</span>
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -46,13 +56,14 @@
                     >{{ demandData['user']['agency_name'] }}e</a
                   >
                   <div class="kt-widget__action">
-                    <button
+                    <a
                       type="button"
                       class="btn btn-sm btn-upper"
                       style="background: #edeff6;"
                       *ngIf="appData.role == 'Employer'"
+                      routerLink="/user/demand/{{ demandData.id }}"
                     >
-                      Edit</button
+                      Edit</a
                     >&nbsp;
                     <button
                       type="button"

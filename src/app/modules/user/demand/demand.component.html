@@ -15,7 +15,17 @@
           </h3>
         </div>
         <div class="kt-subheader__toolbar">
-          <div class="kt-subheader__wrapper"></div>
+          <div class="kt-subheader__wrapper">
+            <a
+              routerLink="/user/demandlist"
+              class="btn btn-primary btn-brand--icon"
+              id="kt_search"
+            >
+              <span>
+                <span>Demand List</span>
+              </span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -421,8 +431,8 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <label for="accommodation"
-                                      >Basic Salary
-                                      {{ currency ? currency : '' }}</label
+                                      >Basic Salary (
+                                      {{ currency ? currency : '' }} )</label
                                     >
                                     <input
                                       type="text"
@@ -450,7 +460,7 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="form-group col-md-4">
+                                  <div class="form-group col-md-3">
                                     <label for="accommodation">Gender</label>
                                     <select
                                       class="form-control"
@@ -487,7 +497,15 @@
                                       </div>
                                     </div>
                                   </div>
-                                  <div class="form-group col-md-4 text-center">
+                                  <div class="form-group col-md-3">
+                                    <label>Nationality</label>
+                                    <input
+                                      class="form-control"
+                                      value="{{ selectedCity }}"
+                                      readonly
+                                    />
+                                  </div>
+                                  <div class="form-group col-md-2 text-center">
                                     <!-- <label for="accommodation">&nbsp;</label> -->
                                     <a
                                       class="btn btn-priamry showDetailsDemand"
