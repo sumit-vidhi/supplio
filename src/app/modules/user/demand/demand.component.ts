@@ -779,6 +779,8 @@ export class DemandComponent implements OnInit {
     const counrty = this.countries.findIndex((value) => {
       return value.code == code;
     })
-    return this.countries[counrty]["name"];
+    if (counrty) {
+      return this.countries[counrty]["name"];
+    }
   }
 }

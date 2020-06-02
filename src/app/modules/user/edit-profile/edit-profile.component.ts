@@ -107,7 +107,7 @@ export class EditProfileComponent implements OnInit {
     private router: Router,
     private loader: LoaderService,
     public loginService: JWTAuthService,
-    private ngZone: NgZone, 
+    private ngZone: NgZone,
     private http: HttpClient,
     private toastr: ToastrService
   ) {
@@ -307,9 +307,21 @@ export class EditProfileComponent implements OnInit {
       return;
     }
     var myFormData = new FormData();
-    myFormData.append('trade_license', this.imageForm.get('myFile').value);
-    myFormData.append('proof_of_identity', this.imageForm.get('identity').value);
-    myFormData.append('company_logo', this.imageForm.get('logo').value);
+    if (this.filedata) {
+      myFormData.append('trade_license', this.imageForm.get('myFile').value);
+    } else {
+      myFormData.append('trade_license', "");
+    }
+    if (this.fileIdentity) {
+      myFormData.append('proof_of_identity', this.imageForm.get('identity').value);
+    } else {
+      myFormData.append('proof_of_identity', "");
+    }
+    if (this.filelogo) {
+      myFormData.append('company_logo', this.imageForm.get('logo').value);
+    } else {
+      myFormData.append('company_logo', "");
+    }
     myFormData.append('form_step', '4');
     this.loader.startLoading();
     this.userService.editProfile(myFormData
