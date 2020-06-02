@@ -33,16 +33,16 @@ export class UserDashboardComponent implements OnInit {
   ngOnInit() {
 
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-  
-    if (this.appData.role == 'Employer') {
-      console.log(this.appData);
-      let el: HTMLElement = this.myDiv.nativeElement;
-      el.click();
-    } else {
-      console.log(this.appData);
-      let el2: HTMLElement = this.myDiv2.nativeElement;
-      el2.click();
+    if (this.appData.is_welcome == "0") {
+      if (this.appData.role == 'Employer') {
+        let el: HTMLElement = this.myDiv.nativeElement;
+        el.click();
+      } else {
+        let el2: HTMLElement = this.myDiv2.nativeElement;
+        el2.click();
+      }
     }
+
 
 
 

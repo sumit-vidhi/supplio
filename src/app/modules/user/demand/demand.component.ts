@@ -85,6 +85,7 @@ export class DemandComponent implements OnInit {
   currency: any;
   modeInterview: any;
   id: any;
+  updated_at: any;
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -152,7 +153,7 @@ export class DemandComponent implements OnInit {
       transportationAllowance: [''],
       food: ['', [Validators.required]],
       foodAllowance: [''],
-      employment_location: ['', [Validators.required]],
+      employment_location: [''],
       employment_country: ['', [Validators.required]],
       employment_city: ['', [Validators.required]],
       contract_duration: ['', [Validators.required]],
@@ -188,7 +189,7 @@ export class DemandComponent implements OnInit {
           this.demandId = result.payload.demand[0].id;
           this.hireDemand = result.payload.demand[0].hire_type;
           this.demandTitle = result.payload.demand[0].title;
-
+          this.updated_at = result.payload.demand[0].updated_at;
           this.hire = this.hireDemand;
           this.demandCategory = result.payload.demand[0].demand_category;
           this.selectedCity = result.payload.demand[0].hire_country;
@@ -201,7 +202,7 @@ export class DemandComponent implements OnInit {
             this.setLocation();
             this.setBenifit(result.payload.demand[0]);
             this.setTerm(result.payload.demand[0]);
-            this.postDemand = result.payload.demand[0].demand_type;
+            this.postDemand = result.payload.demand[0].demand_type.toString();;
           }
         }
       });
@@ -212,6 +213,7 @@ export class DemandComponent implements OnInit {
           this.loader.stopLoading();
           this.setCurrencyByData(result.payload.demand.currency)
           this.demandId = result.payload.demand.id;
+          this.updated_at = result.payload.demand.updated_at;
           this.hireDemand = result.payload.demand.hire_type;
           this.hire = this.hireDemand;
           this.demandTitle = result.payload.demand.title;
@@ -226,7 +228,7 @@ export class DemandComponent implements OnInit {
             this.setLocation();
             this.setBenifit(result.payload.demand);
             this.setTerm(result.payload.demand);
-            this.postDemand = result.payload.demand.demand_type;
+            this.postDemand = result.payload.demand.demand_type.toString();;
           }
         }
       });
@@ -771,5 +773,12 @@ export class DemandComponent implements OnInit {
         this.toastr.success("Denand created", 'Duplicate Demand');
       }
     })
+  }
+
+  getcountry(code) {
+    const counrty = this.countries.findIndex((value) => {
+      return value.code == code;
+    })
+    return this.countries[counrty]["name"];
   }
 }
