@@ -48,7 +48,7 @@
                   <a (click)="showTab(2)" role="tab" title="Step 1">Demand Details
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li (click)="changeStep('step2')" [ngClass]="{
+                <li (click)="changeStep('step3')" [ngClass]="{
                     completed: isTabActive(3),
                     disabled: isTabDisabled(3),
                     active: !isTabDisabled(3)
@@ -56,7 +56,7 @@
                   <a (click)="showTab(3)" role="tab" title="Step 1">Benefits
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li (click)="changeStep('step3')" [ngClass]="{
+                <li (click)="changeStep('step4')" [ngClass]="{
                     completed: isTabActive(4),
                     disabled: isTabDisabled(4),
                     active: !isTabDisabled(4)
@@ -64,12 +64,20 @@
                   <a (click)="showTab(4)" role="tab" title="Step 1">Terms & Conditions
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li (click)="changeStep('step4')" [ngClass]="{
+                <li (click)="changeStep('step5')" [ngClass]="{
                     completed: isTabActive(5),
                     disabled: isTabDisabled(5),
                     active: !isTabDisabled(5)
                   }" class="">
-                  <a (click)="showTab(5)" role="tab" title="Step 1">Post Demand
+                  <a (click)="showTab(5)" role="tab" title="Step 1">Review & Submit
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                </li>
+                <li (click)="changeStep('step6')" [ngClass]="{
+                  completed: isTabActive(6),
+                  disabled: isTabDisabled(6),
+                  active: !isTabDisabled(6)
+                }" class="">
+                  <a (click)="showTab(6)" role="tab" title="Step 1">Post Demand
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
               </ul>
@@ -970,6 +978,186 @@
                   'is-display': isTabActive(5),
                   'is-hide': !isTabActive(5)
                 }">
+                <h3>Review & Submit</h3>
+                <div class="kt-form__section kt-form__section--first">
+                  <div class="kt-wizard-v2__review">
+                    <div class="kt-wizard-v2__review-item">
+                      <div class="kt-wizard-v2__review-title">
+                        Demand Detail
+                        <a class="stepEditLink" (click)="showTab(1)"><i class="far fa-edit"></i></a>
+                      </div>
+                      <div class="kt-wizard-v2__review-content">
+                        <strong>Demand Title:</strong> {{ demand.title
+                        }}<br />
+                        <strong>Hire Type:</strong> {{ demand.hire_type }}<br />
+                        <strong>Country:</strong>
+                        {{ getcountry(demand.hire_country)}}<br />
+                      </div>
+                    </div>
+                    <div class="kt-wizard-v2__review-item">
+                      <div class="kt-wizard-v2__review-title">
+                        Demand Category
+                        <a class="stepEditLink" (click)="showTab(2)"><i class="far fa-edit"></i></a>
+                      </div>
+                      <div class="kt-wizard-v2__review-content">
+                        <table class="table table-bordered" *ngIf="demand && demand.demand_category.length > 0">
+                          <thead>
+                            <th>Sno</th>
+                            <th>Industry</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Salary</th>
+                            <th>Gender</th>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let array of demand.demand_category; let i = index">
+                              <td>{{ i + 1 }}</td>
+                              <td>{{getCategory(array.parent_category_id)}}</td>
+                              <td>{{ array.category_name }}</td>
+                              <td>{{ array.quantity }}</td>
+                              <td>{{ array.salary }}</td>
+                              <td>{{ array.gender }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="kt-wizard-v2__review-item">
+                      <div class="kt-wizard-v2__review-title">
+                        Benefits
+                        <a class="stepEditLink" (click)="showTab(3)"><i class="far fa-edit"></i></a>
+                      </div>
+                      <div class="kt-wizard-v2__review-content">
+                        <ul class="nostyle">
+                          <li>
+                            <strong> Accommodation: </strong>
+                            {{ demand.accommodation ? demand.accommodation : '-' }}
+                          </li>
+
+                          <li>
+                            <strong> Visa Sponsorship:</strong>
+                            {{
+                              demand.visa_sponsorship ? demand.visa_sponsorship : '-'
+                            }}
+                          </li>
+
+                          <li>
+                            <strong> Transportation: </strong>{{ demand.transportation ? demand.transportation : '-' }}
+                          </li>
+
+                          <li>
+                            <strong> Food: </strong>
+                            {{ demand.food ? demand.food : '-' }}
+                          </li>
+
+                          <li>
+                            <strong>Contract duration: </strong>{{
+                              demand.contract_duration
+                                ? demand.contract_duration
+                                : '-'
+                            }}
+                          </li>
+
+                          <li>
+                            <strong>Working hours per day: </strong>{{
+                              demand.working_hours_day
+                                ? demand.working_hours_day
+                                : '-'
+                            }}
+                          </li>
+
+                          <li>
+                            <strong>Working days per week: </strong>{{
+                              demand.working_hours_week
+                                ? demand.working_hours_week
+                                : '-'
+                            }}
+                          </li>
+
+                          <li>
+                            <strong>Probation period: </strong>{{
+                              demand.probation_period ? demand.probation_period : '-'
+                            }}
+                          </li>
+
+                          <li>
+                            <strong>Overtime: </strong>{{ demand.overtime ? demand.overtime : '-' }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="kt-wizard-v2__review-item">
+                      <div class="kt-wizard-v2__review-title">
+                        Terms & Conditions
+                        <a class="stepEditLink" (click)="showTab(4)"><i class="far fa-edit"></i></a>
+                      </div>
+                      <div class="kt-wizard-v2__review-content">
+                        <ul class="nostyle">
+                          <li>
+                            <strong> Mode Of interview: </strong>
+                            {{ demand.mode_of_interview ? demand.mode_of_interview : '-' }}
+                          </li>
+
+                          <li>
+                            <strong> Recruitment fee:</strong>
+                            {{
+                              demand.recruitment_fee ? demand.recruitment_fee : '-'
+                            }}
+                          </li>
+
+                          <li>
+                            <strong> No of delegates:
+                            </strong>{{ demand.no_of_delegates ? demand.no_of_delegates : '-' }}
+                          </li>
+
+                          <li>
+                            <strong> Flights for delegates: </strong>
+                            {{ demand.flights_for_delegates ? demand.flights_for_delegates : '-' }}
+                          </li>
+
+                          <li>
+                            <strong>Hotels for delegates: </strong>{{
+                              demand.hotels_for_delegates
+                                ? demand.hotels_for_delegates
+                                : '-'
+                            }}
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <!-- <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
+                (ngSubmit)="termSubmit()"> -->
+                <div class="stepButtons">
+                  <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                    (click)="goPrevious()" data-ktwizard-type="action-prev">
+                    <span>
+                      <i class="la la-angle-left"></i>
+                      <span>Previous</span>
+                    </span>
+                  </a>
+                  <span>Last updated: {{
+                    updated_at | date: 'medium'
+                  }} </span>
+                  <button type="submit"
+                    class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                    data-ktwizard-type="action-next" (click)="reviewSubmit()">
+                    <span>
+                      <span>Next</span>
+                      <i class="la la-angle-right"></i>
+                    </span>
+                  </button>
+                </div>
+                <!-- </form> -->
+              </div>
+
+
+              <div class="stepContainer" id="step1" [ngClass]="{
+                'is-display': isTabActive(6),
+                'is-hide': !isTabActive(6)
+              }">
                 <h3>Post Demand</h3>
                 <div class="text-center">
                   <h2>Two ways to get manpower?</h2>
@@ -1034,7 +1222,7 @@
                   </div>
                 </div>
                 <!-- <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
-                (ngSubmit)="termSubmit()"> -->
+              (ngSubmit)="termSubmit()"> -->
                 <div class="stepButtons">
                   <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
                     (click)="goPrevious()" data-ktwizard-type="action-prev">
@@ -1044,8 +1232,8 @@
                     </span>
                   </a>
                   <span>Last updated: {{
-                    updated_at | date: 'medium'
-                  }} </span>
+                  updated_at | date: 'medium'
+                }} </span>
                   <button type="submit"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
                     data-ktwizard-type="action-next" (click)="updateDemand(content)">

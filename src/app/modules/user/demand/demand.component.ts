@@ -55,7 +55,7 @@ export class DemandComponent implements OnInit {
   maxTab = 5; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
-  disabledTabs: any = [2, 3, 4, 5];
+  disabledTabs: any = [2, 3, 4, 5, 6];
   appData: any;
   locationForm: FormGroup;
   ckeConfig: any;
@@ -86,6 +86,7 @@ export class DemandComponent implements OnInit {
   modeInterview: any;
   id: any;
   updated_at: any;
+  demand: any;
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -186,6 +187,7 @@ export class DemandComponent implements OnInit {
 
         if (result.payload.demand) {
           this.loader.stopLoading();
+          this.demand = result.payload.demand[0];
           this.demandId = result.payload.demand[0].id;
           this.hireDemand = result.payload.demand[0].hire_type;
           this.demandTitle = result.payload.demand[0].title;
@@ -211,6 +213,7 @@ export class DemandComponent implements OnInit {
       this.userService.checkDemand().subscribe((result: any) => {
         if (result.payload.demand) {
           this.loader.stopLoading();
+          this.demand = result.payload.demand;
           this.setCurrencyByData(result.payload.demand.currency)
           this.demandId = result.payload.demand.id;
           this.updated_at = result.payload.demand.updated_at;
@@ -387,6 +390,7 @@ export class DemandComponent implements OnInit {
   showDetail(i) {
     this.isValidDetail[i] = !this.isValidDetail[i];
   }
+
 
   updateDemand(content) {
     const data = {
@@ -609,19 +613,10 @@ export class DemandComponent implements OnInit {
   }
 
   reviewSubmit() {
-    const formdata = { form_step: 5 };
-
-    this.loader.startLoading();
-    this.userService.editProfile(formdata).subscribe((result: any) => {
-      this.loader.stopLoading();
-      if (result.payload.message) {
-        result.payload.user[
-          'authToken'
-        ] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetail(result.payload.user);
-        this.toastr.success(result.message, 'Update Demand');
-      }
-    });
+    let nextTab = this.activeTab + 1;
+    if (nextTab <= this.maxTab) {
+      this.makeActive(nextTab);
+    }
   }
   changeStep(step) { }
 
@@ -774,13 +769,20 @@ export class DemandComponent implements OnInit {
       }
     })
   }
+  getCategory(id) {
+    const category = this.category.findIndex((value) => {
+      return value.id == id;
+    })
+
+    return this.category[category].name;
+
+  }
 
   getcountry(code) {
     const counrty = this.countries.findIndex((value) => {
       return value.code == code;
     })
-    if (counrty) {
-      return this.countries[counrty]["name"];
-    }
+    return this.countries[counrty]["name"];
+
   }
 }
