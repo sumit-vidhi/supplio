@@ -52,7 +52,7 @@ export class DemandComponent implements OnInit {
   benefitForm: FormGroup;
   years: Array<number> = [];
   minTab = 1; //Minimum Tab Step
-  maxTab = 5; //Maximum Tab Step
+  maxTab = 6; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
   disabledTabs: any = [2, 3, 4, 5, 6];
@@ -614,9 +614,11 @@ export class DemandComponent implements OnInit {
 
   reviewSubmit() {
     let nextTab = this.activeTab + 1;
+    console.log(nextTab);
     if (nextTab <= this.maxTab) {
       this.makeActive(nextTab);
     }
+
   }
   changeStep(step) { }
 
@@ -782,7 +784,8 @@ export class DemandComponent implements OnInit {
     const counrty = this.countries.findIndex((value) => {
       return value.code == code;
     })
-    return this.countries[counrty]["name"];
+    if (counrty > -1)
+      return this.countries[counrty]["name"];
 
   }
 }
