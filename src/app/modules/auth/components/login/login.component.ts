@@ -29,6 +29,12 @@ export class LoginComponent implements OnInit {
     private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.userservice.siteSetting().subscribe((result: any) => {
+      if (result.payload.settings) {
+        console.log(232323);
+        window.localStorage.setItem("setting", JSON.stringify(result.payload.settings))
+      }
+    })
     this.message = "";
     this.loginForm = this.fb.group({
       email: ['', [

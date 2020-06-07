@@ -549,7 +549,12 @@ export class DemandComponent implements OnInit {
     const currneny = this.countriesCode.filter((value) => {
       return value.currency.code == targetcurrency;
     })
-    this.currency = currneny[0].currency.symbol;
+    if (currneny[0].currency.symbol) {
+      this.currency = currneny[0].currency.symbol;
+    } else {
+      this.currency = targetcurrency;
+    }
+
   }
   setCurrencyByData(targetcurrency) {
     const currneny = this.countriesCode.filter((value) => {

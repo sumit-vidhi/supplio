@@ -25,6 +25,7 @@ export const appApiUrl: CommonBase = {
         setting:'settings/site',
         resetPassword: 'reset-password',
         editProfile: 'basic-information',
+        agencyeditProfile:'agency/completeProfile',
         getSubcategory:"master/getAllCategories",
         getAllSubcategory:"master/getAllSubCategoriesByParent",
         getdata: 'user/getProfile',

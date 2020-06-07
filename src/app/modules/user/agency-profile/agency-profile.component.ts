@@ -26,6 +26,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { Location } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { idLocale } from 'ngx-bootstrap/chronos/i18n/id';
 
 @Component({
   selector: 'app-agency-profile',
@@ -69,6 +70,55 @@ export class AgencyProfileComponent implements OnInit {
   confirmMessage: any;
   imageForm: FormGroup;
   filedata: any;
+  config2: any = { 'placeholder': 'category', 'sourceField': 'name' };
+  selectedItem: any = [];
+  selectedSubItem: any = [];
+  inputChanged: any = '';
+  category: any;
+  subcategory: any;
+  subcategoryData = [];
+  setCategory: any;
+  setSubCategory: any;
+  submittedCategory = false;
+  selected: any;
+  categories: any = [];
+  subCategories: any = [];
+  experienceForm: FormGroup;
+  experienceSubmitted = false;
+  workForm: FormGroup;
+  workSubmitted = false;
+  fileName: any = [];
+  filePath: any = [];
+  declareForm: FormGroup;
+  declareSubmitted = false;
+  qusetFirst: any;
+  associationForm: FormGroup;
+  associationSubmitted = false;
+  iconList = [ // array of icon class list based on type
+    { type: "xlsx", icon: "fa fa-file-excel-o" },
+    { type: "pdf", icon: "fa fa-file-pdf-o" },
+    { type: "jpg", icon: "fa fa-file-image-o" },
+    { type: "png", icon: "fa fa-file-image-o" }
+  ];
+
+  getFileExtension(filename) { // this will give you icon class name
+    //console.log(filename);
+    if (filename) {
+      let ext = filename.split(".").pop();
+      let obj = this.iconList.filter(row => {
+        if (row.type === ext) {
+          return true;
+        }
+      });
+      if (obj.length > 0) {
+        let icon = obj[0].icon;
+        return icon;
+      } else {
+        return "";
+      }
+    }
+
+  }
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -91,7 +141,50 @@ export class AgencyProfileComponent implements OnInit {
     };
   }
 
+  /*
+   function name : createForm
+   Explain :this function use for create eduaction name year and diploma field"
+   */
+  initAddress(value) {
+    return this.formBuilder.group({
+      name: ['', Validators.required]
+
+    });
+
+  }
+
+  addAddress() {
+    // const control = <FormArray>this.trainerForm.controls['addresses'];
+    const control = this.experienceForm.get(`countryName`) as FormArray;
+    control.push(this.initAddress(null));
+  }
+  addWork() {
+    const control = this.workForm.get(`name`) as FormArray;
+    control.push(this.formBuilder.group({
+      name: ['', Validators.required],
+      image: ['', Validators.required]
+    }));
+  }
   ngOnInit() {
+    this.declareForm = this.formBuilder.group({
+      ques1: [null, Validators.required],
+      ques2: [null, Validators.required],
+      ques3: [null, Validators.required],
+      ques4: [null, Validators.required],
+      ques1why: ['']
+    })
+    this.experienceForm = this.formBuilder.group({
+      categoryName: new FormArray([]),
+      subCategoryName: new FormArray([]),
+      countryName: new FormArray([])
+    });
+    this.workForm = this.formBuilder.group({
+      name: new FormArray([])
+    });
+    this.associationForm = this.formBuilder.group({
+      name: new FormArray([])
+    });
+
     this.editForm = this.formBuilder.group({
       agency_name: ['', Validators.required],
       phone_code: ['IN', Validators.required],
@@ -108,6 +201,9 @@ export class AgencyProfileComponent implements OnInit {
     this.imageForm = this.formBuilder.group({
       myFile: ['']
     })
+    this.userService.getSubcategoies().subscribe((result: any) => {
+      this.category = result.payload.categories;
+    });
     const locationForm = this.formBuilder.group({
       location: this.formBuilder.array([]),
     });
@@ -121,15 +217,392 @@ export class AgencyProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    //if (this.appData.phone_number) {
+    this.setWork();
 
     this.setFormdata();
     if (this.appData.users_locations.length > 0) {
       this.setLocation(locationForm, arrayControl);
     }
+    this.categories = this.appData.expertise_industries;
+    this.subCategories = this.appData.expertise_categories;
     this.phoneForm = this.formBuilder.group({
       phone: [''],
     });
+    if (this.appData.expertise_industries) {
+      this.selectedItem = this.appData.expertise_industries;
+      this.selectedSubItem = this.appData.expertise_categories;
+    }
+
+    if (this.selectedItem.length) {
+      for (let i = 0; i < this.selectedItem.length; i++) {
+        this.onSelectChange(this.selectedItem[i].id, this.selectedItem[i].name);
+      }
+
+      this.setDeclartion();
+      this.setAssociation();
+
+    }
+
+  }
+  setDeclartion() {
+    if (this.appData.declarations[0].ques1 == 'no') {
+      this.qusetFirst = "no";
+      this.declareForm.controls.ques1why.setValidators(Validators.required);
+      this.declareForm.controls.ques1why.updateValueAndValidity();
+    }
+    this.declareForm.setValue(this.appData.declarations[0]);
+  }
+
+  setWork() {
+    if (this.appData && this.appData.agency_work) {
+      for (let i = 0; i < this.appData.agency_work.length; i++) {
+
+        this.wokName.push(this.formBuilder.group({
+          name: [this.appData.agency_work[i].description, Validators.required],
+          image: [this.appData.agency_work[i].filepath, Validators.required]
+        }));
+        this.fileName[i] = this.appData.agency_work[i].filename;
+        this.filePath[i] = this.appData.agency_work[i].filepath;
+      }
+    } else {
+      this.wokName.push(this.formBuilder.group({
+        name: ['', Validators.required],
+        image: ['', Validators.required]
+      }));
+    }
+  }
+  onAssociationSubmit() {
+    this.associationSubmitted = true;
+    if (this.associationForm.invalid) {
+      return;
+    }
+  }
+
+  setAssociation() {
+    if (this.appData && this.appData.associations) {
+      for (let i = 0; i < this.appData.associations.length; i++) {
+
+        this.accociationName.push(this.formBuilder.group({
+          name: [this.appData.agency_work[i].name, Validators.required],
+          type: [this.appData.agency_work[i].type, Validators.required]
+        }));
+      }
+    } else {
+      this.accociationName.push(this.formBuilder.group({
+        name: ['', Validators.required],
+        type: ['', Validators.required]
+      }));
+    }
+  }
+
+  get accociationName() { return this.a.name as FormArray; }
+  onSelectChange(id, name) {
+    this.loader.startLoading();
+    this.userService.getAllSubcategoies(id).subscribe((result: any) => {
+      this.loader.stopLoading();
+      this.subcategory = [{ label: name, items: result.payload.categories }];
+      this.subcategoryData = [...this.subcategoryData, ...this.subcategory];
+    });
+  }
+  onChangeCountry(value) {
+    if (value && value.length) {
+      for (let i = 0; i < value.length; i++) {
+        this.c.push(this.formBuilder.group({
+          name: [value[i], Validators.required]
+        }));
+      }
+    } else {
+      for (let i = 0; i < this.categories.length; i++) {
+        this.c.push(this.formBuilder.group({
+          name: ['', Validators.required]
+        }));
+      }
+    }
+
+
+  }
+
+  onChangeTickets(value) {
+    if (value && value.length) {
+      for (let i = 0; i < this.categories.length; i++) {
+        this.t.push(this.formBuilder.group({
+          name: [value[i], Validators.required]
+        }));
+      }
+    } else {
+      for (let i = 0; i < this.categories.length; i++) {
+        this.t.push(this.formBuilder.group({
+          name: ['', Validators.required]
+        }));
+      }
+    }
+
+
+  }
+  onChangeSubTickets(value) {
+    if (value && value.length) {
+      for (let i = 0; i < this.subCategories.length; i++) {
+        this.s.push(this.formBuilder.group({
+          name: [value[i], Validators.required]
+        }));
+      }
+    } else {
+      for (let i = 0; i < this.subCategories.length; i++) {
+        this.s.push(this.formBuilder.group({
+          name: ['', Validators.required]
+        }));
+      }
+    }
+
+
+  }
+
+  onDeclareFormSubmit() {
+    this.declareSubmitted = true;
+    if (this.declareForm.invalid) {
+      return;
+    }
+
+    const formdata = { form_step: 7, declaration: [this.declareForm.value] };
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+  }
+
+  workUpload(event, i) {
+    if (this.wokName.controls[i].value.name == "") {
+      alert("Please enter the name.");
+      return;
+    }
+    var myFormData = new FormData();
+    myFormData.append('file', event.target.files[0]);
+    myFormData.append('name', this.wokName.controls[i].value.name);
+
+    myFormData.append('form_step', "6");
+
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(myFormData).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+      }
+    });
+
+  }
+  onExperienceSubmit() {
+    this.experienceSubmitted = true;
+    const valueAray = this.experienceForm.value.categoryName.map((data) => {
+      return data.name;
+    });
+    const valueSubAray = this.experienceForm.value.subCategoryName.map((data) => {
+      return data.name;
+    });
+    const valuecateAray = this.selectedItem.map((data) => {
+      return data.id;
+    });
+    const valueSubcateAray = this.selectedSubItem.map((data) => {
+      return data.id;
+    });
+    const newCateArray = valuecateAray.concat(valueSubcateAray).join(",");
+    const newArray = valueAray.concat(valueSubAray).join(",");
+    // stop here if form is invalid
+    const valueCountryAray = this.experienceForm.value.countryName.map((data) => {
+      return data.name;
+    }).join(",");
+    if (this.experienceForm.invalid) {
+      return;
+    }
+    const formdata = {
+      form_step: 5,
+      experience_ids: newCateArray,
+      experience_values: newArray,
+      experience_countries: valueCountryAray
+    }
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+  }
+
+  onWorkSubmit() {
+    this.workSubmitted = true;
+    if (this.workForm.invalid) {
+      return;
+    }
+    let nextTab = this.activeTab + 1;
+    if (nextTab <= this.maxTab) {
+      this.makeActive(nextTab);
+    }
+
+  }
+
+  get d() { return this.experienceForm.controls; }
+  get t() { return this.d.categoryName as FormArray; }
+  get c() { return this.d.countryName as FormArray; }
+  get s() { return this.d.subCategoryName as FormArray; }
+  get a() { return this.associationForm.controls; }
+  get w() { return this.workForm.controls; }
+  get wokName() { return this.w.name as FormArray; }
+
+  onSelectsubcategory(event) {
+    let rt;
+    for (let i = 0; i < this.subcategoryData.length; i++) {
+      rt = this.getdata(i);
+      if (rt.length) {
+        this.setSubCategory = rt[0];
+      }
+    }
+
+  }
+  getdata(i) {
+    const er = this.subcategoryData[i].items.filter((data) => {
+      return data.id == this.selected;
+    });
+    if (er) {
+      return er;
+    }
+  }
+
+  onInputChangedEventsubcategory(val: string) {
+
+  }
+  addSubCategory(item) {
+    if (item) {
+      this.selectedSubItem.push(item);
+    }
+  }
+
+  addCategory(item) {
+
+    let getIndex = -1;
+    if (this.selectedItem) {
+      getIndex = this.selectedItem.findIndex((data) => data.id == item.id);
+    }
+    if (item && getIndex == -1) {
+      this.selectedItem.push(item);
+      this.subcategoryData = [...this.subcategoryData, ...this.subcategory];
+    }
+  }
+
+  onSelect(item: any) {
+    this.setCategory = item;
+    let getIndex = -1;
+    if (this.selectedItem) {
+      getIndex = this.selectedItem.findIndex((data) => data.id == item.id);
+    }
+
+    if (getIndex == -1) {
+      this.loader.startLoading();
+      this.userService.getAllSubcategoies(item.id).subscribe((result: any) => {
+        this.loader.stopLoading();
+        this.subcategory = [{ label: item.name, items: result.payload.categories }];
+      });
+    }
+  }
+  remove(id, index) {
+    // this.subcategoryData = this.subcategoryData[index].items.filter((data) => {
+    //   return data.id != id;
+    // });
+    this.selected = "";
+    this.subcategoryData.splice(index, 1);
+    this.selectedItem = this.selectedItem.filter((data) => {
+      return data.id != id;
+    });
+    this.selectedSubItem = this.selectedSubItem.filter((data) => {
+      return data.parent != id;
+    });
+  }
+  removeSubcategory(id) {
+    this.selectedSubItem = this.selectedSubItem.filter((data) => {
+      return data.id != id;
+    });
+  }
+
+  submitCategory() {
+    this.submittedCategory = true;
+    if (this.selectedItem.length == 0) {
+      return;
+    }
+    if (this.selectedSubItem.length == 0) {
+      return;
+    }
+    const categoryArray = this.selectedItem.map((data) => {
+      return data.id;
+    })
+    const subcategoryArray = this.selectedSubItem.map((data) => {
+      return data.id;
+    })
+    const category = categoryArray.join(",");
+    const subCategory = subcategoryArray.join(",");
+    const formdata = {
+      form_step: 4,
+      expertise_industries: category,
+      expertise_categories: subCategory
+    }
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.experienceForm = this.formBuilder.group({
+          categoryName: new FormArray([]),
+          subCategoryName: new FormArray([]),
+          countryName: new FormArray([])
+        });
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.categories = this.appData.expertise_industries;
+        this.subCategories = this.appData.expertise_categories;
+
+        const cateValue = this.appData.experience_industries_values;
+        const subCategoriesValue = this.appData.experience_categories_values;
+
+        const countries = this.appData.experience_countries;
+        // this.initAddress(countries);
+
+        this.onChangeTickets(cateValue);
+        this.onChangeSubTickets(subCategoriesValue);
+        this.onChangeCountry(countries);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+
+  }
+
+  onInputChangedEvent(val: string) {
+    this.inputChanged = '';
   }
 
   setLocation(locationForm, newGroup) {
@@ -144,12 +617,10 @@ export class AgencyProfileComponent implements OnInit {
     }
 
     this.locationForm.setControl('location', this.formBuilder.array(groupArr));
-    console.log(this.locationForm.get('location')['controls'][0].value.address);
   }
 
   fileEvent(e) {
     this.filedata = e.target.files[0];
-    console.log(this.filedata);
   }
   setFormdata() {
     var data = {
@@ -189,9 +660,21 @@ export class AgencyProfileComponent implements OnInit {
     const arrayControl = <FormArray>this.locationForm.controls['location'];
     arrayControl.removeAt(index);
   }
+  removeCountry(index) {
+    const arrayControl = <FormArray>this.experienceForm.controls['countryName'];
+    arrayControl.removeAt(index);
+  }
+
+  removeWork(index) {
+    const arrayControl = <FormArray>this.workForm.controls['name'];
+    arrayControl.removeAt(index);
+  }
 
   get f() {
     return this.editForm.controls;
+  }
+  get declare() {
+    return this.declareForm.controls;
   }
 
   getEmail() {
@@ -219,18 +702,14 @@ export class AgencyProfileComponent implements OnInit {
     });
     myFormData.append('trade_license', this.filedata, this.filedata.name);
     //  myFormData.append('form_step', '4');
-
-    console.log(headers);
     this.userService.imageUpload(myFormData
     ).subscribe(data => {
-      console.log(data);
     });
   }
 
 
 
   onSubmit() {
-    console.log(this.editForm);
     this.submitted = true;
     if (this.editForm.invalid) {
       return;
@@ -240,9 +719,8 @@ export class AgencyProfileComponent implements OnInit {
     formdata.form_step = 1;
     formdata.phone_code = formdata.phone_number.countryCode;
     formdata.phone_number = formdata.phone_number.number;
-    console.log(formdata);
     this.loader.startLoading();
-    this.userService.editProfile(formdata).subscribe((result: any) => {
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user[
@@ -262,7 +740,7 @@ export class AgencyProfileComponent implements OnInit {
     const formdata = { form_step: 5 };
 
     this.loader.startLoading();
-    this.userService.editProfile(formdata).subscribe((result: any) => {
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user[
@@ -293,7 +771,7 @@ export class AgencyProfileComponent implements OnInit {
 
   /*
     function name : isTabDisabled
-	Explain :this function use for active previous tab"
+  Explain :this function use for active previous tab"
     */
   goPrevious() {
     let prevTab = this.activeTab - 1;
@@ -324,7 +802,7 @@ export class AgencyProfileComponent implements OnInit {
       locations: address,
       form_step: 2,
     };
-    this.userService.editProfile(data).subscribe((result: any) => {
+    this.userService.agencyeditProfile(data).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user[
@@ -343,7 +821,7 @@ export class AgencyProfileComponent implements OnInit {
     const formdata = this.aboutForm.value;
     formdata.form_step = 3;
     this.loader.startLoading();
-    this.userService.editProfile(formdata).subscribe((result: any) => {
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user[
@@ -359,8 +837,18 @@ export class AgencyProfileComponent implements OnInit {
     });
   }
 
+  checkQuest(event) {
+    this.qusetFirst = event.target.value;
+    if (this.qusetFirst == "no") {
+      this.declareForm.controls.ques1why.setValidators(Validators.required);
+      this.declareForm.controls.ques1why.updateValueAndValidity();
+    } else {
+      this.declareForm.controls.ques1why.clearValidators();
+      this.declareForm.controls.ques1why.updateValueAndValidity();
+    }
+  }
+
   getAddress(place: object, i) {
-    console.log(place);
     if (Object.keys(place).length > 0) {
       this.address = place['formatted_address'];
       this.formattedAddress = place['formatted_address'];
@@ -369,7 +857,6 @@ export class AgencyProfileComponent implements OnInit {
     } else {
       this.addressForm.controls[i].setValue({ address: '' });
     }
-    console.log(this.addressForm);
   }
   get addressForm(): FormArray {
     return this.locationForm.get('location') as FormArray;

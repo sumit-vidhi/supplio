@@ -28,6 +28,7 @@
     "@ng-select/ng-option-highlight": "0.0.1",
     "@ng-select/ng-select": "^3.0.0",
     "@types/googlemaps": "^3.30.13",
+    "ng2-input-autocomplete": "1.1.2",
     "bn-ng-idle": "^1.0.1",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
