@@ -558,7 +558,7 @@ span.mat-checkbox-label {
 .kt-wizard-v2__review-title {
   font-size: 18px;
   border-bottom: 1px solid #eee;
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
 .kt-sidebar {
@@ -732,6 +732,9 @@ ul.nostyle {
 .showDetailsDemand {
   margin-top: 34px;
 }
+.collapseBtn {
+  margin-left: 5px;
+}
 [data-toggle='collapse'] .fa:before {
   content: '\f139';
 }
@@ -741,4 +744,32 @@ ul.nostyle {
 }
 .collapse:not(.show) {
   display: none !important;
+}
+@media (min-width: 1025px) {
+  .kt-header-menu
+    .kt-menu__nav
+    > .kt-menu__item
+    > .kt-menu__link
+    .kt-menu__link-text {
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-transform: initial;
+  }
+}
+.alignMe b,
+.alignMe strong {
+  display: inline-block;
+  width: 50%;
+  position: relative;
+  padding-right: 10px; /* Ensures colon does not overlay the text */
+}
+
+.alignMe b::after,
+.alignMe strong::after {
+  content: ':';
+  position: absolute;
+  right: 10px;
+}
+.cke_bottom {
+  display: none;
 }
