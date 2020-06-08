@@ -28,6 +28,7 @@ export class ChangePasswordComponent implements OnInit {
   regForm1: FormGroup;
   errormessage: any;
   sucessmessage: any;
+  submitted = false;
   constructor(private fb: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService) { }
 
@@ -61,6 +62,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(form: FormGroup) {
+    this.submitted = true;
     if (form.invalid) {
       return;
     }
