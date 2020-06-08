@@ -790,3 +790,14 @@ span.detailed_list_label {
 .options_btn {
   margin-left: 10px;
 }
+.status {
+  width: 100px;
+}
+.kt-iconbox__icon i {
+  font-size: 36px;
+  padding-top: 10px;
+  display: block;
+}
+.mleft20 {
+  margin-left: 20px;
+}

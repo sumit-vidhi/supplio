@@ -28,15 +28,15 @@
 
       <div class="row">
         <div class="col-md-3">
-          <div class="kt-portlet kt-iconbox">
+          <div class="kt-portlet kt-iconbox kt-iconbox--wave">
             <div class="kt-portlet__body">
               <div class="kt-iconbox__body">
-                <div class="kt-iconbox__icon">
-                  <i class="fa fa-user"></i>
+                <div class="kt-iconbox__icon kt-font-success">
+                  <i class="flaticon2-list-1"></i>
                 </div>
                 <div class="kt-iconbox__desc">
                   <h3 class="kt-iconbox__title">
-                    123
+                    <a class="kt-link" href="#">123</a>
                   </h3>
                   <div class="kt-iconbox__content">
                     Total Active Demands
@@ -47,18 +47,18 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="kt-portlet kt-iconbox">
+          <div class="kt-portlet kt-iconbox kt-iconbox--wave">
             <div class="kt-portlet__body">
               <div class="kt-iconbox__body">
-                <div class="kt-iconbox__icon">
-                  <i class="fa fa-user"></i>
+                <div class="kt-iconbox__icon kt-font-info">
+                  <i class="flaticon2-line-chart"></i>
                 </div>
                 <div class="kt-iconbox__desc">
                   <h3 class="kt-iconbox__title">
-                    123
+                    <a class="kt-link" href="#">23</a>
                   </h3>
                   <div class="kt-iconbox__content">
-                    Total Quotes Demands
+                    Total Demands
                   </div>
                 </div>
               </div>
@@ -66,18 +66,18 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="kt-portlet kt-iconbox">
+          <div class="kt-portlet kt-iconbox kt-iconbox--wave">
             <div class="kt-portlet__body">
               <div class="kt-iconbox__body">
-                <div class="kt-iconbox__icon">
-                  <i class="fa fa-user"></i>
+                <div class="kt-iconbox__icon kt-font-warning">
+                  <i class="flaticon-medal"></i>
                 </div>
                 <div class="kt-iconbox__desc">
                   <h3 class="kt-iconbox__title">
-                    123
+                    <a class="kt-link" href="#">51</a>
                   </h3>
                   <div class="kt-iconbox__content">
-                    Demands Won
+                    Total Active Agencies
                   </div>
                 </div>
               </div>
@@ -85,18 +85,18 @@
           </div>
         </div>
         <div class="col-md-3">
-          <div class="kt-portlet kt-iconbox">
+          <div class="kt-portlet kt-iconbox kt-iconbox--wave">
             <div class="kt-portlet__body">
               <div class="kt-iconbox__body">
-                <div class="kt-iconbox__icon">
-                  <i class="fa fa-user"></i>
+                <div class="kt-iconbox__icon kt-font-danger">
+                  <i class="flaticon2-layers"></i>
                 </div>
                 <div class="kt-iconbox__desc">
                   <h3 class="kt-iconbox__title">
-                    123
+                    <a class="kt-link" href="#">93</a>
                   </h3>
                   <div class="kt-iconbox__content">
-                    Demands Lost
+                    Total Agencies
                   </div>
                 </div>
               </div>
@@ -106,7 +106,210 @@
       </div>
 
       <!--End::Row-->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head">
+              <div class="kt-portlet__head-label">
+                <h3 class="kt-portlet__head-title">
+                  Latest Demands
+                </h3>
+                <a
+                  routerLink="/user/demand"
+                  class="btn btn-primary btn-brand--icon pull-right mleft20"
+                  id="kt_search"
+                >
+                  <span>
+                    <span>Create Demand</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="kt-portlet__body">
+              <div class="detailed_list">
+                <div class="detailed_list_item row">
+                  <div class="col-md-3 detailed_list_title">
+                    <h5>
+                      <a routerLink="/user/demandview/{{ arrayItem.id }}"
+                        >Demand Title</a
+                      >
+                    </h5>
+                  </div>
 
+                  <div class="col-md-2">
+                    8 Jun, 2020
+                    <span class="detailed_list_label">Posted Date</span>
+                  </div>
+                  <div class="col-md-2">
+                    India
+                    <span class="detailed_list_label">Location</span>
+                  </div>
+
+                  <div class="col-md-2">
+                    Plumber, Painter
+                    <span class="detailed_list_label">Categories</span>
+                  </div>
+                  <div class="col-md-1">
+                    100
+                    <span class="detailed_list_label">Total Demands</span>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <span
+                      class="btn btn-label-success btn-sm btn-bold btn-upper status"
+                      >Draft</span
+                    >
+                    <a
+                      href="#"
+                      class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
+                      data-toggle="dropdown"
+                    >
+                      <i class="flaticon-more-1"></i>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-fit dropdown-menu-right"
+                    >
+                      <ul class="kt-nav">
+                        <li class="kt-nav__item">
+                          <a
+                            href="#"
+                            class="kt-nav__link"
+                            routerLink="/user/demandview/{{ arrayItem.id }}"
+                          >
+                            <i class="kt-nav__link-icon flaticon-eye"></i>
+                            <span class="kt-nav__link-text">View</span>
+                          </a>
+                        </li>
+                        <li
+                          class="kt-nav__item"
+                          *ngIf="appData.role == 'Employer'"
+                        >
+                          <a
+                            routerLink="/user/demand/{{ arrayItem.id }}"
+                            class="kt-nav__link"
+                          >
+                            <i class="kt-nav__link-icon flaticon-edit"></i>
+                            <span class="kt-nav__link-text">Edit</span>
+                          </a>
+                        </li>
+                        <li
+                          class="kt-nav__item"
+                          *ngIf="appData.role == 'Employer'"
+                        >
+                          <a
+                            (click)="createDuplicateDemand(arrayItem.id)"
+                            class="kt-nav__link"
+                          >
+                            <i class="kt-nav__link-icon flaticon2-copy"></i>
+                            <span class="kt-nav__link-text">Duplicate</span>
+                          </a>
+                        </li>
+                        <li
+                          class="kt-nav__item"
+                          *ngIf="appData.role == 'Employer'"
+                        >
+                          <a href="#" class="kt-nav__link">
+                            <i class="kt-nav__link-icon flaticon2-trash"></i>
+                            <span class="kt-nav__link-text">Delete</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="detailed_list_item row">
+                  <div class="col-md-3 detailed_list_title">
+                    <h5>
+                      <a routerLink="/user/demandview/{{ arrayItem.id }}"
+                        >Demand Title</a
+                      >
+                    </h5>
+                  </div>
+
+                  <div class="col-md-2">
+                    4 Jun, 2020
+                    <span class="detailed_list_label">Posted Date</span>
+                  </div>
+                  <div class="col-md-2">
+                    Nepal
+                    <span class="detailed_list_label">Location</span>
+                  </div>
+
+                  <div class="col-md-2">
+                    Doctor, Painter
+                    <span class="detailed_list_label">Categories</span>
+                  </div>
+                  <div class="col-md-1">
+                    140
+                    <span class="detailed_list_label">Total Demands</span>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <span
+                      class="btn btn-label-success btn-sm btn-bold btn-upper status"
+                      >Published</span
+                    >
+                    <a
+                      href="#"
+                      class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
+                      data-toggle="dropdown"
+                    >
+                      <i class="flaticon-more-1"></i>
+                    </a>
+                    <div
+                      class="dropdown-menu dropdown-menu-fit dropdown-menu-right"
+                    >
+                      <ul class="kt-nav">
+                        <li class="kt-nav__item">
+                          <a
+                            href="#"
+                            class="kt-nav__link"
+                            routerLink="/user/demandview/{{ arrayItem.id }}"
+                          >
+                            <i class="kt-nav__link-icon flaticon-eye"></i>
+                            <span class="kt-nav__link-text">View</span>
+                          </a>
+                        </li>
+                        <li
+                          class="kt-nav__item"
+                          *ngIf="appData.role == 'Employer'"
+                        >
+                          <a
+                            routerLink="/user/demand/{{ arrayItem.id }}"
+                            class="kt-nav__link"
+                          >
+                            <i class="kt-nav__link-icon flaticon-edit"></i>
+                            <span class="kt-nav__link-text">Edit</span>
+                          </a>
+                        </li>
+                        <li
+                          class="kt-nav__item"
+                          *ngIf="appData.role == 'Employer'"
+                        >
+                          <a
+                            (click)="createDuplicateDemand(arrayItem.id)"
+                            class="kt-nav__link"
+                          >
+                            <i class="kt-nav__link-icon flaticon2-copy"></i>
+                            <span class="kt-nav__link-text">Duplicate</span>
+                          </a>
+                        </li>
+                        <li
+                          class="kt-nav__item"
+                          *ngIf="appData.role == 'Employer'"
+                        >
+                          <a href="#" class="kt-nav__link">
+                            <i class="kt-nav__link-icon flaticon2-trash"></i>
+                            <span class="kt-nav__link-text">Delete</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!--End::Dashboard 3-->
     </div>
 

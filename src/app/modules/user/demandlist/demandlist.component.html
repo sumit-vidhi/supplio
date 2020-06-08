@@ -184,8 +184,12 @@
                   class="detailed_list_item row"
                   *ngFor="let arrayItem of demandData; let i = index"
                 >
-                  <div class="col-md-4 detailed_list_title">
-                    <h5>{{ arrayItem.title ? arrayItem.title : '-' }}</h5>
+                  <div class="col-md-3 detailed_list_title">
+                    <h5>
+                      <a routerLink="/user/demandview/{{ arrayItem.id }}">{{
+                        arrayItem.title ? arrayItem.title : '-'
+                      }}</a>
+                    </h5>
                   </div>
 
                   <div class="col-md-2">
@@ -209,6 +213,10 @@
                     }}
                     <span class="detailed_list_label">Categories</span>
                   </div>
+                  <div class="col-md-1">
+                    100
+                    <span class="detailed_list_label">Total Demands</span>
+                  </div>
                   <div class="col-md-2 text-center">
                     <span
                       class="btn btn-label-{{
@@ -228,7 +236,11 @@
                     >
                       <ul class="kt-nav">
                         <li class="kt-nav__item">
-                          <a href="#" class="kt-nav__link">
+                          <a
+                            href="#"
+                            class="kt-nav__link"
+                            routerLink="/user/demandview/{{ arrayItem.id }}"
+                          >
                             <i class="kt-nav__link-icon flaticon-eye"></i>
                             <span class="kt-nav__link-text">View</span>
                           </a>
