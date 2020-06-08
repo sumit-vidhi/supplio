@@ -4,7 +4,7 @@
  * On application startup, this component is loaded
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { appSettings } from '@configs/app-settings.config';
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     phone: new FormControl(undefined, [Validators.required])
   });
 
-  constructor(private authService: AuthService, private userService: UserService, private loginService: JWTAuthService, private router: Router, private bnIdle: BnNgIdleService) {
+  constructor(private authService: AuthService, private userService: UserService, private loginService: JWTAuthService, private router: Router, private bnIdle: BnNgIdleService, private renderer: Renderer2) {
     this.bnIdle.startWatching(1800).subscribe((res) => {
       if (res) {
         this.loginService.logout();
@@ -47,6 +47,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.loginService.IsAuthUser()) {
+      this.renderer.addClass(document.body, 'demo');
+    }
+    if (!this.loginService.IsAuthUser()) {
+      this.renderer.removeClass(document.body, 'demo');
+    }
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {
         return;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { UserService } from '@modules/user/services/user.service';
 import { Router } from '@angular/router';
@@ -27,11 +27,11 @@ export class UserDashboardComponent implements OnInit {
   @ViewChild('myDiv', { static: true }) myDiv: ElementRef<HTMLElement>;
   @ViewChild('myDiv2', { static: true }) myDiv2: ElementRef<HTMLElement>;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
-    private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
+    private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal, private renderer: Renderer2) {
   }
 
   ngOnInit() {
-
+    this.renderer.addClass(document.body, 'demo');
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     if (this.appData.is_welcome == "0") {
       if (this.appData.role == 'Employer') {

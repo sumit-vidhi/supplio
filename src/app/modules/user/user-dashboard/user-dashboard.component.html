@@ -1,11 +1,5 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -114,11 +108,7 @@
                 <h3 class="kt-portlet__head-title">
                   Latest Demands
                 </h3>
-                <a
-                  routerLink="/user/demand"
-                  class="btn btn-primary btn-brand--icon pull-right mleft20"
-                  id="kt_search"
-                >
+                <a routerLink="/user/demand" class="btn btn-primary btn-brand--icon pull-right mleft20" id="kt_search">
                   <span>
                     <span>Create Demand</span>
                   </span>
@@ -129,11 +119,11 @@
               <div class="detailed_list">
                 <div class="detailed_list_item row">
                   <div class="col-md-3 detailed_list_title">
-                    <h5>
+                    <!-- <h5>
                       <a routerLink="/user/demandview/{{ arrayItem.id }}"
                         >Demand Title</a
                       >
-                    </h5>
+                    </h5> -->
                   </div>
 
                   <div class="col-md-2">
@@ -154,59 +144,31 @@
                     <span class="detailed_list_label">Total Demands</span>
                   </div>
                   <div class="col-md-2 text-center">
-                    <span
-                      class="btn btn-label-success btn-sm btn-bold btn-upper status"
-                      >Draft</span
-                    >
-                    <a
-                      href="#"
-                      class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                      data-toggle="dropdown"
-                    >
+                    <span class="btn btn-label-success btn-sm btn-bold btn-upper status">Draft</span>
+                    <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                       <i class="flaticon-more-1"></i>
                     </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-fit dropdown-menu-right"
-                    >
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                       <ul class="kt-nav">
                         <li class="kt-nav__item">
-                          <a
-                            href="#"
-                            class="kt-nav__link"
-                            routerLink="/user/demandview/{{ arrayItem.id }}"
-                          >
+                          <!-- <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.id }}">
                             <i class="kt-nav__link-icon flaticon-eye"></i>
                             <span class="kt-nav__link-text">View</span>
-                          </a>
+                          </a> -->
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            routerLink="/user/demand/{{ arrayItem.id }}"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <!-- <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon-edit"></i>
                             <span class="kt-nav__link-text">Edit</span>
-                          </a>
+                          </a> -->
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            (click)="createDuplicateDemand(arrayItem.id)"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <!-- <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-copy"></i>
                             <span class="kt-nav__link-text">Duplicate</span>
-                          </a>
+                          </a> -->
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
                           <a href="#" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-trash"></i>
                             <span class="kt-nav__link-text">Delete</span>
@@ -218,11 +180,9 @@
                 </div>
                 <div class="detailed_list_item row">
                   <div class="col-md-3 detailed_list_title">
-                    <h5>
-                      <a routerLink="/user/demandview/{{ arrayItem.id }}"
-                        >Demand Title</a
-                      >
-                    </h5>
+                    <!-- <h5>
+                      <a routerLink="/user/demandview/{{ arrayItem.id }}">Demand Title</a>
+                    </h5> -->
                   </div>
 
                   <div class="col-md-2">
@@ -243,59 +203,31 @@
                     <span class="detailed_list_label">Total Demands</span>
                   </div>
                   <div class="col-md-2 text-center">
-                    <span
-                      class="btn btn-label-success btn-sm btn-bold btn-upper status"
-                      >Published</span
-                    >
-                    <a
-                      href="#"
-                      class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                      data-toggle="dropdown"
-                    >
+                    <span class="btn btn-label-success btn-sm btn-bold btn-upper status">Published</span>
+                    <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                       <i class="flaticon-more-1"></i>
                     </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-fit dropdown-menu-right"
-                    >
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                       <ul class="kt-nav">
                         <li class="kt-nav__item">
-                          <a
-                            href="#"
-                            class="kt-nav__link"
-                            routerLink="/user/demandview/{{ arrayItem.id }}"
-                          >
+                          <!-- <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.id }}">
                             <i class="kt-nav__link-icon flaticon-eye"></i>
                             <span class="kt-nav__link-text">View</span>
-                          </a>
+                          </a> -->
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            routerLink="/user/demand/{{ arrayItem.id }}"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <!-- <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon-edit"></i>
                             <span class="kt-nav__link-text">Edit</span>
-                          </a>
+                          </a> -->
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            (click)="createDuplicateDemand(arrayItem.id)"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <!-- <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-copy"></i>
                             <span class="kt-nav__link-text">Duplicate</span>
-                          </a>
+                          </a> -->
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
                           <a href="#" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-trash"></i>
                             <span class="kt-nav__link-text">Delete</span>
@@ -323,12 +255,7 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Welcome to {{ loginService.getCompany() }} page!</span>
     </h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click ')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -359,12 +286,7 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Welcome to {{ loginService.getCompany() }} page!</span>
     </h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click ')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

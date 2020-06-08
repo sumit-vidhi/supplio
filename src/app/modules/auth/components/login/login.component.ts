@@ -2,7 +2,7 @@
  * Login component for auth module
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -26,9 +26,10 @@ export class LoginComponent implements OnInit {
   error: string = '';
   message: string = "";
   constructor(private fb: FormBuilder, private authService: AuthService, private userservice: UserService,
-    private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router) { }
+    private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2) { }
 
   ngOnInit() {
+    this.renderer.removeClass(document.body, 'demo');
     this.userservice.siteSetting().subscribe((result: any) => {
       if (result.payload.settings) {
         console.log(232323);

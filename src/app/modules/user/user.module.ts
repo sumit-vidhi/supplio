@@ -16,7 +16,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AgencyProfileComponent } from './agency-profile/agency-profile.component';
-
+import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { AutocompleteModule } from 'ng2-input-autocomplete';
 @NgModule({
   declarations: [AgencyProfileComponent,demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
@@ -31,7 +31,8 @@ import { AutocompleteModule } from 'ng2-input-autocomplete';
     NgxIntlTelInputModule,
     AutocompleteModule,
     BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot() 
+    DatepickerModule.forRoot(),
+    SelectDropDownModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

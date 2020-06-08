@@ -446,6 +446,8 @@ export class DemandComponent implements OnInit {
         this.userService.createDemand(data).subscribe((result: any) => {
           if (result.payload.demand) {
             this.loader.stopLoading();
+            this.updated_at = result.payload.demand.updated_at;
+            console.log(this.updated_at);
           }
           this.toastr.success(result.message, 'Update Demand');
           let nextTab = this.activeTab + 1;
@@ -677,6 +679,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(data).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.demand) {
+        this.updated_at = result.payload.demand.updated_at;
       }
       this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;
@@ -707,6 +710,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.demand) {
+        this.updated_at = result.payload.demand.updated_at;
       }
       this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;
@@ -728,6 +732,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.demand) {
+        this.updated_at = result.payload.demand.updated_at;
       }
       this.toastr.success(result.message, 'Update Demand');
       let nextTab = this.activeTab + 1;

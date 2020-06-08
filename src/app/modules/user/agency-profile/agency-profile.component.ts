@@ -19,6 +19,7 @@ import { APP_USER } from '@configs/app-settings.config';
 import { SearchCountryField } from 'projects/ngx-intl-tel-input/src/lib/enums/search-country-field.enum';
 import { TooltipLabel } from 'projects/ngx-intl-tel-input/src/lib/enums/tooltip-label.enum';
 import { CountryISO } from 'projects/ngx-intl-tel-input/src/lib/enums/country-iso.enum';
+import { countries } from '../country';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -63,6 +64,7 @@ export class AgencyProfileComponent implements OnInit {
   disabledTabs: any = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   appData: any;
   locationForm: FormGroup;
+  country = countries;
   ckeConfig: any;
   countryCode = "IN";
   @ViewChild('searchElement', { static: false }) searchElement: ElementRef;
@@ -94,12 +96,40 @@ export class AgencyProfileComponent implements OnInit {
   qusetFirst: any;
   associationForm: FormGroup;
   associationSubmitted = false;
+  awardForm: FormGroup;
+  workname: any = [];
+  fileData: any = '';
+  awardSubmitted = false;
+  imageDocumentForm: FormGroup;
+  fileDocumentdata: any;
+  fileIdentity: any;
+  filelogo: any;
+  imageSubmitted = false;
+  image: any;
+  imageName: any;
+  teamForm: FormGroup;
+  teamSubmitted = false;
+  profileData: any;
+  photoData: any;
+  teamData = [];
+  singleSelect: any = [];
+  stringOptions = [
+    'Burns Dalton', 'Mcintyre Lawson', 'Amie Franklin', 'Jocelyn Horton', 'Fischer Erickson', 'Medina Underwood', 'Goldie Barber'
+  ];
+  config = {
+    displayKey: 'name', // if objects array passed which key to be displayed defaults to description
+    search: true,
+    limitTo: 3
+  };
   iconList = [ // array of icon class list based on type
     { type: "xlsx", icon: "fa fa-file-excel-o" },
     { type: "pdf", icon: "fa fa-file-pdf-o" },
     { type: "jpg", icon: "fa fa-file-image-o" },
     { type: "png", icon: "fa fa-file-image-o" }
   ];
+  searchChange($event) {
+    console.log($event);
+  }
 
   getFileExtension(filename) { // this will give you icon class name
     //console.log(filename);
@@ -173,13 +203,31 @@ export class AgencyProfileComponent implements OnInit {
       ques4: [null, Validators.required],
       ques1why: ['']
     })
+    this.awardForm = this.formBuilder.group({
+      image: [null, Validators.required],
+      image2: [null, Validators.required],
+      image3: [null, Validators.required],
+      image4: [null, Validators.required],
+      image5: [null, Validators.required],
+      image6: [null, Validators.required],
+      image7: [null, Validators.required],
+      image8: [null, Validators.required],
+      image9: [null, Validators.required],
+    });
     this.experienceForm = this.formBuilder.group({
       categoryName: new FormArray([]),
       subCategoryName: new FormArray([]),
       countryName: new FormArray([])
     });
     this.workForm = this.formBuilder.group({
-      name: new FormArray([])
+      name: ['', Validators.required],
+      image: ['', Validators.required]
+    });
+    this.teamForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      desination: ['', Validators.required],
+      photo: ['', Validators.required],
+      profile: ['', Validators.required]
     });
     this.associationForm = this.formBuilder.group({
       name: new FormArray([])
@@ -201,14 +249,26 @@ export class AgencyProfileComponent implements OnInit {
     this.imageForm = this.formBuilder.group({
       myFile: ['']
     })
+    this.imageDocumentForm = this.formBuilder.group({
+      myFile: ['', Validators.required],
+      identity: ['', Validators.required],
+      logo: ['', Validators.required]
+    })
     this.userService.getSubcategoies().subscribe((result: any) => {
-      this.category = result.payload.categories;
+      this.category = result.payload.categories.filter((data) => {
+        return data.parent == 0;
+      });
+
     });
     const locationForm = this.formBuilder.group({
       location: this.formBuilder.array([]),
     });
     this.aboutForm = this.formBuilder.group({
       about_company: [''],
+      linkedin: [''],
+      twitter: [''],
+      facebook: [''],
+      youtube: ['']
     });
     const arrayControl = <FormArray>locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
@@ -217,7 +277,7 @@ export class AgencyProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    this.setWork();
+    this.teamData = this.appData.team;
 
     this.setFormdata();
     if (this.appData.users_locations.length > 0) {
@@ -237,12 +297,128 @@ export class AgencyProfileComponent implements OnInit {
       for (let i = 0; i < this.selectedItem.length; i++) {
         this.onSelectChange(this.selectedItem[i].id, this.selectedItem[i].name);
       }
-
-      this.setDeclartion();
-      this.setAssociation();
+    }
+    this.image = {
+      trade_license: "",
+      proof_of_identity: "",
+      company_logo: ""
+    };
+    this.imageName = {
+      trade_license: "",
+      proof_of_identity: "",
+      company_logo: ""
+    };
+    if (this.appData.files && this.appData.files.length) {
+      for (let i = 0; i < this.appData.files.length; i++) {
+        if (this.appData.files[i].file_key == "trade_license") {
+          this.image.trade_license = this.appData.files[i].filepath;
+          this.imageName.trade_license = this.appData.files[i].filename;
+          this.imageDocumentForm.patchValue({
+            myFile: this.image.trade_license
+          });
+        }
+        if (this.appData.files[i].file_key == "proof_of_identity") {
+          this.image.proof_of_identity = this.appData.files[i].filepath;
+          this.imageName.proof_of_identity = this.appData.files[i].filename;
+          this.imageDocumentForm.patchValue({
+            identity: this.image.proof_of_identity
+          });
+        }
+        if (this.appData.files[i].file_key == "company_logo") {
+          this.image.company_logo = this.appData.files[i].filepath;
+          this.imageName.company_logo = this.appData.files[i].filename;
+          this.imageDocumentForm.patchValue({
+            logo: this.image.company_logo
+          });
+        }
+        console.log(this.imageForm.value);
+      }
 
     }
+    this.setFromValue('ISO 9001 Quality Management Systems');
+    this.setFromValue('ISO 14001 Environmental Management Systems');
+    this.setFromValue('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems');
+    this.setFromValue('ISO 22301 Business Continuity Management');
+    this.setFromValue('Responsible Business Alliance (RBA)');
+    this.setFromValue('Fair Labor Association (FLA)');
+    this.setFromValue('Ethical Trading Initiative (ETI)');
+    this.setFromValue('Business Social Compliance Initiative (BSCI)');
+    this.setFromValue('International Recruitment Integrity System (IRIS)');
+  }
+  setAward(name) {
+    if (this.appData.awards) {
+      const awardData = this.appData.awards.findIndex((data) => data.name == name);
+      if (awardData > -1) {
+        return this.appData.awards[awardData];
+      }
+    }
 
+  }
+
+  setFromValue(name) {
+    const awardData = this.appData.awards.findIndex((data) => data.name == name);
+    if (awardData > -1) {
+      if (name == "ISO 9001 Quality Management Systems") {
+        this.awardForm.patchValue({
+          image: name
+        });
+      }
+      if (name == "ISO 14001 Environmental Management Systems") {
+        this.awardForm.patchValue({
+          image2: name
+        });
+      }
+      if (name == "OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems") {
+        this.awardForm.patchValue({
+          image3: name
+        });
+      }
+      if (name == "ISO 22301 Business Continuity Management") {
+        this.awardForm.patchValue({
+          image4: name
+        });
+      }
+      if (name == "Responsible Business Alliance (RBA)") {
+        this.awardForm.patchValue({
+          image5: name
+        });
+      }
+      if (name == "Fair Labor Association (FLA)") {
+        this.awardForm.patchValue({
+          image6: name
+        });
+      }
+      console.log(name);
+      console.log('Ethical Trading Initiative (ETI)');
+      if (name == "Ethical Trading Initiative (ETI)") {
+        this.awardForm.patchValue({
+          image7: name
+        });
+      }
+      if (name == "Business Social Compliance Initiative (BSCI)") {
+        this.awardForm.patchValue({
+          image8: name
+        });
+      }
+      if (name == "International Recruitment Integrity System (IRIS)") {
+        this.awardForm.patchValue({
+          image9: name
+        });
+      }
+    }
+  }
+
+  awardUpload() {
+    this.awardSubmitted = true;
+    if (this.awardForm.invalid) {
+      return;
+    }
+
+    let nextTab = this.activeTab + 1;
+    if (nextTab <= this.maxTab) {
+      this.makeActive(nextTab);
+    }
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
   }
   setDeclartion() {
     if (this.appData.declarations[0].ques1 == 'no') {
@@ -255,20 +431,8 @@ export class AgencyProfileComponent implements OnInit {
 
   setWork() {
     if (this.appData && this.appData.agency_work) {
-      for (let i = 0; i < this.appData.agency_work.length; i++) {
+      this.workname = this.appData.agency_work;
 
-        this.wokName.push(this.formBuilder.group({
-          name: [this.appData.agency_work[i].description, Validators.required],
-          image: [this.appData.agency_work[i].filepath, Validators.required]
-        }));
-        this.fileName[i] = this.appData.agency_work[i].filename;
-        this.filePath[i] = this.appData.agency_work[i].filepath;
-      }
-    } else {
-      this.wokName.push(this.formBuilder.group({
-        name: ['', Validators.required],
-        image: ['', Validators.required]
-      }));
     }
   }
   onAssociationSubmit() {
@@ -276,6 +440,31 @@ export class AgencyProfileComponent implements OnInit {
     if (this.associationForm.invalid) {
       return;
     }
+    const formdata = { form_step: 8, associations: this.associationForm.value.name };
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        //  this.setAssociation();
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+  }
+
+  addAssociation() {
+    const control = this.associationForm.get(`name`) as FormArray;
+    control.push(this.formBuilder.group({
+      name: ['', Validators.required],
+      type: ['', Validators.required]
+    }));
   }
 
   setAssociation() {
@@ -283,8 +472,8 @@ export class AgencyProfileComponent implements OnInit {
       for (let i = 0; i < this.appData.associations.length; i++) {
 
         this.accociationName.push(this.formBuilder.group({
-          name: [this.appData.agency_work[i].name, Validators.required],
-          type: [this.appData.agency_work[i].type, Validators.required]
+          name: [this.appData.associations[i].name, Validators.required],
+          type: [this.appData.associations[i].type, Validators.required]
         }));
       }
     } else {
@@ -312,11 +501,9 @@ export class AgencyProfileComponent implements OnInit {
         }));
       }
     } else {
-      for (let i = 0; i < this.categories.length; i++) {
-        this.c.push(this.formBuilder.group({
-          name: ['', Validators.required]
-        }));
-      }
+      this.c.push(this.formBuilder.group({
+        name: ['', Validators.required]
+      }));
     }
 
 
@@ -373,6 +560,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.setAssociation();
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -381,14 +569,56 @@ export class AgencyProfileComponent implements OnInit {
     });
   }
 
-  workUpload(event, i) {
-    if (this.wokName.controls[i].value.name == "") {
-      alert("Please enter the name.");
+  changeFile(event) {
+    this.fileData = event.target.files[0];
+  }
+  get team() {
+    return this.teamForm.controls;
+  }
+
+  changePhotoFile(event) {
+    this.photoData = event.target.files[0];
+  }
+  changeProfileFile(event) {
+    this.profileData = event.target.files[0];
+  }
+
+
+  teamUpload() {
+    this.teamSubmitted = true;
+    if (this.teamForm.invalid) {
       return;
     }
     var myFormData = new FormData();
-    myFormData.append('file', event.target.files[0]);
-    myFormData.append('name', this.wokName.controls[i].value.name);
+    myFormData.append('photo', this.photoData);
+    myFormData.append('profile', this.profileData);
+    myFormData.append('name', this.teamForm.value.name);
+    myFormData.append('designation', this.teamForm.value.desination);
+
+    myFormData.append('form_step', "11");
+
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(myFormData).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.teamData = this.appData.team;
+      }
+    });
+  }
+
+  workUpload(event) {
+    this.workSubmitted = true;
+    if (this.workForm.invalid) {
+      return;
+    }
+    var myFormData = new FormData();
+    myFormData.append('file', this.fileData);
+    myFormData.append('name', this.workForm.value.name);
 
     myFormData.append('form_step', "6");
 
@@ -401,11 +631,34 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.setWork();
       }
     });
 
   }
+
+  changeAwardFile(event, name) {
+    var myFormData = new FormData();
+    myFormData.append('file', event.target.files[0]);
+    myFormData.append('name', name);
+
+    myFormData.append('form_step', "9");
+
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(myFormData).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.setFromValue(name);
+      }
+    });
+  }
   onExperienceSubmit() {
+    console.log(this.experienceForm.value);
     this.experienceSubmitted = true;
     const valueAray = this.experienceForm.value.categoryName.map((data) => {
       return data.name;
@@ -423,7 +676,7 @@ export class AgencyProfileComponent implements OnInit {
     const newArray = valueAray.concat(valueSubAray).join(",");
     // stop here if form is invalid
     const valueCountryAray = this.experienceForm.value.countryName.map((data) => {
-      return data.name;
+      return data.name.name;
     }).join(",");
     if (this.experienceForm.invalid) {
       return;
@@ -443,6 +696,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.setWork();
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -452,15 +706,13 @@ export class AgencyProfileComponent implements OnInit {
   }
 
   onWorkSubmit() {
-    this.workSubmitted = true;
-    if (this.workForm.invalid) {
-      return;
-    }
+
     let nextTab = this.activeTab + 1;
     if (nextTab <= this.maxTab) {
       this.makeActive(nextTab);
     }
-
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
+    this.setDeclartion();
   }
 
   get d() { return this.experienceForm.controls; }
@@ -469,7 +721,8 @@ export class AgencyProfileComponent implements OnInit {
   get s() { return this.d.subCategoryName as FormArray; }
   get a() { return this.associationForm.controls; }
   get w() { return this.workForm.controls; }
-  get wokName() { return this.w.name as FormArray; }
+  get award() { return this.awardForm.controls; }
+  //  get wokName() { return this.w.name as FormArray; }
 
   onSelectsubcategory(event) {
     let rt;
@@ -479,6 +732,7 @@ export class AgencyProfileComponent implements OnInit {
         this.setSubCategory = rt[0];
       }
     }
+    this.addSubCategory(this.setSubCategory);
 
   }
   getdata(i) {
@@ -523,6 +777,7 @@ export class AgencyProfileComponent implements OnInit {
       this.userService.getAllSubcategoies(item.id).subscribe((result: any) => {
         this.loader.stopLoading();
         this.subcategory = [{ label: item.name, items: result.payload.categories }];
+        this.addCategory(item);
       });
     }
   }
@@ -619,6 +874,62 @@ export class AgencyProfileComponent implements OnInit {
     this.locationForm.setControl('location', this.formBuilder.array(groupArr));
   }
 
+  fileDocumentEvent(e) {
+    this.fileDocumentdata = e.target.files[0];
+    this.imageDocumentForm.get('myFile').setValue(this.fileDocumentdata);
+    console.log(this.fileDocumentdata);
+  }
+  fileIdentityEvent(e) {
+    this.fileIdentity = e.target.files[0];
+    this.imageDocumentForm.get('identity').setValue(this.fileIdentity);
+    // console.log(this.filedata);
+  }
+  fileLogoEvent(e) {
+    this.filelogo = e.target.files[0];
+    this.imageDocumentForm.get('logo').setValue(this.filelogo);
+    //console.log(this.filedata);
+  }
+
+  imageDocumentSubmit() {
+    this.imageSubmitted = true;
+    if (this.imageDocumentForm.invalid) {
+      return;
+    }
+    var myFormData = new FormData();
+    if (this.fileDocumentdata) {
+      myFormData.append('trade_license', this.imageDocumentForm.get('myFile').value);
+    } else {
+      myFormData.append('trade_license', "");
+    }
+    if (this.fileIdentity) {
+      myFormData.append('proof_of_identity', this.imageDocumentForm.get('identity').value);
+    } else {
+      myFormData.append('proof_of_identity', "");
+    }
+    if (this.filelogo) {
+      myFormData.append('company_logo', this.imageDocumentForm.get('logo').value);
+    } else {
+      myFormData.append('company_logo', "");
+    }
+    myFormData.append('form_step', '10');
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(myFormData
+    ).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+      }
+      let nextTab = this.activeTab + 1;
+      if (nextTab <= this.maxTab) {
+        this.makeActive(nextTab);
+      }
+    });
+  }
+
   fileEvent(e) {
     this.filedata = e.target.files[0];
   }
@@ -637,7 +948,14 @@ export class AgencyProfileComponent implements OnInit {
     };
     this.countryCode = data.phone_code;
     this.editForm.setValue(data);
-    this.aboutForm.setValue({ about_company: this.appData.about_company });
+    this.aboutForm.patchValue({ about_company: this.appData.about_company });
+    if (this.appData.social && this.appData.social[0]) {
+      this.aboutForm.patchValue({ linkedin: this.appData.social[0].linkedin });
+      this.aboutForm.patchValue({ twitter: this.appData.social[0].twitter });
+      this.aboutForm.patchValue({ facebook: this.appData.social[0].facebook });
+      this.aboutForm.patchValue({ youtube: this.appData.social[0].youtube });
+    }
+
   }
 
   open(content) {
@@ -669,6 +987,12 @@ export class AgencyProfileComponent implements OnInit {
     const arrayControl = <FormArray>this.workForm.controls['name'];
     arrayControl.removeAt(index);
   }
+
+  removeAssociation(index) {
+    const arrayControl = <FormArray>this.associationForm.controls['name'];
+    arrayControl.removeAt(index);
+  }
+
 
   get f() {
     return this.editForm.controls;
@@ -819,9 +1143,18 @@ export class AgencyProfileComponent implements OnInit {
   }
   aboutSubmit() {
     const formdata = this.aboutForm.value;
-    formdata.form_step = 3;
+    const newdata = {
+      about_company: this.aboutForm.value.about_company,
+      social: [{}],
+      form_step: 3
+    }
+    newdata.social[0]['linkedin'] = this.aboutForm.value.linkedin;
+    newdata.social[0]['twitter'] = this.aboutForm.value.twitter;
+    newdata.social[0]['facebook'] = this.aboutForm.value.facebook;
+    newdata.social[0]['youtube'] = this.aboutForm.value.youtube;
+    console.log(newdata);
     this.loader.startLoading();
-    this.userService.agencyeditProfile(formdata).subscribe((result: any) => {
+    this.userService.agencyeditProfile(newdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.message) {
         result.payload.user[
@@ -846,6 +1179,10 @@ export class AgencyProfileComponent implements OnInit {
       this.declareForm.controls.ques1why.clearValidators();
       this.declareForm.controls.ques1why.updateValueAndValidity();
     }
+  }
+
+  get i() {
+    return this.imageDocumentForm.controls;
   }
 
   getAddress(place: object, i) {

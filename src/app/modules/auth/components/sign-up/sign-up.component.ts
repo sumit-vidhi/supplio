@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from '@modules/auth/services/auth.service';
 import { map } from 'rxjs/operators';
@@ -43,12 +43,13 @@ export class SignUpComponent implements OnInit {
     error: string = "";
     constructor(private formBuilder: FormBuilder, private authService: AuthService,
         private router: Router, private loader: LoaderService,
-        private route: ActivatedRoute, ) { }
+        private route: ActivatedRoute, private renderer: Renderer2) { }
 
     ngOnInit() {
-        const restitData:any=JSON.parse(window.localStorage.getItem("setting"));
+        this.renderer.removeClass(document.body, 'demo');
+        const restitData: any = JSON.parse(window.localStorage.getItem("setting"));
 
-        const domainArray =restitData.employer_restricted_domains.split(',');
+        const domainArray = restitData.employer_restricted_domains.split(',');
         console.log(domainArray);
         this.registerForm = this.formBuilder.group({
             first_name: ['', Validators.required],
@@ -92,7 +93,7 @@ export class SignUpComponent implements OnInit {
         const q = new Promise((resolve, reject) => {
             setTimeout(() => {
                 this.authService.checkEmailToken({ email: control.value }).subscribe((res) => {
-              
+
                     if (res.message == 'Error') {
                         console.log(res);
                         resolve({ 'isEmailUnique': true });
@@ -122,9 +123,9 @@ export class SignUpComponent implements OnInit {
         this.error = '';
         const formData = this.registerForm.value;
         if (this.userType == "employer") {
-            const restitData:any=JSON.parse(window.localStorage.getItem("setting"));
+            const restitData: any = JSON.parse(window.localStorage.getItem("setting"));
 
-            const domainArray =restitData.employer_restricted_domains.split(',');
+            const domainArray = restitData.employer_restricted_domains.split(',');
             console.log(domainArray);
             for (let index = 0; index < domainArray.length; index++) {
                 if (formData.email.indexOf(domainArray[index]) > -1) {
@@ -141,7 +142,7 @@ export class SignUpComponent implements OnInit {
         this.authService.register(formData).subscribe((result: any) => {
             this.loader.stopLoading();
             if (result.payload.message) {
-                this.message = result.payload.message;
+                this.router.navigate(['auth/thankyou']);
             } else if (result.payload.error) {
                 this.error = result.payload.error;
             }
