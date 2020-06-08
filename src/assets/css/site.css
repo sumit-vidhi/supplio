@@ -42,7 +42,7 @@ body h4,
 body h5 {
   font-weight: 300;
   color: #0a8e9e;
-  letter-spacing: -1.5px;
+  /* letter-spacing: -1.5px; */
 }
 body h4,
 body .h4 {
@@ -772,4 +772,21 @@ ul.nostyle {
 }
 .cke_bottom {
   display: none;
+}
+.detailed_list_item {
+  border-bottom: 1px solid #f7f8fa;
+  padding: 15px 0;
+}
+.detailed_list_title h5 {
+  color: #111;
+  font-size: 16px;
+}
+span.detailed_list_label {
+  display: block;
+  font-size: 13px;
+  line-height: 1rem;
+  color: #909090;
+}
+.options_btn {
+  margin-left: 10px;
 }
