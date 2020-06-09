@@ -97,7 +97,9 @@ export class AgencyProfileComponent implements OnInit {
   associationForm: FormGroup;
   associationSubmitted = false;
   awardForm: FormGroup;
+  companyForm: FormGroup;
   workname: any = [];
+  companySubmitted = false;
   fileData: any = '';
   awardSubmitted = false;
   imageDocumentForm: FormGroup;
@@ -114,7 +116,9 @@ export class AgencyProfileComponent implements OnInit {
   teamData = [];
   singleSelect: any = [];
   awardData: any;
+  companyData: any;
   awardname: any = [];
+  cpmpanyname: any = [];
   config = {
     displayKey: 'name', // if objects array passed which key to be displayed defaults to description
     search: true,
@@ -206,6 +210,10 @@ export class AgencyProfileComponent implements OnInit {
       name: [null, Validators.required],
       image: [null, Validators.required]
     });
+    this.companyForm = this.formBuilder.group({
+      name: [null, Validators.required],
+      image: [null, Validators.required]
+    });
     this.experienceForm = this.formBuilder.group({
       categoryName: new FormArray([]),
       subCategoryName: new FormArray([]),
@@ -270,7 +278,7 @@ export class AgencyProfileComponent implements OnInit {
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.teamData = this.appData.team;
-
+    this.cpmpanyname = this.appData.agency_company_tour;
     this.setFormdata();
     if (this.appData.users_locations.length > 0) {
       this.setLocation(locationForm, arrayControl);
@@ -346,6 +354,35 @@ export class AgencyProfileComponent implements OnInit {
     this.appData = JSON.parse(window.localStorage[APP_USER]);
   }
 
+  get company() {
+    return this.companyForm.controls;
+  }
+  companyUpload() {
+    this.companySubmitted = true;
+    if (this.companyForm.invalid) {
+      return;
+    }
+
+    var myFormData = new FormData();
+    myFormData.append('file', this.companyData);
+    myFormData.append('name', this.companyForm.value.name);
+
+    myFormData.append('form_step', "12");
+
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(myFormData).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.cpmpanyname = this.appData.agency_company_tour;
+      }
+    });
+
+  }
 
   awardUpload() {
     this.awardSubmitted = true;
@@ -355,7 +392,7 @@ export class AgencyProfileComponent implements OnInit {
 
     var myFormData = new FormData();
     myFormData.append('file', this.awardData);
-    myFormData.append('name', name);
+    myFormData.append('name', this.awardForm.value);
 
     myFormData.append('form_step', "9");
 
@@ -372,11 +409,6 @@ export class AgencyProfileComponent implements OnInit {
       }
     });
 
-    let nextTab = this.activeTab + 1;
-    if (nextTab <= this.maxTab) {
-      this.makeActive(nextTab);
-    }
-    this.appData = JSON.parse(window.localStorage[APP_USER]);
   }
   setDeclartion() {
     if (this.appData.declarations[0].ques1 == 'no') {
@@ -599,6 +631,10 @@ export class AgencyProfileComponent implements OnInit {
 
   changeAwardFile(event) {
     this.awardData = event.target.files[0];
+  }
+
+  changeCompanyFile(event) {
+    this.companyData = event.target.files[0];
   }
   onExperienceSubmit() {
     console.log(this.experienceForm.value);
