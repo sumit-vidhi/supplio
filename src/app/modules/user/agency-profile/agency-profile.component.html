@@ -888,223 +888,101 @@
                   <h3>Certifications & Awards </h3>
                 </div>
 
-                <form [formGroup]="awardForm" (ngSubmit)="awardUpload()" enctype="multipart/form-data">
-                  <div class="card m-3">
+
+                <div class="card m-3">
+                  <form [formGroup]="awardForm" (ngSubmit)="awardUpload()" enctype="multipart/form-data">
                     <div class="list-group list-group-flush">
                       <div class="list-group-item">
                         <div class="form-row">
                           <div class="form-group col-6">
-                            <label>ISO 9001 Quality Management Systems</label>
+                            <label>Name</label>
+                            <select class="form-control" formControlName='name' 
+                            [ngClass]="{ 'is-invalid': awardSubmitted && award.name.errors }">
+                              <option value="" disabled>Select name</option>
+                              <option value="ISO 9001 Quality Management Systems">ISO 9001 Quality Management Systems
+                              </option>
+                              <option value="ISO 14001 Environmental Management Systems">ISO 14001 Environmental
+                                Management Systems</option>
+                              <option value="OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems">
+                                OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems</option>
+                              <option value="ISO 22301 Business Continuity Management ">ISO 22301 Business Continuity
+                                Management </option>
+                              <option value="Responsible Business Alliance (RBA) ">Responsible Business Alliance (RBA)
+                              </option>
+                              <option value="Fair Labor Association (FLA)">Fair Labor Association (FLA)</option>
+                              <option value="Ethical Trading Initiative (ETI) ">Ethical Trading Initiative (ETI)
+                              </option>
+                              <option value="Business Social Compliance Initiative (BSCI)">Business Social Compliance
+                                Initiative (BSCI)</option>
+                              <option value="International Recruitment Integrity System (IRIS) ">International
+                                Recruitment Integrity System (IRIS) </option>
+
+                            </select>
+                            <div *ngIf="awardSubmitted && award.name.errors" class="invalid-feedback">
+                              <div *ngIf="award.name.errors">Image is required
+                              </div>
+                            </div>
+
+                          </div>
+
+                          <div class="form-group col-6">
+                            <label>Image</label>
                             <input type="file" formControlName="image" class="form-control"
-                              (change)="changeAwardFile($event,'ISO 9001 Quality Management Systems')"
+                              (change)="changeAwardFile($event)"
                               [ngClass]="{ 'is-invalid': awardSubmitted && award.image.errors }" />
                             <div *ngIf="awardSubmitted && award.image.errors" class="invalid-feedback">
                               <div *ngIf="award.image.errors">Image is required
                               </div>
                             </div>
-                            <div *ngIf="setAward('ISO 9001 Quality Management Systems')">
-                              <a href="{{setAward('ISO 9001 Quality Management Systems').file}}" target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('ISO 9001 Quality Management Systems').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('ISO 9001 Quality Management Systems').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('ISO 9001 Quality Management Systems').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
 
                           </div>
-                          <div class="form-group col-6">
-                            <label>ISO 14001 Environmental Management Systems</label>
-                            <input type="file" formControlName="image2" class="form-control"
-                              (change)="changeAwardFile($event,'ISO 14001 Environmental Management Systems')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image2.errors }" />
-                            <div *ngIf="awardSubmitted && award.image2.errors" class="invalid-feedback">
-                              <div *ngIf="award.image2.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('ISO 14001 Environmental Management Systems')">
-                              <a href="{{setAward('ISO 14001 Environmental Management Systems').file}}" target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('ISO 14001 Environmental Management Systems').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('ISO 14001 Environmental Management Systems').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('ISO 14001 Environmental Management Systems').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
+                          <div class="col-xl-4">
+                            <div>
+                              <button type="submit" class="btn btn-primary addLocation"><i class="fa fa-plus"></i>
+                                Upload
+                              </button>
                             </div>
                           </div>
-                          <div class="form-group col-6">
-                            <label>OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems</label>
-                            <input type="file" formControlName="image3" class="form-control"
-                              (change)="changeAwardFile($event,'OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image3.errors }" />
-                            <div *ngIf="awardSubmitted && award.image3.errors" class="invalid-feedback">
-                              <div *ngIf="award.image3.errors">Image is required
-                              </div>
-                            </div>
-                            <div
-                              *ngIf="setAward('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems')">
-                              <a href="{{setAward('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems').file}}"
-                                target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>ISO 22301 Business Continuity Management </label>
-                            <input type="file" formControlName="image4" class="form-control"
-                              (change)="changeAwardFile($event,'ISO 22301 Business Continuity Management')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image4.errors }" />
-                            <div *ngIf="awardSubmitted && award.image4.errors" class="invalid-feedback">
-                              <div *ngIf="award.image4.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('ISO 22301 Business Continuity Management')">
-                              <a href="{{setAward('ISO 22301 Business Continuity Management').file}}" target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('ISO 22301 Business Continuity Management').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('ISO 22301 Business Continuity Management').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('ISO 22301 Business Continuity Management').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Responsible Business Alliance (RBA) </label>
-                            <input type="file" formControlName="image5" class="form-control"
-                              (change)="changeAwardFile($event,'Responsible Business Alliance (RBA)')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image5.errors }" />
-                            <div *ngIf="awardSubmitted && award.image5.errors" class="invalid-feedback">
-                              <div *ngIf="award.image5.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('Responsible Business Alliance (RBA)')">
-                              <a href="{{setAward('Responsible Business Alliance (RBA)').file}}" target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('Responsible Business Alliance (RBA)').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('Responsible Business Alliance (RBA)').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('Responsible Business Alliance (RBA)').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Fair Labor Association (FLA)</label>
-                            <input type="file" formControlName="image6" class="form-control"
-                              (change)="changeAwardFile($event,'Fair Labor Association (FLA)')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image6.errors }" />
-                            <div *ngIf="awardSubmitted && award.image6.errors" class="invalid-feedback">
-                              <div *ngIf="award.image6.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('Fair Labor Association (FLA)')">
-                              <a href="{{setAward('Fair Labor Association (FLA)').file}}" target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('Fair Labor Association (FLA)').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('Fair Labor Association (FLA)').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('Fair Labor Association (FLA)').id)"><i aria-hidden="true"
-                                  class="fa fa-trash"></i></a>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Ethical Trading Initiative (ETI)</label>
-                            <input type="file" formControlName="image7" class="form-control"
-                              (change)="changeAwardFile($event,'Ethical Trading Initiative (ETI)')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image7.errors }" />
-                            <div *ngIf="awardSubmitted && award.image7.errors" class="invalid-feedback">
-                              <div *ngIf="award.image7.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('Ethical Trading Initiative (ETI)')">
-                              <a href="{{setAward('Ethical Trading Initiative (ETI)').file}}" target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('Ethical Trading Initiative (ETI)').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('Ethical Trading Initiative (ETI)').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('Ethical Trading Initiative (ETI)').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Business Social Compliance Initiative (BSCI) </label>
-                            <input type="file" formControlName="image8" class="form-control"
-                              (change)="changeAwardFile($event,'Business Social Compliance Initiative (BSCI)')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image8.errors }" />
-                            <div *ngIf="awardSubmitted && award.image8.errors" class="invalid-feedback">
-                              <div *ngIf="award.image8.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('Business Social Compliance Initiative (BSCI)')">
-                              <a href="{{setAward('Business Social Compliance Initiative (BSCI)').file}}"
-                                target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('Business Social Compliance Initiative (BSCI)').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('Business Social Compliance Initiative (BSCI)').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('Business Social Compliance Initiative (BSCI)').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>International Recruitment Integrity System (IRIS) </label>
-                            <input type="file" formControlName="image9" class="form-control"
-                              (change)="changeAwardFile($event,'International Recruitment Integrity System (IRIS)')"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image9.errors }" />
-                            <div *ngIf="awardSubmitted && award.image9.errors" class="invalid-feedback">
-                              <div *ngIf="award.image9.errors">Image is required
-                              </div>
-                            </div>
-                            <div *ngIf="setAward('International Recruitment Integrity System (IRIS)')">
-                              <a href="{{setAward('International Recruitment Integrity System (IRIS)').file}}"
-                                target="_blank">
-                                <i class="{{
-                                    getFileExtension(setAward('International Recruitment Integrity System (IRIS)').file)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                {{setAward('International Recruitment Integrity System (IRIS)').name}}</a>
-                              <a class="deleteLocation" href="javscript:;"
-                                (click)="deleteAward(setAward('International Recruitment Integrity System (IRIS)').id)"><i
-                                  aria-hidden="true" class="fa fa-trash"></i></a>
-                            </div>
+                          <div class="search-result" *ngIf="awardname && awardname.length">
+                            <ul>
+                              <li *ngFor="let item of awardname let i=index;">
+                                {{item.name}} <a href="{{ item.file }}" target="_blank">
+                                  <i class="{{
+                                      getFileExtension(item.file)
+                                    }}" style="color: #5cb85c;" aria-hidden="true"></i>
+                                 </a><a (click)="removeWork(item.id)" class="deleteLocation"><i
+                                    class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                            </ul>
                           </div>
                         </div>
                       </div>
 
                     </div>
+                  </form>
 
-
-                    <div class="stepButtons">
-                      <a (click)="goPrevious()"
-                        class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-prev">
-                        <span>
-                          <i class="la la-angle-left"></i>
-                          <span>Previous</span>
-                        </span>
-                      </a>
-                      <button type="submit"
-                        class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-next">
-                        <span>
-                          <span>Next Step</span>
-                          <i class="la la-angle-right"></i>
-                        </span>
-                      </button>
-                    </div>
-
+                  <div class="stepButtons">
+                    <a (click)="goPrevious()"
+                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      data-ktwizard-type="action-prev">
+                      <span>
+                        <i class="la la-angle-left"></i>
+                        <span>Previous</span>
+                      </span>
+                    </a>
+                    <button (click)="awardSubmit()"
+                      class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      data-ktwizard-type="action-next">
+                      <span>
+                        <span>Next Step</span>
+                        <i class="la la-angle-right"></i>
+                      </span>
+                    </button>
                   </div>
-                </form>
+
+                </div>
+
               </div>
 
 

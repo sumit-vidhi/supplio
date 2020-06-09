@@ -113,9 +113,8 @@ export class AgencyProfileComponent implements OnInit {
   photoData: any;
   teamData = [];
   singleSelect: any = [];
-  stringOptions = [
-    'Burns Dalton', 'Mcintyre Lawson', 'Amie Franklin', 'Jocelyn Horton', 'Fischer Erickson', 'Medina Underwood', 'Goldie Barber'
-  ];
+  awardData: any;
+  awardname: any = [];
   config = {
     displayKey: 'name', // if objects array passed which key to be displayed defaults to description
     search: true,
@@ -204,15 +203,8 @@ export class AgencyProfileComponent implements OnInit {
       ques1why: ['']
     })
     this.awardForm = this.formBuilder.group({
-      image: [null, Validators.required],
-      image2: [null, Validators.required],
-      image3: [null, Validators.required],
-      image4: [null, Validators.required],
-      image5: [null, Validators.required],
-      image6: [null, Validators.required],
-      image7: [null, Validators.required],
-      image8: [null, Validators.required],
-      image9: [null, Validators.required],
+      name: [null, Validators.required],
+      image: [null, Validators.required]
     });
     this.experienceForm = this.formBuilder.group({
       categoryName: new FormArray([]),
@@ -292,7 +284,7 @@ export class AgencyProfileComponent implements OnInit {
       this.selectedItem = this.appData.expertise_industries;
       this.selectedSubItem = this.appData.expertise_categories;
     }
-
+    this.awardname = this.appData.awards;
     if (this.selectedItem.length) {
       for (let i = 0; i < this.selectedItem.length; i++) {
         this.onSelectChange(this.selectedItem[i].id, this.selectedItem[i].name);
@@ -335,15 +327,6 @@ export class AgencyProfileComponent implements OnInit {
       }
 
     }
-    this.setFromValue('ISO 9001 Quality Management Systems');
-    this.setFromValue('ISO 14001 Environmental Management Systems');
-    this.setFromValue('OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems');
-    this.setFromValue('ISO 22301 Business Continuity Management');
-    this.setFromValue('Responsible Business Alliance (RBA)');
-    this.setFromValue('Fair Labor Association (FLA)');
-    this.setFromValue('Ethical Trading Initiative (ETI)');
-    this.setFromValue('Business Social Compliance Initiative (BSCI)');
-    this.setFromValue('International Recruitment Integrity System (IRIS)');
   }
   setAward(name) {
     if (this.appData.awards) {
@@ -355,64 +338,39 @@ export class AgencyProfileComponent implements OnInit {
 
   }
 
-  setFromValue(name) {
-    const awardData = this.appData.awards.findIndex((data) => data.name == name);
-    if (awardData > -1) {
-      if (name == "ISO 9001 Quality Management Systems") {
-        this.awardForm.patchValue({
-          image: name
-        });
-      }
-      if (name == "ISO 14001 Environmental Management Systems") {
-        this.awardForm.patchValue({
-          image2: name
-        });
-      }
-      if (name == "OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems") {
-        this.awardForm.patchValue({
-          image3: name
-        });
-      }
-      if (name == "ISO 22301 Business Continuity Management") {
-        this.awardForm.patchValue({
-          image4: name
-        });
-      }
-      if (name == "Responsible Business Alliance (RBA)") {
-        this.awardForm.patchValue({
-          image5: name
-        });
-      }
-      if (name == "Fair Labor Association (FLA)") {
-        this.awardForm.patchValue({
-          image6: name
-        });
-      }
-      console.log(name);
-      console.log('Ethical Trading Initiative (ETI)');
-      if (name == "Ethical Trading Initiative (ETI)") {
-        this.awardForm.patchValue({
-          image7: name
-        });
-      }
-      if (name == "Business Social Compliance Initiative (BSCI)") {
-        this.awardForm.patchValue({
-          image8: name
-        });
-      }
-      if (name == "International Recruitment Integrity System (IRIS)") {
-        this.awardForm.patchValue({
-          image9: name
-        });
-      }
+  awardSubmit() {
+    let nextTab = this.activeTab + 1;
+    if (nextTab <= this.maxTab) {
+      this.makeActive(nextTab);
     }
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
   }
+
 
   awardUpload() {
     this.awardSubmitted = true;
     if (this.awardForm.invalid) {
       return;
     }
+
+    var myFormData = new FormData();
+    myFormData.append('file', this.awardData);
+    myFormData.append('name', name);
+
+    myFormData.append('form_step', "9");
+
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(myFormData).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.message) {
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.awardname = this.appData.awards;
+      }
+    });
 
     let nextTab = this.activeTab + 1;
     if (nextTab <= this.maxTab) {
@@ -637,25 +595,10 @@ export class AgencyProfileComponent implements OnInit {
 
   }
 
-  changeAwardFile(event, name) {
-    var myFormData = new FormData();
-    myFormData.append('file', event.target.files[0]);
-    myFormData.append('name', name);
 
-    myFormData.append('form_step', "9");
 
-    this.loader.startLoading();
-    this.userService.agencyeditProfile(myFormData).subscribe((result: any) => {
-      this.loader.stopLoading();
-      if (result.payload.message) {
-        result.payload.user[
-          'authToken'
-        ] = this.loginService.getUserAccessToken();
-        this.loginService.setLoginUserDetailData(result.payload.user);
-        this.appData = JSON.parse(window.localStorage[APP_USER]);
-        this.setFromValue(name);
-      }
-    });
+  changeAwardFile(event) {
+    this.awardData = event.target.files[0];
   }
   onExperienceSubmit() {
     console.log(this.experienceForm.value);
