@@ -57,7 +57,7 @@ export class AgencyProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<number> = [];
-  minTab = 4; //Minimum Tab Step
+  minTab = 1; //Minimum Tab Step
   maxTab = 14; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;

@@ -1,11 +1,5 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
         <div class="kt-subheader__main" *ngIf="appData.role == 'Employer'">
@@ -21,11 +15,7 @@
         <div class="kt-subheader__main"></div>
         <div class="kt-subheader__toolbar" *ngIf="appData.role == 'Employer'">
           <div class="kt-subheader__wrapper">
-            <a
-              routerLink="/user/demand"
-              class="btn btn-primary btn-brand--icon"
-              id="kt_search"
-            >
+            <a routerLink="/user/demand" class="btn btn-primary btn-brand--icon" id="kt_search">
               <span>
                 <span>Create Demand</span>
               </span>
@@ -47,86 +37,42 @@
             </div>
             <div class="kt-portlet__body">
               <h3>Filters</h3>
-              <form
-                class="kt-form"
-                id="kt_form"
-                novalidate="novalidate"
-                [formGroup]="searchForm"
-                (ngSubmit)="searchSubmit()"
-              >
+              <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="searchForm"
+                (ngSubmit)="searchSubmit()">
                 <div class="row">
                   <div class="col-lg-4">
                     <div class="form-group kt-margin-b-10-tablet-and-mobile">
                       <label>Posted On:</label>
-                      <div
-                        class="input-daterange input-group"
-                        id="kt_datepicker"
-                      >
-                        <input
-                          type="text"
-                          class="form-control kt-input"
-                          #dp="bsDatepicker"
-                          bsDatepicker
-                          [(bsValue)]="myDateValue"
-                          placeholder="From"
-                          data-col-index="5"
-                          formControlName="startDate"
-                        />
+                      <div class="input-daterange input-group" id="kt_datepicker">
+                        <input type="text" class="form-control kt-input" #dp="bsDatepicker" bsDatepicker
+                          [(bsValue)]="myDateValue" placeholder="From" data-col-index="5" formControlName="startDate" />
                         <div class="input-group-append">
-                          <span class="input-group-text"
-                            ><i class="la la-ellipsis-h"></i
-                          ></span>
+                          <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                         </div>
-                        <input
-                          type="text"
-                          class="form-control kt-input"
-                          #dp="bsDatepicker"
-                          bsDatepicker
-                          [(bsValue)]="myDateValue2"
-                          placeholder="To"
-                          data-col-index="5"
-                          formControlName="postDate"
-                        />
+                        <input type="text" class="form-control kt-input" #dp="bsDatepicker" bsDatepicker
+                          [(bsValue)]="myDateValue2" placeholder="To" data-col-index="5" formControlName="postDate" />
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile"
-                  >
+                  <div class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile">
                     <label>Hiring Type:</label>
-                    <select
-                      class="form-control kt-input"
-                      data-col-index="2"
-                      formControlName="hire_type"
-                    >
+                    <select class="form-control kt-input" data-col-index="2" formControlName="hire_type">
                       <option value="">Select Type</option>
                       <option value="locally">Locally</option>
                       <option value="overseas">Overseas</option>
                     </select>
                   </div>
 
-                  <div
-                    class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile"
-                  >
+                  <div class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile">
                     <label>Location:</label>
-                    <select
-                      class="form-control kt-input"
-                      data-col-index="2"
-                      formControlName="hire_country"
-                    >
+                    <select class="form-control kt-input" data-col-index="2" formControlName="hire_country">
                       <option value="">Select Country</option>
-                      <option
-                        *ngFor="let value of countries"
-                        value="{{ value.code }}"
-                        >{{ value.name }}
+                      <option *ngFor="let value of countries" value="{{ value.code }}">{{ value.name }}
                       </option>
                     </select>
                   </div>
 
-                  <div
-                    class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile"
-                    formControlName="demand_type"
-                  >
+                  <div class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile" formControlName="demand_type">
                     <label>Demand Type:</label>
                     <select class="form-control kt-input" data-col-index="2">
                       <option value="">Select Type</option>
@@ -135,15 +81,9 @@
                     </select>
                   </div>
 
-                  <div
-                    class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile"
-                  >
+                  <div class="col-lg-4 form-group kt-margin-b-10-tablet-and-mobile">
                     <label>Status:</label>
-                    <select
-                      class="form-control kt-input"
-                      data-col-index="2"
-                      formControlName="status"
-                    >
+                    <select class="form-control kt-input" data-col-index="2" formControlName="status">
                       <option value="">Select Status</option>
                       <option value="0">Draft</option>
                       <option value="1">Published</option>
@@ -153,21 +93,14 @@
                   </div>
 
                   <div class="col-lg-12 form-group">
-                    <button
-                      class="btn btn-primary btn-brand--icon"
-                      id="kt_search"
-                    >
+                    <button class="btn btn-primary btn-brand--icon" id="kt_search">
                       <span>
                         <i class="la la-search"></i>
                         <span>Search</span>
                       </span>
                     </button>
                     &nbsp;&nbsp;
-                    <a
-                      class="btn btn-secondary btn-secondary--icon"
-                      id="kt_reset"
-                      (click)="reset()"
-                    >
+                    <a class="btn btn-secondary btn-secondary--icon" id="kt_reset" (click)="reset()">
                       <span>
                         <i class="la la-close"></i>
                         <span>Reset</span>
@@ -176,14 +109,9 @@
                   </div>
                 </div>
               </form>
-              <div
-                class="kt-separator kt-separator--border-dashed kt-separator--space-md"
-              ></div>
+              <div class="kt-separator kt-separator--border-dashed kt-separator--space-md"></div>
               <div class="detailed_list">
-                <div
-                  class="detailed_list_item row"
-                  *ngFor="let arrayItem of demandData; let i = index"
-                >
+                <div class="detailed_list_item row" *ngFor="let arrayItem of demandData; let i = index">
                   <div class="col-md-3 detailed_list_title">
                     <h5>
                       <a routerLink="/user/demandview/{{ arrayItem.id }}">{{
@@ -218,61 +146,33 @@
                     <span class="detailed_list_label">Total Demands</span>
                   </div>
                   <div class="col-md-2 text-center">
-                    <span
-                      class="btn btn-label-{{
+                    <span class="btn btn-label-{{
                         arrayItem.status == 1 ? 'success' : 'danger'
-                      }} btn-sm btn-bold btn-upper status"
-                      >{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span
-                    >
-                    <a
-                      href="#"
-                      class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                      data-toggle="dropdown"
-                    >
+                      }} btn-sm btn-bold btn-upper status">{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span>
+                    <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                       <i class="flaticon-more-1"></i>
                     </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-fit dropdown-menu-right"
-                    >
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                       <ul class="kt-nav">
                         <li class="kt-nav__item">
-                          <a
-                            href="#"
-                            class="kt-nav__link"
-                            routerLink="/user/demandview/{{ arrayItem.id }}"
-                          >
+                          <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.id }}">
                             <i class="kt-nav__link-icon flaticon-eye"></i>
                             <span class="kt-nav__link-text">View</span>
                           </a>
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            routerLink="/user/demand/{{ arrayItem.id }}"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon-edit"></i>
                             <span class="kt-nav__link-text">Edit</span>
                           </a>
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            (click)="createDuplicateDemand(arrayItem.id)"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-copy"></i>
                             <span class="kt-nav__link-text">Duplicate</span>
                           </a>
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
                           <a href="#" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-trash"></i>
                             <span class="kt-nav__link-text">Delete</span>
@@ -292,82 +192,39 @@
           <div class="kt-portlet kt-sidebar">
             <h3>Filters</h3>
             <div class="row">
-              <form
-                class="kt-form"
-                id="kt_form"
-                novalidate="novalidate"
-                [formGroup]="searchForm"
-                (ngSubmit)="searchSubmit()"
-              >
-                <div
-                  class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile"
-                >
+              <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="searchForm"
+                (ngSubmit)="searchSubmit()">
+                <div class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile">
                   <label>Posted On:</label>
                   <div class="input-daterange input-group" id="kt_datepicker">
-                    <input
-                      type="text"
-                      class="form-control kt-input"
-                      #dp="bsDatepicker"
-                      bsDatepicker
-                      [(bsValue)]="myDateValue"
-                      placeholder="From"
-                      data-col-index="5"
-                      formControlName="startDate"
-                    />
+                    <input type="text" class="form-control kt-input" #dp="bsDatepicker" bsDatepicker
+                      [(bsValue)]="myDateValue" placeholder="From" data-col-index="5" formControlName="startDate" />
                     <div class="input-group-append">
-                      <span class="input-group-text"
-                        ><i class="la la-ellipsis-h"></i
-                      ></span>
+                      <span class="input-group-text"><i class="la la-ellipsis-h"></i></span>
                     </div>
-                    <input
-                      type="text"
-                      class="form-control kt-input"
-                      #dp="bsDatepicker"
-                      bsDatepicker
-                      [(bsValue)]="myDateValue2"
-                      placeholder="To"
-                      data-col-index="5"
-                      formControlName="postDate"
-                    />
+                    <input type="text" class="form-control kt-input" #dp="bsDatepicker" bsDatepicker
+                      [(bsValue)]="myDateValue2" placeholder="To" data-col-index="5" formControlName="postDate" />
                   </div>
                 </div>
-                <div
-                  class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile"
-                >
+                <div class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile">
                   <label>Hiring Type:</label>
-                  <select
-                    class="form-control kt-input"
-                    data-col-index="2"
-                    formControlName="hire_type"
-                  >
+                  <select class="form-control kt-input" data-col-index="2" formControlName="hire_type">
                     <option value="">Select Type</option>
                     <option value="locally">Locally</option>
                     <option value="overseas">Overseas</option>
                   </select>
                 </div>
 
-                <div
-                  class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile"
-                >
+                <div class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile">
                   <label>Location:</label>
-                  <select
-                    class="form-control kt-input"
-                    data-col-index="2"
-                    formControlName="hire_country"
-                  >
+                  <select class="form-control kt-input" data-col-index="2" formControlName="hire_country">
                     <option value="">Select Country</option>
-                    <option
-                      *ngFor="let value of countries"
-                      value="{{ value.code }}"
-                      >{{ value.name }}
+                    <option *ngFor="let value of countries" value="{{ value.code }}">{{ value.name }}
                     </option>
                   </select>
                 </div>
 
-                <div
-                  class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile"
-                  formControlName="demand_type"
-                >
+                <div class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile" formControlName="demand_type">
                   <label>Demand Type:</label>
                   <select class="form-control kt-input" data-col-index="2">
                     <option value="">Select Type</option>
@@ -376,15 +233,9 @@
                   </select>
                 </div>
 
-                <div
-                  class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile"
-                >
+                <div class="col-lg-12 form-group kt-margin-b-10-tablet-and-mobile">
                   <label>Status:</label>
-                  <select
-                    class="form-control kt-input"
-                    data-col-index="2"
-                    formControlName="status"
-                  >
+                  <select class="form-control kt-input" data-col-index="2" formControlName="status">
                     <option value="">Select Status</option>
                     <option value="0">Draft</option>
                     <option value="1">Published</option>
@@ -394,21 +245,14 @@
                 </div>
 
                 <div class="col-lg-12 form-group">
-                  <button
-                    class="btn btn-primary btn-brand--icon"
-                    id="kt_search"
-                  >
+                  <button class="btn btn-primary btn-brand--icon" id="kt_search">
                     <span>
                       <i class="la la-search"></i>
                       <span>Search</span>
                     </span>
                   </button>
                   &nbsp;&nbsp;
-                  <a
-                    class="btn btn-secondary btn-secondary--icon"
-                    id="kt_reset"
-                    (click)="reset()"
-                  >
+                  <a class="btn btn-secondary btn-secondary--icon" id="kt_reset" (click)="reset()">
                     <span>
                       <i class="la la-close"></i>
                       <span>Reset</span>
@@ -420,10 +264,7 @@
           </div>
         </div>
         <div class="col-md-9" *ngIf="demandData && demandData.length">
-          <div
-            class="kt-portlet"
-            *ngFor="let arrayItem of demandData; let i = index"
-          >
+          <div class="kt-portlet" *ngFor="let arrayItem of demandData; let i = index">
             <div class="kt-portlet__body kt-portlet__body--fit">
               <!--begin::Widget -->
               <div class="kt-widget kt-widget--project-1 demand-item">
@@ -438,33 +279,22 @@
                       <a href="#" class="kt-widget__title">
                         {{ arrayItem.title ? arrayItem.title : '-' }}
                       </a>
-                      <span class="kt-widget__desc"
-                        ><span>Categories:</span>
+                      <span class="kt-widget__desc"><span>Categories:</span>
                         {{
                           category[i].length > 1
                             ? category[i].join(', ')
                             : category[i][0]
-                        }}</span
-                      >
+                        }}</span>
                     </div>
                   </div>
                   <div class="kt-portlet__head-toolbar">
-                    <span
-                      class="btn btn-label-{{
+                    <span class="btn btn-label-{{
                         arrayItem.status == 1 ? 'success' : 'danger'
-                      }} btn-sm btn-bold btn-upper status"
-                      >{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span
-                    >
-                    <a
-                      href="#"
-                      class="btn btn-clean btn-sm btn-icon btn-icon-md"
-                      data-toggle="dropdown"
-                    >
+                      }} btn-sm btn-bold btn-upper status">{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span>
+                    <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md" data-toggle="dropdown">
                       <i class="flaticon-more-1"></i>
                     </a>
-                    <div
-                      class="dropdown-menu dropdown-menu-fit dropdown-menu-right"
-                    >
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                       <ul class="kt-nav">
                         <li class="kt-nav__item">
                           <a href="#" class="kt-nav__link">
@@ -472,34 +302,19 @@
                             <span class="kt-nav__link-text">View</span>
                           </a>
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            routerLink="/user/demand/{{ arrayItem.id }}"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon-edit"></i>
                             <span class="kt-nav__link-text">Edit</span>
                           </a>
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
-                          <a
-                            (click)="createDuplicateDemand(arrayItem.id)"
-                            class="kt-nav__link"
-                          >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                          <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-copy"></i>
                             <span class="kt-nav__link-text">Duplicate</span>
                           </a>
                         </li>
-                        <li
-                          class="kt-nav__item"
-                          *ngIf="appData.role == 'Employer'"
-                        >
+                        <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
                           <a href="#" class="kt-nav__link">
                             <i class="kt-nav__link-icon flaticon2-trash"></i>
                             <span class="kt-nav__link-text">Delete</span>
@@ -570,10 +385,7 @@
                       </div>
                     </div>
                     <div class="kt-widget__section">
-                      <a
-                        routerLink="/user/demandview/{{ arrayItem.id }}"
-                        class="btn btn-brand btn-sm"
-                      >
+                      <a routerLink="/user/demandview/{{ arrayItem.id }}" class="btn btn-brand btn-sm">
                         <span>
                           <i class="la la-eye"></i>
                           <span>Details</span>
