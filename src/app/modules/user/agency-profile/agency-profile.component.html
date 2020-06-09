@@ -464,8 +464,11 @@
                     <div class="col-xl-12">
                       <div class="form-group col-md-4">
                         <label for="accommodation">Select Category</label>
-                        <input input-autocomplete [config]="config2" [items]="category"
-                          (inputChangedEvent)="onInputChangedEvent($event)" (selectEvent)="onSelect($event)" />
+                        <!-- <input input-autocomplete [config]="config2" [items]="category"
+                          (inputChangedEvent)="onInputChangedEvent($event)" (selectEvent)="onSelect($event)" /> -->
+                        <ng-select [items]="category" name="category" required bindValue="id" bindLabel="name"
+                          appendTo="body" [(ngModel)]="selectedCity" (change)="onSelect()">
+                        </ng-select>
                         <!-- <a (click)="addCategory(setCategory)" class="btn btn-primary addLocation"><i
                             class="fa fa-plus"></i>
                           Add</a> -->
@@ -609,9 +612,13 @@
                             <div class="form-group col-12">
                               <!-- <input type="text" formControlName="name" class="form-control" placeholder="Country"
                                 [ngClass]="{ 'is-invalid': experienceSubmitted && ticket.controls.name.errors }" /> -->
-                              <ngx-select-dropdown formControlName="name" (searchChange)="searchChange($event)"
+                              <!-- <ngx-select-dropdown formControlName="name" (searchChange)="searchChange($event)"
                                 tabindex="0" [multiple]="false" [config]="config" [options]="country">
-                              </ngx-select-dropdown>
+                              </ngx-select-dropdown> -->
+
+                              <ng-select [items]="country" name="country" required bindValue="code" bindLabel="name"
+                                appendTo="body" formControlName="name">
+                              </ng-select>
 
                               <div *ngIf="
                                   experienceSubmitted &&

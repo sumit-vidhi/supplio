@@ -57,7 +57,7 @@ export class AgencyProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<number> = [];
-  minTab = 1; //Minimum Tab Step
+  minTab = 4; //Minimum Tab Step
   maxTab = 14; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
@@ -119,6 +119,7 @@ export class AgencyProfileComponent implements OnInit {
   companyData: any;
   awardname: any = [];
   cpmpanyname: any = [];
+  selectedCity: any;
   config = {
     displayKey: 'name', // if objects array passed which key to be displayed defaults to description
     search: true,
@@ -293,6 +294,7 @@ export class AgencyProfileComponent implements OnInit {
       this.selectedSubItem = this.appData.expertise_categories;
     }
     this.awardname = this.appData.awards;
+    console.log(this.awardname);
     if (this.selectedItem.length) {
       for (let i = 0; i < this.selectedItem.length; i++) {
         this.onSelectChange(this.selectedItem[i].id, this.selectedItem[i].name);
@@ -331,7 +333,6 @@ export class AgencyProfileComponent implements OnInit {
             logo: this.image.company_logo
           });
         }
-        console.log(this.imageForm.value);
       }
 
     }
@@ -655,7 +656,7 @@ export class AgencyProfileComponent implements OnInit {
     const newArray = valueAray.concat(valueSubAray).join(",");
     // stop here if form is invalid
     const valueCountryAray = this.experienceForm.value.countryName.map((data) => {
-      return data.name.name;
+      return data.name;
     }).join(",");
     if (this.experienceForm.invalid) {
       return;
@@ -744,14 +745,18 @@ export class AgencyProfileComponent implements OnInit {
     }
   }
 
-  onSelect(item: any) {
-    this.setCategory = item;
+
+  onSelect() {
     let getIndex = -1;
     if (this.selectedItem) {
-      getIndex = this.selectedItem.findIndex((data) => data.id == item.id);
+      getIndex = this.selectedItem.findIndex((data) => data.id == this.selectedCity);
     }
+    const index = this.category.findIndex((data) => data.id == this.selectedCity);
+    const item = this.category[index];
+    this.setCategory = item;
 
-    if (getIndex == -1) {
+
+    if (getIndex == -1 && this.selectedCity) {
       this.loader.startLoading();
       this.userService.getAllSubcategoies(item.id).subscribe((result: any) => {
         this.loader.stopLoading();
