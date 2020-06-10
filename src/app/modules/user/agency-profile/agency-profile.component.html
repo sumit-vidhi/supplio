@@ -814,7 +814,6 @@
                     </div>
                   </div>
                   <div
-                    _ngcontent-mkg-c5=""
                     class="kt-separator kt-separator--border-dashed kt-separator--space-md"
                   ></div>
                   <div class="row">
@@ -1440,8 +1439,15 @@
                 }"
               >
                 <div class="kt-heading kt-heading--md">
-                  <h3>Association</h3>
+                  <h3>Associations</h3>
                 </div>
+                <p>
+                  Please list names of the organizations you’re associated with
+                  for training and testing of candidates. Please be specific and
+                  precise, Supplio may ask you to provide the supporting
+                  documents such as MOU, agreement or confirmation letter. These
+                  associations will appear in your profile.
+                </p>
                 <form
                   [formGroup]="associationForm"
                   (ngSubmit)="onAssociationSubmit()"
@@ -1567,6 +1573,11 @@
                 <div class="kt-heading kt-heading--md">
                   <h3>Certifications & Awards</h3>
                 </div>
+                <p>
+                  Here you can add the certifications and awards your company
+                  has. This adds to your rating and enhance your chances of
+                  working with bigger brands from around the globe.
+                </p>
 
                 <form
                   [formGroup]="awardForm"
@@ -1578,7 +1589,7 @@
                       <div class="list-group-item">
                         <div class="form-row">
                           <div class="form-group col-6">
-                            <label>Name</label>
+                            <label>Certificate Type</label>
                             <select
                               class="form-control"
                               formControlName="name"
@@ -1587,7 +1598,7 @@
                                   awardSubmitted && award.name.errors
                               }"
                             >
-                              <option value="" disabled>Select name</option>
+                              <option value="" disabled>Select Type</option>
                               <option
                                 value="ISO 9001 Quality Management Systems"
                                 >ISO 9001 Quality Management Systems
@@ -1633,13 +1644,13 @@
                               class="invalid-feedback"
                             >
                               <div *ngIf="award.name.errors">
-                                Image is required
+                                File is required
                               </div>
                             </div>
                           </div>
 
                           <div class="form-group col-6">
-                            <label>Image</label>
+                            <label>Certificate File</label>
                             <input
                               type="file"
                               formControlName="image"
@@ -1655,7 +1666,7 @@
                               class="invalid-feedback"
                             >
                               <div *ngIf="award.image.errors">
-                                Image is required
+                                Certificate is required
                               </div>
                             </div>
                           </div>
@@ -1670,30 +1681,33 @@
                               </button>
                             </div>
                           </div>
-                          <div
-                            class="search-result"
-                            *ngIf="awardname && awardname.length"
-                          >
-                            <ul>
-                              <li *ngFor="let item of awardname; let i = index">
-                                {{ item.name }}
-                                <a href="{{ item.file }}" target="_blank">
-                                  <i
-                                    class="{{ getFileExtension(item.file) }}"
-                                    style="color: #5cb85c;"
-                                    aria-hidden="true"
-                                  ></i> </a
-                                ><a
-                                  (click)="removeAward(item.id)"
-                                  class="deleteLocation"
-                                  ><i
-                                    class="fa fa-trash"
-                                    aria-hidden="true"
-                                  ></i>
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
+                        </div>
+                        <div
+                          class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                        ></div>
+
+                        <h5>Cerfications Added</h5>
+                        <div
+                          class="search-result"
+                          *ngIf="awardname && awardname.length"
+                        >
+                          <ul class="liWithDeleteIcon">
+                            <li *ngFor="let item of awardname; let i = index">
+                              <a
+                                (click)="removeAward(item.id)"
+                                class="deleteLiItem"
+                                ><i class="fa fa-trash" aria-hidden="true"></i>
+                              </a>
+                              {{ item.name }}
+                              <a href="{{ item.file }}" target="_blank">
+                                <i
+                                  class="{{ getFileExtension(item.file) }}"
+                                  style="color: #5cb85c;"
+                                  aria-hidden="true"
+                                ></i>
+                              </a>
+                            </li>
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -1887,6 +1901,11 @@
                 <div class="kt-heading kt-heading--md">
                   <h3>Team</h3>
                 </div>
+                <p>
+                  Here, you can add your team members. This information will
+                  appear on your agency profile and give to potential clients a
+                  more human impression of your agency.
+                </p>
 
                 <div class="m-3">
                   <form
@@ -1894,111 +1913,113 @@
                     (ngSubmit)="teamUpload()"
                     enctype="multipart/form-data"
                   >
-                    <div class="list-group list-group-flush">
-                      <div class="list-group-item">
-                        <div class="form-row">
-                          <div class="form-group col-6">
-                            <label>Name</label>
-                            <input
-                              type="text"
-                              formControlName="name"
-                              class="form-control"
-                              placeholder="name"
-                              [ngClass]="{
-                                'is-invalid': teamSubmitted && team.name.errors
-                              }"
-                            />
-                            <div
-                              *ngIf="teamSubmitted && team.name.errors"
-                              class="invalid-feedback"
-                            >
-                              <div *ngIf="team.name.errors.required">
-                                Name is required
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Designation</label>
-                            <input
-                              type="text"
-                              formControlName="desination"
-                              class="form-control"
-                              placeholder="Designation"
-                              [ngClass]="{
-                                'is-invalid':
-                                  teamSubmitted && team.desination.errors
-                              }"
-                            />
-                            <div
-                              *ngIf="teamSubmitted && team.desination.errors"
-                              class="invalid-feedback"
-                            >
-                              <div *ngIf="team.desination.errors.required">
-                                Name is required
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Photo</label>
-                            <input
-                              type="file"
-                              formControlName="photo"
-                              class="form-control"
-                              placeholder="name"
-                              (change)="changePhotoFile($event)"
-                              [ngClass]="{
-                                'is-invalid': teamSubmitted && team.photo.errors
-                              }"
-                            />
-                            <div
-                              *ngIf="teamSubmitted && team.photo.errors"
-                              class="invalid-feedback"
-                            >
-                              <div *ngIf="team.photo.errors.required">
-                                Name is required
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Profile Photo</label>
-                            <input
-                              type="file"
-                              formControlName="profile"
-                              class="form-control"
-                              (change)="changeProfileFile($event)"
-                              [ngClass]="{
-                                'is-invalid':
-                                  teamSubmitted && team.profile.errors
-                              }"
-                            />
-                            <div
-                              *ngIf="teamSubmitted && team.profile.errors"
-                              class="invalid-feedback"
-                            >
-                              <div *ngIf="team.profile.errors">
-                                Image is required
-                              </div>
-                            </div>
+                    <div class="form-row">
+                      <div class="form-group col-6">
+                        <label>Name</label>
+                        <input
+                          type="text"
+                          formControlName="name"
+                          class="form-control"
+                          placeholder="name"
+                          [ngClass]="{
+                            'is-invalid': teamSubmitted && team.name.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="teamSubmitted && team.name.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="team.name.errors.required">
+                            Name is required
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-xl-4">
-                      <div>
-                        <button
-                          type="submit"
-                          class="btn btn-primary addLocation"
+                      <div class="form-group col-6">
+                        <label>Designation</label>
+                        <input
+                          type="text"
+                          formControlName="desination"
+                          class="form-control"
+                          placeholder="Designation"
+                          [ngClass]="{
+                            'is-invalid':
+                              teamSubmitted && team.desination.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="teamSubmitted && team.desination.errors"
+                          class="invalid-feedback"
                         >
-                          <i class="fa fa-plus"></i> Upload
-                        </button>
+                          <div *ngIf="team.desination.errors.required">
+                            Name is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-6">
+                        <label>Photo</label>
+                        <input
+                          type="file"
+                          formControlName="photo"
+                          class="form-control"
+                          placeholder="name"
+                          (change)="changePhotoFile($event)"
+                          [ngClass]="{
+                            'is-invalid': teamSubmitted && team.photo.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="teamSubmitted && team.photo.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="team.photo.errors.required">
+                            Name is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group col-6">
+                        <label>Profile Photo</label>
+                        <input
+                          type="file"
+                          formControlName="profile"
+                          class="form-control"
+                          (change)="changeProfileFile($event)"
+                          [ngClass]="{
+                            'is-invalid': teamSubmitted && team.profile.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="teamSubmitted && team.profile.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="team.profile.errors">
+                            Image is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div>
+                          <button
+                            type="submit"
+                            class="btn btn-primary addLocation"
+                          >
+                            <i class="fa fa-plus"></i> Upload
+                          </button>
+                        </div>
                       </div>
                     </div>
+                    <div
+                      class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                    ></div>
+                    <h4>Team Members</h4>
                     <div
                       class="search-result"
                       *ngIf="teamData && teamData.length"
                     >
-                      <ul>
+                      <ul class="liWithDeleteIcon">
                         <li *ngFor="let item of teamData; let i = index">
+                          <a (click)="removeWork(item.id)" class="deleteLiItem"
+                            ><i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
                           {{ item.name }} {{ item.designation }}
                           <a href="{{ item.photo }}" target="_blank">
                             <i
@@ -2052,113 +2073,106 @@
                 <div class="kt-heading kt-heading--md">
                   <h3>Company tour</h3>
                 </div>
-
+                <p>
+                  Here, you can add photos of your office and facilities. Based
+                  on the information provided here, Supplio creates a virtual
+                  tour for potential clients.
+                </p>
                 <form
                   [formGroup]="companyForm"
                   (ngSubmit)="companyUpload()"
                   enctype="multipart/form-data"
                 >
                   <div class="m-3">
-                    <div class="list-group list-group-flush">
-                      <div class="list-group-item">
-                        <div class="form-row">
-                          <div class="form-group col-6">
-                            <label>Name</label>
-                            <select
-                              class="form-control"
-                              formControlName="name"
-                              [ngClass]="{
-                                'is-invalid':
-                                  companySubmitted && company.name.errors
-                              }"
-                            >
-                              <option value="" disabled>Select name</option>
-                              <option value="Front Office"
-                                >Front Office
-                              </option>
-                              <option value="Reception">Reception</option>
-                              <option value="Interview Room"
-                                >Interview Room</option
-                              >
-                              <option value="Waiting hall"
-                                >Waiting hall
-                              </option>
-                              <option value="Documentation Room "
-                                >Documentation Room
-                              </option>
-                            </select>
-                            <div
-                              *ngIf="companySubmitted && company.name.errors"
-                              class="invalid-feedback"
-                            >
-                              <div *ngIf="company.name.errors">
-                                Image is required
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="form-group col-6">
-                            <label>Image</label>
-                            <input
-                              type="file"
-                              formControlName="image"
-                              class="form-control"
-                              (change)="changeCompanyFile($event)"
-                              [ngClass]="{
-                                'is-invalid':
-                                  companySubmitted && company.image.errors
-                              }"
-                            />
-                            <div
-                              *ngIf="companySubmitted && company.image.errors"
-                              class="invalid-feedback"
-                            >
-                              <div *ngIf="company.image.errors">
-                                Image is required
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-xl-4">
-                            <div>
-                              <button
-                                type="submit"
-                                class="btn btn-primary addLocation"
-                              >
-                                <i class="fa fa-plus"></i>
-                                Upload
-                              </button>
-                            </div>
-                          </div>
-                          <div
-                            class="search-result"
-                            *ngIf="cpmpanyname && cpmpanyname.length"
-                          >
-                            <ul>
-                              <li
-                                *ngFor="let item of cpmpanyname; let i = index"
-                              >
-                                <a href="{{ item.filepath }}" target="_blank">
-                                  <i
-                                    class="{{
-                                      getFileExtension(item.filepath)
-                                    }}"
-                                    style="color: #5cb85c;"
-                                    aria-hidden="true"
-                                  ></i>
-                                  {{ item.filename }}</a
-                                ><a
-                                  (click)="removeWork('company',item.id)"
-                                  class="deleteLocation"
-                                  ><i
-                                    class="fa fa-trash"
-                                    aria-hidden="true"
-                                  ></i>
-                                </a>
-                              </li>
-                            </ul>
+                    <div class="form-row">
+                      <div class="form-group col-6">
+                        <label>Name</label>
+                        <select
+                          class="form-control"
+                          formControlName="name"
+                          [ngClass]="{
+                            'is-invalid':
+                              companySubmitted && company.name.errors
+                          }"
+                        >
+                          <option value="" disabled>Select name</option>
+                          <option value="Front Office">Front Office </option>
+                          <option value="Reception">Reception</option>
+                          <option value="Interview Room">Interview Room</option>
+                          <option value="Waiting hall">Waiting hall </option>
+                          <option value="Documentation Room "
+                            >Documentation Room
+                          </option>
+                        </select>
+                        <div
+                          *ngIf="companySubmitted && company.name.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="company.name.errors">
+                            Image is required
                           </div>
                         </div>
                       </div>
+
+                      <div class="form-group col-6">
+                        <label>Image</label>
+                        <input
+                          type="file"
+                          formControlName="image"
+                          class="form-control"
+                          (change)="changeCompanyFile($event)"
+                          [ngClass]="{
+                            'is-invalid':
+                              companySubmitted && company.image.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="companySubmitted && company.image.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="company.image.errors">
+                            Image is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-4">
+                        <div>
+                          <button
+                            type="submit"
+                            class="btn btn-primary addLocation"
+                          >
+                            <i class="fa fa-plus"></i>
+                            Upload
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                    ></div>
+                    <h5>Company Images</h5>
+                    <div
+                      class="search-result"
+                      *ngIf="cpmpanyname && cpmpanyname.length"
+                    >
+                      <ul class="liWithDeleteIcon">
+                        <li *ngFor="let item of cpmpanyname; let i = index">
+                          <a
+                            (click)="removeWork('company',item.id)"
+                            class="liWithDeleteIcon"
+                            ><i class="fa fa-trash" aria-hidden="true"></i>
+                          </a>
+
+                          <a href="{{ item.filepath }}" target="_blank">
+                            <i
+                              class="{{ getFileExtension(item.filepath) }}"
+                              style="color: #5cb85c;"
+                              aria-hidden="true"
+                            ></i>
+                            {{ item.filename }}</a
+                          >
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </form>
