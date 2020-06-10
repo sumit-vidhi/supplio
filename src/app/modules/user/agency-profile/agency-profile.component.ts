@@ -57,7 +57,7 @@ export class AgencyProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<number> = [];
-  minTab = 1; //Minimum Tab Step
+  minTab = 4; //Minimum Tab Step
   maxTab = 14; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
@@ -705,15 +705,24 @@ export class AgencyProfileComponent implements OnInit {
   //  get wokName() { return this.w.name as FormArray; }
 
   onSelectsubcategory(event) {
-    let rt;
-    for (let i = 0; i < this.subcategoryData.length; i++) {
-      rt = this.getdata(i);
-      if (rt.length) {
-        this.setSubCategory = rt[0];
-      }
+    let getIndex = -1;
+    if (this.selectedSubItem) {
+      getIndex = this.selectedSubItem.findIndex((data) => data.id == this.selected);
     }
-    this.addSubCategory(this.setSubCategory);
-
+    if (getIndex == -1 && event.target.value) {
+      let rt;
+      for (let i = 0; i < this.subcategoryData.length; i++) {
+        rt = this.getdata(i);
+        if (rt.length) {
+          this.setSubCategory = rt[0];
+        }
+      }
+      this.addSubCategory(this.setSubCategory);
+      this.selected = "";
+    } else {
+      this.selected = "";
+    }
+    console.log(this.selected);
   }
   getdata(i) {
     const er = this.subcategoryData[i].items.filter((data) => {
@@ -762,7 +771,10 @@ export class AgencyProfileComponent implements OnInit {
         this.loader.stopLoading();
         this.subcategory = [{ label: item.name, items: result.payload.categories }];
         this.addCategory(item);
+        this.selectedCity = "";
       });
+    } else {
+      this.selectedCity = "";
     }
   }
   remove(id, index) {
@@ -967,9 +979,54 @@ export class AgencyProfileComponent implements OnInit {
     arrayControl.removeAt(index);
   }
 
-  removeWork(index) {
-    const arrayControl = <FormArray>this.workForm.controls['name'];
-    arrayControl.removeAt(index);
+  removeWork(name, id) {
+    if (confirm('Are you sure want to delete?')) {
+      let fileId = 0;
+      if (name == "company") {
+        fileId = this.cpmpanyname.findIndex((data) => data.id == id);
+      }
+      if (name == "work") {
+        fileId = this.workname.findIndex((data) => data.id == id);
+      }
+
+      this.loader.startLoading();
+      this.userService.filedelete(id).subscribe((data: any) => {
+        this.loader.stopLoading();
+        if (data.success) {
+          if (name == "company") {
+            this.cpmpanyname.splice(fileId, 1);
+          }
+          if (name == "work") {
+            this.workname.splice(fileId, 1);
+          }
+        }
+      })
+    }
+  }
+  removeAward(id) {
+    if (confirm('Are you sure want to delete?')) {
+      const fileId = this.awardname.findIndex((data) => data.id == id);
+      this.loader.startLoading();
+      this.userService.fileAgencydelete(id).subscribe((data: any) => {
+        this.loader.stopLoading();
+        if (data.success) {
+          this.awardname.splice(fileId, 1);
+        }
+      })
+    }
+  }
+
+  removeTeam(id) {
+    if (confirm('Are you sure want to delete?')) {
+      const fileId = this.teamData.findIndex((data) => data.id == id);
+      this.loader.startLoading();
+      this.userService.fileteamdelete(id).subscribe((data: any) => {
+        this.loader.stopLoading();
+        if (data.success) {
+          this.teamData.splice(fileId, 1);
+        }
+      })
+    }
   }
 
   removeAssociation(index) {

@@ -1192,17 +1192,17 @@
                   >
                     <ul class="liWithDeleteIcon">
                       <li *ngFor="let item of workname; let i = index">
-                        <a (click)="removeWork(item.id)" class="deleteLiItem"
+                        <a (click)="removeWork('work',item.id)" class="deleteLiItem"
                           ><i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
-                        {{ item.name }}
+                      
                         <a href="{{ item.filepath }}" target="_blank">
                           <i
                             class="{{ getFileExtension(item.filepath) }}"
                             style="color: #5cb85c;"
                             aria-hidden="true"
                           ></i>
-                          {{ item.filename }}</a
+                          {{ item.description }}</a
                         >
                       </li>
                     </ul>
@@ -1483,7 +1483,7 @@
                           </div>
                           <div class="form-group col-6">
                             <label>Type</label>
-                            <input
+                            <select
                               type="text"
                               formControlName="type"
                               class="form-control"
@@ -1492,7 +1492,11 @@
                                   associationSubmitted &&
                                   ticket.controls.type.errors
                               }"
-                            />
+                            >
+                            <option value="" disabled>Select Organization</option>
+                            <option value="Trade center">Trade center</option>
+                            <option value="Language center">Language center</option>
+                            </select>
                             <div
                               *ngIf="
                                 associationSubmitted &&
@@ -1680,7 +1684,7 @@
                                     aria-hidden="true"
                                   ></i> </a
                                 ><a
-                                  (click)="removeWork(item.id)"
+                                  (click)="removeAward(item.id)"
                                   class="deleteLocation"
                                   ><i
                                     class="fa fa-trash"
@@ -2004,7 +2008,7 @@
                             ></i>
                             Photo</a
                           ><a
-                            (click)="removeWork(item.id)"
+                            (click)="removeTeam(item.id)"
                             class="deleteLocation"
                             ><i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
@@ -2143,7 +2147,7 @@
                                   ></i>
                                   {{ item.filename }}</a
                                 ><a
-                                  (click)="removeWork(item.id)"
+                                  (click)="removeWork('company',item.id)"
                                   class="deleteLocation"
                                   ><i
                                     class="fa fa-trash"
