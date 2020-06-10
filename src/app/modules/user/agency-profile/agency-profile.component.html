@@ -1,5 +1,11 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+<div
+  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
+  id="kt_body"
+>
+  <div
+    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+    id="kt_content"
+  >
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -23,142 +29,240 @@
           <div class="row stepsWizard">
             <div class="col-md-3 stepsList">
               <ul class="steps">
-                <li (click)="changeStep('step1')" [ngClass]="{
+                <li
+                  (click)="changeStep('step1')"
+                  [ngClass]="{
                     completed: isTabActive(1),
                     disabled: isTabDisabled(1),
                     active: !isTabDisabled(1)
-                  }">
+                  }"
+                >
                   <a (click)="showTab(1)" role="tab" title="Step 1">
                     Basic Information
-                    <span class="first icon"><i class="fa fa-circle"></i>
+                    <span class="first icon"
+                      ><i class="fa fa-circle"></i>
                     </span>
                   </a>
                 </li>
-                <li (click)="changeStep('step2')" [ngClass]="{
+                <li
+                  (click)="changeStep('step2')"
+                  [ngClass]="{
                     completed: isTabActive(2),
                     disabled: isTabDisabled(2),
                     active: !isTabDisabled(2)
-                  }" class="">
-                  <a (click)="showTab(2)" role="tab" title="Step 1">Locations
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(2)" role="tab" title="Step 1"
+                    >Locations
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step3')" [ngClass]="{
+                <li
+                  (click)="changeStep('step3')"
+                  [ngClass]="{
                     completed: isTabActive(3),
                     disabled: isTabDisabled(3),
                     active: !isTabDisabled(3)
-                  }">
-                  <a (click)="showTab(3)" role="tab" title="Step 1">About
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                >
+                  <a (click)="showTab(3)" role="tab" title="Step 1"
+                    >About
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step4')" [ngClass]="{
+                <li
+                  (click)="changeStep('step4')"
+                  [ngClass]="{
                     completed: isTabActive(4),
                     disabled: isTabDisabled(4),
                     active: !isTabDisabled(4)
-                  }" class="">
-                  <a (click)="showTab(4)" role="tab" title="Step 1">Your expertise
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(4)" role="tab" title="Step 1"
+                    >Your expertise
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step5')" [ngClass]="{
+                <li
+                  (click)="changeStep('step5')"
+                  [ngClass]="{
                     completed: isTabActive(5),
                     disabled: isTabDisabled(5),
                     active: !isTabDisabled(5)
-                  }" class="">
-                  <a (click)="showTab(5)" role="tab" title="Step 1">Your experience
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(5)" role="tab" title="Step 1"
+                    >Your experience
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step6')" [ngClass]="{
+                <li
+                  (click)="changeStep('step6')"
+                  [ngClass]="{
                     completed: isTabActive(6),
                     disabled: isTabDisabled(6),
                     active: !isTabDisabled(6)
-                  }" class="">
-                  <a (click)="showTab(6)" role="tab" title="Step 1">Your work
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(6)" role="tab" title="Step 1"
+                    >Your work
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step7')" [ngClass]="{
+                <li
+                  (click)="changeStep('step7')"
+                  [ngClass]="{
                     completed: isTabActive(7),
                     disabled: isTabDisabled(7),
                     active: !isTabDisabled(7)
-                  }" class="">
-                  <a (click)="showTab(7)" role="tab" title="Step 1">Declarations
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(7)" role="tab" title="Step 1"
+                    >Declarations
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step8')" [ngClass]="{
+                <li
+                  (click)="changeStep('step8')"
+                  [ngClass]="{
                     completed: isTabActive(8),
                     disabled: isTabDisabled(8),
                     active: !isTabDisabled(8)
-                  }" class="">
-                  <a (click)="showTab(8)" role="tab" title="Step 1">Associations
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(8)" role="tab" title="Step 1"
+                    >Associations
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step9')" [ngClass]="{
+                <li
+                  (click)="changeStep('step9')"
+                  [ngClass]="{
                     completed: isTabActive(9),
                     disabled: isTabDisabled(9),
                     active: !isTabDisabled(9)
-                  }" class="">
-                  <a (click)="showTab(9)" role="tab" title="Step 1">Certifications & Awards
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(9)" role="tab" title="Step 1"
+                    >Certifications & Awards
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step10')" [ngClass]="{
+                <li
+                  (click)="changeStep('step10')"
+                  [ngClass]="{
                     completed: isTabActive(10),
                     disabled: isTabDisabled(10),
                     active: !isTabDisabled(10)
-                  }" class="">
-                  <a (click)="showTab(10)" role="tab" title="Step 1">Documents
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(10)" role="tab" title="Step 1"
+                    >Documents
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step11')" [ngClass]="{
+                <li
+                  (click)="changeStep('step11')"
+                  [ngClass]="{
                     completed: isTabActive(11),
                     disabled: isTabDisabled(11),
                     active: !isTabDisabled(11)
-                  }" class="">
-                  <a (click)="showTab(11)" role="tab" title="Step 1">Team <span class="icon"><i
-                        class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(11)" role="tab" title="Step 1"
+                    >Team <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step12')" [ngClass]="{
+                <li
+                  (click)="changeStep('step12')"
+                  [ngClass]="{
                     completed: isTabActive(12),
                     disabled: isTabDisabled(12),
                     active: !isTabDisabled(12)
-                  }" class="">
-                  <a (click)="showTab(12)" role="tab" title="Step 1">Company tour
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(12)" role="tab" title="Step 1"
+                    >Company tour
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step13')" [ngClass]="{
+                <li
+                  (click)="changeStep('step13')"
+                  [ngClass]="{
                     completed: isTabActive(13),
                     disabled: isTabDisabled(13),
                     active: !isTabDisabled(13)
-                  }" class="">
-                  <a (click)="showTab(13)" role="tab" title="Step 1">Ask for reviews
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(13)" role="tab" title="Step 1"
+                    >Ask for reviews
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
-                <li (click)="changeStep('step14')" [ngClass]="{
+                <li
+                  (click)="changeStep('step14')"
+                  [ngClass]="{
                     completed: isTabActive(14),
                     disabled: isTabDisabled(14),
                     active: !isTabDisabled(14)
-                  }" class="">
-                  <a (click)="showTab(14)" role="tab" title="Step 1">Your badges
-                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
+                  }"
+                  class=""
+                >
+                  <a (click)="showTab(14)" role="tab" title="Step 1"
+                    >Your badges
+                    <span class="icon"><i class="fa fa-circle"></i> </span
+                  ></a>
                 </li>
               </ul>
             </div>
             <div class="col-md-9">
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(1),
                   'is-hide': !isTabActive(1)
-                }">
+                }"
+              >
                 <h3>Basic Information</h3>
-                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="editForm"
-                  (ngSubmit)="onSubmit()">
+                <form
+                  class="kt-form"
+                  id="kt_form"
+                  novalidate="novalidate"
+                  [formGroup]="editForm"
+                  (ngSubmit)="onSubmit()"
+                >
                   <div class="kt-form__section kt-form__section--first">
                     <div class="kt-wizard-v2__form">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Company Legal Name *</label>
-                            <input type="text" class="form-control" formControlName="agency_name"
-                              placeholder="Company Legal Name" aria-describedby="fname-error" [ngClass]="{
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="agency_name"
+                              placeholder="Company Legal Name"
+                              aria-describedby="fname-error"
+                              [ngClass]="{
                                 'is-invalid': submitted && f.agency_name.errors
-                              }" />
-                            <div *ngIf="submitted && f.agency_name.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="submitted && f.agency_name.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="f.agency_name.errors.required">
                                 Company name is required
                               </div>
@@ -170,29 +274,45 @@
                           <div class="form-group">
                             <label>Phone Number *</label>
 
-                            <ngx-intl-tel-input [cssClass]="'custom'" [preferredCountries]="preferredCountries"
-                              [enableAutoCountrySelect]="false" [enablePlaceholder]="true" [searchCountryFlag]="true"
+                            <ngx-intl-tel-input
+                              [cssClass]="'custom'"
+                              [preferredCountries]="preferredCountries"
+                              [enableAutoCountrySelect]="false"
+                              [enablePlaceholder]="true"
+                              [searchCountryFlag]="true"
                               [searchCountryField]="[
                                 SearchCountryField.Iso2,
                                 SearchCountryField.Name
-                              ]" [selectFirstCountry]="false" [selectedCountryISO]="this.countryCode" [maxLength]="15"
-                              [tooltipField]="TooltipLabel.Name" [phoneValidation]="true"
-                              [separateDialCode]="separateDialCode" formControlName="phone_number" [ngClass]="{
+                              ]"
+                              [selectFirstCountry]="false"
+                              [selectedCountryISO]="this.countryCode"
+                              [maxLength]="15"
+                              [tooltipField]="TooltipLabel.Name"
+                              [phoneValidation]="true"
+                              [separateDialCode]="separateDialCode"
+                              formControlName="phone_number"
+                              [ngClass]="{
                                 'is-invalid': submitted && f.phone_number.errors
-                              }">
+                              }"
+                            >
                             </ngx-intl-tel-input>
                             <!-- <input type="text" class="form-control" formControlName="phone_number"
                               placeholder="Phone number with country code" aria-describedby="fname-error" [ngClass]="{
                                 'is-invalid': submitted && f.phone_number.errors
                               }" /> -->
-                            <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
+                            <div
+                              *ngIf="submitted && f.phone_number.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="f.phone_number.errors.required">
                                 Phone number is required
                               </div>
-                              <div *ngIf="
+                              <div
+                                *ngIf="
                                   !f.phone_number.errors.validatePhoneNumber
                                     .valid
-                                ">
+                                "
+                              >
                                 Please enter correct phone number.
                               </div>
                             </div>
@@ -204,18 +324,33 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Year of establishment *</label>
-                            <select class="form-control" formControlName="year_of_establishment" [ngClass]="{
+                            <select
+                              class="form-control"
+                              formControlName="year_of_establishment"
+                              [ngClass]="{
                                 'is-invalid':
                                   submitted && f.year_of_establishment.errors
-                              }">
-                              <option [ngValue]="null" disabled>Select year</option>
+                              }"
+                            >
+                              <option [ngValue]="null" disabled
+                                >Select year</option
+                              >
 
-                              <option *ngFor="let data of years" [ngValue]="data">{{ data }}</option>
+                              <option
+                                *ngFor="let data of years"
+                                [ngValue]="data"
+                                >{{ data }}</option
+                              >
                             </select>
-                            <div *ngIf="
+                            <div
+                              *ngIf="
                                 submitted && f.year_of_establishment.errors
-                              " class="invalid-feedback">
-                              <div *ngIf="f.year_of_establishment.errors.required">
+                              "
+                              class="invalid-feedback"
+                            >
+                              <div
+                                *ngIf="f.year_of_establishment.errors.required"
+                              >
                                 Year of establishment is required
                               </div>
                             </div>
@@ -224,18 +359,32 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Company Size *</label>
-                            <select class="form-control" formControlName="company_size" [ngClass]="{
+                            <select
+                              class="form-control"
+                              formControlName="company_size"
+                              [ngClass]="{
                                 'is-invalid': submitted && f.company_size.errors
-                              }">
-                              <option [ngValue]="null" disabled>Select Company Size</option>
+                              }"
+                            >
+                              <option [ngValue]="null" disabled
+                                >Select Company Size</option
+                              >
                               <option value="Small < 50">Small 50 </option>
-                              <option value="Medium 50-500">Medium 50-500</option>
-                              <option value="Large 500-2000">Large 500-2000</option>
+                              <option value="Medium 50-500"
+                                >Medium 50-500</option
+                              >
+                              <option value="Large 500-2000"
+                                >Large 500-2000</option
+                              >
                               <option value="Enterprise 2000+">
-                                Enterprise 2000+</option>
+                                Enterprise 2000+</option
+                              >
                             </select>
 
-                            <div *ngIf="submitted && f.company_size.errors" class="invalid-feedback">
+                            <div
+                              *ngIf="submitted && f.company_size.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="f.company_size.errors.required">
                                 Company size is required
                               </div>
@@ -247,11 +396,20 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Website *</label>
-                            <input type="text" class="form-control" formControlName="website"
-                              placeholder="Company Website" aria-describedby="fname-error" [ngClass]="{
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="website"
+                              placeholder="Company Website"
+                              aria-describedby="fname-error"
+                              [ngClass]="{
                                 'is-invalid': submitted && f.website.errors
-                              }" />
-                            <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="submitted && f.website.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="f.website.errors.required">
                                 Website is required
                               </div>
@@ -260,13 +418,23 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label>Company Owner Name/ Authorized Signatory *</label>
-                            <input type="text" class="form-control" formControlName="owner_name"
-                              placeholder="Company Owner Name/ Authorized Signatory" aria-describedby="fname-error"
+                            <label
+                              >Company Owner Name/ Authorized Signatory *</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="owner_name"
+                              placeholder="Company Owner Name/ Authorized Signatory"
+                              aria-describedby="fname-error"
                               [ngClass]="{
                                 'is-invalid': submitted && f.owner_name.errors
-                              }" />
-                            <div *ngIf="submitted && f.owner_name.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="submitted && f.owner_name.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="f.owner_name.errors.required">
                                 Owner name is required
                               </div>
@@ -278,12 +446,20 @@
                         <div class="col-md-6">
                           <div class="form-group">
                             <label>Designation of Authorized Signatory *</label>
-                            <input type="text" class="form-control" formControlName="designation"
-                              placeholder="Designation of Authorized Signatory " aria-describedby="fname-error"
+                            <input
+                              type="text"
+                              class="form-control"
+                              formControlName="designation"
+                              placeholder="Designation of Authorized Signatory "
+                              aria-describedby="fname-error"
                               [ngClass]="{
                                 'is-invalid': submitted && f.designation.errors
-                              }" />
-                            <div *ngIf="submitted && f.designation.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="submitted && f.designation.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="f.designation.errors.required">
                                 Designation is required
                               </div>
@@ -292,9 +468,11 @@
                         </div>
                       </div>
                       <div class="stepButtons">
-                        <button type="submit"
+                        <button
+                          type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
+                          data-ktwizard-type="action-next"
+                        >
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -309,12 +487,21 @@
               <!--end: Form Wizard Step 1-->
 
               <!--begin: Form Wizard Step 2-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(2),
                   'is-hide': !isTabActive(2)
-                }">
-                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="locationForm"
-                  (ngSubmit)="locationSubmit()">
+                }"
+              >
+                <form
+                  class="kt-form"
+                  id="kt_form"
+                  novalidate="novalidate"
+                  [formGroup]="locationForm"
+                  (ngSubmit)="locationSubmit()"
+                >
                   <div class="kt-heading kt-heading--md">
                     <h3>Locations</h3>
                   </div>
@@ -324,28 +511,47 @@
                         <div class="col-xl-12">
                           <div class="form-group">
                             <label>Address</label>
-                            <div formArrayName="location" *ngFor="
+                            <div
+                              formArrayName="location"
+                              *ngFor="
                                 let arrayItem of locationForm.get('location')[
                                   'controls'
                                 ];
                                 let i = index
-                              ">
-                              <div [formGroupName]="i" [ngClass]="{
+                              "
+                            >
+                              <div
+                                [formGroupName]="i"
+                                [ngClass]="{
                                   'is-invalid':
                                     locationSubmitted && getValidity(i)
-                                }">
-                                <AutocompleteComponent (setAddress)="getAddress($event, i)" adressType="establishment"
-                                  address="{{ arrayItem.value.address }}">
+                                }"
+                              >
+                                <AutocompleteComponent
+                                  (setAddress)="getAddress($event, i)"
+                                  adressType="establishment"
+                                  address="{{ arrayItem.value.address }}"
+                                >
                                 </AutocompleteComponent>
                                 <!-- <input type="text" class="form-control" formControlName="address"
                                   placeholder="Type in your address" aria-describedby="address1-error" /> -->
-                                <a href="javscript:;" class="deleteLocation" *ngIf="
+                                <a
+                                  href="javscript:;"
+                                  class="deleteLocation"
+                                  *ngIf="
                                     locationForm.controls['location'].controls
                                       .length > 1
-                                  " (click)="removeItem(i)"><i class="fa fa-trash" aria-hidden="true"></i>
+                                  "
+                                  (click)="removeItem(i)"
+                                  ><i
+                                    class="fa fa-trash"
+                                    aria-hidden="true"
+                                  ></i>
                                 </a>
-                                <div class="form-text text-muted invalid-feedback"
-                                  *ngIf="locationSubmitted && getValidity(i)">
+                                <div
+                                  class="form-text text-muted invalid-feedback"
+                                  *ngIf="locationSubmitted && getValidity(i)"
+                                >
                                   Please enter your Address.
                                 </div>
                               </div>
@@ -354,22 +560,30 @@
                         </div>
                         <div class="col-xl-4">
                           <div>
-                            <a (click)="addItem()" class="btn btn-primary addLocation"><i class="fa fa-plus"></i> Add
-                              Location</a>
+                            <a
+                              (click)="addItem()"
+                              class="btn btn-primary addLocation"
+                              ><i class="fa fa-plus"></i> Add Location</a
+                            >
                           </div>
                         </div>
                       </div>
                       <div class="stepButtons">
-                        <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          (click)="goPrevious()" data-ktwizard-type="action-prev">
+                        <a
+                          class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                          (click)="goPrevious()"
+                          data-ktwizard-type="action-prev"
+                        >
                           <span>
                             <i class="la la-angle-left"></i>
                             <span>Previous</span>
                           </span>
                         </a>
-                        <button type="submit"
+                        <button
+                          type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
+                          data-ktwizard-type="action-next"
+                        >
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -384,62 +598,131 @@
               <!--end: Form Wizard Step 2-->
 
               <!--begin: Form Wizard Step 3-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(3),
                   'is-hide': !isTabActive(3)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Tell us about your company (Optional)</h3>
                 </div>
                 <div class="kt-form__section kt-form__section--first">
-                  <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="aboutForm"
-                    (ngSubmit)="aboutSubmit()">
+                  <form
+                    class="kt-form"
+                    id="kt_form"
+                    novalidate="novalidate"
+                    [formGroup]="aboutForm"
+                    (ngSubmit)="aboutSubmit()"
+                  >
                     <div class="kt-wizard-v2__form">
                       <div class="form-group">
                         <label>About</label>
-                        <ckeditor formControlName="about_company" [config]="ckeConfig" debounce="500">
+                        <ckeditor
+                          formControlName="about_company"
+                          [config]="ckeConfig"
+                          debounce="500"
+                        >
                         </ckeditor>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Linkedin</label>
-                            <input type="text" class="form-control" formControlName="linkedin" placeholder="linkedin"
-                              aria-describedby="fname-error" />
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Linkedin</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"
+                                    ><i class="flaticon-linkedin-logo"></i
+                                  ></span>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="linkedin"
+                                  placeholder="Linkedin"
+                                  aria-describedby="fname-error"
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Twitter</label>
-                            <input type="text" class="form-control" formControlName="twitter" placeholder="twitter"
-                              aria-describedby="fname-error" />
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Twitter</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"
+                                    ><i class="flaticon-twitter-logo"></i
+                                  ></span>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="twitter"
+                                  placeholder="Twitter"
+                                  aria-describedby="fname-error"
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>facebook</label>
-                            <input type="text" class="form-control" formControlName="facebook" placeholder="facebook"
-                              aria-describedby="fname-error" />
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Facebook</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"
+                                    ><i
+                                      class="flaticon-facebook-letter-logo"
+                                    ></i
+                                  ></span>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="facebook"
+                                  placeholder="Facebook"
+                                  aria-describedby="fname-error"
+                                />
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <label>Youtube</label>
-                            <input type="text" class="form-control" formControlName="youtube" placeholder="youtube"
-                              aria-describedby="fname-error" />
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Youtube</label>
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"
+                                    ><i class="flaticon-youtube"></i
+                                  ></span>
+                                </div>
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  formControlName="youtube"
+                                  placeholder="Youtube"
+                                  aria-describedby="fname-error"
+                                />
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div class="stepButtons">
-                        <a (click)="goPrevious()"
+                        <a
+                          (click)="goPrevious()"
                           class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-prev">
+                          data-ktwizard-type="action-prev"
+                        >
                           <span>
                             <i class="la la-angle-left"></i>
                             <span>Previous</span>
                           </span>
                         </a>
-                        <button type="submit"
+                        <button
+                          type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
+                          data-ktwizard-type="action-next"
+                        >
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -452,161 +735,293 @@
               </div>
 
               <!--end: Form Wizard Step 3-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(4),
                   'is-hide': !isTabActive(4)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Your expertise</h3>
                 </div>
                 <div class="kt-wizard-v2__form">
                   <div class="row">
                     <div class="col-xl-12">
-                      <div class="form-group col-md-4">
-                        <label for="accommodation">Select Category</label>
-                        <!-- <input input-autocomplete [config]="config2" [items]="category"
+                      <p>
+                        <strong
+                          >You can list as many expertise (sectors) as you
+                          want</strong
+                        >
+                        but, with your current plan you’ll be selected for
+                        opportunities in the first 2 ones. Be specific and
+                        select the sectors where you have prior experience and
+                        you outperform. Give a precise description for each
+                        service, using the right keywords, in order to receive
+                        the corresponding opportunities.
+                      </p>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="accommodation"
+                        >Select Your Expertise Sectors</label
+                      >
+                      <!-- <input input-autocomplete [config]="config2" [items]="category"
                           (inputChangedEvent)="onInputChangedEvent($event)" (selectEvent)="onSelect($event)" /> -->
-                        <ng-select [items]="category" name="category" required bindValue="id" bindLabel="name"
-                          appendTo="body" [(ngModel)]="selectedCity" (change)="onSelect()">
-                        </ng-select>
-                        <!-- <a (click)="addCategory(setCategory)" class="btn btn-primary addLocation"><i
+                      <ng-select
+                        [items]="category"
+                        name="category"
+                        required
+                        bindValue="id"
+                        bindLabel="name"
+                        appendTo="body"
+                        [(ngModel)]="selectedCity"
+                        (change)="onSelect()"
+                      >
+                      </ng-select>
+                      <!-- <a (click)="addCategory(setCategory)" class="btn btn-primary addLocation"><i
                             class="fa fa-plus"></i>
                           Add</a> -->
-                        <div *ngIf="
-                            selectedItem &&
-                            selectedItem.length == 0 &&
-                            submittedCategory
-                          " style="color: red;">
-                          <div>
-                            Category is required
-                          </div>
+                      <div
+                        *ngIf="
+                          selectedItem &&
+                          selectedItem.length == 0 &&
+                          submittedCategory
+                        "
+                        style="color: red;"
+                      >
+                        <div>
+                          Category is required
                         </div>
                       </div>
-                      <div class="search-result" *ngIf="selectedItem && selectedItem.length">
-                        <ul>
+                    </div>
+                    <div class="col-md-8">
+                      <h4>Selected Sectors</h4>
+                      <div
+                        class="search-result"
+                        *ngIf="selectedItem && selectedItem.length"
+                      >
+                        <ul class="liWithDeleteIcon">
                           <li *ngFor="let item of selectedItem; let i = index">
-                            {{ item.name
-                            }}<a (click)="remove(item.id, i)" class="deleteLocation"><i class="fa fa-trash"
-                                aria-hidden="true"></i>
+                            <a (click)="remove(item.id, i)" class="deleteLiItem"
+                              ><i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
+                            {{ item.name }}
                           </li>
                         </ul>
                       </div>
-                      <br />
-                      <select class="form-control" [(ngModel)]="selected" (change)="onSelectsubcategory($event)">
+                    </div>
+                  </div>
+                  <div
+                    _ngcontent-mkg-c5=""
+                    class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                  ></div>
+                  <div class="row">
+                    <div class="col-xl-12">
+                      <p>
+                        Based on your selection, please select the categories
+                        where your specialties are.
+                        <strong
+                          >You can list as many categories as you want</strong
+                        >
+                        in the sector you have selected however, be wise and
+                        select only the categories where you outperform.
+                      </p>
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="accommodation"
+                        >Select Your Expertise Categories
+                      </label>
+                      <select
+                        class="form-control"
+                        [(ngModel)]="selected"
+                        (change)="onSelectsubcategory($event)"
+                      >
                         <option value="" disabled>Select Subcategory</option>
-                        <optgroup *ngFor="let group of subcategoryData" label="{{ group.label }}">
-                          <option *ngFor="let item of group.items" [ngValue]="item.id">{{ item.name }}</option>
+                        <optgroup
+                          *ngFor="let group of subcategoryData"
+                          label="{{ group.label }}"
+                        >
+                          <option
+                            *ngFor="let item of group.items"
+                            [ngValue]="item.id"
+                            >{{ item.name }}</option
+                          >
                         </optgroup>
                       </select>
                       <!-- <a (click)="addSubCategory(setSubCategory)" class="btn btn-primary addLocation"><i
                           class="fa fa-plus"></i>
                         Add</a> -->
-                      <div *ngIf="
+                      <div
+                        *ngIf="
                           selectedSubItem &&
                           selectedSubItem.length == 0 &&
                           submittedCategory
-                        " style="color: red;">
+                        "
+                        style="color: red;"
+                      >
                         <div>
                           SubCategory is required
                         </div>
                       </div>
-                      <div class="search-result" *ngIf="selectedSubItem && selectedSubItem.length">
-                        <ul>
+                    </div>
+                    <div class="col-md-8">
+                      <h5>Selected Categories</h5>
+                      <div
+                        class="search-result"
+                        *ngIf="selectedSubItem && selectedSubItem.length"
+                      >
+                        <ul class="liWithDeleteIcon">
                           <li *ngFor="let item of selectedSubItem">
-                            {{ item.name
-                            }}<a (click)="removeSubcategory(item.id)" class="deleteLocation"><i class="fa fa-trash"
-                                aria-hidden="true"></i>
+                            <a
+                              (click)="removeSubcategory(item.id)"
+                              class="deleteLiItem"
+                              ><i class="fa fa-trash" aria-hidden="true"></i>
                             </a>
+                            {{ item.name }}
                           </li>
                         </ul>
                       </div>
-
-                      <div class="stepButtons">
-                        <a (click)="goPrevious()"
-                          class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-prev">
-                          <span>
-                            <i class="la la-angle-left"></i>
-                            <span>Previous</span>
-                          </span>
-                        </a>
-                        <a (click)="submitCategory()"
-                          class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
-                          <span>
-                            <span>Next Step</span>
-                            <i class="la la-angle-right"></i>
-                          </span>
-                        </a>
-                      </div>
                     </div>
+                  </div>
+
+                  <div class="stepButtons">
+                    <a
+                      (click)="goPrevious()"
+                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      data-ktwizard-type="action-prev"
+                    >
+                      <span>
+                        <i class="la la-angle-left"></i>
+                        <span>Previous</span>
+                      </span>
+                    </a>
+                    <a
+                      (click)="submitCategory()"
+                      class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      data-ktwizard-type="action-next"
+                    >
+                      <span>
+                        <span>Next Step</span>
+                        <i class="la la-angle-right"></i>
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>
               <!--begin: Form Wizard Step 6-->
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(5),
                   'is-hide': !isTabActive(5)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Your experience</h3>
                 </div>
-                <form [formGroup]="experienceForm" (ngSubmit)="onExperienceSubmit()">
+                <p>
+                  <strong
+                    >Based on your selected sectors, please tell us about your
+                    experience.</strong
+                  >
+                  Give precise numbers in the below field, Supplio may ask you
+                  to provide the supporting documents such as demand letter to
+                  verify these numbers. It is important for us to give honest
+                  and precise account of your experience in these sectors.
+                </p>
+                <form
+                  [formGroup]="experienceForm"
+                  (ngSubmit)="onExperienceSubmit()"
+                >
                   <div class="m-3">
-                    <h4>Category</h4>
-                    <div *ngFor="let ticket of t.controls; let i = index" class="list-group list-group-flush">
-                      <div class="list-group-item">
-                        <div [formGroup]="ticket" class="form-row">
-                          <div class="form-group col-12">
-                            <label>{{ categories[i].name }}</label>
-                            <input type="text" formControlName="name" class="form-control"
-                              placeholder="Number of demands executed by your company during the last calendar year i.e. Jan-Dec?"
-                              [ngClass]="{
-                                'is-invalid':
-                                  experienceSubmitted &&
-                                  ticket.controls.name.errors
-                              }" />
-                            <div *ngIf="
+                    <h4>Experience in Sectors</h4>
+                    <div
+                      *ngFor="let ticket of t.controls; let i = index"
+                      class="list-group list-group-flush"
+                    >
+                      <div [formGroup]="ticket" class="form-group row">
+                        <label class="col-xl-4 col-lg-4 col-form-label">{{
+                          categories[i].name
+                        }}</label>
+                        <div class="col-lg-8 col-xl-8">
+                          <input
+                            type="text"
+                            formControlName="name"
+                            class="form-control"
+                            placeholder="Number of demands executed by your company during the last calendar year i.e. Jan-Dec?"
+                            [ngClass]="{
+                              'is-invalid':
                                 experienceSubmitted &&
                                 ticket.controls.name.errors
-                              " class="invalid-feedback">
-                              <div *ngIf="ticket.controls.name.errors.required">
-                                {{ categories[i].name }} is required
-                              </div>
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              experienceSubmitted && ticket.controls.name.errors
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="ticket.controls.name.errors.required">
+                              {{ categories[i].name }} is required
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <h4>Subcategory</h4>
-                    <div *ngFor="let ticket of s.controls; let i = index" class="list-group list-group-flush">
-                      <div class="list-group-item">
-                        <div [formGroup]="ticket" class="form-row">
-                          <div class="form-group col-12">
-                            <label>{{ subCategories[i].name }}</label>
-                            <input type="text" formControlName="name" class="form-control"
-                              placeholder="Number of demands executed by your company during the last calendar year i.e. Jan-Dec?"
-                              [ngClass]="{
-                                'is-invalid':
-                                  experienceSubmitted &&
-                                  ticket.controls.name.errors
-                              }" />
-                            <div *ngIf="
+                    <div
+                      _ngcontent-llt-c8=""
+                      class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                    ></div>
+                    <h4>Experience in Categories</h4>
+                    <div
+                      *ngFor="let ticket of s.controls; let i = index"
+                      class="list-group list-group-flush"
+                    >
+                      <div [formGroup]="ticket" class="form-group row">
+                        <label class="col-xl-4 col-lg-4 col-form-label">{{
+                          subCategories[i].name
+                        }}</label>
+                        <div class="col-lg-8 col-xl-8">
+                          <input
+                            type="text"
+                            formControlName="name"
+                            class="form-control"
+                            placeholder="Number of demands executed by your company during the last calendar year i.e. Jan-Dec?"
+                            [ngClass]="{
+                              'is-invalid':
                                 experienceSubmitted &&
                                 ticket.controls.name.errors
-                              " class="invalid-feedback">
-                              <div *ngIf="ticket.controls.name.errors.required">
-                                {{ subCategories[i].name }} is required
-                              </div>
+                            }"
+                          />
+                          <div
+                            *ngIf="
+                              experienceSubmitted && ticket.controls.name.errors
+                            "
+                            class="invalid-feedback"
+                          >
+                            <div *ngIf="ticket.controls.name.errors.required">
+                              {{ subCategories[i].name }} is required
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="">
-                      <h4>Country</h4>
-                      <div *ngFor="let ticket of c.controls; let i = index" class="list-group list-group-flush">
+                      <div
+                        class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                      ></div>
+                      <!-- <h4>Country</h4> -->
+                      <p>
+                        Please select the host countries you have recruited
+                        these workers for.
+                      </p>
+                      <div
+                        *ngFor="let ticket of c.controls; let i = index"
+                        class="list-group list-group-flush"
+                      >
                         <div class="list-group-item">
                           <div [formGroup]="ticket" class="form-row">
                             <div class="form-group col-12">
@@ -616,22 +1031,39 @@
                                 tabindex="0" [multiple]="false" [config]="config" [options]="country">
                               </ngx-select-dropdown> -->
 
-                              <ng-select [items]="country" name="country" required bindValue="code" bindLabel="name"
-                                appendTo="body" formControlName="name">
+                              <ng-select
+                                [items]="country"
+                                name="country"
+                                required
+                                bindValue="code"
+                                bindLabel="name"
+                                appendTo="body"
+                                formControlName="name"
+                              >
                               </ng-select>
 
-                              <div *ngIf="
+                              <div
+                                *ngIf="
                                   experienceSubmitted &&
                                   ticket.controls.name.errors
-                                " style="color:red;">
-                                <div *ngIf="ticket.controls.name.errors.required">
+                                "
+                                style="color: red;"
+                              >
+                                <div
+                                  *ngIf="ticket.controls.name.errors.required"
+                                >
                                   Country is required
                                 </div>
                               </div>
-                              <a href="javscript:;" class="deleteLocation" *ngIf="
-                              experienceForm.controls['countryName'].controls
-                                    .length > 1
-                                " (click)="removeCountry(i)"><i class="fa fa-trash" aria-hidden="true"></i>
+                              <a
+                                href="javscript:;"
+                                class="deleteLocation"
+                                *ngIf="
+                                  experienceForm.controls['countryName']
+                                    .controls.length > 1
+                                "
+                                (click)="removeCountry(i)"
+                                ><i class="fa fa-trash" aria-hidden="true"></i>
                               </a>
                             </div>
                           </div>
@@ -639,23 +1071,30 @@
                       </div>
                       <div class="col-xl-4">
                         <div>
-                          <a (click)="addAddress()" class="btn btn-primary addLocation"><i class="fa fa-plus"></i> Add
-                            Country</a>
+                          <a
+                            (click)="addAddress()"
+                            class="btn btn-primary addLocation"
+                            ><i class="fa fa-plus"></i> Add Country</a
+                          >
                         </div>
                       </div>
                     </div>
                     <div class="stepButtons">
-                      <a (click)="goPrevious()"
+                      <a
+                        (click)="goPrevious()"
                         class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-prev">
+                        data-ktwizard-type="action-prev"
+                      >
                         <span>
                           <i class="la la-angle-left"></i>
                           <span>Previous</span>
                         </span>
                       </a>
-                      <button type="submit"
+                      <button
+                        type="submit"
                         class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-next">
+                        data-ktwizard-type="action-next"
+                      >
                         <span>
                           <span>Next Step</span>
                           <i class="la la-angle-right"></i>
@@ -666,78 +1105,125 @@
                 </form>
               </div>
 
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(6),
                   'is-hide': !isTabActive(6)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Your Work</h3>
                 </div>
-
+                <p>
+                  Here you can upload examples of your work such as demand
+                  letter, Job order, requisition letter from the employers. Add
+                  as many as you can, covering all your area of expertise. This
+                  can make you stand out from the crowed and enhance your
+                  chances of winning new demands.
+                </p>
                 <div class="m-3">
-                  <form [formGroup]="workForm" (ngSubmit)="workUpload()" enctype="multipart/form-data">
-                    <div class="list-group list-group-flush">
-                      <div class="list-group-item">
-                        <div class="form-row">
-                          <div class="form-group col-6">
-                            <label>Name</label>
-                            <input type="text" formControlName="name" class="form-control" placeholder="name" [ngClass]="{
-                                'is-invalid': workSubmitted && w.name.errors
-                              }" />
-                            <div *ngIf="workSubmitted && w.name.errors" class="invalid-feedback">
-                              <div *ngIf="w.name.errors.required">
-                                Name is required
-                              </div>
-                            </div>
-                          </div>
-                          <div class="form-group col-6">
-                            <label>Image</label>
-                            <input type="file" formControlName="image" class="form-control"
-                              (change)="changeFile($event)" [ngClass]="{
-                                'is-invalid': workSubmitted && w.image.errors
-                              }" />
-                            <div *ngIf="workSubmitted && w.image.errors" class="invalid-feedback">
-                              <div *ngIf="w.image.errors">
-                                Image is required
-                              </div>
-                            </div>
+                  <form
+                    [formGroup]="workForm"
+                    (ngSubmit)="workUpload()"
+                    enctype="multipart/form-data"
+                  >
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <label>Name</label>
+                        <input
+                          type="text"
+                          formControlName="name"
+                          class="form-control"
+                          placeholder="Name"
+                          [ngClass]="{
+                            'is-invalid': workSubmitted && w.name.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="workSubmitted && w.name.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="w.name.errors.required">
+                            Name is required
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-xl-4">
-                      <div>
-                        <button type="submit" class="btn btn-primary addLocation">
-                          <i class="fa fa-plus"></i> Upload
-                        </button>
+                      <div class="form-group col-md-6">
+                        <label>Image</label>
+                        <input
+                          type="file"
+                          formControlName="image"
+                          class="form-control"
+                          (change)="changeFile($event)"
+                          [ngClass]="{
+                            'is-invalid': workSubmitted && w.image.errors
+                          }"
+                        />
+                        <div
+                          *ngIf="workSubmitted && w.image.errors"
+                          class="invalid-feedback"
+                        >
+                          <div *ngIf="w.image.errors">
+                            Image is required
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-groupcol-md-2">
+                        <div>
+                          <button
+                            type="submit"
+                            class="btn btn-primary addLocation"
+                          >
+                            <i class="fa fa-plus"></i> Add
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div class="search-result" *ngIf="workname && workname.length">
-                      <ul>
-                        <li *ngFor="let item of workname; let i = index">
-                          {{ item.name }}
-                          <a href="{{ item.filepath }}" target="_blank">
-                            <i class="{{ getFileExtension(item.filepath) }}" style="color: #5cb85c;"
-                              aria-hidden="true"></i>
-                            {{ item.filename }}</a><a (click)="removeWork(item.id)" class="deleteLocation"><i
-                              class="fa fa-trash" aria-hidden="true"></i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
                   </form>
+                  <div
+                    class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                  ></div>
+                  <h4>Your Work</h4>
+                  <div
+                    class="search-result"
+                    *ngIf="workname && workname.length"
+                  >
+                    <ul class="liWithDeleteIcon">
+                      <li *ngFor="let item of workname; let i = index">
+                        <a (click)="removeWork(item.id)" class="deleteLiItem"
+                          ><i class="fa fa-trash" aria-hidden="true"></i>
+                        </a>
+                        {{ item.name }}
+                        <a href="{{ item.filepath }}" target="_blank">
+                          <i
+                            class="{{ getFileExtension(item.filepath) }}"
+                            style="color: #5cb85c;"
+                            aria-hidden="true"
+                          ></i>
+                          {{ item.filename }}</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+
                   <div class="stepButtons">
-                    <a (click)="goPrevious()"
+                    <a
+                      (click)="goPrevious()"
                       class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-prev">
+                      data-ktwizard-type="action-prev"
+                    >
                       <span>
                         <i class="la la-angle-left"></i>
                         <span>Previous</span>
                       </span>
                     </a>
-                    <button (click)="onWorkSubmit()"
+                    <button
+                      (click)="onWorkSubmit()"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next">
+                      data-ktwizard-type="action-next"
+                    >
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -747,46 +1233,85 @@
                 </div>
               </div>
 
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(7),
                   'is-hide': !isTabActive(7)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Declartions</h3>
                 </div>
-                <form [formGroup]="declareForm" (ngSubmit)="onDeclareFormSubmit()">
+                <form
+                  [formGroup]="declareForm"
+                  (ngSubmit)="onDeclareFormSubmit()"
+                >
                   <div class="m-3">
                     <div class="list-group list-group-flush">
                       <div class="list-group-item">
                         <div class="form-row">
                           <div class="form-group col-12">
-                            <label>Does your agency pre-screen the candidates and
+                            <label
+                              >Does your agency pre-screen the candidates and
                               conduct interviews before presenting to the
-                              clients?</label>
+                              clients?</label
+                            >
 
-                            <input type="radio" formControlName="ques1" value="yes" (change)="checkQuest($event)" />Yes
-                            <input type="radio" formControlName="ques1" value="no" (change)="checkQuest($event)" />No
-                            <div *ngIf="declareSubmitted && declare.ques1.errors">
-                              <div *ngIf="declare.ques1.errors.required" style="color: red;">
+                            <input
+                              type="radio"
+                              formControlName="ques1"
+                              value="yes"
+                              (change)="checkQuest($event)"
+                            />Yes
+                            <input
+                              type="radio"
+                              formControlName="ques1"
+                              value="no"
+                              (change)="checkQuest($event)"
+                            />No
+                            <div
+                              *ngIf="declareSubmitted && declare.ques1.errors"
+                            >
+                              <div
+                                *ngIf="declare.ques1.errors.required"
+                                style="color: red;"
+                              >
                                 Does your agency pre-screen the candidates and
                                 conduct interviews before presenting to the
                                 clients? is required
                               </div>
                             </div>
                           </div>
-                          <div class="form-group col-12" *ngIf="qusetFirst == 'no'">
-                            <label>Does your agency pre-screen the candidates and
+                          <div
+                            class="form-group col-12"
+                            *ngIf="qusetFirst == 'no'"
+                          >
+                            <label
+                              >Does your agency pre-screen the candidates and
                               conduct interviews before presenting to the
-                              clients (NO)</label>
+                              clients (NO)</label
+                            >
 
-                            <input type="test" formControlName="ques1why" class="form-control" [ngClass]="{
+                            <input
+                              type="test"
+                              formControlName="ques1why"
+                              class="form-control"
+                              [ngClass]="{
                                 'is-invalid':
                                   declareSubmitted && declare.ques1why.errors
-                              }" />
-                            <div *ngIf="
+                              }"
+                            />
+                            <div
+                              *ngIf="
                                 declareSubmitted && declare.ques1why.errors
-                              ">
-                              <div *ngIf="declare.ques1why.errors.required" style="color: red;">
+                              "
+                            >
+                              <div
+                                *ngIf="declare.ques1why.errors.required"
+                                style="color: red;"
+                              >
                                 Does your agency pre-screen the candidates and
                                 conduct interviews before presenting to the
                                 clients (NO) is required
@@ -794,13 +1319,28 @@
                             </div>
                           </div>
                           <div class="form-group col-12">
-                            <label>Does your agency pre-verify the candidates as to
+                            <label
+                              >Does your agency pre-verify the candidates as to
                               their antecedent experience and
-                              qualification?</label>
-                            <input type="radio" formControlName="ques2" value="yes" />Yes
-                            <input type="radio" formControlName="ques2" value="no" />No
-                            <div *ngIf="declareSubmitted && declare.ques2.errors">
-                              <div *ngIf="declare.ques2.errors.required" style="color: red;">
+                              qualification?</label
+                            >
+                            <input
+                              type="radio"
+                              formControlName="ques2"
+                              value="yes"
+                            />Yes
+                            <input
+                              type="radio"
+                              formControlName="ques2"
+                              value="no"
+                            />No
+                            <div
+                              *ngIf="declareSubmitted && declare.ques2.errors"
+                            >
+                              <div
+                                *ngIf="declare.ques2.errors.required"
+                                style="color: red;"
+                              >
                                 Does your agency pre-verify the candidates as to
                                 their antecedent experience and qualification?
                                 is required
@@ -808,24 +1348,54 @@
                             </div>
                           </div>
                           <div class="form-group col-12">
-                            <label>Does your company do pre-medical of the
-                              candidates in their home country?</label>
-                            <input type="radio" formControlName="ques3" value="yes" />Yes
-                            <input type="radio" formControlName="ques3" value="no" />No
-                            <div *ngIf="declareSubmitted && declare.ques3.errors">
-                              <div *ngIf="declare.ques3.errors.required" style="color: red;">
+                            <label
+                              >Does your company do pre-medical of the
+                              candidates in their home country?</label
+                            >
+                            <input
+                              type="radio"
+                              formControlName="ques3"
+                              value="yes"
+                            />Yes
+                            <input
+                              type="radio"
+                              formControlName="ques3"
+                              value="no"
+                            />No
+                            <div
+                              *ngIf="declareSubmitted && declare.ques3.errors"
+                            >
+                              <div
+                                *ngIf="declare.ques3.errors.required"
+                                style="color: red;"
+                              >
                                 Does your company do pre-medical of the
                                 candidates in their home country? is required
                               </div>
                             </div>
                           </div>
                           <div class="form-group col-12">
-                            <label>Does your company keep record of the candidates
-                              deployed?</label>
-                            <input type="radio" formControlName="ques4" value="yes" />Yes
-                            <input type="radio" formControlName="ques4" value="no" />No
-                            <div *ngIf="declareSubmitted && declare.ques4.errors">
-                              <div *ngIf="declare.ques4.errors.required" style="color: red;">
+                            <label
+                              >Does your company keep record of the candidates
+                              deployed?</label
+                            >
+                            <input
+                              type="radio"
+                              formControlName="ques4"
+                              value="yes"
+                            />Yes
+                            <input
+                              type="radio"
+                              formControlName="ques4"
+                              value="no"
+                            />No
+                            <div
+                              *ngIf="declareSubmitted && declare.ques4.errors"
+                            >
+                              <div
+                                *ngIf="declare.ques4.errors.required"
+                                style="color: red;"
+                              >
                                 Does your company keep record of the candidates
                                 deployed? is required
                               </div>
@@ -835,17 +1405,21 @@
                       </div>
 
                       <div class="stepButtons">
-                        <a (click)="goPrevious()"
+                        <a
+                          (click)="goPrevious()"
                           class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-prev">
+                          data-ktwizard-type="action-prev"
+                        >
                           <span>
                             <i class="la la-angle-left"></i>
                             <span>Previous</span>
                           </span>
                         </a>
-                        <button type="submit"
+                        <button
+                          type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
+                          data-ktwizard-type="action-next"
+                        >
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -857,32 +1431,51 @@
                 </form>
               </div>
 
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(8),
                   'is-hide': !isTabActive(8)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Association</h3>
                 </div>
-                <form [formGroup]="associationForm" (ngSubmit)="onAssociationSubmit()">
+                <form
+                  [formGroup]="associationForm"
+                  (ngSubmit)="onAssociationSubmit()"
+                >
                   <div class="m-3">
-                    <div *ngFor="
+                    <div
+                      *ngFor="
                         let ticket of accociationName.controls;
                         let i = index
-                      " class="list-group list-group-flush">
+                      "
+                      class="list-group list-group-flush"
+                    >
                       <div class="list-group-item">
                         <div [formGroup]="ticket" class="form-row">
                           <div class="form-group col-6">
                             <label>Name</label>
-                            <input type="text" formControlName="name" class="form-control" placeholder="name" [ngClass]="{
+                            <input
+                              type="text"
+                              formControlName="name"
+                              class="form-control"
+                              placeholder="name"
+                              [ngClass]="{
                                 'is-invalid':
                                   associationSubmitted &&
                                   ticket.controls.name.errors
-                              }" />
-                            <div *ngIf="
+                              }"
+                            />
+                            <div
+                              *ngIf="
                                 associationSubmitted &&
                                 ticket.controls.name.errors
-                              " class="invalid-feedback">
+                              "
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="ticket.controls.name.errors.required">
                                 Name is required
                               </div>
@@ -890,46 +1483,66 @@
                           </div>
                           <div class="form-group col-6">
                             <label>Type</label>
-                            <input type="text" formControlName="type" class="form-control" [ngClass]="{
+                            <input
+                              type="text"
+                              formControlName="type"
+                              class="form-control"
+                              [ngClass]="{
                                 'is-invalid':
                                   associationSubmitted &&
                                   ticket.controls.type.errors
-                              }" />
-                            <div *ngIf="
+                              }"
+                            />
+                            <div
+                              *ngIf="
                                 associationSubmitted &&
                                 ticket.controls.type.errors
-                              " class="invalid-feedback">
+                              "
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="ticket.controls.type.errors">
                                 Type is required
                               </div>
                             </div>
                           </div>
-                          <a href="javscript:;" class="deleteLocation" *ngIf="
+                          <a
+                            href="javscript:;"
+                            class="deleteLocation"
+                            *ngIf="
                               associationForm.controls['name'].controls.length >
                               1
-                            " (click)="removeAssociation(i)"><i class="fa fa-trash" aria-hidden="true"></i>
+                            "
+                            (click)="removeAssociation(i)"
+                            ><i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
                         </div>
                       </div>
                     </div>
                     <div class="col-xl-4">
                       <div>
-                        <a (click)="addAssociation()" class="btn btn-primary addLocation"><i class="fa fa-plus"></i> Add
+                        <a
+                          (click)="addAssociation()"
+                          class="btn btn-primary addLocation"
+                          ><i class="fa fa-plus"></i> Add
                         </a>
                       </div>
                     </div>
                     <div class="stepButtons">
-                      <a (click)="goPrevious()"
+                      <a
+                        (click)="goPrevious()"
                         class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-prev">
+                        data-ktwizard-type="action-prev"
+                      >
                         <span>
                           <i class="la la-angle-left"></i>
                           <span>Previous</span>
                         </span>
                       </a>
-                      <button type="submit"
+                      <button
+                        type="submit"
                         class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                        data-ktwizard-type="action-next">
+                        data-ktwizard-type="action-next"
+                      >
                         <span>
                           <span>Next Step</span>
                           <i class="la la-angle-right"></i>
@@ -939,77 +1552,140 @@
                   </div>
                 </form>
               </div>
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(9),
                   'is-hide': !isTabActive(9)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Certifications & Awards</h3>
                 </div>
 
-                <form [formGroup]="awardForm" (ngSubmit)="awardUpload()" enctype="multipart/form-data">
+                <form
+                  [formGroup]="awardForm"
+                  (ngSubmit)="awardUpload()"
+                  enctype="multipart/form-data"
+                >
                   <div class="m-3">
                     <div class="list-group list-group-flush">
                       <div class="list-group-item">
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label>Name</label>
-                            <select class="form-control" formControlName='name'
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.name.errors }">
+                            <select
+                              class="form-control"
+                              formControlName="name"
+                              [ngClass]="{
+                                'is-invalid':
+                                  awardSubmitted && award.name.errors
+                              }"
+                            >
                               <option value="" disabled>Select name</option>
-                              <option value="ISO 9001 Quality Management Systems">ISO 9001 Quality Management Systems
+                              <option
+                                value="ISO 9001 Quality Management Systems"
+                                >ISO 9001 Quality Management Systems
                               </option>
-                              <option value="ISO 14001 Environmental Management Systems">ISO 14001 Environmental
-                                Management Systems</option>
-                              <option value="OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems">
-                                OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems</option>
-                              <option value="ISO 22301 Business Continuity Management ">ISO 22301 Business Continuity
-                                Management </option>
-                              <option value="Responsible Business Alliance (RBA) ">Responsible Business Alliance (RBA)
+                              <option
+                                value="ISO 14001 Environmental Management Systems"
+                                >ISO 14001 Environmental Management
+                                Systems</option
+                              >
+                              <option
+                                value="OHSAS 18001 & ISO 45001 Occupational Health & Safety Management Systems"
+                              >
+                                OHSAS 18001 & ISO 45001 Occupational Health &
+                                Safety Management Systems</option
+                              >
+                              <option
+                                value="ISO 22301 Business Continuity Management "
+                                >ISO 22301 Business Continuity Management
                               </option>
-                              <option value="Fair Labor Association (FLA)">Fair Labor Association (FLA)</option>
-                              <option value="Ethical Trading Initiative (ETI) ">Ethical Trading Initiative (ETI)
+                              <option
+                                value="Responsible Business Alliance (RBA) "
+                                >Responsible Business Alliance (RBA)
                               </option>
-                              <option value="Business Social Compliance Initiative (BSCI)">Business Social Compliance
-                                Initiative (BSCI)</option>
-                              <option value="International Recruitment Integrity System (IRIS) ">International
-                                Recruitment Integrity System (IRIS) </option>
-
+                              <option value="Fair Labor Association (FLA)"
+                                >Fair Labor Association (FLA)</option
+                              >
+                              <option value="Ethical Trading Initiative (ETI) "
+                                >Ethical Trading Initiative (ETI)
+                              </option>
+                              <option
+                                value="Business Social Compliance Initiative (BSCI)"
+                                >Business Social Compliance Initiative
+                                (BSCI)</option
+                              >
+                              <option
+                                value="International Recruitment Integrity System (IRIS) "
+                                >International Recruitment Integrity System
+                                (IRIS)
+                              </option>
                             </select>
-                            <div *ngIf="awardSubmitted && award.name.errors" class="invalid-feedback">
-                              <div *ngIf="award.name.errors">Image is required
+                            <div
+                              *ngIf="awardSubmitted && award.name.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="award.name.errors">
+                                Image is required
                               </div>
                             </div>
-
                           </div>
 
                           <div class="form-group col-6">
                             <label>Image</label>
-                            <input type="file" formControlName="image" class="form-control"
+                            <input
+                              type="file"
+                              formControlName="image"
+                              class="form-control"
                               (change)="changeAwardFile($event)"
-                              [ngClass]="{ 'is-invalid': awardSubmitted && award.image.errors }" />
-                            <div *ngIf="awardSubmitted && award.image.errors" class="invalid-feedback">
-                              <div *ngIf="award.image.errors">Image is required
+                              [ngClass]="{
+                                'is-invalid':
+                                  awardSubmitted && award.image.errors
+                              }"
+                            />
+                            <div
+                              *ngIf="awardSubmitted && award.image.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="award.image.errors">
+                                Image is required
                               </div>
                             </div>
-
                           </div>
                           <div class="col-xl-4">
                             <div>
-                              <button type="submit" class="btn btn-primary addLocation"><i class="fa fa-plus"></i>
+                              <button
+                                type="submit"
+                                class="btn btn-primary addLocation"
+                              >
+                                <i class="fa fa-plus"></i>
                                 Upload
                               </button>
                             </div>
                           </div>
-                          <div class="search-result" *ngIf="awardname && awardname.length">
+                          <div
+                            class="search-result"
+                            *ngIf="awardname && awardname.length"
+                          >
                             <ul>
-                              <li *ngFor="let item of awardname let i=index;">
-                                {{item.name}} <a href="{{ item.file }}" target="_blank">
-                                  <i class="{{
-                                      getFileExtension(item.file)
-                                    }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                </a><a (click)="removeWork(item.id)" class="deleteLocation"><i class="fa fa-trash"
-                                    aria-hidden="true"></i>
+                              <li *ngFor="let item of awardname; let i = index">
+                                {{ item.name }}
+                                <a href="{{ item.file }}" target="_blank">
+                                  <i
+                                    class="{{ getFileExtension(item.file) }}"
+                                    style="color: #5cb85c;"
+                                    aria-hidden="true"
+                                  ></i> </a
+                                ><a
+                                  (click)="removeWork(item.id)"
+                                  class="deleteLocation"
+                                  ><i
+                                    class="fa fa-trash"
+                                    aria-hidden="true"
+                                  ></i>
                                 </a>
                               </li>
                             </ul>
@@ -1021,104 +1697,170 @@
                 </form>
 
                 <div class="stepButtons">
-                  <a (click)="goPrevious()"
+                  <a
+                    (click)="goPrevious()"
                     class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-prev">
+                    data-ktwizard-type="action-prev"
+                  >
                     <span>
                       <i class="la la-angle-left"></i>
                       <span>Previous</span>
                     </span>
                   </a>
-                  <button (click)="awardSubmit()"
+                  <button
+                    (click)="awardSubmit()"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-next">
+                    data-ktwizard-type="action-next"
+                  >
                     <span>
                       <span>Next Step</span>
                       <i class="la la-angle-right"></i>
                     </span>
                   </button>
                 </div>
-
               </div>
 
-
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(10),
                   'is-hide': !isTabActive(10)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Documents</h3>
                 </div>
                 <div class="kt-form__section kt-form__section--first">
                   <div class="kt-wizard-v2__form">
-                    <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="imageDocumentForm"
-                      (ngSubmit)="imageDocumentSubmit()" enctype="multipart/form-data">
+                    <form
+                      class="kt-form"
+                      id="kt_form"
+                      novalidate="novalidate"
+                      [formGroup]="imageDocumentForm"
+                      (ngSubmit)="imageDocumentSubmit()"
+                      enctype="multipart/form-data"
+                    >
                       <div class="form-group">
                         <label>Trade Licence</label>
-                        <input type="file" formControlName="myFile" (change)="fileDocumentEvent($event)" />
-                        <div *ngIf="imageSubmitted && i.myFile.errors" style="color: red;">
+                        <input
+                          type="file"
+                          formControlName="myFile"
+                          (change)="fileDocumentEvent($event)"
+                        />
+                        <div
+                          *ngIf="imageSubmitted && i.myFile.errors"
+                          style="color: red;"
+                        >
                           <div *ngIf="i.myFile.errors.required">
                             Trade Licence is required
                           </div>
                         </div>
                         <div *ngIf="image && image.trade_license">
                           <a href="{{ image.trade_license }}" target="_blank">
-                            <i class="{{
+                            <i
+                              class="{{
                                 getFileExtension(image.trade_license)
-                              }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                            {{ imageName.trade_license }}</a>
-                          <a class="deleteLocation" href="javscript:;"
-                            (click)="deleteImage('trade_license', 'myFile')"><i aria-hidden="true"
-                              class="fa fa-trash"></i></a>
+                              }}"
+                              style="color: #5cb85c;"
+                              aria-hidden="true"
+                            ></i>
+                            {{ imageName.trade_license }}</a
+                          >
+                          <a
+                            class="deleteLocation"
+                            href="javscript:;"
+                            (click)="deleteImage('trade_license', 'myFile')"
+                            ><i aria-hidden="true" class="fa fa-trash"></i
+                          ></a>
                         </div>
                       </div>
                       <div class="form-group">
                         <label>Proof of identity</label>
-                        <input type="file" formControlName="identity" (change)="fileIdentityEvent($event)" />
-                        <div *ngIf="imageSubmitted && i.identity.errors" style="color: red;">
+                        <input
+                          type="file"
+                          formControlName="identity"
+                          (change)="fileIdentityEvent($event)"
+                        />
+                        <div
+                          *ngIf="imageSubmitted && i.identity.errors"
+                          style="color: red;"
+                        >
                           <div *ngIf="i.identity.errors.required">
                             Proof of identity is required
                           </div>
                         </div>
                         <div *ngIf="image && image.proof_of_identity">
-                          <a href="{{ image.proof_of_identity }}" target="_blank"><i class="{{
+                          <a
+                            href="{{ image.proof_of_identity }}"
+                            target="_blank"
+                            ><i
+                              class="{{
                                 getFileExtension(image.proof_of_identity)
-                              }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                            {{ imageName.proof_of_identity }}</a>
-                          <a class="deleteLocation" href="javscript:;" (click)="
+                              }}"
+                              style="color: #5cb85c;"
+                              aria-hidden="true"
+                            ></i>
+                            {{ imageName.proof_of_identity }}</a
+                          >
+                          <a
+                            class="deleteLocation"
+                            href="javscript:;"
+                            (click)="
                               deleteImage('proof_of_identity', 'identity')
-                            "><i aria-hidden="true" class="fa fa-trash"></i></a>
+                            "
+                            ><i aria-hidden="true" class="fa fa-trash"></i
+                          ></a>
                         </div>
                       </div>
                       <div class="form-group">
                         <label>Compony Logo</label>
-                        <input type="file" formControlName="logo" (change)="fileLogoEvent($event)" />
-                        <div *ngIf="imageSubmitted && i.logo.errors" style="color: red;">
+                        <input
+                          type="file"
+                          formControlName="logo"
+                          (change)="fileLogoEvent($event)"
+                        />
+                        <div
+                          *ngIf="imageSubmitted && i.logo.errors"
+                          style="color: red;"
+                        >
                           <div *ngIf="i.logo.errors.required">
                             Company logo is required
                           </div>
                         </div>
                         <div *ngIf="image && image.company_logo">
                           <a href="{{ image.company_logo }}" target="_blank">
-                            <i class="{{ getFileExtension(image.company_logo) }}" style="color: #5cb85c;"
-                              aria-hidden="true"></i>
-                            {{ imageName.company_logo }}</a>
-                          <a class="deleteLocation" href="javscript:;" (click)="deleteImage('company_logo', 'logo')"><i
-                              aria-hidden="true" class="fa fa-trash"></i></a>
+                            <i
+                              class="{{ getFileExtension(image.company_logo) }}"
+                              style="color: #5cb85c;"
+                              aria-hidden="true"
+                            ></i>
+                            {{ imageName.company_logo }}</a
+                          >
+                          <a
+                            class="deleteLocation"
+                            href="javscript:;"
+                            (click)="deleteImage('company_logo', 'logo')"
+                            ><i aria-hidden="true" class="fa fa-trash"></i
+                          ></a>
                         </div>
                       </div>
                       <div class="stepButtons">
-                        <a (click)="goPrevious()"
+                        <a
+                          (click)="goPrevious()"
                           class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-prev">
+                          data-ktwizard-type="action-prev"
+                        >
                           <span>
                             <i class="la la-angle-left"></i>
                             <span>Previous</span>
                           </span>
                         </a>
-                        <button type="submit"
+                        <button
+                          type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next">
+                          data-ktwizard-type="action-next"
+                        >
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -1130,25 +1872,42 @@
                 </div>
               </div>
 
-              <div class="stepContainer" id="step1" [ngClass]="{
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
                   'is-display': isTabActive(11),
                   'is-hide': !isTabActive(11)
-                }">
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Team</h3>
                 </div>
 
                 <div class="m-3">
-                  <form [formGroup]="teamForm" (ngSubmit)="teamUpload()" enctype="multipart/form-data">
+                  <form
+                    [formGroup]="teamForm"
+                    (ngSubmit)="teamUpload()"
+                    enctype="multipart/form-data"
+                  >
                     <div class="list-group list-group-flush">
                       <div class="list-group-item">
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label>Name</label>
-                            <input type="text" formControlName="name" class="form-control" placeholder="name" [ngClass]="{
+                            <input
+                              type="text"
+                              formControlName="name"
+                              class="form-control"
+                              placeholder="name"
+                              [ngClass]="{
                                 'is-invalid': teamSubmitted && team.name.errors
-                              }" />
-                            <div *ngIf="teamSubmitted && team.name.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="teamSubmitted && team.name.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="team.name.errors.required">
                                 Name is required
                               </div>
@@ -1156,12 +1915,20 @@
                           </div>
                           <div class="form-group col-6">
                             <label>Designation</label>
-                            <input type="text" formControlName="desination" class="form-control"
-                              placeholder="Designation" [ngClass]="{
+                            <input
+                              type="text"
+                              formControlName="desination"
+                              class="form-control"
+                              placeholder="Designation"
+                              [ngClass]="{
                                 'is-invalid':
                                   teamSubmitted && team.desination.errors
-                              }" />
-                            <div *ngIf="teamSubmitted && team.desination.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="teamSubmitted && team.desination.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="team.desination.errors.required">
                                 Name is required
                               </div>
@@ -1169,11 +1936,20 @@
                           </div>
                           <div class="form-group col-6">
                             <label>Photo</label>
-                            <input type="file" formControlName="photo" class="form-control" placeholder="name"
-                              (change)="changePhotoFile($event)" [ngClass]="{
+                            <input
+                              type="file"
+                              formControlName="photo"
+                              class="form-control"
+                              placeholder="name"
+                              (change)="changePhotoFile($event)"
+                              [ngClass]="{
                                 'is-invalid': teamSubmitted && team.photo.errors
-                              }" />
-                            <div *ngIf="teamSubmitted && team.photo.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="teamSubmitted && team.photo.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="team.photo.errors.required">
                                 Name is required
                               </div>
@@ -1181,12 +1957,20 @@
                           </div>
                           <div class="form-group col-6">
                             <label>Profile Photo</label>
-                            <input type="file" formControlName="profile" class="form-control"
-                              (change)="changeProfileFile($event)" [ngClass]="{
+                            <input
+                              type="file"
+                              formControlName="profile"
+                              class="form-control"
+                              (change)="changeProfileFile($event)"
+                              [ngClass]="{
                                 'is-invalid':
                                   teamSubmitted && team.profile.errors
-                              }" />
-                            <div *ngIf="teamSubmitted && team.profile.errors" class="invalid-feedback">
+                              }"
+                            />
+                            <div
+                              *ngIf="teamSubmitted && team.profile.errors"
+                              class="invalid-feedback"
+                            >
                               <div *ngIf="team.profile.errors">
                                 Image is required
                               </div>
@@ -1197,37 +1981,53 @@
                     </div>
                     <div class="col-xl-4">
                       <div>
-                        <button type="submit" class="btn btn-primary addLocation">
+                        <button
+                          type="submit"
+                          class="btn btn-primary addLocation"
+                        >
                           <i class="fa fa-plus"></i> Upload
                         </button>
                       </div>
                     </div>
-                    <div class="search-result" *ngIf="teamData && teamData.length">
+                    <div
+                      class="search-result"
+                      *ngIf="teamData && teamData.length"
+                    >
                       <ul>
                         <li *ngFor="let item of teamData; let i = index">
                           {{ item.name }} {{ item.designation }}
                           <a href="{{ item.photo }}" target="_blank">
-                            <i class="{{ getFileExtension(item.photo) }}" style="color: #5cb85c;"
-                              aria-hidden="true"></i>
-                            Photo</a><a (click)="removeWork(item.id)" class="deleteLocation"><i class="fa fa-trash"
-                              aria-hidden="true"></i>
+                            <i
+                              class="{{ getFileExtension(item.photo) }}"
+                              style="color: #5cb85c;"
+                              aria-hidden="true"
+                            ></i>
+                            Photo</a
+                          ><a
+                            (click)="removeWork(item.id)"
+                            class="deleteLocation"
+                            ><i class="fa fa-trash" aria-hidden="true"></i>
                           </a>
                         </li>
                       </ul>
                     </div>
                   </form>
                   <div class="stepButtons">
-                    <a (click)="goPrevious()"
+                    <a
+                      (click)="goPrevious()"
                       class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-prev">
+                      data-ktwizard-type="action-prev"
+                    >
                       <span>
                         <i class="la la-angle-left"></i>
                         <span>Previous</span>
                       </span>
                     </a>
-                    <button (click)="onWorkSubmit()"
+                    <button
+                      (click)="onWorkSubmit()"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next">
+                      data-ktwizard-type="action-next"
+                    >
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -1237,67 +2037,118 @@
                 </div>
               </div>
 
-              <div class="stepContainer" id="step1" [ngClass]="{
-                'is-display': isTabActive(12),
-                'is-hide': !isTabActive(12)
-              }">
+              <div
+                class="stepContainer"
+                id="step1"
+                [ngClass]="{
+                  'is-display': isTabActive(12),
+                  'is-hide': !isTabActive(12)
+                }"
+              >
                 <div class="kt-heading kt-heading--md">
                   <h3>Company tour</h3>
                 </div>
 
-                <form [formGroup]="companyForm" (ngSubmit)="companyUpload()" enctype="multipart/form-data">
+                <form
+                  [formGroup]="companyForm"
+                  (ngSubmit)="companyUpload()"
+                  enctype="multipart/form-data"
+                >
                   <div class="m-3">
                     <div class="list-group list-group-flush">
                       <div class="list-group-item">
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label>Name</label>
-                            <select class="form-control" formControlName='name'
-                              [ngClass]="{ 'is-invalid': companySubmitted && company.name.errors }">
+                            <select
+                              class="form-control"
+                              formControlName="name"
+                              [ngClass]="{
+                                'is-invalid':
+                                  companySubmitted && company.name.errors
+                              }"
+                            >
                               <option value="" disabled>Select name</option>
-                              <option value="Front Office">Front Office
+                              <option value="Front Office"
+                                >Front Office
                               </option>
                               <option value="Reception">Reception</option>
-                              <option value="Interview Room">Interview Room</option>
-                              <option value="Waiting hall">Waiting hall
+                              <option value="Interview Room"
+                                >Interview Room</option
+                              >
+                              <option value="Waiting hall"
+                                >Waiting hall
                               </option>
-                              <option value="Documentation Room ">Documentation Room </option>
-
+                              <option value="Documentation Room "
+                                >Documentation Room
+                              </option>
                             </select>
-                            <div *ngIf="companySubmitted && company.name.errors" class="invalid-feedback">
-                              <div *ngIf="company.name.errors">Image is required
+                            <div
+                              *ngIf="companySubmitted && company.name.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="company.name.errors">
+                                Image is required
                               </div>
                             </div>
-
                           </div>
 
                           <div class="form-group col-6">
                             <label>Image</label>
-                            <input type="file" formControlName="image" class="form-control"
+                            <input
+                              type="file"
+                              formControlName="image"
+                              class="form-control"
                               (change)="changeCompanyFile($event)"
-                              [ngClass]="{ 'is-invalid': companySubmitted && company.image.errors }" />
-                            <div *ngIf="companySubmitted && company.image.errors" class="invalid-feedback">
-                              <div *ngIf="company.image.errors">Image is required
+                              [ngClass]="{
+                                'is-invalid':
+                                  companySubmitted && company.image.errors
+                              }"
+                            />
+                            <div
+                              *ngIf="companySubmitted && company.image.errors"
+                              class="invalid-feedback"
+                            >
+                              <div *ngIf="company.image.errors">
+                                Image is required
                               </div>
                             </div>
-
                           </div>
                           <div class="col-xl-4">
                             <div>
-                              <button type="submit" class="btn btn-primary addLocation"><i class="fa fa-plus"></i>
+                              <button
+                                type="submit"
+                                class="btn btn-primary addLocation"
+                              >
+                                <i class="fa fa-plus"></i>
                                 Upload
                               </button>
                             </div>
                           </div>
-                          <div class="search-result" *ngIf="cpmpanyname && cpmpanyname.length">
+                          <div
+                            class="search-result"
+                            *ngIf="cpmpanyname && cpmpanyname.length"
+                          >
                             <ul>
-                              <li *ngFor="let item of cpmpanyname let i=index;">
+                              <li
+                                *ngFor="let item of cpmpanyname; let i = index"
+                              >
                                 <a href="{{ item.filepath }}" target="_blank">
-                                  <i class="{{
-                                    getFileExtension(item.filepath)
-                                  }}" style="color: #5cb85c;" aria-hidden="true"></i>
-                                  {{item.filename}}</a><a (click)="removeWork(item.id)" class="deleteLocation"><i
-                                    class="fa fa-trash" aria-hidden="true"></i>
+                                  <i
+                                    class="{{
+                                      getFileExtension(item.filepath)
+                                    }}"
+                                    style="color: #5cb85c;"
+                                    aria-hidden="true"
+                                  ></i>
+                                  {{ item.filename }}</a
+                                ><a
+                                  (click)="removeWork(item.id)"
+                                  class="deleteLocation"
+                                  ><i
+                                    class="fa fa-trash"
+                                    aria-hidden="true"
+                                  ></i>
                                 </a>
                               </li>
                             </ul>
@@ -1309,24 +2160,27 @@
                 </form>
 
                 <div class="stepButtons">
-                  <a (click)="goPrevious()"
+                  <a
+                    (click)="goPrevious()"
                     class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-prev">
+                    data-ktwizard-type="action-prev"
+                  >
                     <span>
                       <i class="la la-angle-left"></i>
                       <span>Previous</span>
                     </span>
                   </a>
-                  <button (click)="awardSubmit()"
+                  <button
+                    (click)="awardSubmit()"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-next">
+                    data-ktwizard-type="action-next"
+                  >
                     <span>
                       <span>Next Step</span>
                       <i class="la la-angle-right"></i>
                     </span>
                   </button>
                 </div>
-
               </div>
               <!--end: Form Wizard Step 6-->
             </div>
@@ -1342,7 +2196,12 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Profile Completed</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(' Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss(' Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -1354,7 +2213,11 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close(' Save click ')">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="modal.close(' Save click ')"
+    >
       Ok
     </button>
   </div>

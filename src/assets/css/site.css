@@ -771,7 +771,7 @@ ul.nostyle {
   right: 10px;
 }
 .cke_bottom {
-  display: none;
+  display: none !important;
 }
 .detailed_list_item {
   border-bottom: 1px solid #f7f8fa;
@@ -800,4 +800,17 @@ span.detailed_list_label {
 }
 .mleft20 {
   margin-left: 20px;
+}
+.liWithDeleteIcon {
+  list-style: none;
+  padding-left: 10px;
+}
+.liWithDeleteIcon .deleteLiItem {
+  margin-right: 5px;
+  cursor: pointer;
+}
+.liWithDeleteIcon li {
+  /* margin-bottom: 5px; */
+  border-bottom: 1px solid #eee;
+  padding: 5px 0;
 }
