@@ -18,6 +18,7 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { AgencyProfileComponent } from './agency-profile/agency-profile.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { AutocompleteModule } from 'ng2-input-autocomplete';
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [AgencyProfileComponent,demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
   imports: [
@@ -32,7 +33,8 @@ import { AutocompleteModule } from 'ng2-input-autocomplete';
     AutocompleteModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
-    SelectDropDownModule
+    SelectDropDownModule,
+    NgxPaginationModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

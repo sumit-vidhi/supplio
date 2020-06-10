@@ -448,6 +448,7 @@ export class DemandComponent implements OnInit {
             this.loader.stopLoading();
             this.updated_at = result.payload.demand.updated_at;
             console.log(this.updated_at);
+            this.router.navigate(['user/demand/' + result.payload.demand.id]);
           }
           this.toastr.success(result.message, 'Update Demand');
           let nextTab = this.activeTab + 1;

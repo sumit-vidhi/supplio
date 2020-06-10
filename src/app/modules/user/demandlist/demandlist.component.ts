@@ -280,6 +280,7 @@ export class demandListComponent implements OnInit {
   myDateValue: Date;
   myDateValue2: Date;
   appData: any;
+  config: any;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
@@ -302,19 +303,24 @@ export class demandListComponent implements OnInit {
       "demand_type": "",
       "status": "",
       "startDate": "",
-      "postDate": ""
+      "postDate": "",
+      "page": 1
     }
     if (this.appData.role == 'Employer') {
       this.userService.demandList(data).subscribe((result: any) => {
         this.loader.stopLoading();
         if (result.payload.demand) {
-          this.demandData = result.payload.demand;
+          this.demandData = result.payload.demand.data;
           this.category = this.demandData.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
             })
           })
-          console.log(this.category);
+          this.config = {
+            itemsPerPage: 10,
+            currentPage: 1,
+            totalItems: Number(result.payload.demand.total)
+          };
         }
       })
     }
@@ -323,20 +329,69 @@ export class demandListComponent implements OnInit {
       this.userService.demandAllList(data).subscribe((result: any) => {
         this.loader.stopLoading();
         if (result.payload.demand) {
-          this.demandData = result.payload.demand;
+          this.demandData = result.payload.demand.data;
           this.category = this.demandData.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
             })
           })
-          console.log(this.category);
+          this.config = {
+            itemsPerPage: 10,
+            currentPage: 1,
+            totalItems: Number(result.payload.demand.total)
+          };
         }
       })
     }
-
-
-
   }
+
+  getData(config) {
+    const data = {
+      "hire_type": "",
+      "hire_country": "",
+      "demand_type": "",
+      "status": "",
+      "startDate": "",
+      "postDate": "",
+      "page": config.currentPage
+    }
+    this.loader.startLoading();
+    if (this.appData.role == 'Employer') {
+      this.userService.demandList(data).subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.demand) {
+          this.demandData = result.payload.demand.data;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            })
+          })
+        }
+      })
+    }
+    if (this.appData.role == 'Agency') {
+      console.log(23232);
+      this.userService.demandAllList(data).subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.demand) {
+          this.demandData = result.payload.demand.data;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            })
+          })
+        }
+      })
+    }
+  }
+
+
+
+  pageChanged(event) {
+    this.config.currentPage = event;
+    this.getData(this.config);
+  }
+
 
   onDateChange(newDate: Date) {
     console.log(newDate);

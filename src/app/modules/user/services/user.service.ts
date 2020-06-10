@@ -69,10 +69,10 @@ export class UserService {
     return this.commonHttp.post<ApiResponseModel>('fileTest', data);
   }
   demandList(data): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandList + "?page=" + data.page + "hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);
   }
   demandAllList(data): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandAllList + "?hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.demandAllList + "?page=" + data.page + "hire_type=" + data.hire_type + "&hire_country=" + data.hire_country + "&demand_type=" + data.demand_type + "&status=" + data.status + "&start_date=" + data.startDate + "&end_date=" + data.postDate);
   }
   getDashboardData(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getDashboardData);
