@@ -30,7 +30,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgbModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 2000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       closeButton:true

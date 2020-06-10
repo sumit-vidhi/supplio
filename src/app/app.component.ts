@@ -48,10 +48,31 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (this.loginService.IsAuthUser()) {
-      this.renderer.addClass(document.body, 'demo');
+      this.renderer.addClass(document.body, 'body-bg');
+      this.renderer.addClass(document.body, 'kt-page--loading-enabled');
+      this.renderer.addClass(document.body, 'kt-quick-panel--right');
+      this.renderer.addClass(document.body, 'kt-demo-panel--right');
+      this.renderer.addClass(document.body, 'kt-offcanvas-panel--right');
+      this.renderer.addClass(document.body, 'kt-header--fixed');
+      this.renderer.addClass(document.body, 'kt-header--minimize-menu');
+      this.renderer.addClass(document.body, 'kt-header--minimize-menu');
+      this.renderer.addClass(document.body, 'kt-header-mobile--fixed');
+      this.renderer.addClass(document.body, 'kt-subheader--enabled');
+      this.renderer.addClass(document.body, 'kt-subheader--transparent');
+              
     }
     if (!this.loginService.IsAuthUser()) {
-      this.renderer.removeClass(document.body, 'demo');
+      this.renderer.removeClass(document.body, 'body-bg');
+      this.renderer.removeClass(document.body, 'kt-page--loading-enabled');
+      this.renderer.removeClass(document.body, 'kt-quick-panel--right');
+      this.renderer.removeClass(document.body, 'kt-demo-panel--right');
+      this.renderer.removeClass(document.body, 'kt-offcanvas-panel--right');
+      this.renderer.removeClass(document.body, 'kt-header--fixed');
+      this.renderer.removeClass(document.body, 'kt-header--minimize-menu');
+      this.renderer.removeClass(document.body, 'kt-header--minimize-menu');
+      this.renderer.removeClass(document.body, 'kt-header-mobile--fixed');
+      this.renderer.removeClass(document.body, 'kt-subheader--enabled');
+      this.renderer.removeClass(document.body, 'kt-subheader--transparent');
     }
     this.router.events.subscribe((evt) => {
       if (!(evt instanceof NavigationEnd)) {

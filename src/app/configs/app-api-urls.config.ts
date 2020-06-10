@@ -34,7 +34,7 @@ export const appApiUrl: CommonBase = {
         getAllSubcategory: "master/getAllSubCategoriesByParent",
         getdata: 'user/getProfile',
         getdashboradData: 'user/getdashboradData',
-        updatePassword: 'user/updatePassword',
+        updatePassword: 'users/changePassword',
         imageUpload: 'user/imageUpload',
         resendEmail: 'user/resendEmail'
     }

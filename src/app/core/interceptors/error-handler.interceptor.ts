@@ -8,8 +8,8 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { UNAUTHORIZED, FORBIDDEN, NOT_FOUND } from 'http-status-codes';
-
+import { UNAUTHORIZED, FORBIDDEN, NOT_FOUND, INTERNAL_SERVER_ERROR } from 'http-status-codes';
+import { ToastrService } from 'ngx-toastr';
 import { LoggerService } from '@core/services/logger.service';
 import { environment } from '@environment/environment';
 
@@ -24,7 +24,8 @@ import { environment } from '@environment/environment';
 export class ErrorHandlerInterceptor implements HttpInterceptor {
   constructor(
     private logger: LoggerService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(error => this.errorHandler(error)));
@@ -37,14 +38,15 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
   */
   // Customize the default error handler here if needed
   private errorHandler(response: HttpEvent<any>): Observable<HttpEvent<any>> {
-    
+
     if (!environment.production) {
       // Do something with the error
       this.logger.logError('Request error ' + JSON.stringify(response));
     }
 
-     console.error(response);
+    console.error(response);
     const httpErrorCode = response['status'];
+
     switch (httpErrorCode) {
       case UNAUTHORIZED:
         this.router.navigateByUrl('/users/login');
@@ -54,6 +56,9 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
         break;
       case NOT_FOUND:
         this.router.navigateByUrl('/pages/404');
+        break;
+      case INTERNAL_SERVER_ERROR:
+        this.toastr.error(response["message"], 'Something went wrong');
         break;
       default:
     }

@@ -35,14 +35,10 @@ export class ChangePasswordComponent implements OnInit {
   ngOnInit() {
     this.regForm1 = this.fb.group({
       oldpassword: ['', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(20),
+        Validators.required
       ]],
       password: ['', [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(20),
+        Validators.required
       ]],
       confirm_password: ['', Validators.required]
     }, {
@@ -66,23 +62,26 @@ export class ChangePasswordComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    const formModal = form.value;
+    const formModal = {
+      current_password: form.value.oldpassword,
+      new_password: form.value.password,
+      new_confirm_password: form.value.confirm_password
+    }
     this.sucessmessage = "";
     this.errormessage = "";
     this.loader.startLoading();
     this.userService.changepassword(formModal)
-      .subscribe((res) => {
+      .subscribe((res: any) => {
+        this.submitted = false;
         this.regForm1.reset();
         this.loader.stopLoading();
-        if (res.status === 'success') {
+        if (res.payload.password) {
           this.errormessage = "";
-          this.sucessmessage = "Password changed successfully";
-          alert("Password changed successfully");
-
-        } else {
+          this.sucessmessage = res.message;
+        }
+        if (res.payload.error) {
           this.sucessmessage = "";
-          this.errormessage = "Old Password is wrong .";
-          alert("Old Password is wrong .");
+          this.errormessage = res.payload.error;
         }
       });
   }

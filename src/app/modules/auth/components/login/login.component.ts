@@ -29,7 +29,18 @@ export class LoginComponent implements OnInit {
     private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.renderer.removeClass(document.body, 'demo');
+   
+    this.renderer.removeClass(document.body, 'body-bg');
+    this.renderer.removeClass(document.body, 'kt-page--loading-enabled');
+    this.renderer.removeClass(document.body, 'kt-quick-panel--right');
+    this.renderer.removeClass(document.body, 'kt-demo-panel--right');
+    this.renderer.removeClass(document.body, 'kt-offcanvas-panel--right');
+    this.renderer.removeClass(document.body, 'kt-header--fixed');
+    this.renderer.removeClass(document.body, 'kt-header--minimize-menu');
+    this.renderer.removeClass(document.body, 'kt-header--minimize-menu');
+    this.renderer.removeClass(document.body, 'kt-header-mobile--fixed');
+    this.renderer.removeClass(document.body, 'kt-subheader--enabled');
+    this.renderer.removeClass(document.body, 'kt-subheader--transparent');
     this.userservice.siteSetting().subscribe((result: any) => {
       if (result.payload.settings) {
         console.log(232323);

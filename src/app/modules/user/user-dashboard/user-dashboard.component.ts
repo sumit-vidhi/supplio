@@ -277,7 +277,7 @@ export class UserDashboardComponent implements OnInit {
   appData: any;
   demandData: any = [];;
   category: any = [];
-  total_active_demands:any;
+  total_active_demands: any;
   total_demands: any;
   total_active_agencies: any;
   total_agencies: any;
@@ -288,7 +288,18 @@ export class UserDashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.renderer.addClass(document.body, 'demo');
+
+    this.renderer.addClass(document.body, 'body-bg');
+    this.renderer.addClass(document.body, 'kt-page--loading-enabled');
+    this.renderer.addClass(document.body, 'kt-quick-panel--right');
+    this.renderer.addClass(document.body, 'kt-demo-panel--right');
+    this.renderer.addClass(document.body, 'kt-offcanvas-panel--right');
+    this.renderer.addClass(document.body, 'kt-header--fixed');
+    this.renderer.addClass(document.body, 'kt-header--minimize-menu');
+    this.renderer.addClass(document.body, 'kt-header--minimize-menu');
+    this.renderer.addClass(document.body, 'kt-header-mobile--fixed');
+    this.renderer.addClass(document.body, 'kt-subheader--enabled');
+    this.renderer.addClass(document.body, 'kt-subheader--transparent');
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     if (this.appData.is_welcome == "0") {
       if (this.appData.role == 'Employer') {
