@@ -25,6 +25,7 @@ export class demandViewComponent implements OnInit {
   demandData: any;
   category: any;
   searchForm: FormGroup;
+  showDetailData = [false];
   countries = [
     { "name": "Afghanistan", "code": "AF" },
     { "name": "Åland Islands", "code": "AX" },
@@ -276,12 +277,15 @@ export class demandViewComponent implements OnInit {
     { "name": "Zambia", "code": "ZM" },
     { "name": "Zimbabwe", "code": "ZW" }
   ];
-  appData:any;
+  appData: any;
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
+    this.userService.getSubcategoies().subscribe((result: any) => {
+      this.category = result.payload.categories;
+    });
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.route.params.subscribe(params => {
       this.loader.startLoading();
@@ -296,7 +300,11 @@ export class demandViewComponent implements OnInit {
 
   }
 
-
+  showDetails(i) {
+    console.log(i);
+    this.showDetailData[i] = !this.showDetailData[i];
+    console.log(this.showDetailData[i]);
+  }
 
   getType() {
     if (this.demandData) {
@@ -315,6 +323,11 @@ export class demandViewComponent implements OnInit {
       return value.code == code;
     })
     return this.countries[counrty]["name"];
+  }
+
+  getCategoryname(id) {
+    const index = this.category.findIndex((data) => data.id == id);
+    return this.category[index].name;
   }
 
 

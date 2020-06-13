@@ -28,7 +28,7 @@ import {
 import { Location } from '@angular/common';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { idLocale } from 'ngx-bootstrap/chronos/i18n/id';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-agency-profile',
   templateUrl: './agency-profile.component.html',
@@ -161,7 +161,8 @@ export class AgencyProfileComponent implements OnInit {
     private router: Router,
     private loader: LoaderService,
     public loginService: JWTAuthService,
-    private ngZone: NgZone, private http: HttpClient
+    private ngZone: NgZone, private http: HttpClient,
+    private toastr: ToastrService
   ) {
     for (let i = 2020; i >= 1950; i--) {
       this.years.push(i);
@@ -278,6 +279,11 @@ export class AgencyProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    if(this.appData.last_step_updated){
+      this.disabledTabs = this.disabledTabs.slice(this.appData.last_step_updated);
+      console.log(this.disabledTabs);
+    }
+  
     this.teamData = this.appData.team;
     this.cpmpanyname = this.appData.agency_company_tour;
     this.setFormdata();
@@ -336,6 +342,21 @@ export class AgencyProfileComponent implements OnInit {
       }
 
     }
+    this.categories = this.appData.expertise_industries;
+    this.subCategories = this.appData.expertise_categories;
+
+    const cateValue = this.appData.experience_industries_values;
+    const subCategoriesValue = this.appData.experience_categories_values;
+
+    const countries = this.appData.experience_countries;
+    // this.initAddress(countries);
+
+    this.onChangeTickets(cateValue);
+    this.onChangeSubTickets(subCategoriesValue);
+    this.onChangeCountry(countries);
+    this.setWork();
+    this.setDeclartion();
+    this.setAssociation();
   }
   setAward(name) {
     if (this.appData.awards) {
@@ -380,6 +401,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.cpmpanyname = this.appData.agency_company_tour;
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
     });
 
@@ -407,6 +429,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.awardname = this.appData.awards;
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
     });
 
@@ -441,7 +464,8 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
-        //  this.setAssociation();
+       
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -552,6 +576,8 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.setAssociation();
+        
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -598,6 +624,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.teamData = this.appData.team;
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
     });
   }
@@ -623,6 +650,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.setWork();
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
     });
 
@@ -677,6 +705,8 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.setWork();
+        
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -838,7 +868,8 @@ export class AgencyProfileComponent implements OnInit {
         const subCategoriesValue = this.appData.experience_categories_values;
 
         const countries = this.appData.experience_countries;
-        // this.initAddress(countries);
+       
+        this.toastr.success(result.payload.message, 'Update Profile');
 
         this.onChangeTickets(cateValue);
         this.onChangeSubTickets(subCategoriesValue);
@@ -918,6 +949,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -1093,7 +1125,10 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
+      
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
@@ -1115,6 +1150,8 @@ export class AgencyProfileComponent implements OnInit {
         this.confirmMessage = result.message;
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.open(content)
+        
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
     });
   }
@@ -1175,6 +1212,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
@@ -1203,6 +1241,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {

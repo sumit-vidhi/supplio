@@ -155,6 +155,10 @@ export class EditProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    if (this.appData.last_step_updated) {
+      this.disabledTabs = this.disabledTabs.slice(this.appData.last_step_updated);
+      console.log(this.disabledTabs);
+    }
     this.image = {
       trade_license: "",
       proof_of_identity: "",
@@ -376,7 +380,6 @@ export class EditProfileComponent implements OnInit {
 
   reviewSubmit(content) {
     const formdata = { form_step: 5 };
-
     this.loader.startLoading();
     this.userService.editProfile(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
