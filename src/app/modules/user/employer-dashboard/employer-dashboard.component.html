@@ -1,0 +1,177 @@
+<div class="row">
+    <div class="col-md-3">
+        <div class="kt-portlet kt-iconbox kt-iconbox--wave">
+            <div class="kt-portlet__body">
+                <div class="kt-iconbox__body">
+                    <div class="kt-iconbox__icon kt-font-success">
+                        <i class="flaticon2-list-1"></i>
+                    </div>
+                    <div class="kt-iconbox__desc">
+                        <h3 class="kt-iconbox__title">
+                            <a class="kt-link" href="#">{{(total_active_demands)?total_active_demands:"-"}}</a>
+                        </h3>
+                        <div class="kt-iconbox__content">
+                            Total Active Demands
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kt-portlet kt-iconbox kt-iconbox--wave">
+            <div class="kt-portlet__body">
+                <div class="kt-iconbox__body">
+                    <div class="kt-iconbox__icon kt-font-info">
+                        <i class="flaticon2-line-chart"></i>
+                    </div>
+                    <div class="kt-iconbox__desc">
+                        <h3 class="kt-iconbox__title">
+                            <a class="kt-link" href="#">{{(total_demands)?total_demands:"-"}}</a>
+                        </h3>
+                        <div class="kt-iconbox__content">
+                            Total Demands
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kt-portlet kt-iconbox kt-iconbox--wave">
+            <div class="kt-portlet__body">
+                <div class="kt-iconbox__body">
+                    <div class="kt-iconbox__icon kt-font-warning">
+                        <i class="flaticon-medal"></i>
+                    </div>
+                    <div class="kt-iconbox__desc">
+                        <h3 class="kt-iconbox__title">
+                            <a class="kt-link" href="#">{{(total_active_agencies)?total_active_agencies:"-"}}</a>
+                        </h3>
+                        <div class="kt-iconbox__content">
+                            Total Active Agencies
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="kt-portlet kt-iconbox kt-iconbox--wave">
+            <div class="kt-portlet__body">
+                <div class="kt-iconbox__body">
+                    <div class="kt-iconbox__icon kt-font-danger">
+                        <i class="flaticon2-layers"></i>
+                    </div>
+                    <div class="kt-iconbox__desc">
+                        <h3 class="kt-iconbox__title">
+                            <a class="kt-link" href="#">{{(total_agencies)?total_agencies:"-"}}</a>
+                        </h3>
+                        <div class="kt-iconbox__content">
+                            Total Agencies
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--End::Row-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="kt-portlet kt-portlet--mobile">
+            <div class="kt-portlet__head">
+                <div class="kt-portlet__head-label">
+                    <h3 class="kt-portlet__head-title">
+                        Latest Demands
+                    </h3>
+                    <a routerLink="/user/demand" class="btn btn-primary btn-brand--icon pull-right mleft20"
+                        id="kt_search">
+                        <span>
+                            <span>Create Demand</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="kt-portlet__body">
+                <div class="detailed_list" *ngIf="demandData && demandData.length">
+                    <div class="detailed_list_item row" *ngFor="let arrayItem of demandData; let i = index">
+                        <div class="col-md-3 detailed_list_title">
+                            <h5>
+                                <a routerLink="/user/demandview/{{ arrayItem.id }}">
+                                    {{ arrayItem.title ? arrayItem.title : '-' }}</a>
+                            </h5>
+                        </div>
+
+                        <div class="col-md-2">
+                            {{
+                  arrayItem.created_at | date: 'mediumDate'
+                }}
+                            <span class="detailed_list_label">Posted Date</span>
+                        </div>
+                        <div class="col-md-2">
+                            {{
+                  arrayItem.hire_country
+                    ? getcountry(arrayItem.hire_country)
+                    : '-'
+                }}
+                            <span class="detailed_list_label">Location</span>
+                        </div>
+
+                        <div class="col-md-2">
+                            {{
+                  category[i].length > 1
+                    ? category[i].join(', ')
+                    : category[i][0]
+                }}
+                            <span class="detailed_list_label">Categories</span>
+                        </div>
+                        <div class="col-md-1">
+                            {{(arrayItem.total_demands)?arrayItem.total_demands:"-"}}
+                            <span class="detailed_list_label">Total Demands</span>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span class="btn btn-label-{{
+                  arrayItem.status == 1 ? 'success' : 'danger'
+                }} btn-sm btn-bold btn-upper status">{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span>
+                            <a href=" #" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
+                                data-toggle="dropdown">
+                                <i class="flaticon-more-1"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
+                                <ul class="kt-nav">
+                                    <li class="kt-nav__item">
+                                        <a href="#" class="kt-nav__link"
+                                            routerLink="/user/demandview/{{ arrayItem.id }}">
+                                            <i class="kt-nav__link-icon flaticon-eye"></i>
+                                            <span class="kt-nav__link-text">View</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                                        <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon flaticon-edit"></i>
+                                            <span class="kt-nav__link-text">Edit</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                                        <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon flaticon2-copy"></i>
+                                            <span class="kt-nav__link-text">Duplicate</span>
+                                        </a>
+                                    </li>
+                                    <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
+                                        <a href="#" class="kt-nav__link">
+                                            <i class="kt-nav__link-icon flaticon2-trash"></i>
+                                            <span class="kt-nav__link-text">Delete</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

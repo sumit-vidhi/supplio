@@ -9,6 +9,7 @@ import { DemandComponent } from './demand/demand.component';
 import { demandListComponent } from './demandlist/demandlist.component';
 import { demandViewComponent } from './demandview/demandview.component';
 import { AgencyProfileComponent } from './agency-profile/agency-profile.component';
+import { PricingComponent } from './pricing/pricing.component';
 const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
@@ -50,6 +51,11 @@ const routes: Routes = [
     data: { title: 'Demand' },
     canActivate: [AuthGuard]
   },
+  {
+    path: 'pricing', component: PricingComponent,
+    data: { title: 'Price Selection' },
+    canActivate: [AuthGuard]
+  }
 
 ];
 

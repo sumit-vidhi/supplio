@@ -19,8 +19,11 @@ import { AgencyProfileComponent } from './agency-profile/agency-profile.componen
 import { SelectDropDownModule } from 'ngx-select-dropdown'
 import { AutocompleteModule } from 'ng2-input-autocomplete';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
+import { AgencyDashboardComponent } from './agency-dashboard/agency-dashboard.component';
+import { PricingComponent } from './pricing/pricing.component';
 @NgModule({
-  declarations: [AgencyProfileComponent,demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent],
+  declarations: [AgencyProfileComponent,demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,

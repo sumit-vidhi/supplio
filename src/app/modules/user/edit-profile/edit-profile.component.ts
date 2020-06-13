@@ -74,6 +74,10 @@ export class EditProfileComponent implements OnInit {
   imageSubmitted = false;
   image: any;
   imageName: any;
+  headQuater: any = 0;
+  @ViewChild('labelImport', { static: false }) labelImport: ElementRef;
+  @ViewChild('labelidentityImport', { static: false }) labelidentityImport: ElementRef;
+  @ViewChild('labellogImport', { static: false }) labellogImport: ElementRef;
   iconList = [ // array of icon class list based on type
     { type: "xlsx", icon: "fa fa-file-excel-o" },
     { type: "pdf", icon: "fa fa-file-pdf-o" },
@@ -144,6 +148,7 @@ export class EditProfileComponent implements OnInit {
     })
     const locationForm = this.formBuilder.group({
       location: this.formBuilder.array([]),
+
     });
     this.aboutForm = this.formBuilder.group({
       about_company: [''],
@@ -151,6 +156,7 @@ export class EditProfileComponent implements OnInit {
     const arrayControl = <FormArray>locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
       address: ['', [Validators.required]],
+      orders: [0],
     });
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
@@ -217,10 +223,11 @@ export class EditProfileComponent implements OnInit {
     const location = this.appData.users_locations.map((value, index) => {
       return this.appData.users_locations[index].address;
     });
+    const headQauter = this.appData.users_locations.findIndex((data) => data.headquaters == 1)
     let groupArr = [];
     for (let i = 0; i < location.length; i++) {
       groupArr.push(
-        this.formBuilder.group({ address: [location[i], Validators.required] })
+        this.formBuilder.group({ address: [location[i], Validators.required], orders: [headQauter] })
       );
     }
 
@@ -230,16 +237,18 @@ export class EditProfileComponent implements OnInit {
 
   fileEvent(e) {
     this.filedata = e.target.files[0];
+    this.labelImport.nativeElement.innerText = this.filedata.name;
     this.imageForm.get('myFile').setValue(this.filedata);
-    console.log(this.filedata);
   }
   fileIdentityEvent(e) {
     this.fileIdentity = e.target.files[0];
+    this.labelidentityImport.nativeElement.innerText = this.fileIdentity.name;
     this.imageForm.get('identity').setValue(this.fileIdentity);
     // console.log(this.filedata);
   }
   fileLogoEvent(e) {
     this.filelogo = e.target.files[0];
+    this.labellogImport.nativeElement.innerText = this.filelogo.name;
     this.imageForm.get('logo').setValue(this.filelogo);
     //console.log(this.filedata);
   }
@@ -428,9 +437,13 @@ export class EditProfileComponent implements OnInit {
   isTabDisabled(tabId: number): boolean {
     return this.disabledTabs.indexOf(tabId) >= 0;
   }
+  changeCompany(i) {
+    this.headQuater = i;
+  }
 
   locationSubmit() {
     this.locationSubmitted = true;
+    console.log(this.locationForm)
     if (this.locationForm.invalid) {
       return;
     }
@@ -442,6 +455,7 @@ export class EditProfileComponent implements OnInit {
     const data = {
       locations: address,
       form_step: 2,
+      headquaters: this.headQuater
     };
     this.userService.editProfile(data).subscribe((result: any) => {
       this.loader.stopLoading();
@@ -487,10 +501,7 @@ export class EditProfileComponent implements OnInit {
       this.formattedAddress = place['formatted_address'];
       this.zone.run(() => (this.formattedAddress = place['formatted_address']));
       this.addressForm.controls[i].setValue({ address: this.address });
-    } else {
-      this.addressForm.controls[i].setValue({ address: '' });
     }
-    console.log(this.addressForm);
   }
   get addressForm(): FormArray {
     return this.locationForm.get('location') as FormArray;

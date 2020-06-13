@@ -265,6 +265,7 @@
                                 <AutocompleteComponent (setAddress)="getAddress($event, i)" adressType="establishment"
                                   address="{{ arrayItem.value.address }}">
                                 </AutocompleteComponent>
+                                <input formControlName="orders" (change)="changeCompany(i)" type="radio" name="orders" [value]="i" />
                                 <!-- <input type="text" class="form-control" formControlName="address"
                                   placeholder="Type in your address" aria-describedby="address1-error" /> -->
                                 <a href="javscript:;" class="deleteLocation" *ngIf="
@@ -365,10 +366,16 @@
                       (ngSubmit)="imageSubmit()" enctype="multipart/form-data">
                       <div class="form-group">
                         <label>Trade Licence</label>
-                        <input type="file" formControlName="myFile" (change)="fileEvent($event)" />
-                        <div *ngIf="imageSubmitted && i.myFile.errors" style="color: red;">
-                          <div *ngIf="i.myFile.errors.required">
-                            Trade Licence is required
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="myFile" id="importFile"
+                            (change)="fileEvent($event)">
+                          <label class="custom-file-label" #labelImport for="importFile">
+                            Choose file</label>
+                          <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
+                          <div *ngIf="imageSubmitted && i.myFile.errors" style="color: red;">
+                            <div *ngIf="i.myFile.errors.required">
+                              Trade Licence is required
+                            </div>
                           </div>
                         </div>
                         <div *ngIf="image.trade_license">
@@ -384,10 +391,16 @@
                       </div>
                       <div class="form-group">
                         <label>Proof of identity</label>
-                        <input type="file" formControlName="identity" (change)="fileIdentityEvent($event)" />
-                        <div *ngIf="imageSubmitted && i.identity.errors" style="color: red;">
-                          <div *ngIf="i.identity.errors.required">
-                            Proof of identity is required
+                        <!-- <input type="file" formControlName="identity" (change)="fileIdentityEvent($event)" /> -->
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="identity" id="importFile"
+                            (change)="fileIdentityEvent($event)">
+                          <label class="custom-file-label" #labelidentityImport for="importFile">
+                            Choose file</label>
+                          <div *ngIf="imageSubmitted && i.identity.errors" style="color: red;">
+                            <div *ngIf="i.identity.errors.required">
+                              Proof of identity is required
+                            </div>
                           </div>
                         </div>
                         <div *ngIf="image.proof_of_identity">
@@ -402,10 +415,16 @@
                       </div>
                       <div class="form-group">
                         <label>Compony Logo</label>
-                        <input type="file" formControlName="logo" (change)="fileLogoEvent($event)" />
-                        <div *ngIf="imageSubmitted && i.logo.errors" style="color: red;">
-                          <div *ngIf="i.logo.errors.required">
-                            Company logo is required
+                        <!-- <input type="file" formControlName="logo" (change)="fileLogoEvent($event)" /> -->
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="logo" id="importFile"
+                            (change)="fileLogoEvent($event)">
+                          <label class="custom-file-label" #labellogoImport for="importFile">
+                            Choose file</label>
+                          <div *ngIf="imageSubmitted && i.logo.errors" style="color: red;">
+                            <div *ngIf="i.logo.errors.required">
+                              Company logo is required
+                            </div>
                           </div>
                         </div>
                         <div *ngIf="image.company_logo">

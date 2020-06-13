@@ -7,14 +7,12 @@ import { LoaderService } from '@core/services/loader-service';
 import { JWTAuthService } from '@core/services/jwt-auth.service';
 import { NgbModal, ModalDismissReasons, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { APP_USER } from '@configs/app-settings.config';
-
-import * as $ from 'jquery';
 @Component({
-  selector: 'app-user-dashboard',
-  templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.scss']
+  selector: 'app-agency-dashboard',
+  templateUrl: './agency-dashboard.component.html',
+  styleUrls: ['./agency-dashboard.component.scss']
 })
-export class UserDashboardComponent implements OnInit {
+export class AgencyDashboardComponent implements OnInit {
 
   public sendMessage: boolean;
   countries = [
@@ -278,57 +276,42 @@ export class UserDashboardComponent implements OnInit {
   demandData: any = [];;
   category: any = [];
   total_active_demands: any;
-  total_demands: any;
-  total_active_agencies: any;
-  total_agencies: any;
-  @ViewChild('myDiv', { static: true }) myDiv: ElementRef<HTMLElement>;
-  @ViewChild('myDiv2', { static: true }) myDiv2: ElementRef<HTMLElement>;
+  demands_lost: any;
+  demands_won: any;
+  //total_agencies: any;
+  select: any = 'newDemand';
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal, private renderer: Renderer2) {
   }
 
+
   ngOnInit() {
-
-    this.renderer.addClass(document.body, 'body-bg');
-    this.renderer.addClass(document.body, 'kt-page--loading-enabled');
-    this.renderer.addClass(document.body, 'kt-quick-panel--right');
-    this.renderer.addClass(document.body, 'kt-demo-panel--right');
-    this.renderer.addClass(document.body, 'kt-offcanvas-panel--right');
-    this.renderer.addClass(document.body, 'kt-header--fixed');
-    this.renderer.addClass(document.body, 'kt-header--minimize-menu');
-    this.renderer.addClass(document.body, 'kt-header--minimize-menu');
-    this.renderer.addClass(document.body, 'kt-header-mobile--fixed');
-    this.renderer.addClass(document.body, 'kt-subheader--enabled');
-    this.renderer.addClass(document.body, 'kt-subheader--transparent');
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    if (this.appData.is_welcome == "0") {
-      if (this.appData.role == 'Employer') {
-        let el: HTMLElement = this.myDiv.nativeElement;
-        el.click();
-      } else {
-        let el2: HTMLElement = this.myDiv2.nativeElement;
-        el2.click();
+    this.loader.startLoading();
+    this.userService.getDashboardData().subscribe((result: any) => {
+      this.loader.stopLoading();
+      console.log(result.payload.dashboard);
+      if (result.payload.dashboard) {
+        this.demandData = result.payload.dashboard.latestDemands;
+        this.total_active_demands = result.payload.dashboard.total_active_demands;
+        this.demands_lost = result.payload.dashboard.demands_lost;
+        this.demands_won = result.payload.dashboard.demands_won;
+        // this.total_agencies = result.payload.dashboard.total_agencies;
+
       }
-    }
-
-
-
+    })
   }
-
- 
-
-  open(content) {
-
-    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: 'ticket-modal' });
-
+  selectAgency(name) {
+    this.select = name;
   }
-  editPage() {
-    this.modalReference.close();
-    this.router.navigate(["user/edit-profile"]);
+  show(name) {
+    return this.select == name;
   }
-  editAgency() {
-    this.modalReference.close();
-    this.router.navigate(["user/agency-profile"]);
+  getcountry(code) {
+    const counrty = this.countries.findIndex((value) => {
+      return value.code == code;
+    })
+    return this.countries[counrty]["name"];
   }
 
 }
