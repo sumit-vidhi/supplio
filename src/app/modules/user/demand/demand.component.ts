@@ -72,7 +72,7 @@ export class DemandComponent implements OnInit {
   countriesCode = countriesCode;
   isValidDetail = [false];
   demandId: any;
-  hireDemand: any = 'locally';
+  hireDemand: any = 'overseas';
   demandTitle: any;
   error: any;
   demandCategory: any;
@@ -174,10 +174,7 @@ export class DemandComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    if(this.appData.last_step_updated){
-      this.disabledTabs = this.disabledTabs.slice(this.appData.last_step_updated);
-      console.log(this.disabledTabs);
-    }
+
     this.phoneForm = this.formBuilder.group({
       phone: [''],
     });
@@ -210,6 +207,10 @@ export class DemandComponent implements OnInit {
             this.setTerm(result.payload.demand[0]);
             this.postDemand = result.payload.demand[0].demand_type.toString();;
           }
+          if (this.demand.last_step_updated) {
+            this.disabledTabs = this.disabledTabs.slice(this.demand.last_step_updated);
+            console.log(this.disabledTabs);
+          }
         }
       });
     } else {
@@ -221,8 +222,12 @@ export class DemandComponent implements OnInit {
           this.setCurrencyByData(result.payload.demand.currency)
           this.demandId = result.payload.demand.id;
           this.updated_at = result.payload.demand.updated_at;
-          this.hireDemand = result.payload.demand.hire_type;
-          this.hire = this.hireDemand;
+          if (result.payload.demand.hire_type != 'locally') {
+            this.hireDemand = result.payload.demand.hire_type;
+            this.hire = this.hireDemand;
+            console.log(12112);
+          }
+
           this.demandTitle = result.payload.demand.title;
           this.demandCategory = result.payload.demand.demand_category;
           this.selectedCity = result.payload.demand.hire_country;
@@ -472,7 +477,7 @@ export class DemandComponent implements OnInit {
     this.hire = event.target.value;
   }
   isActive() {
-    if (this.hire == 'overseas') {
+    if (this.hireDemand == 'overseas') {
       return true;
     } else {
       return false;
@@ -648,7 +653,7 @@ export class DemandComponent implements OnInit {
 
   /*
     function name : isTabDisabled
-	Explain :this function use for active previous tab"
+  Explain :this function use for active previous tab"
     */
   goPrevious() {
     let prevTab = this.activeTab - 1;
