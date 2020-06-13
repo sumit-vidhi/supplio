@@ -5,7 +5,7 @@
       <div class="kt-container">
         <div class="kt-subheader__main">
           <h3 class="kt-subheader__title">
-            Demand Detail
+            {{ demandData.title }}
           </h3>
         </div>
         <div class="kt-subheader__toolbar">
@@ -158,12 +158,12 @@
           <table class="table table-bordered" *ngIf="demandData && demandData.demand_category.length > 0">
             <thead>
               <th>Sno</th>
-              <th>Industry</th>
-              <th>Category</th>
+              <th>Sector</th>
+              <th>Categories</th>
               <th>Quantity</th>
               <th>Salary</th>
               <th>Gender</th>
-              <th>Details</th>
+              <th>More</th>
             </thead>
             <tbody>
               <tr *ngFor="let array of demandData.demand_category; let i = index">
@@ -188,7 +188,7 @@
           </table>
           <div class="row">
             <div class="col-md-12">
-              <h4>Terms & Conditions</h4>
+              <h4>Benefits</h4>
             </div>
             <div class="col-md-6">
               <ul class="nostyle alignMe">
@@ -284,6 +284,15 @@
                     demandData.other_benefits ? demandData.other_benefits : '-'
                   }}
                 </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Terms & Conditions</h4>
+            </div>
+            <div class="col-md-6">
+              <ul class="nostyle alignMe">
                 <li>
                   <strong> Mode of interview </strong>{{
                     demandData.mode_of_interview
@@ -298,6 +307,10 @@
                       : '-'
                   }}
                 </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="nostyle alignMe">
                 <li>
                   <strong> Flights for delegates </strong>{{
                     demandData.flights_for_delegates
