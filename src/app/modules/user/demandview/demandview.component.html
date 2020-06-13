@@ -11,7 +11,7 @@
       <div class="kt-container">
         <div class="kt-subheader__main">
           <h3 class="kt-subheader__title">
-            Demand Detail
+            {{ demandData.title }}
           </h3>
         </div>
         <div class="kt-subheader__toolbar">
@@ -200,11 +200,12 @@
           >
             <thead>
               <th>Sno</th>
-              <th>Industry</th>
-              <th>Category</th>
+              <th>Sector</th>
+              <th>Categories</th>
               <th>Quantity</th>
               <th>Salary</th>
               <th>Gender</th>
+              <th>More</th>
             </thead>
             <tbody>
               <tr
@@ -216,12 +217,13 @@
                 <td>{{ array.quantity }}</td>
                 <td>{{ array.salary }}</td>
                 <td>{{ array.gender }}</td>
+                <td>View Details</td>
               </tr>
             </tbody>
           </table>
           <div class="row">
             <div class="col-md-12">
-              <h4>Terms & Conditions</h4>
+              <h4>Benefits</h4>
             </div>
             <div class="col-md-6">
               <ul class="nostyle alignMe">
@@ -288,15 +290,14 @@
                       : '-'
                   }}
                 </li>
-
-                <li>
-                  <strong>Overtime </strong
-                  >{{ demandData.overtime ? demandData.overtime : '-' }}
-                </li>
               </ul>
             </div>
             <div class="col-md-6">
               <ul class="nostyle alignMe">
+                <li>
+                  <strong>Overtime </strong
+                  >{{ demandData.overtime ? demandData.overtime : '-' }}
+                </li>
                 <li>
                   <strong> Medical Insurance </strong
                   >{{
@@ -329,6 +330,15 @@
                     demandData.other_benefits ? demandData.other_benefits : '-'
                   }}
                 </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Terms & Conditions</h4>
+            </div>
+            <div class="col-md-6">
+              <ul class="nostyle alignMe">
                 <li>
                   <strong> Mode of interview </strong
                   >{{
@@ -345,6 +355,10 @@
                       : '-'
                   }}
                 </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="nostyle alignMe">
                 <li>
                   <strong> Flights for delegates </strong
                   >{{

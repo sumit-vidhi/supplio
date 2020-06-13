@@ -814,3 +814,12 @@ span.detailed_list_label {
   border-bottom: 1px solid #eee;
   padding: 5px 0;
 }
+.ngx-pagination .current {
+  padding: 0.1875rem 0.625rem;
+  background: #0a8e9e !important;
+  color: #fefefe;
+  cursor: default;
+}
+a.btn i {
+  color: #fff !important;
+}
