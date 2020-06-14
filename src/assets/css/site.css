@@ -878,3 +878,23 @@ label {
   margin-left: 10px;
   font-size: 14px;
 }
+.kt-nav .kt-nav__item.kt-nav__item--active > .kt-nav__link .kt-nav__link-icon,
+.kt-nav .kt-nav__item.kt-nav__item--active > .kt-nav__link .kt-nav__link-text,
+.kt-nav .kt-nav__item.kt-nav__item--active > .kt-nav__link .kt-nav__link-arrow,
+.kt-nav .kt-nav__item.active > .kt-nav__link .kt-nav__link-icon,
+.kt-nav .kt-nav__item.active > .kt-nav__link .kt-nav__link-text,
+.kt-nav .kt-nav__item.active > .kt-nav__link .kt-nav__link-arrow,
+.kt-nav
+  .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub)
+  > .kt-nav__link
+  .kt-nav__link-icon,
+.kt-nav
+  .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub)
+  > .kt-nav__link
+  .kt-nav__link-text,
+.kt-nav
+  .kt-nav__item:hover:not(.kt-nav__item--disabled):not(.kt-nav__item--sub)
+  > .kt-nav__link
+  .kt-nav__link-arrow {
+  color: #0a8e9e !important;
+}
