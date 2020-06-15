@@ -87,7 +87,7 @@ export class DemandComponent implements OnInit {
   id: any;
   updated_at: any;
   demand: any;
-  showDetailData=false;
+  showDetailData = false;
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -111,6 +111,74 @@ export class DemandComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.route.params.subscribe((params) => {
       this.id = params.id;
+    });
+
+
+  }
+
+  ngOnInit() {
+
+    const locationForm = this.formBuilder.group({
+      currency: ['', Validators.required],
+      location: this.formBuilder.array([]),
+    });
+    this.aboutForm = this.formBuilder.group({
+      about_company: [''],
+    });
+    this.termForm = this.formBuilder.group({
+      // address: ['', [Validators.required]]
+      mode_of_interview: ['', [Validators.required]],
+      recruitment_fee: ['', [Validators.required]],
+      no_of_delegates: ['', [Validators.required]],
+      flights_for_delegates: ['', [Validators.required]],
+      hotels_for_delegates: ['', [Validators.required]],
+    });
+    const arrayControl = <FormArray>locationForm.controls['location'];
+    let newGroup = this.formBuilder.group({
+      parent_category_id: ['', [Validators.required]],
+      category_id: [null, [Validators.required]],
+      quantity: ['', [Validators.required]],
+      salary: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      nationality: [''],
+      age_bracket: [''],
+      qualification: [''],
+      years_of_experience: [''],
+      driver_license: [''],
+      job_desc: [''],
+    });
+    this.benefitForm = this.formBuilder.group({
+      // address: ['', [Validators.required]]
+      accommodation: [null, [Validators.required]],
+      accomdationAllowance: [''],
+      visa_sponsorship: ['', [Validators.required]],
+      transportation: ['', [Validators.required]],
+      transportationAllowance: [''],
+      food: ['', [Validators.required]],
+      foodAllowance: [''],
+      employment_location: [''],
+      employment_country: ['', [Validators.required]],
+      employment_city: ['', [Validators.required]],
+      contract_duration: ['', [Validators.required]],
+      contract_type: ['', [Validators.required]],
+      working_hours_day: ['', [Validators.required]],
+      working_hours_week: [null, [Validators.required]],
+      probation_period: ['', [Validators.required]],
+      overtime: ['', [Validators.required]],
+      medical_insurance: ['', [Validators.required]],
+      joining_ticket: ['', [Validators.required]],
+      paid_leaves: ['', [Validators.required]],
+      paid_leaves_duration: ['', [Validators.required]],
+      leave_ticket: ['', [Validators.required]],
+      uniform: ['', [Validators.required]],
+      other_benefits: [''],
+    });
+    arrayControl.push(newGroup);
+    this.locationForm = locationForm;
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
+
+    this.phoneForm = this.formBuilder.group({
+      phone: [''],
     });
     if (this.id) {
       this.loader.startLoading();
@@ -175,72 +243,6 @@ export class DemandComponent implements OnInit {
         }
       });
     }
-
-  }
-
-  ngOnInit() {
-    const locationForm = this.formBuilder.group({
-      currency: ['', Validators.required],
-      location: this.formBuilder.array([]),
-    });
-    this.aboutForm = this.formBuilder.group({
-      about_company: [''],
-    });
-    this.termForm = this.formBuilder.group({
-      // address: ['', [Validators.required]]
-      mode_of_interview: ['', [Validators.required]],
-      recruitment_fee: ['', [Validators.required]],
-      no_of_delegates: ['', [Validators.required]],
-      flights_for_delegates: ['', [Validators.required]],
-      hotels_for_delegates: ['', [Validators.required]],
-    });
-    const arrayControl = <FormArray>locationForm.controls['location'];
-    let newGroup = this.formBuilder.group({
-      parent_category_id: ['', [Validators.required]],
-      category_id: [null, [Validators.required]],
-      quantity: ['', [Validators.required]],
-      salary: ['', [Validators.required]],
-      gender: ['', [Validators.required]],
-      nationality: [''],
-      age_bracket: [''],
-      qualification: [''],
-      years_of_experience: [''],
-      driver_license: [''],
-      job_desc: [''],
-    });
-    this.benefitForm = this.formBuilder.group({
-      // address: ['', [Validators.required]]
-      accommodation: [null, [Validators.required]],
-      accomdationAllowance: [''],
-      visa_sponsorship: ['', [Validators.required]],
-      transportation: ['', [Validators.required]],
-      transportationAllowance: [''],
-      food: ['', [Validators.required]],
-      foodAllowance: [''],
-      employment_location: [''],
-      employment_country: ['', [Validators.required]],
-      employment_city: ['', [Validators.required]],
-      contract_duration: ['', [Validators.required]],
-      contract_type: ['', [Validators.required]],
-      working_hours_day: ['', [Validators.required]],
-      working_hours_week: [null, [Validators.required]],
-      probation_period: ['', [Validators.required]],
-      overtime: ['', [Validators.required]],
-      medical_insurance: ['', [Validators.required]],
-      joining_ticket: ['', [Validators.required]],
-      paid_leaves: ['', [Validators.required]],
-      paid_leaves_duration: ['', [Validators.required]],
-      leave_ticket: ['', [Validators.required]],
-      uniform: ['', [Validators.required]],
-      other_benefits: [''],
-    });
-    arrayControl.push(newGroup);
-    this.locationForm = locationForm;
-    this.appData = JSON.parse(window.localStorage[APP_USER]);
-
-    this.phoneForm = this.formBuilder.group({
-      phone: [''],
-    });
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories.filter((data) => {
         return data.parent == 0;
@@ -248,8 +250,35 @@ export class DemandComponent implements OnInit {
     });
 
   }
+
+  setData(result) {
+    this.demand = result.payload.demand;
+    this.setCurrencyByData(result.payload.demand.currency)
+    this.demandId = result.payload.demand.id;
+    this.updated_at = result.payload.demand.updated_at;
+    if (result.payload.demand.hire_type != 'locally') {
+      this.hireDemand = result.payload.demand.hire_type;
+      this.hire = this.hireDemand;
+      console.log(12112);
+    }
+
+    this.demandTitle = result.payload.demand.title;
+    this.demandCategory = result.payload.demand.demand_category;
+    this.selectedCity = result.payload.demand.hire_country;
+    this.locationForm.patchValue({
+      currency: result.payload.demand.currency
+    });
+    this.modeInterview = result.payload.demand.mode_of_interview;
+    if (result.payload.demand.demand_category.length) {
+
+      this.setLocation();
+      this.setBenifit(result.payload.demand);
+      this.setTerm(result.payload.demand);
+      this.postDemand = result.payload.demand.demand_type.toString();;
+    }
+  }
   showDetails(i) {
-    this.showDetailData= !this.showDetailData;
+    this.showDetailData = !this.showDetailData;
   }
 
 
@@ -417,6 +446,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(data).subscribe((result: any) => {
       if (result.payload.demand) {
         this.loader.stopLoading();
+        this.setData(result);
         this.confirmMessage = result.message;
         this.open(content);
       }
@@ -434,6 +464,7 @@ export class DemandComponent implements OnInit {
       this.loader.startLoading();
       this.userService.createDemand(data).subscribe((result: any) => {
         if (result.payload.demand) {
+          this.setData(result);
           this.loader.stopLoading();
         }
 
@@ -461,6 +492,7 @@ export class DemandComponent implements OnInit {
         this.userService.createDemand(data).subscribe((result: any) => {
           if (result.payload.demand) {
             this.loader.stopLoading();
+            this.setData(result);
             this.updated_at = result.payload.demand.updated_at;
             this.toastr.success(result.message, 'Update Demand');
           }
@@ -693,6 +725,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(data).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.demand) {
+        this.setData(result);
         this.updated_at = result.payload.demand.updated_at;
       }
       this.toastr.success(result.message, 'Update Demand');
@@ -724,6 +757,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.demand) {
+        this.setData(result);
         this.updated_at = result.payload.demand.updated_at;
       }
       this.toastr.success(result.message, 'Update Demand');
@@ -746,6 +780,7 @@ export class DemandComponent implements OnInit {
     this.userService.createDemand(formdata).subscribe((result: any) => {
       this.loader.stopLoading();
       if (result.payload.demand) {
+        this.setData(result);
         this.updated_at = result.payload.demand.updated_at;
       }
       this.toastr.success(result.message, 'Update Demand');

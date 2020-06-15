@@ -220,19 +220,24 @@ export class EditProfileComponent implements OnInit {
   }
 
   setLocation(locationForm, newGroup) {
+
     const location = this.appData.users_locations.map((value, index) => {
       return this.appData.users_locations[index].address;
     });
-    const headQauter = this.appData.users_locations.findIndex((data) => data.headquaters == 1)
-    let groupArr = [];
-    for (let i = 0; i < location.length; i++) {
-      groupArr.push(
-        this.formBuilder.group({ address: [location[i], Validators.required], orders: [headQauter] })
-      );
+    if (location.length) {
+      const headQauter = this.appData.users_locations.findIndex((data) => data.headquaters == 1)
+      let groupArr = [];
+
+      for (let i = 0; i < location.length; i++) {
+        groupArr.push(
+          this.formBuilder.group({ address: [location[i], Validators.required], orders: [headQauter] })
+        );
+      }
+
+      this.locationForm.setControl('location', this.formBuilder.array(groupArr));
     }
 
-    this.locationForm.setControl('location', this.formBuilder.array(groupArr));
-    console.log(this.locationForm.get('location')['controls'][0].value.address);
+    //  console.log(this.locationForm.get('location')['controls'][0].value.address);
   }
 
   fileEvent(e) {
@@ -283,6 +288,7 @@ export class EditProfileComponent implements OnInit {
     const arrayControl = <FormArray>this.locationForm.controls['location'];
     let newGroup = this.formBuilder.group({
       address: ['', [Validators.required]],
+      orders: ['']
     });
     arrayControl.push(newGroup);
   }
@@ -500,7 +506,7 @@ export class EditProfileComponent implements OnInit {
       this.address = place['formatted_address'];
       this.formattedAddress = place['formatted_address'];
       this.zone.run(() => (this.formattedAddress = place['formatted_address']));
-      this.addressForm.controls[i].setValue({ address: this.address });
+      this.addressForm.controls[i].patchValue({ address: this.address });
     }
   }
   get addressForm(): FormArray {

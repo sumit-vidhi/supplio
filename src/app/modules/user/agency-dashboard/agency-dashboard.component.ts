@@ -276,6 +276,7 @@ export class AgencyDashboardComponent implements OnInit {
   demandData: any = [];;
   category: any = [];
   total_active_demands: any;
+  total_qoutes_demands:any;
   demands_lost: any;
   demands_won: any;
   //total_agencies: any;

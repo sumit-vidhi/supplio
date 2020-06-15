@@ -1,11 +1,5 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -16,11 +10,7 @@
         </div>
         <div class="kt-subheader__toolbar">
           <div class="kt-subheader__wrapper">
-            <a
-              routerLink="/user/demandlist"
-              class="btn btn-primary btn-brand--icon"
-              id="kt_search"
-            >
+            <a routerLink="/user/demandlist" class="btn btn-primary btn-brand--icon" id="kt_search">
               <span>
                 <span>Demand List</span>
               </span>
@@ -39,122 +29,72 @@
           <div class="row stepsWizard">
             <div class="col-md-3 stepsList">
               <ul class="steps">
-                <li
-                  (click)="changeStep('step1')"
-                  [ngClass]="{
+                <li (click)="changeStep('step1')" [ngClass]="{
                     completed: isTabActive(1),
                     disabled: isTabDisabled(1),
                     active: !isTabDisabled(1)
-                  }"
-                >
+                  }">
                   <a (click)="showTab(1)" role="tab" title="Create Demand">
                     Create Demand
-                    <span class="first icon"
-                      ><i class="fa fa-circle"></i>
+                    <span class="first icon"><i class="fa fa-circle"></i>
                     </span>
                   </a>
                 </li>
-                <li
-                  (click)="changeStep('step2')"
-                  [ngClass]="{
+                <li (click)="changeStep('step2')" [ngClass]="{
                     completed: isTabActive(2),
                     disabled: isTabDisabled(2),
                     active: !isTabDisabled(2)
-                  }"
-                  class=""
-                >
-                  <a (click)="showTab(2)" role="tab" title="Demand Details"
-                    >Demand Details
-                    <span class="icon"><i class="fa fa-circle"></i> </span
-                  ></a>
+                  }" class="">
+                  <a (click)="showTab(2)" role="tab" title="Demand Details">Demand Details
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li
-                  (click)="changeStep('step3')"
-                  [ngClass]="{
+                <li (click)="changeStep('step3')" [ngClass]="{
                     completed: isTabActive(3),
                     disabled: isTabDisabled(3),
                     active: !isTabDisabled(3)
-                  }"
-                  class=""
-                >
-                  <a (click)="showTab(3)" role="tab" title="Benefits"
-                    >Benefits
-                    <span class="icon"><i class="fa fa-circle"></i> </span
-                  ></a>
+                  }" class="">
+                  <a (click)="showTab(3)" role="tab" title="Benefits">Benefits
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li
-                  (click)="changeStep('step4')"
-                  [ngClass]="{
+                <li (click)="changeStep('step4')" [ngClass]="{
                     completed: isTabActive(4),
                     disabled: isTabDisabled(4),
                     active: !isTabDisabled(4)
-                  }"
-                >
-                  <a (click)="showTab(4)" role="tab" title="Terms & Conditions"
-                    >Terms & Conditions
-                    <span class="icon"><i class="fa fa-circle"></i> </span
-                  ></a>
+                  }">
+                  <a (click)="showTab(4)" role="tab" title="Terms & Conditions">Terms & Conditions
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li
-                  (click)="changeStep('step5')"
-                  [ngClass]="{
+                <li (click)="changeStep('step5')" [ngClass]="{
                     completed: isTabActive(5),
                     disabled: isTabDisabled(5),
                     active: !isTabDisabled(5)
-                  }"
-                  class=""
-                >
-                  <a (click)="showTab(5)" role="tab" title="Review & Submit"
-                    >Review & Submit
-                    <span class="icon"><i class="fa fa-circle"></i> </span
-                  ></a>
+                  }" class="">
+                  <a (click)="showTab(5)" role="tab" title="Review & Submit">Review & Submit
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
-                <li
-                  (click)="changeStep('step6')"
-                  [ngClass]="{
+                <li (click)="changeStep('step6')" [ngClass]="{
                     completed: isTabActive(6),
                     disabled: isTabDisabled(6),
                     active: !isTabDisabled(6)
-                  }"
-                  class=""
-                >
-                  <a (click)="showTab(6)" role="tab" title="Post Demand"
-                    >Post Demand
-                    <span class="icon"><i class="fa fa-circle"></i> </span
-                  ></a>
+                  }" class="">
+                  <a (click)="showTab(6)" role="tab" title="Post Demand">Post Demand
+                    <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
               </ul>
             </div>
             <div class="col-md-9">
-              <div
-                class="stepContainer"
-                id="step1"
-                [ngClass]="{
+              <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(1),
                   'is-hide': !isTabActive(1)
-                }"
-              >
+                }">
                 <h3>Create Demand</h3>
-                <form
-                  role="form"
-                  #MySelectForm="ngForm"
-                  (submit)="demandFirst(content)"
-                >
+                <form role="form" #MySelectForm="ngForm" (submit)="demandFirst(content)">
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Title</label>
-                      <input
-                        type="text"
-                        name="title"
-                        required
-                        [(ngModel)]="demandTitle"
-                        placeholder="Demand Title"
-                        class="form-control"
-                      />
-                      <div
-                        *ngIf="titleSubmitted && t.title.errors"
-                        style="color: red;"
-                      >
+                      <input type="text" name="title" required [(ngModel)]="demandTitle" placeholder="Demand Title"
+                        class="form-control" />
+                      <div *ngIf="titleSubmitted && t.title.errors" style="color: red;">
                         <div>
                           Demand Title is required
                         </div>
@@ -166,13 +106,8 @@
                       <label class="kt-option">
                         <span class="kt-option__control">
                           <span class="kt-radio kt-radio--bold kt-radio--brand">
-                            <input
-                              type="radio"
-                              name="demand"
-                              [(ngModel)]="hireDemand"
-                              value="locally"
-                              (change)="checkDemand($event)"
-                            />
+                            <input type="radio" name="demand" [(ngModel)]="hireDemand" value="locally"
+                              (change)="checkDemand($event)" />
                             <span></span>
                           </span>
                         </span>
@@ -182,10 +117,7 @@
                               Hire locally
                             </span>
                             <span class="kt-option__focus">
-                              <i
-                                class="fa fa-map-marker"
-                                aria-hidden="true"
-                              ></i>
+                              <i class="fa fa-map-marker" aria-hidden="true"></i>
                             </span>
                           </span>
                           <span class="kt-option__body">
@@ -198,13 +130,8 @@
                       <label class="kt-option">
                         <span class="kt-option__control">
                           <span class="kt-radio kt-radio--bold kt-radio--brand">
-                            <input
-                              type="radio"
-                              name="demand"
-                              [(ngModel)]="hireDemand"
-                              value="overseas"
-                              (change)="checkDemand($event)"
-                            />
+                            <input type="radio" name="demand" [(ngModel)]="hireDemand" value="overseas"
+                              (change)="checkDemand($event)" />
                             <span></span>
                           </span>
                         </span>
@@ -224,25 +151,12 @@
                       </label>
                     </div>
                   </div>
-                  <div
-                    class="col-md-12"
-                    [ngClass]="{ isActive: isActive(), 'is-hide': !isActive() }"
-                  >
+                  <div class="col-md-12" [ngClass]="{ isActive: isActive(), 'is-hide': !isActive() }">
                     <label>Select Country</label>
-                    <ng-select
-                      [items]="countries"
-                      name="country"
-                      required
-                      bindValue="code"
-                      bindLabel="name"
-                      appendTo="body"
-                      [(ngModel)]="selectedCity"
-                    >
+                    <ng-select [items]="countries" name="country" required bindValue="code" bindLabel="name"
+                      appendTo="body" [(ngModel)]="selectedCity">
                     </ng-select>
-                    <div
-                      *ngIf="titleSubmitted && t.country.errors"
-                      style="color: red;"
-                    >
+                    <div *ngIf="titleSubmitted && t.country.errors" style="color: red;">
                       <div>
                         Country is required
                       </div>
@@ -250,11 +164,9 @@
                   </div>
                   <div class="stepButtons">
                     <span>Last saved: {{ updated_at | date: 'medium' }} </span>
-                    <button
-                      type="submit"
+                    <button type="submit"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next"
-                    >
+                      data-ktwizard-type="action-next">
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -267,21 +179,12 @@
               <!--end: Form Wizard Step 1-->
 
               <!--begin: Form Wizard Step 2-->
-              <div
-                class="stepContainer"
-                id="step1"
-                [ngClass]="{
+              <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(2),
                   'is-hide': !isTabActive(2)
-                }"
-              >
-                <form
-                  class="kt-form"
-                  id="kt_form"
-                  novalidate="novalidate"
-                  [formGroup]="locationForm"
-                  (ngSubmit)="locationSubmit()"
-                >
+                }">
+                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="locationForm"
+                  (ngSubmit)="locationSubmit()">
                   <div class="kt-heading kt-heading--md">
                     <h3>Demand Details</h3>
                   </div>
@@ -292,28 +195,15 @@
                           <label>Select Currency</label>
                         </div>
                         <div class="form-group col-md-8">
-                          <select
-                            name="currency"
-                            formControlName="currency"
-                            [ngClass]="{
+                          <select name="currency" formControlName="currency" [ngClass]="{
                               'is-invalid':
                                 locationSubmitted && l.currency.errors
-                            }"
-                            (change)="setCurrency($event)"
-                            class="form-control"
-                          >
+                            }" (change)="setCurrency($event)" class="form-control">
                             <option value="" disabled>Select currency</option>
-                            <option
-                              value="{{ code.currency.code }}"
-                              *ngFor="let code of countriesCode"
-                            >
-                              {{ code.currency.code }}</option
-                            >
+                            <option value="{{ code.currency.code }}" *ngFor="let code of countriesCode">
+                              {{ code.currency.code }}</option>
                           </select>
-                          <div
-                            *ngIf="locationSubmitted && l.currency.errors"
-                            class="invalid-feedback"
-                          >
+                          <div *ngIf="locationSubmitted && l.currency.errors" class="invalid-feedback">
                             <div>
                               Currency is required
                             </div>
@@ -325,57 +215,38 @@
                           <div class="form-group">
                             <!-- <label>Demand </label> -->
 
-                            <div
-                              class="demandRow"
-                              formArrayName="location"
-                              *ngFor="
+                            <div class="demandRow" formArrayName="location" *ngFor="
                                 let arrayItem of locationForm.get('location')[
                                   'controls'
                                 ];
                                 let i = index
-                              "
-                            >
-                              <div
-                                [formGroupName]="i"
-                                [ngClass]="{
+                              ">
+                              <div [formGroupName]="i" [ngClass]="{
                                   'is-invalid':
                                     locationSubmitted && getValidity(i)
-                                }"
-                              >
+                                }">
                                 <div class="row">
                                   <div class="form-group col-md-4">
                                     <label>Industry</label>
-                                    <select
-                                      class="categoriesSelect form-control"
-                                      formControlName="parent_category_id"
-                                      (change)="categoryChange($event, i)"
-                                      [ngClass]="{
+                                    <select class="categoriesSelect form-control" formControlName="parent_category_id"
+                                      (change)="categoryChange($event, i)" [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls
                                             .parent_category_id.valid
-                                      }"
-                                    >
-                                      <option [ngValue]="null" disbled
-                                        >Select Category</option
-                                      >
+                                      }">
+                                      <option [ngValue]="null" disbled>Select Category</option>
 
-                                      <option
-                                        *ngFor="let value of category"
-                                        value="{{ value.id }}"
-                                        >{{ value.name }}
+                                      <option *ngFor="let value of category" value="{{ value.id }}">{{ value.name }}
                                       </option>
                                     </select>
-                                    <div
-                                      *ngIf="
+                                    <div *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.parent_category_id.valid
-                                      "
-                                      class="invalid-feedback"
-                                    >
+                                      " class="invalid-feedback">
                                       <div>
                                         Industry is required
                                       </div>
@@ -383,37 +254,26 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <label>Category</label>
-                                    <select
-                                      class="categoriesSelect form-control"
-                                      formControlName="category_id"
+                                    <select class="categoriesSelect form-control" formControlName="category_id"
                                       [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.category_id
                                             .valid
-                                      }"
-                                    >
-                                      <option [ngValue]="null" disbled
-                                        >Select Category</option
-                                      >
+                                      }">
+                                      <option [ngValue]="null" disbled>Select Category</option>
 
-                                      <option
-                                        *ngFor="let value of subcategory[i]"
-                                        value="{{ value.id }}"
-                                      >
+                                      <option *ngFor="let value of subcategory[i]" value="{{ value.id }}">
                                         {{ value.name }}
                                       </option>
                                     </select>
-                                    <div
-                                      *ngIf="
+                                    <div *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.category_id.valid
-                                      "
-                                      class="invalid-feedback"
-                                    >
+                                      " class="invalid-feedback">
                                       <div>
                                         Category name is required
                                       </div>
@@ -421,27 +281,19 @@
                                   </div>
                                   <div class="form-group col-md-4">
                                     <label>Quantity</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="quantity"
-                                      formControlName="quantity"
-                                      [ngClass]="{
+                                    <input type="text" class="form-control" placeholder="quantity"
+                                      formControlName="quantity" [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.quantity.valid
-                                      }"
-                                    />
-                                    <div
-                                      *ngIf="
+                                      }" />
+                                    <div *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.quantity.valid
-                                      "
-                                      class="invalid-feedback"
-                                    >
+                                      " class="invalid-feedback">
                                       <div>
                                         Quantity is required
                                       </div>
@@ -451,32 +303,21 @@
                                     <label>Basic Salary</label>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
-                                        <span
-                                          class="input-group-text"
-                                          id="basic-addon1"
-                                          >{{ currency ? currency : '' }}</span
-                                        >
+                                        <span class="input-group-text"
+                                          id="basic-addon1">{{ currency ? currency : '' }}</span>
                                       </div>
-                                      <input
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="Salary"
-                                        formControlName="salary"
-                                        [ngClass]="{
+                                      <input type="text" class="form-control" placeholder="Salary"
+                                        formControlName="salary" [ngClass]="{
                                           'is-invalid':
                                             locationSubmitted &&
                                             !locationForm.get('location')
                                               .controls[i].controls.salary.valid
-                                        }"
-                                      />
-                                      <div
-                                        *ngIf="
+                                        }" />
+                                      <div *ngIf="
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.salary.valid
-                                        "
-                                        class="invalid-feedback"
-                                      >
+                                        " class="invalid-feedback">
                                         <div>
                                           Salary is required
                                         </div>
@@ -485,16 +326,12 @@
                                   </div>
                                   <div class="form-group col-md-3">
                                     <label>Gender</label>
-                                    <select
-                                      class="form-control"
-                                      formControlName="gender"
-                                      [ngClass]="{
+                                    <select class="form-control" formControlName="gender" [ngClass]="{
                                         'is-invalid':
                                           locationSubmitted &&
                                           !locationForm.get('location')
                                             .controls[i].controls.gender.valid
-                                      }"
-                                    >
+                                      }">
                                       <option [ngValue]="null" disbled>
                                         Select Gender
                                       </option>
@@ -506,15 +343,12 @@
                                         Others
                                       </option>
                                     </select>
-                                    <div
-                                      *ngIf="
+                                    <div *ngIf="
                                         locationSubmitted &&
                                         !locationForm.get('location').controls[
                                           i
                                         ].controls.gender.valid
-                                      "
-                                      class="invalid-feedback"
-                                    >
+                                      " class="invalid-feedback">
                                       <div>
                                         Gender is required
                                       </div>
@@ -528,35 +362,23 @@
                                   </div>
                                   <div class="form-group col-md-2 text-center">
                                     <!-- <label>&nbsp;</label> -->
-                                    <a
-                                      class="btn btn-priamry showDetailsDemand"
-                                      (click)="showDetail(i)"
-                                    >
+                                    <a class="btn btn-priamry showDetailsDemand" (click)="showDetail(i)">
                                       {{ isValidDetail[i] ? 'Hide' : 'Show' }}
-                                      Details</a
-                                    >
+                                      Details</a>
                                   </div>
                                 </div>
                                 <!--ROW-->
                                 <!--Addtional Fields-->
-                                <div
-                                  class="additionalDemandFields"
-                                  [ngClass]="{
+                                <div class="additionalDemandFields" [ngClass]="{
                                     showDetail: isValidDetail[i],
                                     hideDetail: !isValidDetail[i]
-                                  }"
-                                >
+                                  }">
                                   <h4>Details</h4>
                                   <div class="row">
                                     <div class="form-group col-md-3">
                                       <label>Age Bracket</label>
-                                      <select
-                                        class="form-control"
-                                        formControlName="age_bracket"
-                                      >
-                                        <option [ngValue]="null"
-                                          >Select Age Bracket</option
-                                        >
+                                      <select class="form-control" formControlName="age_bracket">
+                                        <option [ngValue]="null">Select Age Bracket</option>
                                         <option value="16-18">16-18</option>
                                         <option value="19-25">19-25</option>
                                         <option value="26-45">26-45</option>
@@ -566,46 +388,22 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label>Qualification</label>
-                                      <select
-                                        class="form-control dropdown"
-                                        formControlName="qualification"
-                                      >
-                                        <option value="" disabled
-                                          >Select Qualification</option
-                                        >
-                                        <option value="No formal education"
-                                          >No formal education</option
-                                        >
-                                        <option value="Primary education"
-                                          >Primary education</option
-                                        >
-                                        <option value="Secondary education"
-                                          >Secondary education or high
-                                          school</option
-                                        >
-                                        <option value="Vocational qualification"
-                                          >Vocational qualification</option
-                                        >
-                                        <option value="Bachelor's degree"
-                                          >Bachelor's degree</option
-                                        >
-                                        <option value="Master's degree"
-                                          >Master's degree</option
-                                        >
-                                        <option value="Doctorate or higher"
-                                          >Doctorate or higher</option
-                                        >
+                                      <select class="form-control dropdown" formControlName="qualification">
+                                        <option value="" disabled>Select Qualification</option>
+                                        <option value="No formal education">No formal education</option>
+                                        <option value="Primary education">Primary education</option>
+                                        <option value="Secondary education">Secondary education or high
+                                          school</option>
+                                        <option value="Vocational qualification">Vocational qualification</option>
+                                        <option value="Bachelor's degree">Bachelor's degree</option>
+                                        <option value="Master's degree">Master's degree</option>
+                                        <option value="Doctorate or higher">Doctorate or higher</option>
                                       </select>
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label>Years of Experience</label>
-                                      <select
-                                        class="form-control"
-                                        formControlName="years_of_experience"
-                                      >
-                                        <option [ngValue]="null"
-                                          >Select Years of Experience</option
-                                        >
+                                      <select class="form-control" formControlName="years_of_experience">
+                                        <option [ngValue]="null">Select Years of Experience</option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -621,20 +419,13 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                       <label>Driver License</label>
-                                      <input
-                                        type="text"
-                                        formControlName="driver_license"
-                                        class="form-control"
-                                        placeholder="Driver License"
-                                      />
+                                      <input type="text" formControlName="driver_license" class="form-control"
+                                        placeholder="Driver License" />
                                     </div>
                                     <div class="form-group col-md-12">
                                       <label>Job Description</label>
-                                      <textarea
-                                        class="form-control"
-                                        formControlName="job_desc"
-                                        placeholder="Job Description"
-                                      ></textarea>
+                                      <textarea class="form-control" formControlName="job_desc"
+                                        placeholder="Job Description"></textarea>
                                     </div>
                                     <div class="form-group col-md-12">
                                       <label>Job Description</label>
@@ -650,19 +441,11 @@
                                 <!--Addtional Fields-->
                                 <div class="row">
                                   <div class="col-md-12">
-                                    <a
-                                      href="javscript:;"
-                                      class="deleteDemandRow"
-                                      *ngIf="
+                                    <a href="javscript:;" class="deleteDemandRow" *ngIf="
                                         locationForm.controls['location']
                                           .controls.length > 1
-                                      "
-                                      (click)="removeItem(i)"
-                                    >
-                                      <i
-                                        class="fa fa-trash"
-                                        aria-hidden="true"
-                                      ></i>
+                                      " (click)="removeItem(i)">
+                                      <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                   </div>
                                 </div>
@@ -672,31 +455,23 @@
                         </div>
                         <div class="col-md-4">
                           <div>
-                            <a (click)="addItem()" class="btn btn-primary"
-                              ><i class="fa fa-plus"></i>Add Demand Row</a
-                            >
+                            <a (click)="addItem()" class="btn btn-primary"><i class="fa fa-plus"></i>Add Demand Row</a>
                           </div>
                         </div>
                       </div>
                       <div class="stepButtons">
-                        <a
-                          class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          (click)="goPrevious()"
-                          data-ktwizard-type="action-prev"
-                        >
+                        <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                          (click)="goPrevious()" data-ktwizard-type="action-prev">
                           <span>
                             <i class="la la-angle-left"></i>
                             <span>Previous</span>
                           </span>
                         </a>
-                        <span
-                          >Last saved: {{ updated_at | date: 'medium' }}
+                        <span>Last saved: {{ updated_at | date: 'medium' }}
                         </span>
-                        <button
-                          type="submit"
+                        <button type="submit"
                           class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                          data-ktwizard-type="action-next"
-                        >
+                          data-ktwizard-type="action-next">
                           <span>
                             <span>Next Step</span>
                             <i class="la la-angle-right"></i>
@@ -711,80 +486,43 @@
               <!--end: Form Wizard Step 2-->
 
               <!--begin: Form Wizard Step 3-->
-              <div
-                class="stepContainer"
-                id="step1"
-                [ngClass]="{
+              <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(3),
                   'is-hide': !isTabActive(3)
-                }"
-              >
+                }">
                 <h3>
                   Benefits
                 </h3>
-                <form
-                  class="kt-form"
-                  id="kt_form"
-                  novalidate="novalidate"
-                  [formGroup]="benefitForm"
-                  (ngSubmit)="benfitSubmit()"
-                >
+                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="benefitForm"
+                  (ngSubmit)="benfitSubmit()">
                   <div class="row">
                     <div class="form-group col-md-4">
                       <label>Accommodation</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="accommodation"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="accommodation" [ngClass]="{
                           'is-invalid': submitted && f.accommodation.errors
-                        }"
-                        (change)="changeAccomdation($event)"
-                      >
+                        }" (change)="changeAccomdation($event)">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.accommodation.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.accommodation.errors" class="invalid-feedback">
                         <div *ngIf="f.accommodation.errors.required">
                           Accommodation is required
                         </div>
                       </div>
                       <div class="row">
-                        <div
-                          class="form-group col-md-12"
-                          *ngIf="accomdation === 'Allowance'"
-                        >
-                          <label
-                            >Accommodation Allowance (
-                            {{ currency ? currency : '' }} )</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id=""
-                            placeholder="Accomdation Allowance"
-                            formControlName="accomdationAllowance"
-                            aria-describedby="fname-error"
-                            [ngClass]="{
+                        <div class="form-group col-md-12" *ngIf="accomdation === 'Allowance'">
+                          <label>Accommodation Allowance (
+                            {{ currency ? currency : '' }} )</label>
+                          <input type="text" class="form-control" id="" placeholder="Accomdation Allowance"
+                            formControlName="accomdationAllowance" aria-describedby="fname-error" [ngClass]="{
                               'is-invalid':
                                 submitted && f.accomdationAllowance.errors
-                            }"
-                          />
-                          <div
-                            *ngIf="submitted && f.accomdationAllowance.errors"
-                            class="invalid-feedback"
-                          >
+                            }" />
+                          <div *ngIf="submitted && f.accomdationAllowance.errors" class="invalid-feedback">
                             <div *ngIf="f.accomdationAllowance.errors.required">
                               Accomdation Allowance is required
                             </div>
@@ -798,24 +536,14 @@
                       <label>Visa Sponsorship</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="visa_sponsorship"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="visa_sponsorship" [ngClass]="{
                           'is-invalid': submitted && f.visa_sponsorship.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Directly by employer"
-                          >Directly by employer</option
-                        >
+                        <option value="Directly by employer">Directly by employer</option>
                         <option value="Outsourced">Outsourced</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.visa_sponsorship.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.visa_sponsorship.errors" class="invalid-feedback">
                         <div *ngIf="f.visa_sponsorship.errors.required">
                           Visa sponsorship is required
                         </div>
@@ -828,62 +556,32 @@
                       <label>Transportation</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="transportation"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="transportation" [ngClass]="{
                           'is-invalid': submitted && f.transportation.errors
-                        }"
-                        (change)="changeTransportation($event)"
-                      >
+                        }" (change)="changeTransportation($event)">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.transportation.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.transportation.errors" class="invalid-feedback">
                         <div *ngIf="f.transportation.errors.required">
                           Transportation is required
                         </div>
                       </div>
                       <div class="row">
-                        <div
-                          class="form-group col-md-12"
-                          *ngIf="transportation == 'Allowance'"
-                        >
-                          <label
-                            >Transportation Allowance (
-                            {{ currency ? currency : '' }} )</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id=""
-                            placeholder="Transportation Allowance"
-                            formControlName="transportationAllowance"
-                            aria-describedby="fname-error"
-                            [ngClass]="{
+                        <div class="form-group col-md-12" *ngIf="transportation == 'Allowance'">
+                          <label>Transportation Allowance (
+                            {{ currency ? currency : '' }} )</label>
+                          <input type="text" class="form-control" id="" placeholder="Transportation Allowance"
+                            formControlName="transportationAllowance" aria-describedby="fname-error" [ngClass]="{
                               'is-invalid':
                                 submitted && f.transportationAllowance.errors
-                            }"
-                          />
-                          <div
-                            *ngIf="
+                            }" />
+                          <div *ngIf="
                               submitted && f.transportationAllowance.errors
-                            "
-                            class="invalid-feedback"
-                          >
-                            <div
-                              *ngIf="f.transportationAllowance.errors.required"
-                            >
+                            " class="invalid-feedback">
+                            <div *ngIf="f.transportationAllowance.errors.required">
                               Transportation Allowance is required
                             </div>
                           </div>
@@ -896,57 +594,29 @@
                       <label>Food</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="food"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="food" [ngClass]="{
                           'is-invalid': submitted && f.food.errors
-                        }"
-                        (change)="changeFood($event)"
-                      >
+                        }" (change)="changeFood($event)">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.food.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.food.errors" class="invalid-feedback">
                         <div *ngIf="f.food.errors.required">
                           Food is required
                         </div>
                       </div>
 
                       <div class="row">
-                        <div
-                          class="form-group col-md-12"
-                          *ngIf="food == 'Allowance'"
-                        >
-                          <label
-                            >Food Allowance (
-                            {{ currency ? currency : '' }} )</label
-                          >
-                          <input
-                            type="text"
-                            class="form-control"
-                            id=""
-                            placeholder="Food Allowance"
-                            formControlName="foodAllowance"
-                            aria-describedby="fname-error"
-                            [ngClass]="{
+                        <div class="form-group col-md-12" *ngIf="food == 'Allowance'">
+                          <label>Food Allowance (
+                            {{ currency ? currency : '' }} )</label>
+                          <input type="text" class="form-control" id="" placeholder="Food Allowance"
+                            formControlName="foodAllowance" aria-describedby="fname-error" [ngClass]="{
                               'is-invalid': submitted && f.foodAllowance.errors
-                            }"
-                          />
-                          <div
-                            *ngIf="submitted && f.foodAllowance.errors"
-                            class="invalid-feedback"
-                          >
+                            }" />
+                          <div *ngIf="submitted && f.foodAllowance.errors" class="invalid-feedback">
                             <div *ngIf="f.foodAllowance.errors.required">
                               Food Allowance is required
                             </div>
@@ -962,21 +632,11 @@
                     </div>
                     <div class="form-group col-md-4">
                       <!-- <label>City</label> -->
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="City"
-                        formControlName="employment_city"
-                        aria-describedby="fname-error"
-                        [ngClass]="{
+                      <input type="text" class="form-control" id="" placeholder="City" formControlName="employment_city"
+                        aria-describedby="fname-error" [ngClass]="{
                           'is-invalid': submitted && f.employment_city.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.employment_city.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.employment_city.errors" class="invalid-feedback">
                         <div *ngIf="f.employment_city.errors.required">
                           Employment city is required
                         </div>
@@ -984,21 +644,11 @@
                     </div>
                     <div class="form-group col-md-4">
                       <!-- <label>Country</label> -->
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="Country"
-                        formControlName="employment_country"
-                        aria-describedby="fname-error"
-                        [ngClass]="{
+                      <input type="text" class="form-control" id="" placeholder="Country"
+                        formControlName="employment_country" aria-describedby="fname-error" [ngClass]="{
                           'is-invalid': submitted && f.employment_country.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.employment_country.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.employment_country.errors" class="invalid-feedback">
                         <div *ngIf="f.employment_country.errors.required">
                           Employment country is required
                         </div>
@@ -1011,49 +661,30 @@
                       <label>Contract Duration</label>
                     </div>
                     <div class="form-group col-md-4">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="contract_duration"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="contract_duration" [ngClass]="{
                           'is-invalid': submitted && f.contract_duration.errors
-                        }"
-                        (change)="changeFood($event)"
-                      >
-                        <option [ngValue]="null"
-                          >Select Contract Duration</option
-                        >
+                        }" (change)="changeFood($event)">
+                        <option [ngValue]="null">Select Contract Duration</option>
                         <option value="6 Months">6 Months</option>
                         <option value="1 Year">1 Year</option>
                         <option value="2 Year">6 Year</option>
                         <option value="2+ Year">2+ Year</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.contract_duration.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.contract_duration.errors" class="invalid-feedback">
                         <div *ngIf="f.contract_duration.errors.required">
                           Contract duration is required
                         </div>
                       </div>
                     </div>
                     <div class="form-group col-md-4">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="contract_type"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="contract_type" [ngClass]="{
                           'is-invalid': submitted && f.contract_type.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select Contract Type</option>
                         <option value="Renewable">Renewable</option>
                         <option value="Nonrenewable">Nonrenewable</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.contract_type.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.contract_type.errors" class="invalid-feedback">
                         <div *ngIf="f.contract_type.errors.required">
                           Contract type is required
                         </div>
@@ -1067,20 +698,11 @@
                     </div>
                     <div class="form-group col-md-8">
                       <!-- <label>Working hours per day</label> -->
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="x hours"
-                        formControlName="working_hours_day"
-                        [ngClass]="{
+                      <input type="text" class="form-control" id="" placeholder="x hours"
+                        formControlName="working_hours_day" [ngClass]="{
                           'is-invalid': submitted && f.working_hours_day.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.working_hours_day.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.working_hours_day.errors" class="invalid-feedback">
                         <div *ngIf="f.working_hours_day.errors.required">
                           Working hours day is required
                         </div>
@@ -1093,20 +715,11 @@
                     </div>
                     <div class="form-group col-md-8">
                       <!-- <label>Working days per week</label> -->
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="x days"
-                        formControlName="working_hours_week"
-                        [ngClass]="{
+                      <input type="text" class="form-control" id="" placeholder="x days"
+                        formControlName="working_hours_week" [ngClass]="{
                           'is-invalid': submitted && f.working_hours_week.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.working_hours_week.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.working_hours_week.errors" class="invalid-feedback">
                         <div *ngIf="f.working_hours_week.errors.required">
                           Working hours week is required
                         </div>
@@ -1118,20 +731,11 @@
                       <label>Probation period</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="x months"
-                        formControlName="probation_period"
-                        [ngClass]="{
+                      <input type="text" class="form-control" id="" placeholder="x months"
+                        formControlName="probation_period" [ngClass]="{
                           'is-invalid': submitted && f.probation_period.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.probation_period.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.probation_period.errors" class="invalid-feedback">
                         <div *ngIf="f.probation_period.errors.required">
                           Probation period is required
                         </div>
@@ -1144,20 +748,11 @@
                       <label>Overtime</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="Overtime"
-                        formControlName="overtime"
+                      <input type="text" class="form-control" id="" placeholder="Overtime" formControlName="overtime"
                         [ngClass]="{
                           'is-invalid': submitted && f.overtime.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.overtime.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.overtime.errors" class="invalid-feedback">
                         <div *ngIf="f.overtime.errors.required">
                           Overtime is required
                         </div>
@@ -1169,27 +764,15 @@
                       <label>Medical Insurance</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="medical_insurance"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="medical_insurance" [ngClass]="{
                           'is-invalid': submitted && f.medical_insurance.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.medical_insurance.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.medical_insurance.errors" class="invalid-feedback">
                         <div *ngIf="f.medical_insurance.errors.required">
                           Medical insurance is required
                         </div>
@@ -1201,27 +784,15 @@
                       <label>Joining Ticket</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="joining_ticket"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="joining_ticket" [ngClass]="{
                           'is-invalid': submitted && f.joining_ticket.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.joining_ticket.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.joining_ticket.errors" class="invalid-feedback">
                         <div *ngIf="f.joining_ticket.errors.required">
                           Joining_ticket is required
                         </div>
@@ -1234,20 +805,11 @@
                       <label>Paid Leaves</label>
                     </div>
                     <div class="form-group col-md-4">
-                      <input
-                        type="text"
-                        class="form-control"
-                        id=""
-                        placeholder="Paid Leaves"
-                        formControlName="paid_leaves"
-                        [ngClass]="{
+                      <input type="text" class="form-control" id="" placeholder="Paid Leaves"
+                        formControlName="paid_leaves" [ngClass]="{
                           'is-invalid': submitted && f.paid_leaves.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="submitted && f.paid_leaves.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="submitted && f.paid_leaves.errors" class="invalid-feedback">
                         <div *ngIf="f.paid_leaves.errors.required">
                           Paid leaves is required
                         </div>
@@ -1255,23 +817,15 @@
                     </div>
                     <div class="form-group col-md-4">
                       <!-- <label>Frequency</label> -->
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="paid_leaves_duration"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="paid_leaves_duration" [ngClass]="{
                           'is-invalid':
                             submitted && f.paid_leaves_duration.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select Frequency</option>
                         <option value="Per year">Per year </option>
                         <option value="Per 2 years">Per 2 years</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.paid_leaves_duration.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.paid_leaves_duration.errors" class="invalid-feedback">
                         <div *ngIf="f.paid_leaves_duration.errors.required">
                           Paid leaves duration is required
                         </div>
@@ -1284,27 +838,15 @@
                       <label>Leave ticket</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="leave_ticket"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="leave_ticket" [ngClass]="{
                           'is-invalid': submitted && f.leave_ticket.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.leave_ticket.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.leave_ticket.errors" class="invalid-feedback">
                         <div *ngIf="f.leave_ticket.errors.required">
                           Leave ticket is required
                         </div>
@@ -1316,27 +858,15 @@
                       <label>Uniform & PPEs</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="uniform"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="uniform" [ngClass]="{
                           'is-invalid': submitted && f.uniform.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="submitted && f.uniform.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="submitted && f.uniform.errors" class="invalid-feedback">
                         <div *ngIf="f.uniform.errors.required">
                           Uniform is required
                         </div>
@@ -1349,30 +879,21 @@
                       <label>Other benefits</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <textarea
-                        class="form-control"
-                        rows="2"
-                        formControlName="other_benefits"
-                      ></textarea>
+                      <textarea class="form-control" rows="2" formControlName="other_benefits"></textarea>
                     </div>
                   </div>
                   <div class="stepButtons">
-                    <a
-                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      (click)="goPrevious()"
-                      data-ktwizard-type="action-prev"
-                    >
+                    <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      (click)="goPrevious()" data-ktwizard-type="action-prev">
                       <span>
                         <i class="la la-angle-left"></i>
                         <span>Previous</span>
                       </span>
                     </a>
                     <span>Last saved: {{ updated_at | date: 'medium' }} </span>
-                    <button
-                      type="submit"
+                    <button type="submit"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next"
-                    >
+                      data-ktwizard-type="action-next">
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -1385,48 +906,30 @@
               <!--end: Form Wizard Step 3-->
 
               <!--begin: Form Wizard Step 6-->
-              <div
-                class="stepContainer"
-                id="step1"
-                [ngClass]="{
+              <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(4),
                   'is-hide': !isTabActive(4)
-                }"
-              >
+                }">
                 <h3>
                   Terms and Conditions
                 </h3>
-                <form
-                  class="kt-form"
-                  id="kt_form"
-                  novalidate="novalidate"
-                  [formGroup]="termForm"
-                  (ngSubmit)="termSubmit()"
-                >
+                <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
+                  (ngSubmit)="termSubmit()">
                   <div class="row">
                     <div class="form-group col-md-4">
                       <label>Mode of interview</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="mode_of_interview"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="mode_of_interview" [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.mode_of_interview.errors
-                        }"
-                        (change)="changeMode($event)"
-                      >
+                        }" (change)="changeMode($event)">
                         <option [ngValue]="null">Select</option>
                         <option value="In person">In person</option>
                         <option value="Online">Online</option>
                         <option value="CV Selection">CV Selection</option>
                       </select>
-                      <div
-                        *ngIf="termsubmitted && m.mode_of_interview.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="termsubmitted && m.mode_of_interview.errors" class="invalid-feedback">
                         <div *ngIf="m.mode_of_interview.errors.required">
                           Mode of interview is required
                         </div>
@@ -1438,26 +941,14 @@
                       <label>No. of delegates for interview</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <div
-                        class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
-                      >
-                        <input
-                          id="kt_touchspin_1"
-                          type="text"
-                          class="form-control"
-                          value=""
-                          placeholder="No of Delegates"
-                          formControlName="no_of_delegates"
-                          aria-describedby="fname-error"
+                      <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                        <input id="kt_touchspin_1" type="text" class="form-control" value=""
+                          placeholder="No of Delegates" formControlName="no_of_delegates" aria-describedby="fname-error"
                           [ngClass]="{
                             'is-invalid':
                               termsubmitted && m.no_of_delegates.errors
-                          }"
-                        />
-                        <div
-                          *ngIf="termsubmitted && m.no_of_delegates.errors"
-                          class="invalid-feedback"
-                        >
+                          }" />
+                        <div *ngIf="termsubmitted && m.no_of_delegates.errors" class="invalid-feedback">
                           <div *ngIf="m.no_of_delegates.errors.required">
                             No of delegates is required
                           </div>
@@ -1471,28 +962,16 @@
                       <label>Flights for delegates</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="flights_for_delegates"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="flights_for_delegates" [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.flights_for_delegates.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="termsubmitted && m.flights_for_delegates.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="termsubmitted && m.flights_for_delegates.errors" class="invalid-feedback">
                         <div *ngIf="m.flights_for_delegates.errors.required">
                           Flights for delegates is required
                         </div>
@@ -1504,28 +983,16 @@
                       <label>Hotels for delegate</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <select
-                        id="accommodation"
-                        class="form-control"
-                        formControlName="hotels_for_delegates"
-                        [ngClass]="{
+                      <select id="accommodation" class="form-control" formControlName="hotels_for_delegates" [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.hotels_for_delegates.errors
-                        }"
-                      >
+                        }">
                         <option [ngValue]="null">Select</option>
-                        <option value="Provided by company"
-                          >Provided by company</option
-                        >
-                        <option value="Not provided by company"
-                          >Not provided by company</option
-                        >
+                        <option value="Provided by company">Provided by company</option>
+                        <option value="Not provided by company">Not provided by company</option>
                         <option value="Allowance">Allowance</option>
                       </select>
-                      <div
-                        *ngIf="termsubmitted && m.hotels_for_delegates.errors"
-                        class="invalid-feedback"
-                      >
+                      <div *ngIf="termsubmitted && m.hotels_for_delegates.errors" class="invalid-feedback">
                         <div *ngIf="m.hotels_for_delegates.errors.required">
                           Hotels for delegates is required
                         </div>
@@ -1538,22 +1005,12 @@
                       <label>Recruitment Fee</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <input
-                        type="text"
-                        name=""
-                        class="form-control"
-                        placeholder="Recruitment Fee"
-                        formControlName="recruitment_fee"
-                        aria-describedby="fname-error"
-                        [ngClass]="{
+                      <input type="text" name="" class="form-control" placeholder="Recruitment Fee"
+                        formControlName="recruitment_fee" aria-describedby="fname-error" [ngClass]="{
                           'is-invalid':
                             termsubmitted && m.recruitment_fee.errors
-                        }"
-                      />
-                      <div
-                        *ngIf="termsubmitted && m.recruitment_fee.errors"
-                        class="invalid-feedback"
-                      >
+                        }" />
+                      <div *ngIf="termsubmitted && m.recruitment_fee.errors" class="invalid-feedback">
                         <div *ngIf="m.recruitment_fee.errors.required">
                           Recruitment fee is required
                         </div>
@@ -1561,22 +1018,17 @@
                     </div>
                   </div>
                   <div class="stepButtons">
-                    <a
-                      class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      (click)="goPrevious()"
-                      data-ktwizard-type="action-prev"
-                    >
+                    <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                      (click)="goPrevious()" data-ktwizard-type="action-prev">
                       <span>
                         <i class="la la-angle-left"></i>
                         <span>Previous</span>
                       </span>
                     </a>
                     <span>Last saved: {{ updated_at | date: 'medium' }} </span>
-                    <button
-                      type="submit"
+                    <button type="submit"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                      data-ktwizard-type="action-next"
-                    >
+                      data-ktwizard-type="action-next">
                       <span>
                         <span>Next Step</span>
                         <i class="la la-angle-right"></i>
@@ -1586,23 +1038,17 @@
                 </form>
               </div>
 
-              <div
-                class="stepContainer"
-                id="step1"
-                [ngClass]="{
+              <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(5),
                   'is-hide': !isTabActive(5)
-                }"
-              >
+                }">
                 <h3>Review & Submit</h3>
-                <div class="kt-form__section kt-form__section--first">
+                <div class="kt-form__section kt-form__section--first" *ngIf="demand">
                   <div class="kt-wizard-v2__review">
                     <div class="kt-wizard-v2__review-item">
                       <div class="kt-wizard-v2__review-title">
                         Demand Details
-                        <a class="stepEditLink" (click)="showTab(1)"
-                          ><i class="far fa-edit"></i
-                        ></a>
+                        <a class="stepEditLink" (click)="showTab(1)"><i class="far fa-edit"></i></a>
                       </div>
                       <div class="kt-wizard-v2__review-content">
                         <ul class="nostyle alignMe">
@@ -1622,15 +1068,10 @@
                     <div class="kt-wizard-v2__review-item">
                       <div class="kt-wizard-v2__review-title">
                         Demand Category
-                        <a class="stepEditLink" (click)="showTab(2)"
-                          ><i class="far fa-edit"></i
-                        ></a>
+                        <a class="stepEditLink" (click)="showTab(2)"><i class="far fa-edit"></i></a>
                       </div>
                       <div class="kt-wizard-v2__review-content">
-                        <table
-                          class="table table-bordered"
-                          *ngIf="demand && demand.demand_category.length > 0"
-                        >
+                        <table class="table table-bordered" *ngIf="demand && demand.demand_category.length > 0">
                           <thead>
                             <th>Sno</th>
                             <th>Industry</th>
@@ -1641,12 +1082,10 @@
                             <th>Details</th>
                           </thead>
                           <tbody>
-                            <tr
-                              *ngFor="
+                            <tr *ngFor="
                                 let array of demand.demand_category;
                                 let i = index
-                              "
-                            >
+                              ">
                               <td>{{ i + 1 }}</td>
                               <td>
                                 {{ getCategory(array.parent_category_id) }}
@@ -1659,7 +1098,8 @@
                                 <div *ngIf="showDetailData">
                                   <p>Age Brackets:{{(array.age_bracket)?array.age_bracket:"-"}}</p>
                                   <p>Qualification:{{(array.qualification)?array.qualification:"-"}}</p>
-                                  <p>Years Of Experience:{{(array.years_of_experience)?array.years_of_experience:"-"}}</p>
+                                  <p>Years Of Experience:{{(array.years_of_experience)?array.years_of_experience:"-"}}
+                                  </p>
                                   <p>Driver License:{{(array.driver_license)?array.driver_license:"-"}}</p>
                                   <p>Job Desc:{{(array.job_desc)?array.job_desc:"-"}}</p>
                                 </div>
@@ -1672,9 +1112,7 @@
                     <div class="kt-wizard-v2__review-item">
                       <div class="kt-wizard-v2__review-title">
                         Benefits
-                        <a class="stepEditLink" (click)="showTab(3)"
-                          ><i class="far fa-edit"></i
-                        ></a>
+                        <a class="stepEditLink" (click)="showTab(3)"><i class="far fa-edit"></i></a>
                       </div>
                       <div class="kt-wizard-v2__review-content">
                         <ul class="nostyle alignMe">
@@ -1695,8 +1133,7 @@
                           </li>
 
                           <li>
-                            <strong> Transportation </strong
-                            >{{
+                            <strong> Transportation </strong>{{
                               demand.transportation
                                 ? demand.transportation
                                 : '-'
@@ -1709,8 +1146,7 @@
                           </li>
 
                           <li>
-                            <strong>Contract duration </strong
-                            >{{
+                            <strong>Contract duration </strong>{{
                               demand.contract_duration
                                 ? demand.contract_duration
                                 : '-'
@@ -1718,8 +1154,7 @@
                           </li>
 
                           <li>
-                            <strong>Working hours per day </strong
-                            >{{
+                            <strong>Working hours per day </strong>{{
                               demand.working_hours_day
                                 ? demand.working_hours_day
                                 : '-'
@@ -1727,8 +1162,7 @@
                           </li>
 
                           <li>
-                            <strong>Working days per week </strong
-                            >{{
+                            <strong>Working days per week </strong>{{
                               demand.working_hours_week
                                 ? demand.working_hours_week
                                 : '-'
@@ -1736,8 +1170,7 @@
                           </li>
 
                           <li>
-                            <strong>Probation period </strong
-                            >{{
+                            <strong>Probation period </strong>{{
                               demand.probation_period
                                 ? demand.probation_period
                                 : '-'
@@ -1745,42 +1178,35 @@
                           </li>
 
                           <li>
-                            <strong>Overtime </strong
-                            >{{ demand.overtime ? demand.overtime : '-' }}
+                            <strong>Overtime </strong>{{ demand.overtime ? demand.overtime : '-' }}
                           </li>
                           <li>
-                            <strong> Medical Insurance </strong
-                            >{{
+                            <strong> Medical Insurance </strong>{{
                               demand.medical_insurance
                                 ? demand.medical_insurance
                                 : '-'
                             }}
                           </li>
                           <li>
-                            <strong> Joining Ticket </strong
-                            >{{
+                            <strong> Joining Ticket </strong>{{
                               demand.joining_ticket
                                 ? demand.joining_ticket
                                 : '-'
                             }}
                           </li>
                           <li>
-                            <strong> Paid leaves </strong
-                            >{{ demand.paid_leaves ? demand.paid_leaves : '-' }}
+                            <strong> Paid leaves </strong>{{ demand.paid_leaves ? demand.paid_leaves : '-' }}
                           </li>
                           <li>
-                            <strong> Leave ticket </strong
-                            >{{
+                            <strong> Leave ticket </strong>{{
                               demand.leave_ticket ? demand.leave_ticket : '-'
                             }}
                           </li>
                           <li>
-                            <strong> Uniform & PPEs </strong
-                            >{{ demand.uniform ? demand.uniform : '-' }}
+                            <strong> Uniform & PPEs </strong>{{ demand.uniform ? demand.uniform : '-' }}
                           </li>
                           <li>
-                            <strong> Other benefits </strong
-                            >{{
+                            <strong> Other benefits </strong>{{
                               demand.other_benefits
                                 ? demand.other_benefits
                                 : '-'
@@ -1792,9 +1218,7 @@
                     <div class="kt-wizard-v2__review-item">
                       <div class="kt-wizard-v2__review-title">
                         Terms & Conditions
-                        <a class="stepEditLink" (click)="showTab(4)"
-                          ><i class="far fa-edit"></i
-                        ></a>
+                        <a class="stepEditLink" (click)="showTab(4)"><i class="far fa-edit"></i></a>
                       </div>
                       <div class="kt-wizard-v2__review-content">
                         <ul class="nostyle alignMe">
@@ -1807,7 +1231,7 @@
                             }}
                           </li>
 
-                          <li *ngIf="demand.recruitment_fee">
+                          <li *ngIf="demand && demand.recruitment_fee">
                             <strong> Recruitment fee</strong>
                             {{
                               demand.recruitment_fee
@@ -1816,16 +1240,15 @@
                             }}
                           </li>
 
-                          <li *ngIf="demand.no_of_delegates">
-                            <strong> No of delegates </strong
-                            >{{
+                          <li *ngIf="demand && demand.no_of_delegates">
+                            <strong> No of delegates </strong>{{
                               demand.no_of_delegates
                                 ? demand.no_of_delegates
                                 : '-'
                             }}
                           </li>
 
-                          <li *ngIf="demand.flights_for_delegates">
+                          <li *ngIf="demand && demand.flights_for_delegates">
                             <strong> Flights for delegates </strong>
                             {{
                               demand.flights_for_delegates
@@ -1834,9 +1257,8 @@
                             }}
                           </li>
 
-                          <li *ngIf="demand.hotels_for_delegates">
-                            <strong>Hotels for delegates </strong
-                            >{{
+                          <li *ngIf="demand && demand.hotels_for_delegates">
+                            <strong>Hotels for delegates </strong>{{
                               demand.hotels_for_delegates
                                 ? demand.hotels_for_delegates
                                 : '-'
@@ -1850,23 +1272,17 @@
                 <!-- <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
                 (ngSubmit)="termSubmit()"> -->
                 <div class="stepButtons">
-                  <a
-                    class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    (click)="goPrevious()"
-                    data-ktwizard-type="action-prev"
-                  >
+                  <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                    (click)="goPrevious()" data-ktwizard-type="action-prev">
                     <span>
                       <i class="la la-angle-left"></i>
                       <span>Previous</span>
                     </span>
                   </a>
                   <span>Last saved: {{ updated_at | date: 'medium' }} </span>
-                  <a
-                    type="submit"
+                  <a type="submit"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-next"
-                    (click)="reviewSubmit()"
-                  >
+                    data-ktwizard-type="action-next" (click)="reviewSubmit()">
                     <span>
                       <span>Next</span>
                       <i class="la la-angle-right"></i>
@@ -1876,14 +1292,10 @@
                 <!-- </form> -->
               </div>
 
-              <div
-                class="stepContainer"
-                id="step1"
-                [ngClass]="{
+              <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(6),
                   'is-hide': !isTabActive(6)
-                }"
-              >
+                }">
                 <h3>Post Demand</h3>
                 <div class="text-center">
                   <h2>Two ways to get manpower?</h2>
@@ -1898,12 +1310,7 @@
                     <label class="kt-option">
                       <span class="kt-option__control">
                         <span class="kt-radio kt-radio--bold kt-radio--brand">
-                          <input
-                            type="radio"
-                            name="m_option_1"
-                            [(ngModel)]="postDemand"
-                            value="1"
-                          />
+                          <input type="radio" name="m_option_1" [(ngModel)]="postDemand" value="1" />
                           <span></span>
                         </span>
                       </span>
@@ -1929,12 +1336,7 @@
                     <label class="kt-option">
                       <span class="kt-option__control">
                         <span class="kt-radio kt-radio--bold kt-radio--brand">
-                          <input
-                            type="radio"
-                            name="m_option_1"
-                            [(ngModel)]="postDemand"
-                            value="2"
-                          />
+                          <input type="radio" name="m_option_1" [(ngModel)]="postDemand" value="2" />
                           <span></span>
                         </span>
                       </span>
@@ -1960,23 +1362,17 @@
                 <!-- <form class="kt-form" id="kt_form" novalidate="novalidate" [formGroup]="termForm"
               (ngSubmit)="termSubmit()"> -->
                 <div class="stepButtons">
-                  <a
-                    class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    (click)="goPrevious()"
-                    data-ktwizard-type="action-prev"
-                  >
+                  <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                    (click)="goPrevious()" data-ktwizard-type="action-prev">
                     <span>
                       <i class="la la-angle-left"></i>
                       <span>Previous</span>
                     </span>
                   </a>
                   <span>Last saved: {{ updated_at | date: 'medium' }} </span>
-                  <button
-                    type="submit"
+                  <button type="submit"
                     class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                    data-ktwizard-type="action-next"
-                    (click)="updateDemand(content)"
-                  >
+                    data-ktwizard-type="action-next" (click)="updateDemand(content)">
                     <span>
                       <span> Post Demand</span>
                       <i class="la la-angle-right"></i>
@@ -2001,12 +1397,7 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Demand Created</span>
     </h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modal.dismiss('Cross click ')"
-    >
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>

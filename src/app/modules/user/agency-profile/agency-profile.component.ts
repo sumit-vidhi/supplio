@@ -57,7 +57,7 @@ export class AgencyProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<number> = [];
-  minTab = 12; //Minimum Tab Step
+  minTab = 1; //Minimum Tab Step
   maxTab = 14; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
@@ -662,7 +662,7 @@ export class AgencyProfileComponent implements OnInit {
     });
   }
 
-  workUpload(event) {
+  workUpload() {
     this.workSubmitted = true;
     if (this.workForm.invalid) {
       return;
@@ -1320,9 +1320,9 @@ export class AgencyProfileComponent implements OnInit {
       this.address = place['formatted_address'];
       this.formattedAddress = place['formatted_address'];
       this.zone.run(() => (this.formattedAddress = place['formatted_address']));
-      this.addressForm.controls[i].setValue({ address: this.address });
+      this.addressForm.controls[i].patchValue({ address: this.address });
     } else {
-      this.addressForm.controls[i].setValue({ address: '' });
+      this.addressForm.controls[i].patchValue({ address: '' });
     }
   }
   get addressForm(): FormArray {
