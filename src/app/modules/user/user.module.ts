@@ -25,6 +25,8 @@ import { PricingComponent } from './pricing/pricing.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { HttpModule } from '@angular/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 @NgModule({
   declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
   imports: [
@@ -37,13 +39,15 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     NgSelectModule,
     NgxIntlTelInputModule,
     AutocompleteModule,
+    HttpModule,
+    ShareButtonsModule,
+    ShareIconsModule,
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     SelectDropDownModule,
     JwSocialButtonsModule,
     NgxPaginationModule,
-    ShareButtonsModule,
-    ShareIconsModule
+    FontAwesomeModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
