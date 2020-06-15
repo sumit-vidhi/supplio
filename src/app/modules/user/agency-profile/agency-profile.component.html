@@ -2297,11 +2297,11 @@
                           </a>
 
                           <a href="{{ item.filepath }}" target="_blank">
-                            <i
+                            <!-- <i
                               class="{{ getFileExtension(item.filepath) }}"
                               style="color: #5cb85c;"
                               aria-hidden="true"
-                            ></i>
+                            ></i> -->
                             {{ item.filename }}</a
                           >
                         </li>
@@ -2381,7 +2381,10 @@
                             [formGroup]="sendEmailForm"
                             (ngSubmit)="send(sendEmailForm.value)"
                           >
-                            <input formControlName="toAddress" />
+                            <input
+                              formControlName="toAddress"
+                              class="form-control col-md-9"
+                            />
                             <p
                               *ngIf="sendEmail && !sendEmailForm.valid"
                               style="color: red;"
@@ -2389,7 +2392,9 @@
                               Please enter a valid and "," seprate email
                               address.
                             </p>
-                            <button type="submit">Send</button>
+                            <button class="btn btn-primamry" type="submit">
+                              Send
+                            </button>
                           </form>
                         </div>
                       </div>
@@ -2424,8 +2429,8 @@
                 class="stepContainer"
                 id="step1"
                 [ngClass]="{
-                  'is-display': isTabActive(1),
-                  'is-hide': !isTabActive(1)
+                  'is-display': isTabActive(14),
+                  'is-hide': !isTabActive(14)
                 }"
               >
                 <div class="kt-heading kt-heading--md">
@@ -2436,11 +2441,16 @@
                   <div class="list-group list-group-flush">
                     <div class="list-group-item">
                       <div class="form-row">
-                        <div class="form-group col-6">
-                          <h4>Billing information</h4>
-                          <h6>Membership</h6>
-                          <div class="alert alert-outline-success" role="alert">
-                            <strong>Current Membership: </strong> Free
+                        <div class="form-group col-12">
+                          <h4>Membership</h4>
+                          <br />
+                          <div class="col-md-6">
+                            <div
+                              class="alert alert-outline-success"
+                              role="alert"
+                            >
+                              <strong>Current Membership : </strong> &nbsp; Free
+                            </div>
                           </div>
                           <p>You did not subscribe to any membership yet.</p>
                           <p>
@@ -2449,7 +2459,16 @@
                             boost your visibility.
                           </p>
                           <a
-                            class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+                            class="btn btn-secondary btn-md btn-tall btn-wide"
+                            routerLink="/user/pricing"
+                            >Learn more about memberships</a
+                          >
+                          <div
+                            class="kt-separator kt-separator--border-dashed kt-separator--space-md"
+                          ></div>
+                          <h4>Billing information</h4>
+                          <a
+                            class="btn btn-secondary btn-md btn-tall btn-wide"
                             routerLink="/user/pricing"
                             >Create my billing information</a
                           >
