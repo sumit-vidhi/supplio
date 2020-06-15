@@ -124,6 +124,15 @@ export class AgencyProfileComponent implements OnInit {
   url = 'http://jasonwatmore.com';
   sendEmailForm: FormGroup;
   sendEmail = false;
+  @ViewChild('labelImport', { static: false }) labelImport: ElementRef;
+  @ViewChild('labelPhotoImport', { static: false }) labelPhotoImport: ElementRef;
+  @ViewChild('labelProfileImport', { static: false }) labelProfileImport: ElementRef;
+  @ViewChild('labelAwardImport', { static: false }) labelAwardImport: ElementRef;
+  @ViewChild('labelCompanyImport', { static: false }) labelCompanyImport: ElementRef;
+  @ViewChild('labelDocumentImport', { static: false }) labelDocumentImport: ElementRef;
+  @ViewChild('labelidentityImport', { static: false }) labelidentityImport: ElementRef;
+  @ViewChild('labellogImport', { static: false }) labellogImport: ElementRef;
+
   config = {
     displayKey: 'name', // if objects array passed which key to be displayed defaults to description
     search: true,
@@ -608,6 +617,7 @@ export class AgencyProfileComponent implements OnInit {
   }
 
   changeFile(event) {
+    this.labelImport.nativeElement.innerText = event.target.files[0].name;
     this.fileData = event.target.files[0];
   }
   get team() {
@@ -615,9 +625,11 @@ export class AgencyProfileComponent implements OnInit {
   }
 
   changePhotoFile(event) {
+    this.labelPhotoImport.nativeElement.innerText = event.target.files[0].name;
     this.photoData = event.target.files[0];
   }
   changeProfileFile(event) {
+    this.labelProfileImport.nativeElement.innerText = event.target.files[0].name;
     this.profileData = event.target.files[0];
   }
 
@@ -680,10 +692,12 @@ export class AgencyProfileComponent implements OnInit {
 
 
   changeAwardFile(event) {
+    this.labelAwardImport.nativeElement.innerText = event.target.files[0].name;
     this.awardData = event.target.files[0];
   }
 
   changeCompanyFile(event) {
+    this.labelCompanyImport.nativeElement.innerText = event.target.files[0].name;
     this.companyData = event.target.files[0];
   }
   onExperienceSubmit() {
@@ -934,16 +948,19 @@ export class AgencyProfileComponent implements OnInit {
   }
 
   fileDocumentEvent(e) {
+    this.labelDocumentImport.nativeElement.innerText = e.target.files[0].name;
     this.fileDocumentdata = e.target.files[0];
     this.imageDocumentForm.get('myFile').setValue(this.fileDocumentdata);
     console.log(this.fileDocumentdata);
   }
   fileIdentityEvent(e) {
+    this.labelidentityImport.nativeElement.innerText = e.target.files[0].name;
     this.fileIdentity = e.target.files[0];
     this.imageDocumentForm.get('identity').setValue(this.fileIdentity);
     // console.log(this.filedata);
   }
   fileLogoEvent(e) {
+    this.labellogImport.nativeElement.innerText = e.target.files[0].name;
     this.filelogo = e.target.files[0];
     this.imageDocumentForm.get('logo').setValue(this.filelogo);
     //console.log(this.filedata);

@@ -763,15 +763,22 @@
                       </div>
                       <div class="form-group col-md-6">
                         <label>Image</label>
-                        <input type="file" formControlName="image" class="form-control" (change)="changeFile($event)"
-                          [ngClass]="{
-                            'is-invalid': workSubmitted && w.image.errors
-                          }" />
-                        <div *ngIf="workSubmitted && w.image.errors" class="invalid-feedback">
-                          <div *ngIf="w.image.errors">
-                            Image is required
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="image" id="importFile"
+                            (change)="changeFile($event)" [ngClass]="{
+                              'is-invalid': workSubmitted && w.image.errors
+                            }" />
+                          <label class="custom-file-label" #labelImport for="importFile">
+                            Choose file</label>
+                          <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
+
+                          <div *ngIf="workSubmitted && w.image.errors" class="invalid-feedback">
+                            <div *ngIf="w.image.errors">
+                              Image is required
+                            </div>
                           </div>
                         </div>
+
                       </div>
                       <div class="form-groupcol-md-2">
                         <div>
@@ -1081,14 +1088,20 @@
 
                           <div class="form-group col-6">
                             <label>Certificate File</label>
-                            <input type="file" formControlName="image" class="form-control"
-                              (change)="changeAwardFile($event)" [ngClass]="{
-                                'is-invalid':
-                                  awardSubmitted && award.image.errors
-                              }" />
-                            <div *ngIf="awardSubmitted && award.image.errors" class="invalid-feedback">
-                              <div *ngIf="award.image.errors">
-                                Certificate is required
+
+
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" formControlName="image" id="importFile"
+                                (change)="changeAwardFile($event)" [ngClass]="{
+                                  'is-invalid':
+                                    awardSubmitted && award.image.errors
+                                }" />
+                              <label class="custom-file-label" #labelAwardImport for="importFile">
+                                Choose file</label>
+                              <div *ngIf="awardSubmitted && award.image.errors" class="invalid-feedback">
+                                <div *ngIf="award.image.errors">
+                                  Certificate is required
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -1156,10 +1169,22 @@
                       (ngSubmit)="imageDocumentSubmit()" enctype="multipart/form-data">
                       <div class="form-group">
                         <label>Trade Licence</label>
-                        <input type="file" formControlName="myFile" (change)="fileDocumentEvent($event)" />
+                        <!-- <input type="file" formControlName="myFile" (change)="fileDocumentEvent($event)" />
                         <div *ngIf="imageSubmitted && i.myFile.errors" style="color: red;">
                           <div *ngIf="i.myFile.errors.required">
                             Trade Licence is required
+                          </div>
+                        </div> -->
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="myFile" id="importFile"
+                            (change)="fileDocumentEvent($event)" />
+                          <label class="custom-file-label" #labelDocumentImport for="importFile">
+                            Choose file</label>
+                          <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
+                          <div *ngIf="imageSubmitted && i.myFile.errors" style="color: red;">
+                            <div *ngIf="i.myFile.errors.required">
+                              Trade Licence is required
+                            </div>
                           </div>
                         </div>
                         <div *ngIf="image && image.trade_license">
@@ -1175,12 +1200,23 @@
                       </div>
                       <div class="form-group">
                         <label>Proof of identity</label>
-                        <input type="file" formControlName="identity" (change)="fileIdentityEvent($event)" />
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="identity" id="importFile"
+                            (change)="fileIdentityEvent($event)" />
+                          <label class="custom-file-label" #labelidentityImport for="importFile">
+                            Choose file</label>
+                          <div *ngIf="imageSubmitted && i.identity.errors" style="color: red;">
+                            <div *ngIf="i.identity.errors.required">
+                              Proof of identity is required
+                            </div>
+                          </div>
+                        </div>
+                        <!-- <input type="file" formControlName="identity" (change)="fileIdentityEvent($event)" />
                         <div *ngIf="imageSubmitted && i.identity.errors" style="color: red;">
                           <div *ngIf="i.identity.errors.required">
                             Proof of identity is required
                           </div>
-                        </div>
+                        </div>-->
                         <div *ngIf="image && image.proof_of_identity">
                           <a href="{{ image.proof_of_identity }}" target="_blank"><i class="{{
                                 getFileExtension(image.proof_of_identity)
@@ -1193,12 +1229,25 @@
                       </div>
                       <div class="form-group">
                         <label>Compony Logo</label>
-                        <input type="file" formControlName="logo" (change)="fileLogoEvent($event)" />
+
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="logo" id="importFile"
+                            (change)="fileLogoEvent($event)" />
+                          <label class="custom-file-label" #labellogImport for="importFile">
+                            Choose file</label>
+                          <div *ngIf="imageSubmitted && i.logo.errors" style="color: red;">
+                            <div *ngIf="i.logo.errors.required">
+                              Company logo is required
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- <input type="file" formControlName="logo" (change)="fileLogoEvent($event)" />
                         <div *ngIf="imageSubmitted && i.logo.errors" style="color: red;">
                           <div *ngIf="i.logo.errors.required">
                             Company logo is required
                           </div>
-                        </div>
+                        </div> -->
                         <div *ngIf="image && image.company_logo">
                           <a href="{{ image.company_logo }}" target="_blank">
                             <i class="{{ getFileExtension(image.company_logo) }}" style="color: #5cb85c;"
@@ -1273,25 +1322,36 @@
                       </div>
                       <div class="form-group col-6">
                         <label>Photo</label>
-                        <input type="file" formControlName="photo" class="form-control" placeholder="name"
-                          (change)="changePhotoFile($event)" [ngClass]="{
+
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="photo" id="importFile"
+                            (change)="changePhotoFile($event)" [ngClass]="{
                             'is-invalid': teamSubmitted && team.photo.errors
                           }" />
-                        <div *ngIf="teamSubmitted && team.photo.errors" class="invalid-feedback">
-                          <div *ngIf="team.photo.errors.required">
-                            Name is required
+                          <label class="custom-file-label" #labelPhotoImport for="importFile">
+                            Choose file</label>
+                          <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
+                          <div *ngIf="teamSubmitted && team.photo.errors" class="invalid-feedback">
+                            <div *ngIf="team.photo.errors.required">
+                              Photo is required
+                            </div>
                           </div>
                         </div>
                       </div>
                       <div class="form-group col-6">
                         <label>Profile Photo</label>
-                        <input type="file" formControlName="profile" class="form-control"
-                          (change)="changeProfileFile($event)" [ngClass]="{
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="profile" id="importFile"
+                            (change)="changeProfileFile($event)" [ngClass]="{
                             'is-invalid': teamSubmitted && team.profile.errors
                           }" />
-                        <div *ngIf="teamSubmitted && team.profile.errors" class="invalid-feedback">
-                          <div *ngIf="team.profile.errors">
-                            Image is required
+                          <label class="custom-file-label" #labelProfileImport for="importFile">
+                            Choose file</label>
+                          <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
+                          <div *ngIf="teamSubmitted && team.profile.errors" class="invalid-feedback">
+                            <div *ngIf="team.profile.errors">
+                              Image is required
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1381,14 +1441,18 @@
 
                       <div class="form-group col-6">
                         <label>Image</label>
-                        <input type="file" formControlName="image" class="form-control"
-                          (change)="changeCompanyFile($event)" [ngClass]="{
-                            'is-invalid':
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" formControlName="image" id="importFile"
+                            (change)="changeCompanyFile($event)" [ngClass]="{
+                              'is-invalid':
                               companySubmitted && company.image.errors
-                          }" />
-                        <div *ngIf="companySubmitted && company.image.errors" class="invalid-feedback">
-                          <div *ngIf="company.image.errors">
-                            Image is required
+                            }" />
+                          <label class="custom-file-label" #labelCompanyImport for="importFile">
+                            Choose file</label>
+                          <div *ngIf="companySubmitted && company.image.errors" class="invalid-feedback">
+                            <div *ngIf="company.image.errors">
+                              Image is required
+                            </div>
                           </div>
                         </div>
                       </div>
