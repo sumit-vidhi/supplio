@@ -1077,9 +1077,17 @@ export class AgencyProfileComponent implements OnInit {
         if (data.success) {
           if (name == "company") {
             this.cpmpanyname.splice(fileId, 1);
+            
+          this.appData.agency_company_tour = this.cpmpanyname;
+          this.loginService.setLoginUserDetailData(this.appData);
+          this.appData = JSON.parse(window.localStorage[APP_USER]);
           }
           if (name == "work") {
             this.workname.splice(fileId, 1);
+            
+          this.appData.agency_work = this.workname;
+          this.loginService.setLoginUserDetailData(this.appData);
+          this.appData = JSON.parse(window.localStorage[APP_USER]);
           }
         }
       })
@@ -1093,6 +1101,9 @@ export class AgencyProfileComponent implements OnInit {
         this.loader.stopLoading();
         if (data.success) {
           this.awardname.splice(fileId, 1);
+          this.appData.awards = this.awardname;
+          this.loginService.setLoginUserDetailData(this.appData);
+          this.appData = JSON.parse(window.localStorage[APP_USER]);
         }
       })
     }
@@ -1106,6 +1117,9 @@ export class AgencyProfileComponent implements OnInit {
         this.loader.stopLoading();
         if (data.success) {
           this.teamData.splice(fileId, 1);
+          this.appData.team = this.teamData;
+          this.loginService.setLoginUserDetailData(this.appData);
+          this.appData = JSON.parse(window.localStorage[APP_USER]);
         }
       })
     }

@@ -23,8 +23,9 @@ import { EmployerDashboardComponent } from './employer-dashboard/employer-dashbo
 import { AgencyDashboardComponent } from './agency-dashboard/agency-dashboard.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 @NgModule({
-  declarations: [AgencyProfileComponent,demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
+  declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
@@ -39,7 +40,8 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
     DatepickerModule.forRoot(),
     SelectDropDownModule,
     JwSocialButtonsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ShareButtonsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -1524,7 +1524,10 @@
                         <div class="form-group col-6">
                           <label>Share a link</label>
                           <input type="text" class="form-control" placeholder="Link" />
-                          <div class="col">
+                          <share-buttons [theme]="'modern-dark'"
+                            [include]="['facebook','twitter','linkedin','whatsapp','copy']" [show]="5"
+                            [url]="'https://twitter.com/'"></share-buttons>
+                          <!-- <div class="col">
                             <fb-like url={{url}}></fb-like>
                           </div>
                           <div class="col">
@@ -1535,7 +1538,7 @@
                           </div>
                           <div class="col">
                             <linkedin-share url={{url}}></linkedin-share>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="form-group col-6">
                           <label>Send an Email</label>
