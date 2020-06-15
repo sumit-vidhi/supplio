@@ -57,7 +57,7 @@ export class AgencyProfileComponent implements OnInit {
   firstName: any;
   lastName: any;
   years: Array<number> = [];
-  minTab = 1; //Minimum Tab Step
+  minTab = 12; //Minimum Tab Step
   maxTab = 14; //Maximum Tab Step
   phoneForm: FormGroup;
   activeTab = this.minTab;
@@ -121,6 +121,9 @@ export class AgencyProfileComponent implements OnInit {
   cpmpanyname: any = [];
   selectedCity: any;
   headQuater = 0;
+  url = 'http://jasonwatmore.com';
+  sendEmailForm: FormGroup;
+  sendEmail = false;
   config = {
     displayKey: 'name', // if objects array passed which key to be displayed defaults to description
     search: true,
@@ -235,7 +238,9 @@ export class AgencyProfileComponent implements OnInit {
     this.associationForm = this.formBuilder.group({
       name: new FormArray([])
     });
-
+    this.sendEmailForm = this.formBuilder.group({
+      'toAddress': ['', [Validators.required, this.commaSepEmail]]
+    });
     this.editForm = this.formBuilder.group({
       agency_name: ['', Validators.required],
       phone_code: ['IN', Validators.required],
@@ -369,6 +374,20 @@ export class AgencyProfileComponent implements OnInit {
     }
 
   }
+  send(value) {
+    this.sendEmail = true;
+    if (this.sendEmailForm.invalid) {
+      return;
+    }
+    console.log(value);
+  }
+
+  commaSepEmail = (control: AbstractControl): { [key: string]: any } | null => {
+    const emails = control.value.split(',');
+    const forbidden = emails.some(email => Validators.email(new FormControl(email)));
+    console.log(forbidden);
+    return forbidden ? { 'toAddress': { value: control.value } } : null;
+  };
 
   awardSubmit() {
     let nextTab = this.activeTab + 1;
@@ -725,6 +744,12 @@ export class AgencyProfileComponent implements OnInit {
     }
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.setDeclartion();
+  }
+  goNext() {
+    let nextTab = this.activeTab + 1;
+    if (nextTab <= this.maxTab) {
+      this.makeActive(nextTab);
+    }
   }
 
   get d() { return this.experienceForm.controls; }

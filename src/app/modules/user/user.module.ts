@@ -22,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
 import { AgencyDashboardComponent } from './agency-dashboard/agency-dashboard.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 @NgModule({
   declarations: [AgencyProfileComponent,demandViewComponent,demandListComponent,DemandComponent,AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
   imports: [
@@ -37,6 +38,7 @@ import { PricingComponent } from './pricing/pricing.component';
     BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
     SelectDropDownModule,
+    JwSocialButtonsModule,
     NgxPaginationModule
   ],
   schemas: [
