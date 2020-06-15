@@ -898,3 +898,10 @@ label {
   .kt-nav__link-arrow {
   color: #0a8e9e !important;
 }
+.mb10 {
+  margin-bottom: 10px;
+}
+.m-3.radioButtons input {
+  margin-left: 5px;
+  margin-right: 5px;
+}

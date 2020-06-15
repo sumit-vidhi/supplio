@@ -24,6 +24,7 @@ import { AgencyDashboardComponent } from './agency-dashboard/agency-dashboard.co
 import { PricingComponent } from './pricing/pricing.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 @NgModule({
   declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
   imports: [
@@ -41,7 +42,8 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
     SelectDropDownModule,
     JwSocialButtonsModule,
     NgxPaginationModule,
-    ShareButtonsModule
+    ShareButtonsModule,
+    ShareIconsModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

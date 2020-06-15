@@ -135,7 +135,8 @@
                     disabled: isTabDisabled(14),
                     active: !isTabDisabled(14)
                   }" class="">
-                  <a (click)="showTab(14)" role="tab" title="Step 1"> Billing details
+                  <a (click)="showTab(14)" role="tab" title="Step 1">
+                    Billing details
                     <span class="icon"><i class="fa fa-circle"></i> </span></a>
                 </li>
               </ul>
@@ -334,19 +335,30 @@
                                   'is-invalid':
                                     locationSubmitted && getValidity(i)
                                 }">
-                                <AutocompleteComponent (setAddress)="getAddress($event, i)" adressType="establishment"
-                                  address="{{ arrayItem.value.address }}">
-                                </AutocompleteComponent>
-                                <input formControlName="orders" (change)="changeCompany(i)" type="radio" name="orders"
-                                  [value]="i" />Headquater
-                                <a href="javscript:;" class="deleteLocation" *ngIf="
-                                    locationForm.controls['location'].controls
-                                      .length > 1
-                                  " (click)="removeItem(i)"><i class="fa fa-trash" aria-hidden="true"></i>
-                                </a>
-                                <div class="form-text text-muted invalid-feedback"
-                                  *ngIf="locationSubmitted && getValidity(i)">
-                                  Please enter your Address.
+                                <div class="row mb10">
+                                  <div class="col-md-9">
+                                    <AutocompleteComponent (setAddress)="getAddress($event, i)"
+                                      adressType="establishment" address="{{ arrayItem.value.address }}">
+                                    </AutocompleteComponent>
+
+                                    <div class="form-text text-muted invalid-feedback" *ngIf="
+                                        locationSubmitted && getValidity(i)
+                                      ">
+                                      Please enter your Address.
+                                    </div>
+                                  </div>
+                                  <div class="col-md-2">
+                                    <input formControlName="orders" (change)="changeCompany(i)" type="radio"
+                                      name="orders" [value]="i" />
+                                    Headquraters
+                                  </div>
+                                  <div class="col-md-1">
+                                    <a href="javscript:;" class="deleteLocation" *ngIf="
+                                        locationForm.controls['location']
+                                          .controls.length > 1
+                                      " (click)="removeItem(i)"><i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -778,9 +790,9 @@
                             </div>
                           </div>
                         </div>
-
                       </div>
-                      <div class="form-groupcol-md-2">
+                      <div class="form-group col-md-2">
+                        <label class="invisible">Add</label>
                         <div>
                           <button type="submit" class="btn btn-primary addLocation">
                             <i class="fa fa-plus"></i> Add
@@ -794,7 +806,7 @@
                   <div class="search-result" *ngIf="workname && workname.length">
                     <ul class="liWithDeleteIcon">
                       <li *ngFor="let item of workname; let i = index">
-                        <a (click)="removeWork('work',item.id)" class="deleteLiItem"><i class="fa fa-trash"
+                        <a (click)="removeWork('work', item.id)" class="deleteLiItem"><i class="fa fa-trash"
                             aria-hidden="true"></i>
                         </a>
 
@@ -832,10 +844,10 @@
                   'is-hide': !isTabActive(7)
                 }">
                 <div class="kt-heading kt-heading--md">
-                  <h3>Declartions</h3>
+                  <h3>Declarations</h3>
                 </div>
                 <form [formGroup]="declareForm" (ngSubmit)="onDeclareFormSubmit()">
-                  <div class="m-3">
+                  <div class="m-3 radioButtons">
                     <div class="list-group list-group-flush">
                       <div class="list-group-item">
                         <div class="form-row">
@@ -1089,7 +1101,6 @@
                           <div class="form-group col-6">
                             <label>Certificate File</label>
 
-
                             <div class="custom-file">
                               <input type="file" class="custom-file-input" formControlName="image" id="importFile"
                                 (change)="changeAwardFile($event)" [ngClass]="{
@@ -1326,8 +1337,8 @@
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" formControlName="photo" id="importFile"
                             (change)="changePhotoFile($event)" [ngClass]="{
-                            'is-invalid': teamSubmitted && team.photo.errors
-                          }" />
+                              'is-invalid': teamSubmitted && team.photo.errors
+                            }" />
                           <label class="custom-file-label" #labelPhotoImport for="importFile">
                             Choose file</label>
                           <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
@@ -1343,8 +1354,8 @@
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" formControlName="profile" id="importFile"
                             (change)="changeProfileFile($event)" [ngClass]="{
-                            'is-invalid': teamSubmitted && team.profile.errors
-                          }" />
+                              'is-invalid': teamSubmitted && team.profile.errors
+                            }" />
                           <label class="custom-file-label" #labelProfileImport for="importFile">
                             Choose file</label>
                           <!-- <input type="file" formControlName="myFile" (change)="fileEvent($event)" /> -->
@@ -1445,7 +1456,7 @@
                           <input type="file" class="custom-file-input" formControlName="image" id="importFile"
                             (change)="changeCompanyFile($event)" [ngClass]="{
                               'is-invalid':
-                              companySubmitted && company.image.errors
+                                companySubmitted && company.image.errors
                             }" />
                           <label class="custom-file-label" #labelCompanyImport for="importFile">
                             Choose file</label>
@@ -1470,13 +1481,16 @@
                     <div class="search-result" *ngIf="cpmpanyname && cpmpanyname.length">
                       <ul class="liWithDeleteIcon">
                         <li *ngFor="let item of cpmpanyname; let i = index">
-                          <a (click)="removeWork('company',item.id)" class="liWithDeleteIcon"><i class="fa fa-trash"
+                          <a (click)="removeWork('company', item.id)" class="liWithDeleteIcon"><i class="fa fa-trash"
                               aria-hidden="true"></i>
                           </a>
 
                           <a href="{{ item.filepath }}" target="_blank">
-                            <i class="{{ getFileExtension(item.filepath) }}" style="color: #5cb85c;"
-                              aria-hidden="true"></i>
+                            <!-- <i
+                              class="{{ getFileExtension(item.filepath) }}"
+                              style="color: #5cb85c;"
+                              aria-hidden="true"
+                            ></i> -->
                             {{ item.filename }}</a>
                         </li>
                       </ul>
@@ -1504,7 +1518,6 @@
                 </div>
               </div>
 
-
               <div class="stepContainer" id="step1" [ngClass]="{
                   'is-display': isTabActive(13),
                   'is-hide': !isTabActive(13)
@@ -1513,8 +1526,9 @@
                   <h3>Ask for reviews</h3>
                 </div>
                 <p>
-                  Ask people to write reviews about your company and its services. It increases your chances to be hired
-                  by new clients.
+                  Ask people to write reviews about your company and its
+                  services. It increases your chances to be hired by new
+                  clients.
                 </p>
 
                 <div class="m-3">
@@ -1523,32 +1537,22 @@
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label>Share a link</label>
-                          <input type="text" class="form-control" placeholder="Link" />
+                          <input type="text" class="form-control" placeholder="Link" value="{{url}}" />
                           <share-buttons [theme]="'modern-dark'"
-                            [include]="['facebook','twitter','linkedin','whatsapp','copy']" [show]="5"
-                            [url]="'https://twitter.com/'"></share-buttons>
-                          <!-- <div class="col">
-                            <fb-like url={{url}}></fb-like>
-                          </div>
-                          <div class="col">
-                            <google-plus url={{url}}></google-plus>
-                          </div>
-                          <div class="col">
-                            <tweet url={{url}} ></tweet>
-                          </div>
-                          <div class="col">
-                            <linkedin-share url={{url}}></linkedin-share>
-                          </div> -->
+                            [include]="['facebook','twitter','linkedin','whatsapp','copy']" [show]="5" [url]="url">
+                          </share-buttons>
                         </div>
                         <div class="form-group col-6">
                           <label>Send an Email</label>
                           <form [formGroup]="sendEmailForm" (ngSubmit)="send(sendEmailForm.value)">
-
-                            <input formControlName="toAddress">
-                            <p *ngIf="sendEmail && !sendEmailForm.valid" style="color:red;">Please enter a valid and ","
-                              seprate email
-                              address.</p>
-                            <button type="submit"> Send</button>
+                            <input formControlName="toAddress" class="form-control col-md-9" />
+                            <p *ngIf="sendEmail && !sendEmailForm.valid" style="color: red;">
+                              Please enter a valid and "," seprate email
+                              address.
+                            </p>
+                            <button class="btn btn-primamry" type="submit">
+                              Send
+                            </button>
                           </form>
                         </div>
                       </div>
@@ -1575,21 +1579,37 @@
                 </div>
               </div>
               <div class="stepContainer" id="step1" [ngClass]="{
-                'is-display': isTabActive(14),
-                'is-hide': !isTabActive(14)
-              }">
+                  'is-display': isTabActive(14),
+                  'is-hide': !isTabActive(14)
+                }">
                 <div class="kt-heading kt-heading--md">
-                  <h3> Billing details </h3>
+                  <h3>Billing details</h3>
                 </div>
 
                 <div class="m-3">
                   <div class="list-group list-group-flush">
                     <div class="list-group-item">
                       <div class="form-row">
-                        <div class="form-group col-6">
-                          <label>Billing information</label>
-                          <a class="btn btn-secondary btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-                            routerLink="/user/pricing">Create my billing information</a>
+                        <div class="form-group col-12">
+                          <h4>Membership</h4>
+                          <br />
+                          <div class="col-md-6">
+                            <div class="alert alert-outline-success" role="alert">
+                              <strong>Current Membership : </strong> &nbsp; Free
+                            </div>
+                          </div>
+                          <p>You did not subscribe to any membership yet.</p>
+                          <p>
+                            Learn more about our memberships in order to start
+                            recieving relevant and qualified opportunities and
+                            boost your visibility.
+                          </p>
+                          <a class="btn btn-secondary btn-md btn-tall btn-wide" routerLink="/user/pricing">Learn more
+                            about memberships</a>
+                          <div class="kt-separator kt-separator--border-dashed kt-separator--space-md"></div>
+                          <h4>Billing information</h4>
+                          <a class="btn btn-secondary btn-md btn-tall btn-wide" routerLink="/user/pricing">Create my
+                            billing information</a>
                         </div>
                       </div>
                     </div>

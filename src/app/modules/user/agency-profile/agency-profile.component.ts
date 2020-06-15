@@ -121,7 +121,7 @@ export class AgencyProfileComponent implements OnInit {
   cpmpanyname: any = [];
   selectedCity: any;
   headQuater = 0;
-  url = 'http://jasonwatmore.com';
+  url: any = '';
   sendEmailForm: FormGroup;
   sendEmail = false;
   @ViewChild('labelImport', { static: false }) labelImport: ElementRef;
@@ -295,6 +295,7 @@ export class AgencyProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    this.url = this.getUrl(this.appData.id);
     if (this.appData.last_step_updated) {
       this.disabledTabs = this.disabledTabs.slice(this.appData.last_step_updated);
       console.log(this.disabledTabs);
@@ -373,6 +374,17 @@ export class AgencyProfileComponent implements OnInit {
     this.setWork();
     this.setDeclartion();
     this.setAssociation();
+  }
+
+  getUrl(id) {
+
+    const _isDev = window.location.port.indexOf('4200') > -1;
+
+    const protocol = window.location.protocol;
+
+    const host = window.location.host;
+
+    return _isDev ? 'http://localhost:4200/user/agency/review/' + id : protocol + "//" + host + '/user/agency/review/' + id;
   }
   setAward(name) {
     if (this.appData.awards) {
@@ -1077,17 +1089,17 @@ export class AgencyProfileComponent implements OnInit {
         if (data.success) {
           if (name == "company") {
             this.cpmpanyname.splice(fileId, 1);
-            
-          this.appData.agency_company_tour = this.cpmpanyname;
-          this.loginService.setLoginUserDetailData(this.appData);
-          this.appData = JSON.parse(window.localStorage[APP_USER]);
+
+            this.appData.agency_company_tour = this.cpmpanyname;
+            this.loginService.setLoginUserDetailData(this.appData);
+            this.appData = JSON.parse(window.localStorage[APP_USER]);
           }
           if (name == "work") {
             this.workname.splice(fileId, 1);
-            
-          this.appData.agency_work = this.workname;
-          this.loginService.setLoginUserDetailData(this.appData);
-          this.appData = JSON.parse(window.localStorage[APP_USER]);
+
+            this.appData.agency_work = this.workname;
+            this.loginService.setLoginUserDetailData(this.appData);
+            this.appData = JSON.parse(window.localStorage[APP_USER]);
           }
         }
       })
