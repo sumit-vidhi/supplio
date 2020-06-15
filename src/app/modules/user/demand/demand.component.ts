@@ -111,7 +111,69 @@ export class DemandComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.id = params.id;
     });
-    console.log(this.id);
+    if (this.id) {
+      this.loader.startLoading();
+      this.userService.getDemand(this.id).subscribe((result: any) => {
+
+        if (result.payload.demand) {
+          this.loader.stopLoading();
+          this.demand = result.payload.demand[0];
+          this.demandId = result.payload.demand[0].id;
+          this.hireDemand = result.payload.demand[0].hire_type;
+          this.demandTitle = result.payload.demand[0].title;
+          this.updated_at = result.payload.demand[0].updated_at;
+          this.hire = this.hireDemand;
+          this.demandCategory = result.payload.demand[0].demand_category;
+          this.selectedCity = result.payload.demand[0].hire_country;
+          this.locationForm.patchValue({
+            currency: result.payload.demand[0].currency
+          });
+          this.setCurrencyByData(result.payload.demand[0].currency)
+          this.modeInterview = result.payload.demand[0].mode_of_interview;
+          if (result.payload.demand[0].demand_category.length) {
+            this.setLocation();
+            this.setBenifit(result.payload.demand[0]);
+            this.setTerm(result.payload.demand[0]);
+            this.postDemand = result.payload.demand[0].demand_type.toString();;
+          }
+          if (this.demand.last_step_updated) {
+            this.disabledTabs = this.disabledTabs.slice(this.demand.last_step_updated);
+            console.log(this.disabledTabs);
+          }
+        }
+      });
+    } else {
+      this.loader.startLoading();
+      this.userService.checkDemand().subscribe((result: any) => {
+        if (result.payload.demand) {
+          this.loader.stopLoading();
+          this.demand = result.payload.demand;
+          this.setCurrencyByData(result.payload.demand.currency)
+          this.demandId = result.payload.demand.id;
+          this.updated_at = result.payload.demand.updated_at;
+          if (result.payload.demand.hire_type != 'locally') {
+            this.hireDemand = result.payload.demand.hire_type;
+            this.hire = this.hireDemand;
+            console.log(12112);
+          }
+
+          this.demandTitle = result.payload.demand.title;
+          this.demandCategory = result.payload.demand.demand_category;
+          this.selectedCity = result.payload.demand.hire_country;
+          this.locationForm.patchValue({
+            currency: result.payload.demand.currency
+          });
+          this.modeInterview = result.payload.demand.mode_of_interview;
+          if (result.payload.demand.demand_category.length) {
+
+            this.setLocation();
+            this.setBenifit(result.payload.demand);
+            this.setTerm(result.payload.demand);
+            this.postDemand = result.payload.demand.demand_type.toString();;
+          }
+        }
+      });
+    }
 
   }
 
@@ -181,70 +243,7 @@ export class DemandComponent implements OnInit {
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     });
-    console.log(this.id);
-    if (this.id) {
-      this.loader.startLoading();
-      this.userService.getDemand(this.id).subscribe((result: any) => {
 
-        if (result.payload.demand) {
-          this.loader.stopLoading();
-          this.demand = result.payload.demand[0];
-          this.demandId = result.payload.demand[0].id;
-          this.hireDemand = result.payload.demand[0].hire_type;
-          this.demandTitle = result.payload.demand[0].title;
-          this.updated_at = result.payload.demand[0].updated_at;
-          this.hire = this.hireDemand;
-          this.demandCategory = result.payload.demand[0].demand_category;
-          this.selectedCity = result.payload.demand[0].hire_country;
-          this.locationForm.patchValue({
-            currency: result.payload.demand[0].currency
-          });
-          this.setCurrencyByData(result.payload.demand[0].currency)
-          this.modeInterview = result.payload.demand[0].mode_of_interview;
-          if (result.payload.demand[0].demand_category.length) {
-            this.setLocation();
-            this.setBenifit(result.payload.demand[0]);
-            this.setTerm(result.payload.demand[0]);
-            this.postDemand = result.payload.demand[0].demand_type.toString();;
-          }
-          if (this.demand.last_step_updated) {
-            this.disabledTabs = this.disabledTabs.slice(this.demand.last_step_updated);
-            console.log(this.disabledTabs);
-          }
-        }
-      });
-    } else {
-      this.loader.startLoading();
-      this.userService.checkDemand().subscribe((result: any) => {
-        if (result.payload.demand) {
-          this.loader.stopLoading();
-          this.demand = result.payload.demand;
-          this.setCurrencyByData(result.payload.demand.currency)
-          this.demandId = result.payload.demand.id;
-          this.updated_at = result.payload.demand.updated_at;
-          if (result.payload.demand.hire_type != 'locally') {
-            this.hireDemand = result.payload.demand.hire_type;
-            this.hire = this.hireDemand;
-            console.log(12112);
-          }
-
-          this.demandTitle = result.payload.demand.title;
-          this.demandCategory = result.payload.demand.demand_category;
-          this.selectedCity = result.payload.demand.hire_country;
-          this.locationForm.patchValue({
-            currency: result.payload.demand.currency
-          });
-          this.modeInterview = result.payload.demand.mode_of_interview;
-          if (result.payload.demand.demand_category.length) {
-
-            this.setLocation();
-            this.setBenifit(result.payload.demand);
-            this.setTerm(result.payload.demand);
-            this.postDemand = result.payload.demand.demand_type.toString();;
-          }
-        }
-      });
-    }
   }
 
   getSubcategory(id, i) {

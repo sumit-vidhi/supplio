@@ -120,6 +120,7 @@ export class AgencyProfileComponent implements OnInit {
   awardname: any = [];
   cpmpanyname: any = [];
   selectedCity: any;
+  headQuater = 0;
   config = {
     displayKey: 'name', // if objects array passed which key to be displayed defaults to description
     search: true,
@@ -264,6 +265,7 @@ export class AgencyProfileComponent implements OnInit {
     });
     const locationForm = this.formBuilder.group({
       location: this.formBuilder.array([]),
+      orders: [0]
     });
     this.aboutForm = this.formBuilder.group({
       about_company: [''],
@@ -279,11 +281,11 @@ export class AgencyProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    if(this.appData.last_step_updated){
+    if (this.appData.last_step_updated) {
       this.disabledTabs = this.disabledTabs.slice(this.appData.last_step_updated);
       console.log(this.disabledTabs);
     }
-  
+
     this.teamData = this.appData.team;
     this.cpmpanyname = this.appData.agency_company_tour;
     this.setFormdata();
@@ -464,7 +466,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
-       
+
         this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
@@ -576,7 +578,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.setAssociation();
-        
+
         this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
@@ -705,7 +707,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.setWork();
-        
+
         this.toastr.success(result.payload.message, 'Update Profile');
       }
       let nextTab = this.activeTab + 1;
@@ -868,7 +870,7 @@ export class AgencyProfileComponent implements OnInit {
         const subCategoriesValue = this.appData.experience_categories_values;
 
         const countries = this.appData.experience_countries;
-       
+
         this.toastr.success(result.payload.message, 'Update Profile');
 
         this.onChangeTickets(cateValue);
@@ -891,14 +893,19 @@ export class AgencyProfileComponent implements OnInit {
     const location = this.appData.users_locations.map((value, index) => {
       return this.appData.users_locations[index].address;
     });
+    const headQauter = this.appData.users_locations.findIndex((data) => data.headquaters == 1)
     let groupArr = [];
     for (let i = 0; i < location.length; i++) {
       groupArr.push(
-        this.formBuilder.group({ address: [location[i], Validators.required] })
+        this.formBuilder.group({ address: [location[i], Validators.required], orders: [headQauter] })
       );
     }
 
     this.locationForm.setControl('location', this.formBuilder.array(groupArr));
+  }
+
+  changeCompany(i) {
+    this.headQuater = i;
   }
 
   fileDocumentEvent(e) {
@@ -1125,10 +1132,10 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
-        
+
         this.toastr.success(result.payload.message, 'Update Profile');
       }
-      
+
       let nextTab = this.activeTab + 1;
       if (nextTab <= this.maxTab) {
         this.makeActive(nextTab);
@@ -1150,7 +1157,7 @@ export class AgencyProfileComponent implements OnInit {
         this.confirmMessage = result.message;
         this.appData = JSON.parse(window.localStorage[APP_USER]);
         this.open(content)
-        
+
         this.toastr.success(result.payload.message, 'Update Profile');
       }
     });
@@ -1203,6 +1210,7 @@ export class AgencyProfileComponent implements OnInit {
     const data = {
       locations: address,
       form_step: 2,
+      headquaters: this.headQuater
     };
     this.userService.agencyeditProfile(data).subscribe((result: any) => {
       this.loader.stopLoading();

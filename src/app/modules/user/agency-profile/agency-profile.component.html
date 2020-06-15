@@ -533,8 +533,13 @@
                                   address="{{ arrayItem.value.address }}"
                                 >
                                 </AutocompleteComponent>
-                                <!-- <input type="text" class="form-control" formControlName="address"
-                                  placeholder="Type in your address" aria-describedby="address1-error" /> -->
+                                <input
+                                formControlName="orders"
+                                (change)="changeCompany(i)"
+                                type="radio"
+                                name="orders"
+                                [value]="i"
+                              />Headquater
                                 <a
                                   href="javscript:;"
                                   class="deleteLocation"
