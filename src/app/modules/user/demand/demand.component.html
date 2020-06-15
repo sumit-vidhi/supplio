@@ -1638,6 +1638,7 @@
                             <th>Quantity</th>
                             <th>Salary</th>
                             <th>Gender</th>
+                            <th>Details</th>
                           </thead>
                           <tbody>
                             <tr
@@ -1654,6 +1655,15 @@
                               <td>{{ array.quantity }}</td>
                               <td>{{ array.salary }}</td>
                               <td>{{ array.gender }}</td>
+                              <td><a (click)="showDetails()">Details</a>
+                                <div *ngIf="showDetailData">
+                                  <p>Age Brackets:{{(array.age_bracket)?array.age_bracket:"-"}}</p>
+                                  <p>Qualification:{{(array.qualification)?array.qualification:"-"}}</p>
+                                  <p>Years Of Experience:{{(array.years_of_experience)?array.years_of_experience:"-"}}</p>
+                                  <p>Driver License:{{(array.driver_license)?array.driver_license:"-"}}</p>
+                                  <p>Job Desc:{{(array.job_desc)?array.job_desc:"-"}}</p>
+                                </div>
+                              </td>
                             </tr>
                           </tbody>
                         </table>

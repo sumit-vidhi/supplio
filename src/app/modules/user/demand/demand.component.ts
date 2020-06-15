@@ -87,6 +87,7 @@ export class DemandComponent implements OnInit {
   id: any;
   updated_at: any;
   demand: any;
+  showDetailData=false;
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
@@ -247,6 +248,10 @@ export class DemandComponent implements OnInit {
     });
 
   }
+  showDetails(i) {
+    this.showDetailData= !this.showDetailData;
+  }
+
 
   getSubcategory(id, i) {
     this.loader.startLoading();
