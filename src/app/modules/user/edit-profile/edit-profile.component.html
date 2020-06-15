@@ -420,7 +420,7 @@
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" formControlName="logo" id="importFile"
                             (change)="fileLogoEvent($event)" />
-                          <label class="custom-file-label" #labellogoImport for="importFile">
+                          <label class="custom-file-label" #labellogImport for="importFile">
                             Choose file</label>
                           <div *ngIf="imageSubmitted && i.logo.errors" style="color: red;">
                             <div *ngIf="i.logo.errors.required">
@@ -516,6 +516,18 @@
                         <a class="stepEditLink" (click)="showTab(3)"><i class="far fa-edit"></i></a>
                       </div>
                       <div class="kt-wizard-v2__review-content" [innerHtml]="appData.about_company"></div>
+                    </div>
+                    <div class="kt-wizard-v2__review-item">
+                      <div class="kt-wizard-v2__review-title">
+                        Documents
+                        <a class="stepEditLink" (click)="showTab(4)"><i class="far fa-edit"></i></a>
+                      </div>
+                      <div class="kt-wizard-v2__review-content" *ngFor="let location of appData.files">
+                        <a href="{{ location.filepath }}" target="_blank">
+                          <i class="{{ getFileExtension(location.filepath) }}" style="color: #5cb85c;"
+                            aria-hidden="true"></i>
+                          {{ location.filename }}</a><br />
+                      </div>
                     </div>
                     <div class="stepButtons">
                       <button (click)="goPrevious()"

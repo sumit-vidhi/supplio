@@ -119,12 +119,16 @@
                             <span class="detailed_list_label">Location</span>
                         </div>
 
-                        <div class="col-md-2">
+                        <div class="col-md-2" *ngIf="category[i].length">
                             {{
-                  category[i].length > 1
-                    ? category[i].join(', ')
-                    : category[i][0]
-                }}
+                              category[i].length > 1
+                                ? category[i].join(', ')
+                                : category[i][0]
+                            }}
+                            <span class="detailed_list_label">Categories</span>
+                        </div>
+                        <div class="col-md-2" *ngIf="category[i].length==0">
+                            -
                             <span class="detailed_list_label">Categories</span>
                         </div>
                         <div class="col-md-1">

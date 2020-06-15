@@ -1797,7 +1797,7 @@
                             }}
                           </li>
 
-                          <li>
+                          <li *ngIf="demand.recruitment_fee">
                             <strong> Recruitment fee</strong>
                             {{
                               demand.recruitment_fee
@@ -1806,7 +1806,7 @@
                             }}
                           </li>
 
-                          <li>
+                          <li *ngIf="demand.no_of_delegates">
                             <strong> No of delegates </strong
                             >{{
                               demand.no_of_delegates
@@ -1815,7 +1815,7 @@
                             }}
                           </li>
 
-                          <li>
+                          <li *ngIf="demand.flights_for_delegates">
                             <strong> Flights for delegates </strong>
                             {{
                               demand.flights_for_delegates
@@ -1824,7 +1824,7 @@
                             }}
                           </li>
 
-                          <li>
+                          <li *ngIf="demand.hotels_for_delegates">
                             <strong>Hotels for delegates </strong
                             >{{
                               demand.hotels_for_delegates

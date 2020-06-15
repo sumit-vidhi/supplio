@@ -241,7 +241,9 @@ export class DemandComponent implements OnInit {
       phone: [''],
     });
     this.userService.getSubcategoies().subscribe((result: any) => {
-      this.category = result.payload.categories;
+      this.category = result.payload.categories.filter((data) => {
+        return data.parent == 0;
+      });
     });
 
   }
