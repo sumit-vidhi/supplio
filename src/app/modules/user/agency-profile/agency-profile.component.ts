@@ -445,7 +445,7 @@ export class AgencyProfileComponent implements OnInit {
 
     var myFormData = new FormData();
     myFormData.append('file', this.awardData);
-    myFormData.append('name', this.awardForm.value);
+    myFormData.append('name', this.awardForm.value.name);
 
     myFormData.append('form_step', "9");
 
@@ -458,6 +458,7 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
+        console.log(this.appData.awards)
         this.awardname = this.appData.awards;
         this.toastr.success(result.payload.message, 'Update Profile');
       }
