@@ -512,6 +512,11 @@ export class EditProfileComponent implements OnInit {
   get addressForm(): FormArray {
     return this.locationForm.get('location') as FormArray;
   }
+  
+  goDashboard() {
+    this.modalReference.close();
+    this.router.navigate(['/user']);
+  }
   getValidity(i) {
     return (<FormArray>this.locationForm.get('location')).controls[i].invalid;
   }
