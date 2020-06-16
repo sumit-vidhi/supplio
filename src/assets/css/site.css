@@ -181,7 +181,7 @@ body span.required {
   padding: 0 0.55rem 0 0;
   font-weight: 500;
   font-size: 1rem;
-  color: #111;
+  color: #111 !important;
 }
 .kt-header__topbar
   .kt-header__topbar-item.kt-header__topbar-item--user
@@ -191,7 +191,7 @@ body span.required {
   padding: 0 0.55rem 0 0;
   font-weight: 500;
   font-size: 1rem;
-  color: #111;
+  color: #111 !important;
 }
 
 .hidden {
