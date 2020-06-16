@@ -37,7 +37,7 @@
                     active: !isTabDisabled(1)
                   }"
                 >
-                  <a (click)="showTab(1)" role="tab" title="Step 1">
+                  <a (click)="showTab(1)" role="tab" title="Basic Information">
                     Basic Information
                     <span class="first icon"
                       ><i class="fa fa-circle"></i>
@@ -53,7 +53,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(2)" role="tab" title="Step 1"
+                  <a (click)="showTab(2)" role="tab" title="Locations"
                     >Locations
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -66,7 +66,7 @@
                     active: !isTabDisabled(3)
                   }"
                 >
-                  <a (click)="showTab(3)" role="tab" title="Step 1"
+                  <a (click)="showTab(3)" role="tab" title="About"
                     >About
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -80,7 +80,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(4)" role="tab" title="Step 1"
+                  <a (click)="showTab(4)" role="tab" title="Your expertise"
                     >Your expertise
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -94,7 +94,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(5)" role="tab" title="Step 1"
+                  <a (click)="showTab(5)" role="tab" title="Your experience"
                     >Your experience
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -108,7 +108,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(6)" role="tab" title="Step 1"
+                  <a (click)="showTab(6)" role="tab" title="Your work"
                     >Your work
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -122,7 +122,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(7)" role="tab" title="Step 1"
+                  <a (click)="showTab(7)" role="tab" title="Declarations"
                     >Declarations
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -136,7 +136,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(8)" role="tab" title="Step 1"
+                  <a (click)="showTab(8)" role="tab" title="Associations"
                     >Associations
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -150,7 +150,10 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(9)" role="tab" title="Step 1"
+                  <a
+                    (click)="showTab(9)"
+                    role="tab"
+                    title="Certifications & Awards"
                     >Certifications & Awards
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -164,7 +167,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(10)" role="tab" title="Step 1"
+                  <a (click)="showTab(10)" role="tab" title="Documents"
                     >Documents
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -178,7 +181,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(11)" role="tab" title="Step 1"
+                  <a (click)="showTab(11)" role="tab" title="Team"
                     >Team <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
                 </li>
@@ -191,7 +194,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(12)" role="tab" title="Step 1"
+                  <a (click)="showTab(12)" role="tab" title="Company tour"
                     >Company tour
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -205,7 +208,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(13)" role="tab" title="Step 1"
+                  <a (click)="showTab(13)" role="tab" title="Ask for reviews"
                     >Ask for reviews
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -219,7 +222,7 @@
                   }"
                   class=""
                 >
-                  <a (click)="showTab(14)" role="tab" title="Step 1">
+                  <a (click)="showTab(14)" role="tab" title="Billing details">
                     Billing details
                     <span class="icon"><i class="fa fa-circle"></i> </span
                   ></a>
@@ -1040,7 +1043,7 @@
                       >
                         <div class="list-group-item">
                           <div [formGroup]="ticket" class="form-row">
-                            <div class="form-group col-12">
+                            <div class="form-group col-11">
                               <!-- <input type="text" formControlName="name" class="form-control" placeholder="Country"
                                 [ngClass]="{ 'is-invalid': experienceSubmitted && ticket.controls.name.errors }" /> -->
                               <!-- <ngx-select-dropdown formControlName="name" (searchChange)="searchChange($event)"
@@ -1071,9 +1074,11 @@
                                   Country is required
                                 </div>
                               </div>
+                            </div>
+                            <div class="form-group col-1">
                               <a
                                 href="javscript:;"
-                                class="deleteLocation"
+                                class="displayBlock"
                                 *ngIf="
                                   experienceForm.controls['countryName']
                                     .controls.length > 1
@@ -1281,7 +1286,7 @@
                 >
                   <div class="m-3 radioButtons">
                     <div class="list-group list-group-flush">
-                      <div class="list-group-item">
+                      <div class="">
                         <div class="form-row">
                           <div class="form-group col-12">
                             <label
@@ -1500,7 +1505,7 @@
                               type="text"
                               formControlName="name"
                               class="form-control"
-                              placeholder="name"
+                              placeholder="Name"
                               [ngClass]="{
                                 'is-invalid':
                                   associationSubmitted &&
@@ -1519,7 +1524,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="form-group col-6">
+                          <div class="form-group col-5">
                             <label>Type</label>
                             <select
                               type="text"
@@ -1551,16 +1556,19 @@
                               </div>
                             </div>
                           </div>
-                          <a
-                            href="javscript:;"
-                            class="deleteLocation"
-                            *ngIf="
-                              associationForm.controls['name'].controls.length >
-                              1
-                            "
-                            (click)="removeAssociation(i)"
-                            ><i class="fa fa-trash" aria-hidden="true"></i>
-                          </a>
+                          <div class="form-group col-1">
+                            <label class="invisible">Em</label>
+                            <a
+                              href="javscript:;"
+                              class="displayBlock"
+                              *ngIf="
+                                associationForm.controls['name'].controls
+                                  .length > 1
+                              "
+                              (click)="removeAssociation(i)"
+                              ><i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -2021,7 +2029,7 @@
                           type="text"
                           formControlName="name"
                           class="form-control"
-                          placeholder="name"
+                          placeholder="Name"
                           [ngClass]="{
                             'is-invalid': teamSubmitted && team.name.errors
                           }"
@@ -2089,7 +2097,7 @@
                         </div>
                       </div>
                       <div class="form-group col-6">
-                        <label>Profile Photo</label>
+                        <label>Profile</label>
                         <div class="custom-file">
                           <input
                             type="file"

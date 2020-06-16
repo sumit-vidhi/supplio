@@ -908,3 +908,11 @@ label {
 .displayBlock {
   display: block !important;
 }
+.nopad {
+  padding: 0px !important;
+}
+.tabBtnContainer .tabBtn {
+  height: 60px;
+  padding: 15px;
+  cursor: pointer;
+}

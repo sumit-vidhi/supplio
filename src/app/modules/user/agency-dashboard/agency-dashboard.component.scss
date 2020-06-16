@@ -1,15 +1,24 @@
-.isShow{
-    display: show;
+.isShow {
+  display: show;
 }
-.isHide{
-    display: none;
+.isHide {
+  display: none;
 }
-.active{
-    background-color: #074a79 !important;
-    border-color: #074a79 !important;
+.active {
+  background-color: #f9f9fc !important;
+  /* border-color: #f9f9fc !important; */
+  border-top: 1px solid #ebedf2;
+  border-right: 1px solid #ebedf2;
+  border-left: 1px solid #ebedf2;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
-.deactive{
-    background-color: #0a8e9e !important;
-    border-color: #0a8e9e !important;
-    color: #fff !important
+.active:first-child {
+  border-left: none;
+  border-top-left-radius: 0px;
+}
+.deactive {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  // color: #fff !important
 }
