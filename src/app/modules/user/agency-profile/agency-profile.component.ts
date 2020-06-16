@@ -602,6 +602,30 @@ export class AgencyProfileComponent implements OnInit {
 
   }
 
+  updateProfile(content) {
+    const data = {
+      form_step: 13
+    };
+    this.loader.startLoading();
+    this.userService.agencyeditProfile(data).subscribe((result: any) => {
+      if (result.payload.message) {
+        this.loader.stopLoading();
+        this.confirmMessage = result.payload.message;
+        result.payload.user[
+          'authToken'
+        ] = this.loginService.getUserAccessToken();
+        this.loginService.setLoginUserDetailData(result.payload.user);
+        this.appData = JSON.parse(window.localStorage[APP_USER]);
+        this.open(content);
+      }
+    });
+  }
+
+  goDashboard() {
+    this.modalReference.close();
+    this.router.navigate(['/user']);
+  }
+
   onDeclareFormSubmit() {
     this.declareSubmitted = true;
     if (this.declareForm.invalid) {

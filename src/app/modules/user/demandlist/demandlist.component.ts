@@ -306,7 +306,7 @@ export class demandListComponent implements OnInit {
     private loader: LoaderService,
     public loginService: JWTAuthService,
     public modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.appData = JSON.parse(window.localStorage[APP_USER]);
@@ -432,18 +432,34 @@ export class demandListComponent implements OnInit {
     }
     console.log(data);
     this.loader.startLoading();
-    this.userService.demandList(data).subscribe((result: any) => {
-      this.loader.stopLoading();
-      if (result.payload.demand) {
-        this.demandData = result.payload.demand;
-        this.category = this.demandData.map((value, index) => {
-          return value.demand_category.map((v, i) => {
-            return v.category_name;
+    data.page = 1;
+    if (this.appData.role == 'Employer') {
+      this.userService.demandList(data).subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.demand) {
+          this.demandData = result.payload.demand.data;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            });
           });
-        });
-        console.log(this.category);
-      }
-    });
+        }
+      });
+    }
+    if (this.appData.role == 'Agency') {
+      console.log(23232);
+      this.userService.demandAllList(data).subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.demand) {
+          this.demandData = result.payload.demand.data;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            });
+          });
+        }
+      });
+    }
   }
 
   reset() {

@@ -2497,7 +2497,7 @@
                     </a>
                     <button
                       type="submit"
-                      (click)="goNext()"
+                      (click)="updateProfile(content)"
                       class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
                       data-ktwizard-type="action-next"
                     >
@@ -2543,9 +2543,9 @@
     <button
       type="button"
       class="btn btn-outline-dark"
-      (click)="modal.close(' Save click ')"
+      (click)="goDashboard()"
     >
-      Ok
+    Finish
     </button>
   </div>
 </ng-template>
