@@ -89,22 +89,19 @@
 <div class="row">
   <div class="col-md-12">
     <div class="kt-portlet kt-portlet--mobile">
-      <div class="kt-portlet__head">
-        <div class="kt-portlet__head-label">
-          <!-- <h3 class="kt-portlet__head-title">
-                        Latest Demands
-                    </h3> -->
+      <div class="kt-portlet__head nopad">
+        <div class="kt-portlet__head-label tabBtnContainer">
           <a
             (click)="selectAgency('newDemand')"
             [ngClass]="{
               active: show('newDemand'),
               deactive: !show('newDemand')
             }"
-            class="btn btn-primary btn-brand--icon pull-right mleft20"
+            class="tabBtn"
             id="kt_search"
           >
             <span>
-              <span>New Demand</span>
+              <span>New Demands</span>
             </span>
           </a>
           <a
@@ -113,7 +110,7 @@
               active: show('quotesSent'),
               deactive: !show('quotesSent')
             }"
-            class="btn btn-primary btn-brand--icon pull-right mleft20"
+            class="tabBtn"
             id="kt_search"
           >
             <span>
@@ -126,11 +123,11 @@
               active: show('demandWon'),
               deactive: !show('demandWon')
             }"
-            class="btn btn-primary btn-brand--icon pull-right mleft20"
+            class="tabBtn"
             id="kt_search"
           >
             <span>
-              <span>Demand Won</span>
+              <span>Demands Won</span>
             </span>
           </a>
         </div>
