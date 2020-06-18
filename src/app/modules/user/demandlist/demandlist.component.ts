@@ -430,14 +430,14 @@ export class demandListComponent implements OnInit {
       data.startDate = mm + '/' + dd + '/' + yyyy;
       data.postDate = pomm + '/' + podd + '/' + poyyyy;
     }
-    console.log(data);
-    this.loader.startLoading();
     data.page = 1;
+    this.loader.startLoading();
     if (this.appData.role == 'Employer') {
       this.userService.demandList(data).subscribe((result: any) => {
         this.loader.stopLoading();
         if (result.payload.demand) {
           this.demandData = result.payload.demand.data;
+          this.config.totalItems= Number(result.payload.demand.total);
           this.category = this.demandData.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
@@ -452,6 +452,7 @@ export class demandListComponent implements OnInit {
         this.loader.stopLoading();
         if (result.payload.demand) {
           this.demandData = result.payload.demand.data;
+          this.config.totalItems= Number(result.payload.demand.total);
           this.category = this.demandData.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
