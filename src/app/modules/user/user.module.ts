@@ -27,6 +27,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpModule } from '@angular/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {ProgressBarModule} from "angular-progress-bar"
 @NgModule({
   declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent],
   imports: [
@@ -47,7 +48,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SelectDropDownModule,
     JwSocialButtonsModule,
     NgxPaginationModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ProgressBarModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

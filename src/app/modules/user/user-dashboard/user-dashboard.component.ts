@@ -277,6 +277,7 @@ export class UserDashboardComponent implements OnInit {
   appData: any;
   demandData: any = [];;
   category: any = [];
+  progress: number;
   total_active_demands: any;
   total_demands: any;
   total_active_agencies: any;
@@ -301,11 +302,19 @@ export class UserDashboardComponent implements OnInit {
     this.renderer.addClass(document.body, 'kt-subheader--enabled');
     this.renderer.addClass(document.body, 'kt-subheader--transparent');
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    // this.appData.is_welcome = 0;
+    // this.appData.last_step_updated = 2;
     if (this.appData.is_welcome == "0") {
       if (this.appData.role == 'Employer') {
+        const percentage = Number(100 / 5);
+
+        this.progress = Math.round(Number(percentage) * Number(this.appData.last_step_updated));
         let el: HTMLElement = this.myDiv.nativeElement;
         el.click();
       } else {
+        const percentage = Number(100 / 14);
+
+        this.progress = Math.round(Number(percentage) * Number(this.appData.last_step_updated));
         let el2: HTMLElement = this.myDiv2.nativeElement;
         el2.click();
       }
@@ -315,7 +324,7 @@ export class UserDashboardComponent implements OnInit {
 
   }
 
- 
+
 
   open(content) {
 

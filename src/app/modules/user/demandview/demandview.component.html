@@ -1,11 +1,6 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content"
+    *ngIf="demandDataValue.length">
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -16,11 +11,7 @@
         </div>
         <div class="kt-subheader__toolbar">
           <div class="kt-subheader__wrapper">
-            <a
-              routerLink="/user/demandlist"
-              class="btn btn-primary btn-brand--icon"
-              id="kt_search"
-            >
+            <a routerLink="/user/demandlist" class="btn btn-primary btn-brand--icon" id="kt_search">
               <span>
                 <span>Demand List</span>
               </span>
@@ -33,10 +24,7 @@
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
-    <div
-      class="kt-container kt-grid__item kt-grid__item--fluid"
-      *ngIf="demandData"
-    >
+    <div class="kt-container kt-grid__item kt-grid__item--fluid" *ngIf="demandData">
       <!--Begin::Dashboard 3-->
       <div class="kt-portlet">
         <div class="kt-portlet__body">
@@ -56,15 +44,16 @@
                     }}
                     <span class="detailed_list_label">Location</span>
                   </div>
-                  <div
-                    class="col-md-2"
-                    *ngIf="demandData.demand_category.length"
-                  >
+                  <div class="col-md-2" *ngIf="demandData && demandData.demand_category.length">
                     {{
-                      demandData.demand_category.length > 1
-                        ? demandData.demand_category.category_name.join(', ')
-                        : demandData.demand_category[0].category_name
+                      categoryData.length > 1
+                        ? categoryData.join(', ')
+                        : categoryData[0]
                     }}
+                    <span class="detailed_list_label">Categories</span>
+                  </div>
+                  <div class="col-md-2" *ngIf="demandData.demand_category.length==0">
+                    -
                     <span class="detailed_list_label">Categories</span>
                   </div>
                   <div class="col-md-2">
@@ -74,31 +63,18 @@
                     <span class="detailed_list_label">Total Demands</span>
                   </div>
                   <div class="col-md-2 text-center">
-                    <span
-                      class="btn btn-label-{{
+                    <span class="btn btn-label-{{
                         demandData.status == 1 ? 'success' : 'danger'
-                      }} btn-sm btn-bold btn-upper status"
-                      >{{
+                      }} btn-sm btn-bold btn-upper status">{{
                         demandData.status == 1 ? 'Published' : 'Draft'
-                      }}</span
-                    >
+                      }}</span>
                   </div>
                   <div class="col-md-2 text-center">
                     <div class="kt-widget__action">
-                      <a
-                        type="button"
-                        class="btn btn-sm btn-upper"
-                        style="background: #edeff6;"
-                        *ngIf="appData.role == 'Employer'"
-                        routerLink="/user/demand/{{ demandData.id }}"
-                      >
-                        Edit</a
-                      >&nbsp;
-                      <button
-                        type="button"
-                        class="btn btn-success btn-sm btn-upper"
-                        *ngIf="appData.role == 'Agency'"
-                      >
+                      <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
+                        *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
+                        Edit</a>&nbsp;
+                      <button type="button" class="btn btn-success btn-sm btn-upper" *ngIf="appData.role == 'Agency'">
                         Bid
                       </button>
                     </div>
@@ -115,12 +91,7 @@
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
               Demand Details
-              <a
-                type="button"
-                class="collapseBtn collapsed"
-                data-toggle="collapse"
-                data-target="#demandDetails"
-              >
+              <a type="button" class="collapseBtn collapsed" data-toggle="collapse" data-target="#demandDetails">
                 <i class="fa fa-chevron-circle-down"></i>
               </a>
             </h3>
@@ -128,10 +99,7 @@
         </div>
         <div class="kt-portlet__body collapse" id="demandDetails">
           <h4>Demands</h4>
-          <table
-            class="table table-bordered"
-            *ngIf="demandData && demandData.demand_category.length > 0"
-          >
+          <table class="table table-bordered" *ngIf="demandData && demandData.demand_category.length > 0">
             <thead>
               <th>Sno</th>
               <th>Sector</th>
@@ -142,9 +110,7 @@
               <th>More</th>
             </thead>
             <tbody>
-              <tr
-                *ngFor="let array of demandData.demand_category; let i = index"
-              >
+              <tr *ngFor="let array of demandData.demand_category; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ getCategoryname(array.parent_category_id) }}</td>
                 <td>{{ array.category_name }}</td>
@@ -205,8 +171,7 @@
                 </li>
 
                 <li>
-                  <strong> Transportation </strong
-                  >{{
+                  <strong> Transportation </strong>{{
                     demandData.transportation ? demandData.transportation : '-'
                   }}
                 </li>
@@ -217,8 +182,7 @@
                 </li>
 
                 <li>
-                  <strong>Contract duration </strong
-                  >{{
+                  <strong>Contract duration </strong>{{
                     demandData.contract_duration
                       ? demandData.contract_duration
                       : '-'
@@ -226,8 +190,7 @@
                 </li>
 
                 <li>
-                  <strong>Working hours per day </strong
-                  >{{
+                  <strong>Working hours per day </strong>{{
                     demandData.working_hours_day
                       ? demandData.working_hours_day
                       : '-'
@@ -235,8 +198,7 @@
                 </li>
 
                 <li>
-                  <strong>Working days per week </strong
-                  >{{
+                  <strong>Working days per week </strong>{{
                     demandData.working_hours_week
                       ? demandData.working_hours_week
                       : '-'
@@ -244,8 +206,7 @@
                 </li>
 
                 <li>
-                  <strong>Probation period </strong
-                  >{{
+                  <strong>Probation period </strong>{{
                     demandData.probation_period
                       ? demandData.probation_period
                       : '-'
@@ -253,42 +214,35 @@
                 </li>
 
                 <li>
-                  <strong>Overtime </strong
-                  >{{ demandData.overtime ? demandData.overtime : '-' }}
+                  <strong>Overtime </strong>{{ demandData.overtime ? demandData.overtime : '-' }}
                 </li>
               </ul>
             </div>
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Medical Insurance </strong
-                  >{{
+                  <strong> Medical Insurance </strong>{{
                     demandData.medical_insurance
                       ? demandData.medical_insurance
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Joining Ticket </strong
-                  >{{
+                  <strong> Joining Ticket </strong>{{
                     demandData.joining_ticket ? demandData.joining_ticket : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Paid leaves </strong
-                  >{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
+                  <strong> Paid leaves </strong>{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
                 </li>
                 <li>
-                  <strong> Leave ticket </strong
-                  >{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
+                  <strong> Leave ticket </strong>{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
                 </li>
                 <li>
-                  <strong> Uniform & PPEs </strong
-                  >{{ demandData.uniform ? demandData.uniform : '-' }}
+                  <strong> Uniform & PPEs </strong>{{ demandData.uniform ? demandData.uniform : '-' }}
                 </li>
                 <li>
-                  <strong> Other benefits </strong
-                  >{{
+                  <strong> Other benefits </strong>{{
                     demandData.other_benefits ? demandData.other_benefits : '-'
                   }}
                 </li>
@@ -302,16 +256,14 @@
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Mode of interview </strong
-                  >{{
+                  <strong> Mode of interview </strong>{{
                     demandData.mode_of_interview
                       ? demandData.mode_of_interview
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> No. of delegates for interview </strong
-                  >{{
+                  <strong> No. of delegates for interview </strong>{{
                     demandData.no_of_delegates
                       ? demandData.no_of_delegates
                       : '-'
@@ -322,16 +274,14 @@
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Flights for delegates </strong
-                  >{{
+                  <strong> Flights for delegates </strong>{{
                     demandData.flights_for_delegates
                       ? demandData.flights_for_delegates
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Hotels for delegates </strong
-                  >{{
+                  <strong> Hotels for delegates </strong>{{
                     demandData.hotels_for_delegates
                       ? demandData.hotels_for_delegates
                       : '-'
@@ -348,12 +298,7 @@
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
               All Bids
-              <a
-                type="button"
-                class="collapseBtn collapsed"
-                data-toggle="collapse"
-                data-target="#allbids"
-              >
+              <a type="button" class="collapseBtn collapsed" data-toggle="collapse" data-target="#allbids">
                 <i class="fa fa-chevron-circle-down"></i>
               </a>
             </h3>

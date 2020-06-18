@@ -274,7 +274,10 @@ export class DemandComponent implements OnInit {
       this.setLocation();
       this.setBenifit(result.payload.demand);
       this.setTerm(result.payload.demand);
-      this.postDemand = result.payload.demand.demand_type.toString();;
+      if (result.payload.demand && result.payload.demand.demand_type) {
+        this.postDemand = result.payload.demand.demand_type.toString();
+      }
+
     }
   }
   showDetails(i) {
@@ -813,7 +816,8 @@ export class DemandComponent implements OnInit {
     return (<FormArray>this.locationForm.get('location')).controls[i].invalid;
   }
   createDemand() {
-    this.ngOnInit();
+    this.modalReference.close();
+    this.router.navigate(['/user/demand']);
   }
 
   createDuplicateDemand() {

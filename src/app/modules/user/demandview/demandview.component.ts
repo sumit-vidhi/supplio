@@ -37,10 +37,11 @@ export class demandViewComponent implements OnInit {
   formCard: FormGroup;
   modalReference: NgbModalRef;
   submittedForm: boolean = false;
-  demandData: any;
+  demandData: any = [];
   category: any;
   searchForm: FormGroup;
   showDetailData = [false];
+  categoryData = [];
   countries = [
     { name: 'Afghanistan', code: 'AF' },
     { name: 'Åland Islands', code: 'AX' },
@@ -296,6 +297,7 @@ export class demandViewComponent implements OnInit {
     { name: 'Zimbabwe', code: 'ZW' },
   ];
   appData: any;
+  demandDataValue: any = [];
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
@@ -310,7 +312,15 @@ export class demandViewComponent implements OnInit {
       this.userService.getDemand(params.id).subscribe((result: any) => {
         if (result.payload.demand) {
           this.loader.stopLoading();
+          this.demandDataValue = result.payload.demand;
           this.demandData = result.payload.demand[0];
+          console.log(this.demandData.demand_category.length);
+          this.categoryData = this.demandDataValue.map((value, index) => {
+            return value.demand_category.map((v, i) => {
+              return v.category_name;
+            });
+          });
+          console.log(this.categoryData);
         }
       });
     });

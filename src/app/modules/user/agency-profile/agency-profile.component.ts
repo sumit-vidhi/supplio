@@ -223,11 +223,11 @@ export class AgencyProfileComponent implements OnInit {
     })
     this.awardForm = this.formBuilder.group({
       name: [null, Validators.required],
-      image: [null, Validators.required]
+      image: [null]
     });
     this.companyForm = this.formBuilder.group({
       name: [null, Validators.required],
-      image: [null, Validators.required]
+      image: [null]
     });
     this.experienceForm = this.formBuilder.group({
       categoryName: new FormArray([]),
@@ -241,8 +241,7 @@ export class AgencyProfileComponent implements OnInit {
     this.teamForm = this.formBuilder.group({
       name: ['', Validators.required],
       desination: ['', Validators.required],
-      photo: ['', Validators.required],
-      profile: ['', Validators.required]
+      photo: ['', Validators.required]
     });
     this.associationForm = this.formBuilder.group({
       name: new FormArray([])
@@ -571,13 +570,13 @@ export class AgencyProfileComponent implements OnInit {
     if (value && value.length) {
       for (let i = 0; i < this.categories.length; i++) {
         this.t.push(this.formBuilder.group({
-          name: [value[i], Validators.required]
+          name: [value[i], [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
         }));
       }
     } else {
       for (let i = 0; i < this.categories.length; i++) {
         this.t.push(this.formBuilder.group({
-          name: ['', Validators.required]
+          name: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
         }));
       }
     }
@@ -588,13 +587,13 @@ export class AgencyProfileComponent implements OnInit {
     if (value && value.length) {
       for (let i = 0; i < this.subCategories.length; i++) {
         this.s.push(this.formBuilder.group({
-          name: [value[i], Validators.required]
+          name: [value[i], [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
         }));
       }
     } else {
       for (let i = 0; i < this.subCategories.length; i++) {
         this.s.push(this.formBuilder.group({
-          name: ['', Validators.required]
+          name: ['', [Validators.required, Validators.pattern(/^-?(0|[1-9]\d*)?$/)]]
         }));
       }
     }
@@ -672,6 +671,10 @@ export class AgencyProfileComponent implements OnInit {
 
 
   teamUpload() {
+    if (this.teamData.length == 5) {
+      alert("You can not add more than 5");
+      return;
+    }
     this.teamSubmitted = true;
     if (this.teamForm.invalid) {
       return;

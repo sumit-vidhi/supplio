@@ -56,8 +56,12 @@ export class SignUpComponent implements OnInit {
             last_name: ['', Validators.required],
             agency_name: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email], this.isEmailUnique.bind(this)],
-            password: ['', [Validators.required, Validators.minLength(6)]],
-            confirm_password: ['', Validators.required]
+            password: ['', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}'), Validators.minLength(6)]],
+            confirm_password: ['', Validators.required],
+            accept: ['', [
+                Validators.required,
+                Validators.pattern('true')
+            ]],
         }, {
             validator: [MustMatch('password', 'confirm_password')]
         });

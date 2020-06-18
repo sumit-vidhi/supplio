@@ -13,7 +13,9 @@
         </div>
       </div>
     </div>
-
+    <progress-bar *ngIf="appData.is_welcome==0" [progress]="progress"
+      [color-degraded]="{'0': '#00cbcb',  '15': '#f9c3d3', '25': '#fd8c8e'}">
+    </progress-bar>
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
