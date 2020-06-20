@@ -75,8 +75,12 @@
                         *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
                         Edit</a>&nbsp;
                       <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
-                        data-target="#allbids" type="button" *ngIf="appData.role == 'Agency'">
+                        data-target="#allbids" type="button" *ngIf="appData.role == 'Agency' && proposalData.length==0">
                         Bid
+                      </a>
+                      <a class="btn btn-success btn-sm btn-upper" data-toggle="collapse" type="button"
+                        *ngIf="appData.role == 'Agency' && proposalData.length">
+                        Bid Applied
                       </a>
                     </div>
                   </div>
@@ -368,8 +372,8 @@
             <div class="form-group">
               <label for="usr">
                 Do you want to bid this demand?:</label>
-              <input type="radio" formControlName="accept" name="selection" value="yes"
-                (change)="checkQuest($event)">Accept <input type="radio" formControlName="accept" name="selection"
+              <input type="radio" formControlName="accept" name="accept" value="yes"
+                (change)="checkQuest($event)">Accept <input type="radio" formControlName="accept" name="accept"
                 value="no" (change)="checkQuest($event)">Reject
               <div *ngIf="bidSubmitted && bid.accept.errors">
                 <div *ngIf="bid.accept.errors.required" style="color: red;">
@@ -379,17 +383,23 @@
             </div>
             <div class="form-group">
               <label>{{selectionTitle}}</label>
-              <textarea formControlName="comment" class="form-control" rows="5"></textarea>
-              <div *ngIf="bidSubmitted && bid.comment.errors">
-                <div *ngIf="bid.comment.errors.required" style="color: red;">
+              <textarea formControlName="comments" class="form-control" rows="5"></textarea>
+              <div *ngIf="bidSubmitted && bid.comments.errors">
+                <div *ngIf="bid.comments.errors.required" style="color: red;">
                   Comment is required.
                 </div>
               </div>
             </div>
             <button type="submit"
               class="pull-right btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-              data-ktwizard-type="action-submit"> <span>
+              data-ktwizard-type="action-submit" *ngIf="proposalData.length==0"> <span>
                 <span>Bid Apply</span>
+              </span>
+            </button>
+            <button type="submit"
+              class="pull-right btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+              data-ktwizard-type="action-submit" *ngIf="proposalData.length" [disabled]="true"> <span>
+                <span>Bid Applied</span>
               </span>
             </button>
           </form>
@@ -417,7 +427,7 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark mr-auto" (click)="goBid(demandData.id)">
+    <button type="button" class="btn btn-outline-dark mr-auto" (click)="payment(template2)">
       Add Amount
     </button>
     <button type="button" class="btn btn-outline-dark btn-secondary" (click)="upgradePlan(template)">
@@ -441,8 +451,60 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="payment()">
+    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="payment(template2)">
       Payment Procced
+    </button>
+  </div>
+</ng-template>
+<ng-template #template2 let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Payment Process</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="ticket-content mb-4">
+        <p>
+          Here is your payment gateway.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="paymentGateway(template4)">
+      Payment Procced
+    </button>
+  </div>
+</ng-template>
+<ng-template #template4 let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Payment Success</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="ticket-content mb-4">
+        <p>
+          If you add amount then show message amount is added in your wallet account or you upgarde the plan message
+          your plan is upgraded successfully.Now you can bid on demand please bid the demand that showing on your
+          screen.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="modal.dismiss('Cross click')">
+      Ok
     </button>
   </div>
 </ng-template>

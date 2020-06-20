@@ -135,7 +135,7 @@ export class JWTAuthService {
   */
   getLoginUserId(): CommonBase {
     if (window.localStorage[APP_USER]) {
-      return JSON.parse(window.localStorage[APP_USER]).userId;
+      return JSON.parse(window.localStorage[APP_USER]).id;
     }
   }
 

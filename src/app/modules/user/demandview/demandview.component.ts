@@ -301,6 +301,8 @@ export class demandViewComponent implements OnInit {
   bidForm: FormGroup
   bidSubmitted = false;
   selectionTitle = "Comment";
+  paymentSuccess = false;
+  proposalData: any = [];
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
@@ -311,7 +313,7 @@ export class demandViewComponent implements OnInit {
     });
     this.bidForm = this.formBuilder.group({
       accept: [null, Validators.required],
-      comment: [null, Validators.required]
+      comments: [null, Validators.required]
     })
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.route.params.subscribe((params) => {
@@ -321,13 +323,29 @@ export class demandViewComponent implements OnInit {
           this.loader.stopLoading();
           this.demandDataValue = result.payload.demand;
           this.demandData = result.payload.demand[0];
-          console.log(this.demandData.demand_category.length);
           this.categoryData = this.demandDataValue.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
             });
           });
-          console.log(this.categoryData);
+          if (this.demandDataValue[0].proposals.length) {
+
+            this.proposalData = this.demandDataValue[0].proposals.filter((value, index) => {
+              return value.user_id == this.loginService.getLoginUserId() && value.accept == "1";
+            });
+            if (this.proposalData[0].accept == 1) {
+              this.proposalData[0].accept = "yes";
+            }
+            if (this.proposalData[0].accept == 0) {
+              this.proposalData[0].accept = "no";
+            }
+            this.bidForm.patchValue({
+              accept: this.proposalData[0].accept,
+              comments: this.proposalData[0].comments
+            })
+          }
+          console.log(this.proposalData);
+
         }
       });
     });
@@ -346,7 +364,25 @@ export class demandViewComponent implements OnInit {
     if (this.bidForm.invalid) {
       return;
     }
-    this.demandBid(content)
+    const data = this.bidForm.value;
+    if (!this.paymentSuccess && data.accept == "yes") {
+      this.demandBid(content);
+      return;
+    }
+
+    data.demand_id = this.demandData.id;
+    if (data.accept == "yes") {
+      data.accept = 1;
+    } else {
+      data.accept = 0;
+    }
+    this.loader.startLoading();
+    this.userService.saveBid(data).subscribe((result: any) => {
+      if (result.payload.proposal) {
+        this.loader.stopLoading();
+        alert("Bid Placed");
+      }
+    })
   }
   checkQuest(event) {
     const selection = event.target.value;
@@ -359,6 +395,16 @@ export class demandViewComponent implements OnInit {
   upgradePlan(content) {
     this.modalReference.close();
     this.open(content);
+  }
+
+  payment(template) {
+    this.modalReference.close();
+    this.open(template);
+  }
+  paymentGateway(template4) {
+    this.paymentSuccess = true;
+    this.modalReference.close();
+    this.open(template4);
   }
 
   open(content) {

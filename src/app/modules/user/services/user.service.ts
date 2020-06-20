@@ -52,6 +52,9 @@ export class UserService {
   createDemand(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.updateDemand, data);
   }
+  saveBid(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.addbid, data);
+  }
   getSubcategoies(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getSubcategory);
   }
