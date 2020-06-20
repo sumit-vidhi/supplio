@@ -74,9 +74,10 @@
                       <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
                         *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
                         Edit</a>&nbsp;
-                      <button type="button" class="btn btn-success btn-sm btn-upper" *ngIf="appData.role == 'Agency'">
+                      <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
+                        data-target="#allbids" type="button" *ngIf="appData.role == 'Agency'">
                         Bid
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -293,7 +294,7 @@
         </div>
       </div>
 
-      <div class="kt-portlet kt-portlet--mobile">
+      <div class="kt-portlet kt-portlet--mobile" *ngIf="appData.role == 'Employer'">
         <div class="kt-portlet__head">
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
@@ -308,8 +309,140 @@
           <h4>Bids</h4>
         </div>
       </div>
+
+      <div class="kt-portlet kt-portlet--mobile" *ngIf="appData.role == 'Agency'">
+        <div class="kt-portlet__head">
+          <div class="kt-portlet__head-label">
+            <h3 class="kt-portlet__head-title">
+              Offering Selection
+              <a type="button" class="collapseBtn collapsed" data-toggle="collapse" data-target="#allbids">
+                <i class="fa fa-chevron-circle-down"></i>
+              </a>
+            </h3>
+          </div>
+        </div>
+        <div class="kt-portlet__body collapse" id="allbids">
+          <h4>Offer</h4>
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Terms & Conditions</h4>
+            </div>
+            <div class="col-md-6">
+              <ul class="nostyle alignMe">
+                <li>
+                  <strong> Mode of interview </strong>{{
+                    demandData.mode_of_interview
+                      ? demandData.mode_of_interview
+                      : '-'
+                  }}
+                </li>
+                <li>
+                  <strong> No. of delegates for interview </strong>{{
+                    demandData.no_of_delegates
+                      ? demandData.no_of_delegates
+                      : '-'
+                  }}
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="nostyle alignMe">
+                <li>
+                  <strong> Flights for delegates </strong>{{
+                    demandData.flights_for_delegates
+                      ? demandData.flights_for_delegates
+                      : '-'
+                  }}
+                </li>
+                <li>
+                  <strong> Hotels for delegates </strong>{{
+                    demandData.hotels_for_delegates
+                      ? demandData.hotels_for_delegates
+                      : '-'
+                  }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <form [formGroup]="bidForm" (ngSubmit)="onBidFormSubmit(content)">
+            <div class="form-group">
+              <label for="usr">
+                Do you want to bid this demand?:</label>
+              <input type="radio" formControlName="accept" name="selection" value="yes"
+                (change)="checkQuest($event)">Accept <input type="radio" formControlName="accept" name="selection"
+                value="no" (change)="checkQuest($event)">Reject
+              <div *ngIf="bidSubmitted && bid.accept.errors">
+                <div *ngIf="bid.accept.errors.required" style="color: red;">
+                  Selectin is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{selectionTitle}}</label>
+              <textarea formControlName="comment" class="form-control" rows="5"></textarea>
+              <div *ngIf="bidSubmitted && bid.comment.errors">
+                <div *ngIf="bid.comment.errors.required" style="color: red;">
+                  Comment is required.
+                </div>
+              </div>
+            </div>
+            <button type="submit"
+              class="pull-right btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+              data-ktwizard-type="action-submit"> <span>
+                <span>Bid Apply</span>
+              </span>
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
 
     <!-- end:: Content -->
   </div>
 </div>
+<ng-template #content let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Bid Amount</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="ticket-content mb-4">
+      <p>
+        If you want to bid this demand so please add amount in your wallet or upgrade plan.
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark mr-auto" (click)="goBid(demandData.id)">
+      Add Amount
+    </button>
+    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="upgradePlan(template)">
+      Upgrade Plan
+    </button>
+  </div>
+</ng-template>
+<ng-template #template let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Plan</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="height: 450px;
+  overflow-y: auto;background-color: lightblue
+  ;">
+    <app-pricing></app-pricing>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="payment()">
+      Payment Procced
+    </button>
+  </div>
+</ng-template>

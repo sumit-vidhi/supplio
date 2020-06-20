@@ -298,6 +298,9 @@ export class demandViewComponent implements OnInit {
   ];
   appData: any;
   demandDataValue: any = [];
+  bidForm: FormGroup
+  bidSubmitted = false;
+  selectionTitle = "Comment";
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
@@ -306,6 +309,10 @@ export class demandViewComponent implements OnInit {
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     });
+    this.bidForm = this.formBuilder.group({
+      accept: [null, Validators.required],
+      comment: [null, Validators.required]
+    })
     this.appData = JSON.parse(window.localStorage[APP_USER]);
     this.route.params.subscribe((params) => {
       this.loader.startLoading();
@@ -323,6 +330,41 @@ export class demandViewComponent implements OnInit {
           console.log(this.categoryData);
         }
       });
+    });
+  }
+
+  demandBid(content) {
+    this.open(content);
+  }
+
+  get bid() {
+    return this.bidForm.controls;
+  }
+
+  onBidFormSubmit(content) {
+    this.bidSubmitted = true;
+    if (this.bidForm.invalid) {
+      return;
+    }
+    this.demandBid(content)
+  }
+  checkQuest(event) {
+    const selection = event.target.value;
+    if (selection == "no") {
+      this.selectionTitle = "Reason";
+    } else {
+      this.selectionTitle = "Comment";
+    }
+  }
+  upgradePlan(content) {
+    this.modalReference.close();
+    this.open(content);
+  }
+
+  open(content) {
+    this.modalReference = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      windowClass: 'ticket-modal',
     });
   }
 
