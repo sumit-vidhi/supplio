@@ -10,6 +10,7 @@ import { demandListComponent } from './demandlist/demandlist.component';
 import { demandViewComponent } from './demandview/demandview.component';
 import { AgencyProfileComponent } from './agency-profile/agency-profile.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { ProfileComponent } from './profile/profile.component'
 const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'change-password', component: ChangePasswordComponent,
     data: { title: 'Change Password' },
+    canActivate: [AuthGuard]
+  }, {
+    path: 'profile', component: ProfileComponent,
+    data: { title: 'View Profile' },
     canActivate: [AuthGuard]
   },
   {

@@ -68,7 +68,7 @@ export class JWTAuthService {
   */
   setLoginUserDetail(obj: CommonBase): void {
     window.localStorage[APP_USER] = JSON.stringify(obj);
-    this.router.navigate(["user"]);
+    this.router.navigate(["/user"]);
   }
    /**
   * @function setLoginUserDetail

@@ -440,7 +440,7 @@ span.mat-checkbox-label {
 }
 .container,
 .row {
-  height: 100%;
+  /*height: 100%;*/
 }
 .mat-form-field-appearance-legacy .mat-form-field-wrapper {
   padding: 0;

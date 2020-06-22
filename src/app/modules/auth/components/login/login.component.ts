@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private loginService: JWTAuthService, private loader: LoaderService, private route: ActivatedRoute, private router: Router, private renderer: Renderer2) { }
 
   ngOnInit() {
-   
+
     this.renderer.removeClass(document.body, 'body-bg');
     this.renderer.removeClass(document.body, 'kt-page--loading-enabled');
     this.renderer.removeClass(document.body, 'kt-quick-panel--right');
@@ -84,28 +84,18 @@ export class LoginComponent implements OnInit {
     let formModal = this.loginForm.value;
     this.loader.startLoading();
     this.authService.login(formModal).subscribe((result: any) => {
-      this.loader.stopLoading();
+
       if (result.payload.token) {
-        //   result.payload["authToken"] = result.payload.token;
         result.payload.user["authToken"] = result.payload.token;
         this.loginService.setLoginUserDetail(result.payload.user);
-        this.blogData();
       } else if (result.payload.error) {
         this.error = result.payload.error;
       } else {
         alert("Email and password is wrong");
       }
+      this.loader.stopLoading();
     });
 
   }
 
-  blogData() {
-    let plan = 'everyone';
-    if (this.loginService.getUserAccessToken()) {
-      plan = this.loginService.getPlan();
-    }
-    // this.userservice.getBlogPage({ plan: plan }).subscribe((result) => {
-    //   this.loader.addblog(result.record);
-    // })
-  }
 }
