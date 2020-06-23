@@ -15,7 +15,7 @@
     </div>
     <!-- end:: Subheader -->
     <!-- begin:: Content -->
-    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+    <div class="kt-container kt-grid__item kt-grid__item--fluid" *ngIf="appData">
         <!--Begin::Profile 3-->
         <div class="row">
             <div class="col-md-3">
@@ -33,7 +33,7 @@
                         <div class="kt-widget kt-widget--user-profile-2">
                             <div class="kt-widget__head">
                                 <div class="kt-widget__media">
-                                    <img class="kt-widget__img kt-hidden-" src="assets/media//users/100_6.jpg"
+                                    <img class="kt-widget__img kt-hidden-" src="{{this.appData.files[2].filepath}}"
                                         alt="image">
                                     <div
                                         class="kt-widget__pic kt-widget__pic--danger kt-font-danger kt-font-boldest kt-font-light kt-hidden">
@@ -346,6 +346,7 @@
                                 </div>
                             </div>
                             <div class="kt-portlet__body">
+                                <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
                             </div>
                         </div>
                     </div>

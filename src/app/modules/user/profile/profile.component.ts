@@ -1,5 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
+import { UserService } from '@modules/user/services/user.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { LoaderService } from '@core/services/loader-service';
+import { JWTAuthService } from '@core/services/jwt-auth.service';
+import {
+  NgbModal,
+  ModalDismissReasons,
+  NgbModalRef,
+} from '@ng-bootstrap/ng-bootstrap';
 import { APP_USER } from '@configs/app-settings.config';
+import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gallery';
 
 @Component({
   selector: 'app-profile',
@@ -34,10 +58,62 @@ export class ProfileComponent implements OnInit {
     }
 
   }
-  constructor() { }
+  galleryOptions: NgxGalleryOptions[];
+  galleryImages: NgxGalleryImage[];
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
+    private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
+  }
 
   ngOnInit() {
-    this.appData = JSON.parse(window.localStorage[APP_USER]);
+
+    const appData = JSON.parse(window.localStorage[APP_USER]);
+    if (appData.role == "Agency") {
+      this.appData = appData;
+      let data = [];
+      if (this.appData) {
+        for (let i = 0; i < this.appData.agency_company_tour.length; i++) {
+          data[i] = {
+            small: this.appData.agency_company_tour[i].filepath,
+            medium: this.appData.agency_company_tour[i].filepath,
+            description: this.appData.agency_company_tour[i].filename
+          }
+        }
+
+        this.galleryImages = data;
+      }
+    }
+    if (appData.role == "Employer") {
+      this.route.params.subscribe((params) => {
+        this.loader.startLoading();
+        this.userService.getProfiledata(params.id).subscribe((result: any) => {
+          if (result.payload.agency) {
+            this.loader.stopLoading();
+            this.appData = result.payload.agency;
+            let data = [];
+            for (let i = 0; i < this.appData.agency_company_tour.length; i++) {
+              data[i] = {
+                small: this.appData.agency_company_tour[i].filepath,
+                medium: this.appData.agency_company_tour[i].filepath,
+                description: this.appData.agency_company_tour[i].filename
+              }
+              console.log(data);
+            }
+            console.log(data);
+            this.galleryImages = data;
+
+          }
+        });
+      });
+    }
+    this.galleryOptions = [
+      { "imageDescription": true },
+      { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
+      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
+    ];
+
+
+
+
   }
 
 }

@@ -20,6 +20,7 @@ import { SearchCountryField } from 'projects/ngx-intl-tel-input/src/lib/enums/se
 import { TooltipLabel } from 'projects/ngx-intl-tel-input/src/lib/enums/tooltip-label.enum';
 import { CountryISO } from 'projects/ngx-intl-tel-input/src/lib/enums/country-iso.enum';
 import { countries } from '../country';
+import { environment } from '@environment/environment';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -653,6 +654,17 @@ export class AgencyProfileComponent implements OnInit {
   }
 
   changeFile(event) {
+    const fileIdentity = event.target.files[0];
+    const sizeInMB = (fileIdentity.size / (1024 * 1024)).toFixed(2);
+    const ext = fileIdentity.name.split('.').pop();
+    if (Number(sizeInMB) > environment.filesize) {
+      alert("Please file szie is less than " + environment.filesize + "MB");
+      return;
+    }
+    if (ext != "pdf" && ext != "docx" && ext != "doc") {
+      alert("Please file extension should be  pdf, doc or docs");
+      return;
+    }
     this.labelImport.nativeElement.innerText = event.target.files[0].name;
     this.fileData = event.target.files[0];
   }

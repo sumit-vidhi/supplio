@@ -309,5 +309,24 @@ export class EmployerDashboardComponent implements OnInit {
     })
     return this.countries[counrty]["name"];
   }
+  open(content) {
+
+    this.modalReference = this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', windowClass: 'ticket-modal' });
+
+  }
+  createDemand(template) {
+    //this.appData.is_welcome = 0;
+    if (this.appData.is_welcome == 0) {
+      this.open(template);
+    } else {
+      this.router.navigate(['/user/demand']);
+    }
+
+  }
+  goProfile() {
+    this.modalReference.close();
+    this.router.navigate(['/user/edit-profile']);
+  }
+
 
 }

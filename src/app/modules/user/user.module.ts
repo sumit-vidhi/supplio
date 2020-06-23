@@ -29,6 +29,7 @@ import { HttpModule } from '@angular/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {ProgressBarModule} from "angular-progress-bar";
 import { ProfileComponent } from './profile/profile.component'
+import { NgxGalleryModule } from 'ngx-gallery';
 @NgModule({
   declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent, ProfileComponent],
   imports: [
@@ -36,6 +37,7 @@ import { ProfileComponent } from './profile/profile.component'
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxGalleryModule,
     CKEditorModule,
     NgOptionHighlightModule,
     NgSelectModule,

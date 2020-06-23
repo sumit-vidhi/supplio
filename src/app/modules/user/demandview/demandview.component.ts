@@ -303,6 +303,7 @@ export class demandViewComponent implements OnInit {
   selectionTitle = "Comment";
   paymentSuccess = false;
   proposalData: any = [];
+  agencyData: any = [];
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
@@ -316,6 +317,10 @@ export class demandViewComponent implements OnInit {
       comments: [null, Validators.required]
     })
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+
+
+
+
     this.route.params.subscribe((params) => {
       this.loader.startLoading();
       this.userService.getDemand(params.id).subscribe((result: any) => {
@@ -328,24 +333,39 @@ export class demandViewComponent implements OnInit {
               return v.category_name;
             });
           });
-          if (this.demandDataValue[0].proposals.length) {
+          if (this.appData.role == 'Agency') {
+            if (this.demandDataValue[0].proposals.length) {
 
-            this.proposalData = this.demandDataValue[0].proposals.filter((value, index) => {
-              return value.user_id == this.loginService.getLoginUserId() && value.accept == "1";
-            });
-            if (this.proposalData[0].accept == 1) {
-              this.proposalData[0].accept = "yes";
+              this.proposalData = this.demandDataValue[0].proposals.filter((value, index) => {
+                return value.user_id == this.loginService.getLoginUserId() && value.accept == "1";
+              });
+              if (this.proposalData[0].accept == 1) {
+                this.proposalData[0].accept = "yes";
+              }
+              if (this.proposalData[0].accept == 0) {
+                this.proposalData[0].accept = "no";
+              }
+              this.bidForm.patchValue({
+                accept: this.proposalData[0].accept,
+                comments: this.proposalData[0].comments
+              })
             }
-            if (this.proposalData[0].accept == 0) {
-              this.proposalData[0].accept = "no";
-            }
-            this.bidForm.patchValue({
-              accept: this.proposalData[0].accept,
-              comments: this.proposalData[0].comments
-            })
           }
-          console.log(this.proposalData);
-
+          if (this.appData.role == 'Employer') {
+            var data = this.demandData.proposals.map((data) => {
+              return data.user;
+            });
+            var count = [];
+            var countWork = [];
+            for (let i = 0; i < data.length; i++) {
+              data[i]["agencyId"] = this.demandData.proposals[i].id;
+              count[i] = data[i].experience_industries_ids.length + data[i].experience_categories_ids.length;
+              countWork[i] = data[i].agency_work.length;
+              data[i]["count"] = count[i];
+              data[i]["countWork"] = countWork[i];
+            }
+            this.agencyData = data;
+          }
         }
       });
     });

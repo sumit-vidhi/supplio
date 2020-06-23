@@ -437,7 +437,7 @@ export class demandListComponent implements OnInit {
         this.loader.stopLoading();
         if (result.payload.demand) {
           this.demandData = result.payload.demand.data;
-          this.config.totalItems= Number(result.payload.demand.total);
+          this.config.totalItems = Number(result.payload.demand.total);
           this.category = this.demandData.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
@@ -452,7 +452,7 @@ export class demandListComponent implements OnInit {
         this.loader.stopLoading();
         if (result.payload.demand) {
           this.demandData = result.payload.demand.data;
-          this.config.totalItems= Number(result.payload.demand.total);
+          this.config.totalItems = Number(result.payload.demand.total);
           this.category = this.demandData.map((value, index) => {
             return value.demand_category.map((v, i) => {
               return v.category_name;
@@ -461,6 +461,21 @@ export class demandListComponent implements OnInit {
         }
       });
     }
+  }
+
+
+  createDemand(template) {
+  //  this.appData.is_welcome = 0;
+    if (this.appData.is_welcome == 0) {
+      this.open(template);
+    } else {
+      this.router.navigate(['/user/demand']);
+    }
+
+  }
+  goProfile() {
+    this.modalReference.close();
+    this.router.navigate(['/user/edit-profile']);
   }
 
   reset() {

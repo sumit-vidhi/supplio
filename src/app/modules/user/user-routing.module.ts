@@ -31,8 +31,14 @@ const routes: Routes = [
     path: 'change-password', component: ChangePasswordComponent,
     data: { title: 'Change Password' },
     canActivate: [AuthGuard]
-  }, {
+  },
+  {
     path: 'profile', component: ProfileComponent,
+    data: { title: 'View Profile' },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile/:id', component: ProfileComponent,
     data: { title: 'View Profile' },
     canActivate: [AuthGuard]
   },

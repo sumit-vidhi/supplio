@@ -15,7 +15,7 @@
         <div class="kt-subheader__main"></div>
         <div class="kt-subheader__toolbar" *ngIf="appData.role == 'Employer'">
           <div class="kt-subheader__wrapper">
-            <a routerLink="/user/demand" class="btn btn-primary btn-brand--icon" id="kt_search">
+            <a (click)="createDemand(template)" class="btn btn-primary btn-brand--icon" id="kt_search">
               <span>
                 <span>Create Demand</span>
               </span>
@@ -433,3 +433,25 @@
     </div>
   </div>
 </div>
+<ng-template #template let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Create demand</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(' Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="ticket-content mb-4">
+      <p>
+        Your profile is pending please complete profile before create demand.
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="goProfile()">
+      Go To Edit Profile
+    </button>
+  </div>
+</ng-template>

@@ -128,7 +128,7 @@ export class DemandComponent implements OnInit {
     this.termForm = this.formBuilder.group({
       // address: ['', [Validators.required]]
       mode_of_interview: ['', [Validators.required]],
-      recruitment_fee: ['', [Validators.required]],
+      recruitment_fee: [''],
       no_of_delegates: ['', [Validators.required]],
       flights_for_delegates: ['', [Validators.required]],
       hotels_for_delegates: ['', [Validators.required]],

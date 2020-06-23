@@ -38,6 +38,9 @@ export class UserService {
   getProfile(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getdata);
   }
+  getProfiledata(id): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.agencyProfile + "?id=" + id);
+  }
 
   getdashboardData(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getdashboradData);
@@ -68,13 +71,13 @@ export class UserService {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.setting);
   }
   filedelete(id): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.delete+"?id="+id);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.delete + "?id=" + id);
   }
   fileAgencydelete(id): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.agencydelete+"?id="+id);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.agencydelete + "?id=" + id);
   }
   fileteamdelete(id): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.teamdelete+"?id="+id);
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.teamdelete + "?id=" + id);
   }
   imageUpload(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>('fileTest', data);

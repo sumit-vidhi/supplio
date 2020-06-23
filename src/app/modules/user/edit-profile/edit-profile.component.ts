@@ -19,6 +19,7 @@ import { APP_USER } from '@configs/app-settings.config';
 import { SearchCountryField } from 'projects/ngx-intl-tel-input/src/lib/enums/search-country-field.enum';
 import { TooltipLabel } from 'projects/ngx-intl-tel-input/src/lib/enums/tooltip-label.enum';
 import { CountryISO } from 'projects/ngx-intl-tel-input/src/lib/enums/country-iso.enum';
+import { environment } from '@environment/environment';
 import {
   NgbModal,
   ModalDismissReasons,
@@ -141,6 +142,7 @@ export class EditProfileComponent implements OnInit {
       owner_name: ['', Validators.required],
       designation: ['', Validators.required],
     });
+
     this.imageForm = this.formBuilder.group({
       myFile: ['', Validators.required],
       identity: ['', Validators.required],
@@ -161,6 +163,9 @@ export class EditProfileComponent implements OnInit {
     arrayControl.push(newGroup);
     this.locationForm = locationForm;
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    this.editForm.patchValue({
+      "agency_name": this.appData.agency_name
+    });
     if (this.appData.last_step_updated) {
       this.disabledTabs = this.disabledTabs.slice(this.appData.last_step_updated);
       console.log(this.disabledTabs);
@@ -242,17 +247,48 @@ export class EditProfileComponent implements OnInit {
 
   fileEvent(e) {
     this.filedata = e.target.files[0];
+
+    const sizeInMB = (this.filedata.size / (1024 * 1024)).toFixed(2);
+    const ext = this.filedata.name.split('.').pop();
+    if (Number(sizeInMB) > environment.filesize) {
+      alert("Please file szie is less than " + environment.filesize + "MB");
+      return;
+    }
+    if (ext != "pdf" && ext != "docx" && ext != "doc") {
+      alert("Please file extension should be  pdf, doc or docs");
+      return;
+    }
     this.labelImport.nativeElement.innerText = this.filedata.name;
     this.imageForm.get('myFile').setValue(this.filedata);
   }
   fileIdentityEvent(e) {
     this.fileIdentity = e.target.files[0];
+    const sizeInMB = (this.fileIdentity.size / (1024 * 1024)).toFixed(2);
+    const ext = this.fileIdentity.name.split('.').pop();
+    if (Number(sizeInMB) > environment.filesize) {
+      alert("Please file szie is less than " + environment.filesize + "MB");
+      return;
+    }
+    if (ext != "pdf" && ext != "docx" && ext != "doc") {
+      alert("Please file extension should be  pdf, doc or docs");
+      return;
+    }
     this.labelidentityImport.nativeElement.innerText = this.fileIdentity.name;
     this.imageForm.get('identity').setValue(this.fileIdentity);
     // console.log(this.filedata);
   }
   fileLogoEvent(e) {
     this.filelogo = e.target.files[0];
+    const sizeInMB = (this.filelogo.size / (1024 * 1024)).toFixed(2);
+    const ext = this.filelogo.name.split('.').pop();
+    if (Number(sizeInMB) > environment.filesize) {
+      alert("Please file szie is less than " + environment.filesize + "MB");
+      return;
+    }
+    if (ext != "pdf" && ext != "docx" && ext != "doc") {
+      alert("Please file extension should be  pdf, doc or docs");
+      return;
+    }
     this.labellogImport.nativeElement.innerText = this.filelogo.name;
     this.imageForm.get('logo').setValue(this.filelogo);
     //console.log(this.filedata);
@@ -512,7 +548,7 @@ export class EditProfileComponent implements OnInit {
   get addressForm(): FormArray {
     return this.locationForm.get('location') as FormArray;
   }
-  
+
   goDashboard() {
     this.modalReference.close();
     this.router.navigate(['/user']);
