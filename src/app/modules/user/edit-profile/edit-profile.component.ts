@@ -250,8 +250,8 @@ export class EditProfileComponent implements OnInit {
 
     const sizeInMB = (this.filedata.size / (1024 * 1024)).toFixed(2);
     const ext = this.filedata.name.split('.').pop();
-    if (Number(sizeInMB) > environment.filesize) {
-      alert("Please file szie is less than " + environment.filesize + "MB");
+    if (Number(sizeInMB) > environment["filesize"]) {
+      alert("Please file szie is less than " + environment["filesize"] + "MB");
       return;
     }
     if (ext != "pdf" && ext != "docx" && ext != "doc") {
@@ -265,8 +265,8 @@ export class EditProfileComponent implements OnInit {
     this.fileIdentity = e.target.files[0];
     const sizeInMB = (this.fileIdentity.size / (1024 * 1024)).toFixed(2);
     const ext = this.fileIdentity.name.split('.').pop();
-    if (Number(sizeInMB) > environment.filesize) {
-      alert("Please file szie is less than " + environment.filesize + "MB");
+    if (Number(sizeInMB) > environment["filesize"]) {
+      alert("Please file szie is less than " + environment["filesize"] + "MB");
       return;
     }
     if (ext != "pdf" && ext != "docx" && ext != "doc") {
@@ -281,8 +281,8 @@ export class EditProfileComponent implements OnInit {
     this.filelogo = e.target.files[0];
     const sizeInMB = (this.filelogo.size / (1024 * 1024)).toFixed(2);
     const ext = this.filelogo.name.split('.').pop();
-    if (Number(sizeInMB) > environment.filesize) {
-      alert("Please file szie is less than " + environment.filesize + "MB");
+    if (Number(sizeInMB) > environment["filesize"]) {
+      alert("Please file szie is less than " + environment["filesize"] + "MB");
       return;
     }
     if (ext != "pdf" && ext != "docx" && ext != "doc") {

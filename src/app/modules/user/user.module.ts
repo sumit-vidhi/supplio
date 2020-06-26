@@ -30,10 +30,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {ProgressBarModule} from "angular-progress-bar";
 import { ProfileComponent } from './profile/profile.component'
 import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxPayPalModule } from 'ngx-paypal';
 @NgModule({
   declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent, ProfileComponent],
   imports: [
     CommonModule,
+    NgxPayPalModule,
     UserRoutingModule,
     FormsModule,
     ReactiveFormsModule,

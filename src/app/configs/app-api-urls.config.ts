@@ -21,6 +21,8 @@ export const appApiUrl: CommonBase = {
         creatDemand: 'demands/createEmptyDemand',
         demandList: 'demands/myList',
         addbid: 'proposal/create',
+        getWallet: 'wallet/get',
+        addWallet: 'wallet/add',
         demandAllList: 'demands/list',
         delete: 'file/delete',
         agencydelete: 'agency/awards/delete',

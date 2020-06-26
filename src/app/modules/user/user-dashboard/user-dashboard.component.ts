@@ -302,6 +302,7 @@ export class UserDashboardComponent implements OnInit {
     this.renderer.addClass(document.body, 'kt-subheader--enabled');
     this.renderer.addClass(document.body, 'kt-subheader--transparent');
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+   
     // this.appData.is_welcome = 0;
     // this.appData.last_step_updated = 2;
     if (this.appData.is_welcome == "0") {
@@ -339,6 +340,6 @@ export class UserDashboardComponent implements OnInit {
     this.modalReference.close();
     this.router.navigate(["user/agency-profile"]);
   }
- 
+
 
 }

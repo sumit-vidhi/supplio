@@ -657,8 +657,8 @@ export class AgencyProfileComponent implements OnInit {
     const fileIdentity = event.target.files[0];
     const sizeInMB = (fileIdentity.size / (1024 * 1024)).toFixed(2);
     const ext = fileIdentity.name.split('.').pop();
-    if (Number(sizeInMB) > environment.filesize) {
-      alert("Please file szie is less than " + environment.filesize + "MB");
+    if (Number(sizeInMB) > environment["filesize"]) {
+      alert("Please file szie is less than " + environment["filesize"] + "MB");
       return;
     }
     if (ext != "pdf" && ext != "docx" && ext != "doc") {

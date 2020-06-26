@@ -75,6 +75,7 @@ export class ProfileComponent implements OnInit {
           data[i] = {
             small: this.appData.agency_company_tour[i].filepath,
             medium: this.appData.agency_company_tour[i].filepath,
+            big: this.appData.agency_company_tour[i].filepath,
             description: this.appData.agency_company_tour[i].filename
           }
         }
@@ -94,6 +95,7 @@ export class ProfileComponent implements OnInit {
               data[i] = {
                 small: this.appData.agency_company_tour[i].filepath,
                 medium: this.appData.agency_company_tour[i].filepath,
+                big: this.appData.agency_company_tour[i].filepath,
                 description: this.appData.agency_company_tour[i].filename
               }
               console.log(data);

@@ -24,6 +24,7 @@ import {
 } from '@ng-bootstrap/ng-bootstrap';
 import { APP_USER } from '@configs/app-settings.config';
 import * as $ from 'jquery';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 @Component({
   selector: 'app-demandview-dashboard',
   templateUrl: './demandview.component.html',
@@ -304,11 +305,23 @@ export class demandViewComponent implements OnInit {
   paymentSuccess = false;
   proposalData: any = [];
   agencyData: any = [];
+  showSuccess = false;
+  public payPalConfig?: IPayPalConfig;
+  finalAmount: string = '1';
+  bidAmount: any;
+  pendingAmount: any;
+  bidtotalAmount: any;
+  plan: any = "";
+  process = false;
+  paymentMethod: any = "";
+  @ViewChild('myDiv', { static: false }) myDiv: ElementRef<HTMLElement>;
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
+
+
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     });
@@ -317,8 +330,21 @@ export class demandViewComponent implements OnInit {
       comments: [null, Validators.required]
     })
     this.appData = JSON.parse(window.localStorage[APP_USER]);
+    this.appData.plan = this.plan = "";
+    if (this.loginService.IsAuthUser() && this.appData.role == "Agency") {
+      this.userService.getWallet().subscribe((result: any) => {
 
-
+        result.payload.wallet = {
+          "id": 1,
+          "user_id": 50,
+          "amount": "10",
+          "created_at": "2020-06-25T16:54:12.000000Z",
+          "updated_at": "2020-06-25T12:25:49.000000Z"
+        }
+        this.userService.wallet.next(result.payload.wallet);
+        console.log(result.payload.wallet);
+      });
+    }
 
 
     this.route.params.subscribe((params) => {
@@ -369,9 +395,70 @@ export class demandViewComponent implements OnInit {
         }
       });
     });
+    this.initConfig();
   }
 
+
+  private initConfig(): void {
+    this.payPalConfig = {
+      currency: 'EUR',
+      clientId: 'AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfW',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [
+          {
+            amount: {
+              currency_code: 'EUR',
+              value: this.finalAmount
+            },
+
+          }
+        ]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+      },
+      onClientAuthorization: (data) => {
+        this.modalReference.close();
+        this.myDiv.nativeElement.click();
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        data["amount"] = this.finalAmount;
+        this.userService.addWallet(data).subscribe((result: any) => {
+          result.payload.wallet = {
+            "id": 1,
+            "user_id": 50,
+            "amount": "80",
+            "created_at": "2020-06-25T16:54:12.000000Z",
+            "updated_at": "2020-06-25T12:25:49.000000Z"
+          }
+          this.userService.wallet.next(result.payload.wallet);
+        })
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      },
+    };
+  }
+
+
   demandBid(content) {
+
     this.open(content);
   }
 
@@ -379,17 +466,38 @@ export class demandViewComponent implements OnInit {
     return this.bidForm.controls;
   }
 
+  checkPlanAndWallet(content) {
+    this.userService.wallet.subscribe((data) => {
+      this.bidAmount = Number(data.amount);
+    })
+    let bidAmount = this.demandData.total_demands;
+    if (bidAmount > 50) {
+      bidAmount = 50;
+    }
+    this.pendingAmount = Number(bidAmount) - Number(this.bidAmount);
+    this.bidtotalAmount = Number(bidAmount);
+    this.finalAmount = this.pendingAmount;
+    this.demandBid(content);
+
+  }
+
+  submitform(payMethod) {
+    this.modalReference.close();
+    this.process = true;
+    this.paymentMethod = payMethod;
+  }
+
   onBidFormSubmit(content) {
+    const data = this.bidForm.value;
+    if (!this.process && !this.paymentMethod && data.accept == "yes") {
+      this.checkPlanAndWallet(content);
+      return;
+    }
+
     this.bidSubmitted = true;
     if (this.bidForm.invalid) {
       return;
     }
-    const data = this.bidForm.value;
-    if (!this.paymentSuccess && data.accept == "yes") {
-      this.demandBid(content);
-      return;
-    }
-
     data.demand_id = this.demandData.id;
     if (data.accept == "yes") {
       data.accept = 1;
@@ -401,6 +509,7 @@ export class demandViewComponent implements OnInit {
       if (result.payload.proposal) {
         this.loader.stopLoading();
         alert("Bid Placed");
+        this.ngOnInit();
       }
     })
   }

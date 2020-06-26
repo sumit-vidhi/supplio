@@ -13,6 +13,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { JWTAuthService } from './core/services/jwt-auth.service';
 import { UserService } from './modules/user/services/user.service';
+import { APP_USER } from '@configs/app-settings.config';
 
 interface User {
   userId: number;
@@ -59,7 +60,7 @@ export class AppComponent implements OnInit {
       this.renderer.addClass(document.body, 'kt-header-mobile--fixed');
       this.renderer.addClass(document.body, 'kt-subheader--enabled');
       this.renderer.addClass(document.body, 'kt-subheader--transparent');
-              
+
     }
     if (!this.loginService.IsAuthUser()) {
       this.renderer.removeClass(document.body, 'body-bg');
@@ -86,5 +87,9 @@ export class AppComponent implements OnInit {
         window.localStorage.setItem("setting", JSON.stringify(result.payload.settings))
       }
     })
+
+    const appData = JSON.parse(window.localStorage[APP_USER]);
+
+
   }
 }

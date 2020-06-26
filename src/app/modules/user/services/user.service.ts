@@ -11,6 +11,7 @@ import { appApiUrl } from "@configs/app-api-urls.config";
 import { ToggleNu } from "@shared/enum/toggle";
 import { ApiResponseModel } from '@shared/models/api-response-model';
 import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 interface UserLogin {
   email: string;
@@ -22,7 +23,7 @@ interface UserLogin {
   providedIn: 'root'
 })
 export class UserService {
-
+  public wallet = new BehaviorSubject<any>(null);
   constructor(
     private commonHttp: CommonHttpService
   ) { }
@@ -30,6 +31,9 @@ export class UserService {
 
   editProfile(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.editProfile, data);
+  }
+  addWallet(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.addWallet, data);
   }
   agencyeditProfile(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.agencyeditProfile, data);
@@ -41,7 +45,9 @@ export class UserService {
   getProfiledata(id): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.agencyProfile + "?id=" + id);
   }
-
+  getWallet(): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getWallet);
+  }
   getdashboardData(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getdashboradData);
   }

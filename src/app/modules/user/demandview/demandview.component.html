@@ -432,11 +432,12 @@
         </div>
       </div>
     </div>
-
+    <div #myDiv id="tutor-price" (click)="paymentGateway(template4)">
+    </div>
     <!-- end:: Content -->
   </div>
 </div>
-<ng-template #content let-modal class="modal-dialog-centered">
+<!-- <ng-template #content let-modal class="modal-dialog-centered">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">
       <span>Bid Amount</span>
@@ -448,7 +449,9 @@
   <div class="modal-body">
     <div class="ticket-content mb-4">
       <p>
-        If you want to bid this demand so please add amount in your wallet or
+        Your have ${{bidAmount}} in your wallet amount, If you want to bid this demand so please add ${{pendingAmount}}
+        amount in your
+        wallet or
         upgrade plan.
       </p>
     </div>
@@ -458,6 +461,42 @@
       Add Amount
     </button>
     <button type="button" class="btn btn-outline-dark btn-secondary" (click)="upgradePlan(template)">
+      Upgrade Plan
+    </button>
+  </div>
+</ng-template> -->
+<ng-template #content let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Bid amount deduct</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="ticket-content mb-4">
+      <p>
+        If you are using wallet ${{bidtotalAmount}} amount will deduct in your wallet account or if you are using subscription
+        {{plan}} then deduct bid in your {{plan}} plan.
+      </p>
+    </div>
+    <p style="color:red;" *ngIf="bidAmount<bidtotalAmount">Wallet amount is low wallet amount is {{bidAmount}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" *ngIf="bidAmount>bidtotalAmount" class="btn btn-outline-dark mr-auto"
+      (click)="submitform('wallet')">
+      Continue With wallet amount(${{bidAmount}})
+    </button>
+
+    <button type="button" *ngIf="bidAmount<bidtotalAmount" class="btn btn-outline-dark mr-auto"
+      (click)="payment(template2)">
+      Add money in wallet
+    </button>
+    <button type="button" *ngIf="plan" class="btn btn-outline-dark btn-secondary" (click)="submitform('plan')">
+      Continue with {{plan}} plan
+    </button>
+    <button type="button" *ngIf="!plan" class="btn btn-outline-dark btn-secondary" (click)="upgradePlan(template)">
       Upgrade Plan
     </button>
   </div>
@@ -492,16 +531,16 @@
   <div class="modal-body">
     <div class="modal-body">
       <div class="ticket-content mb-4">
+
+        <input type="number" [(ngModel)]="finalAmount" style="padding-bottom: 10px;">
         <p>
-          Here is your payment gateway.
+          <ngx-paypal [config]="payPalConfig"></ngx-paypal>
         </p>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="paymentGateway(template4)">
-      Payment Procced
-    </button>
+
   </div>
 </ng-template>
 <ng-template #template4 let-modal class="modal-dialog-centered">
