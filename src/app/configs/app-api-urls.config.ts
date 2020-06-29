@@ -20,6 +20,7 @@ export const appApiUrl: CommonBase = {
         agencyProfile: 'agency/getAgencyProfile',
         creatDemand: 'demands/createEmptyDemand',
         demandList: 'demands/myList',
+        addsubscription:'agency/addsubscription',
         addbid: 'proposal/create',
         getWallet: 'wallet/get',
         addWallet: 'wallet/add',

@@ -35,6 +35,9 @@ export class UserService {
   addWallet(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.addWallet, data);
   }
+  addsubscription(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.addsubscription, data);
+  }
   agencyeditProfile(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.agencyeditProfile, data);
   }

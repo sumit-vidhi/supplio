@@ -25,6 +25,7 @@ import {
 import { APP_USER } from '@configs/app-settings.config';
 import * as $ from 'jquery';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+declare var paypal;
 @Component({
   selector: 'app-demandview-dashboard',
   templateUrl: './demandview.component.html',
@@ -307,6 +308,7 @@ export class demandViewComponent implements OnInit {
   agencyData: any = [];
   showSuccess = false;
   public payPalConfig?: IPayPalConfig;
+  payPalConfigSubscription: IPayPalConfig;
   finalAmount: string = '1';
   bidAmount: any;
   pendingAmount: any;
@@ -315,6 +317,10 @@ export class demandViewComponent implements OnInit {
   process = false;
   paymentMethod: any = "";
   @ViewChild('myDiv', { static: false }) myDiv: ElementRef<HTMLElement>;
+  @ViewChild('paypaldiv', { static: true }) paypaldiv: ElementRef<HTMLElement>;
+  planId: any;
+  subcripId: any;
+  basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
@@ -396,6 +402,65 @@ export class demandViewComponent implements OnInit {
       });
     });
     this.initConfig();
+
+  }
+
+  createSubscription() {
+    const self = this;
+    this.planId = 'P-5H884452VP862852NL33W5XQ';
+
+    this.payPalConfigSubscription = {
+      currency: 'EUR',
+      clientId: 'AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfW',
+      createSubscription: function (data, actions) {
+        return actions.subscription.create({
+          'plan_id': self.planId,
+        });
+      },
+      onApprove: function (data, actions) {
+        console.log(data);
+        self.modalReference.close();
+        self.myDiv.nativeElement.click();
+        data["plan"] = this.planId;
+        self.loader.startLoading();
+        self.userService.addsubscription(data).subscribe((result: any) => {
+          self.loader.stopLoading();
+          result.payload.wallet = {
+            "id": 1,
+            "user_id": 50,
+            "amount": "80",
+            "created_at": "2020-06-25T16:54:12.000000Z",
+            "updated_at": "2020-06-25T12:25:49.000000Z"
+          }
+          this.userService.wallet.next(result.payload.wallet);
+        })
+        // alert('You have successfully created subscription ' + data.subscriptionID);
+        // self.getSubcriptionDetails(data.subscriptionID);
+      },
+      onCancel: function (data) {
+        // Show a cancel page, or return to cart  
+        console.log(data);
+      },
+      onError: function (err) {
+        // Show an error page here, when an error occurs  
+        console.log(err);
+      }
+    };
+  }
+
+  // ============Start Get Subcription Details Method============================  
+  getSubcriptionDetails(subcriptionId) {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        console.log(JSON.parse(this.responseText));
+        alert(JSON.stringify(this.responseText));
+      }
+    };
+    xhttp.open('GET', 'https://api.sandbox.paypal.com/v1/billing/subscriptions/' + subcriptionId, true);
+    xhttp.setRequestHeader('Authorization', this.basicAuth);
+
+    xhttp.send();
   }
 
 
@@ -433,7 +498,9 @@ export class demandViewComponent implements OnInit {
         this.myDiv.nativeElement.click();
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         data["amount"] = this.finalAmount;
+        this.loader.startLoading();
         this.userService.addWallet(data).subscribe((result: any) => {
+          this.loader.stopLoading();
           result.payload.wallet = {
             "id": 1,
             "user_id": 50,
@@ -489,7 +556,7 @@ export class demandViewComponent implements OnInit {
 
   onBidFormSubmit(content) {
     const data = this.bidForm.value;
-    if (!this.process && !this.paymentMethod && data.accept == "yes") {
+    if (!this.process && !this.paymentMethod && data.accept == "yes" && !this.plan) {
       this.checkPlanAndWallet(content);
       return;
     }
@@ -522,6 +589,7 @@ export class demandViewComponent implements OnInit {
     }
   }
   upgradePlan(content) {
+    this.createSubscription();
     this.modalReference.close();
     this.open(content);
   }

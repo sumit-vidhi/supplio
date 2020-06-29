@@ -477,7 +477,8 @@
   <div class="modal-body">
     <div class="ticket-content mb-4">
       <p>
-        If you are using wallet ${{bidtotalAmount}} amount will deduct in your wallet account or if you are using subscription
+        If you are using wallet ${{bidtotalAmount}} amount will deduct in your wallet account or if you are using
+        subscription
         {{plan}} then deduct bid in your {{plan}} plan.
       </p>
     </div>
@@ -511,7 +512,21 @@
     </button>
   </div>
   <div class="modal-body" style="height: 450px; overflow-y: auto; background-color: lightblue;">
-    <app-pricing></app-pricing>
+    <!-- <app-pricing></app-pricing> -->
+    <div class="row col-md-12 align-items-center justify-content-center">
+
+      <div class="col">
+        <select id="ddlplan" [(ngModel)]="planId">
+          <option value="">Select Plan </option>
+          <option value="P-5H884452VP862852NL33W5XQ">SINGLE DEVICE MONTHLY </option>
+          <option value="P-9UK310826W2821412L33W6CY">SINGLE DEVICE QUARTERLY</option>
+        </select></div>
+      <div class="col">
+
+        <ngx-paypal [config]="payPalConfigSubscription"></ngx-paypal>
+      </div>
+
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark btn-secondary" (click)="payment(template2)">
