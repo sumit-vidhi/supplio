@@ -410,7 +410,7 @@ export class demandViewComponent implements OnInit {
     this.planId = 'P-5H884452VP862852NL33W5XQ';
 
     this.payPalConfigSubscription = {
-      currency: 'EUR',
+      currency: 'USD',
       clientId: 'AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfW',
       createSubscription: function (data, actions) {
         return actions.subscription.create({
@@ -466,14 +466,14 @@ export class demandViewComponent implements OnInit {
 
   private initConfig(): void {
     this.payPalConfig = {
-      currency: 'EUR',
+      currency: 'USD',
       clientId: 'AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfW',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: [
           {
             amount: {
-              currency_code: 'EUR',
+              currency_code: 'USD',
               value: this.finalAmount
             },
 

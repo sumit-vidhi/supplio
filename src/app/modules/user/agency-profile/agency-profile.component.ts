@@ -642,7 +642,8 @@ export class AgencyProfileComponent implements OnInit {
         ] = this.loginService.getUserAccessToken();
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
-        this.setAssociation();
+
+      //  this.setAssociation();
 
         this.toastr.success(result.payload.message, 'Update Profile');
       }
