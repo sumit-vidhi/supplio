@@ -82,10 +82,14 @@
                         Bid
                       </a>
                       <a class="btn btn-success btn-sm btn-upper" data-toggle="collapse" type="button"
-                        *ngIf="appData.role == 'Agency' && proposalData.length">
+                        *ngIf="appData.role == 'Agency' && proposalData.length && proposalData[0].status==0">
                         Bid Applied
                       </a>
-                    </div>
+
+                      <a class="btn btn-success btn-sm btn-upper" data-toggle="collapse" type="button"
+                        *ngIf="appData.role == 'Agency' && proposalData.length && proposalData[0].status==1">
+                        Accepted
+                      </a> </div>
                   </div>
                 </div>
               </div>
