@@ -32,6 +32,7 @@ import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from 'ngx-gal
 })
 export class ProfileComponent implements OnInit {
   appData: any;
+  modalReference: NgbModalRef;
   iconList = [ // array of icon class list based on type
     { type: "xlsx", icon: "fa fa-file-excel-o" },
     { type: "pdf", icon: "fa fa-file-pdf-o" },
@@ -60,12 +61,17 @@ export class ProfileComponent implements OnInit {
   }
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
+  messageForm: FormGroup;
+  submitted = false;
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
   }
 
   ngOnInit() {
-
+    this.messageForm = this.formBuilder.group({
+      subject: ['', [Validators.required]],
+      description: ['', Validators.required]
+    });
     const appData = JSON.parse(window.localStorage[APP_USER]);
     if (appData.role == "Agency") {
       this.appData = appData;
@@ -118,4 +124,34 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  messageOpen(data, template) {
+    this.open(template);
+  }
+
+  open(content) {
+    this.modalReference = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      windowClass: 'ticket-modal',
+    });
+  }
+
+  get f() { return this.messageForm.controls; }
+
+
+  onSubmit(mode) {
+    this.submitted = true;
+    if (this.messageForm.invalid) {
+      return;
+    }
+    const formData = this.messageForm.value;
+    this.loader.startLoading();
+    // this.userService.addEmail(formData).subscribe((result) => {
+    //   this.loader.stopLoading();
+    //   if (result.status == 'success') {
+    //     alert("Message sent to all users");
+    //   } else {
+    //     alert(result.message);
+    //   }
+    // })
+  }
 }

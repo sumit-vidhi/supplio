@@ -44,6 +44,7 @@ export class demandViewComponent implements OnInit {
   searchForm: FormGroup;
   showDetailData = [false];
   categoryData = [];
+  acceptAgeny=false;
   countries = [
     { name: 'Afghanistan', code: 'AF' },
     { name: 'Åland Islands', code: 'AX' },
@@ -320,6 +321,7 @@ export class demandViewComponent implements OnInit {
   @ViewChild('paypaldiv', { static: true }) paypaldiv: ElementRef<HTMLElement>;
   planId: any;
   subcripId: any;
+  messageForm: FormGroup;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
@@ -327,7 +329,10 @@ export class demandViewComponent implements OnInit {
 
   ngOnInit() {
 
-
+    this.messageForm = this.formBuilder.group({
+      subject: ['', [Validators.required]],
+      description: ['', Validators.required]
+    });
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     });
@@ -336,17 +341,18 @@ export class demandViewComponent implements OnInit {
       comments: [null, Validators.required]
     })
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    this.appData.plan = this.plan = "";
+    console.log(this.appData);
+    this.plan = this.appData.package.name;
     if (this.loginService.IsAuthUser() && this.appData.role == "Agency") {
       this.userService.getWallet().subscribe((result: any) => {
 
-        result.payload.wallet = {
-          "id": 1,
-          "user_id": 50,
-          "amount": "10",
-          "created_at": "2020-06-25T16:54:12.000000Z",
-          "updated_at": "2020-06-25T12:25:49.000000Z"
-        }
+        // result.payload.wallet = {
+        //   "id": 1,
+        //   "user_id": 50,
+        //   "amount": "10",
+        //   "created_at": "2020-06-25T16:54:12.000000Z",
+        //   "updated_at": "2020-06-25T12:25:49.000000Z"
+        // }
         this.userService.wallet.next(result.payload.wallet);
         console.log(result.payload.wallet);
       });
@@ -387,6 +393,13 @@ export class demandViewComponent implements OnInit {
             var data = this.demandData.proposals.map((data) => {
               return data.user;
             });
+            var newData = this.demandData.proposals.filter((data) => {
+              return data.accept == 1;
+            })
+            console.log(newData);
+            if (newData.length) {
+              this.acceptAgeny = true;
+            }
             var count = [];
             var countWork = [];
             for (let i = 0; i < data.length; i++) {
@@ -405,9 +418,78 @@ export class demandViewComponent implements OnInit {
 
   }
 
+  get f() { return this.messageForm.controls; }
+
+  messageOpen(data, template) {
+    this.open(template);
+  }
+
+  onSubmit(mode) {
+    this.submitted = true;
+    if (this.messageForm.invalid) {
+      return;
+    }
+    const formData = this.messageForm.value;
+    this.loader.startLoading();
+    // this.userService.addEmail(formData).subscribe((result) => {
+    //   this.loader.stopLoading();
+    //   if (result.status == 'success') {
+    //     alert("Message sent to all users");
+    //   } else {
+    //     alert(result.message);
+    //   }
+    // })
+  }
+
+  setsubscription(event) {
+    this.planId = event;
+    console.log(this.planId);
+  }
+
+  print(): void {
+    let printContents, popupWin;
+    printContents = document.getElementById('print-section').innerHTML;
+    popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+    popupWin.document.open();
+    popupWin.document.write(`
+      <html>
+        <head>
+          <title>Print tab</title>
+          <style>
+          table{
+            border-collapse: collapse;
+          }
+          th,td{
+            padding: 5px 10px;
+          }
+            ul.nostyle {
+            list-style: none;
+            padding-left: 0px;
+          }
+          .alignMe b,
+          .alignMe strong {
+            display: inline-block;
+            width: 50%;
+            position: relative;
+            padding-right: 10px; /* Ensures colon does not overlay the text */
+          }
+        
+          .alignMe b::after,
+          .alignMe strong::after {
+            content: ':';
+            position: absolute;
+            right: 10px;
+          }
+          </style>
+        </head>
+    <body onload="window.print();window.close()">${printContents}</body>
+      </html>`
+    );
+    popupWin.document.close();
+  }
   createSubscription() {
     const self = this;
-    this.planId = 'P-5H884452VP862852NL33W5XQ';
+    //  this.planId = 'P-5H884452VP862852NL33W5XQ';
 
     this.payPalConfigSubscription = {
       currency: 'USD',
@@ -421,21 +503,16 @@ export class demandViewComponent implements OnInit {
         console.log(data);
         self.modalReference.close();
         self.myDiv.nativeElement.click();
-        data["plan"] = this.planId;
+        data["package_id"] = this.planId;
         self.loader.startLoading();
+        const id = self.appData.id;
         self.userService.addsubscription(data).subscribe((result: any) => {
-          self.loader.stopLoading();
-          result.payload.wallet = {
-            "id": 1,
-            "user_id": 50,
-            "amount": "80",
-            "created_at": "2020-06-25T16:54:12.000000Z",
-            "updated_at": "2020-06-25T12:25:49.000000Z"
-          }
-          this.userService.wallet.next(result.payload.wallet);
+          self.userService.getProfiledata(id).subscribe((resul: any) => {
+            result.payload.user["authToken"] = self.appData.authToken;
+            self.loginService.setLoginUserDetail(result.payload.agency);
+            self.loader.stopLoading();
+          })
         })
-        // alert('You have successfully created subscription ' + data.subscriptionID);
-        // self.getSubcriptionDetails(data.subscriptionID);
       },
       onCancel: function (data) {
         // Show a cancel page, or return to cart  
@@ -501,13 +578,13 @@ export class demandViewComponent implements OnInit {
         this.loader.startLoading();
         this.userService.addWallet(data).subscribe((result: any) => {
           this.loader.stopLoading();
-          result.payload.wallet = {
-            "id": 1,
-            "user_id": 50,
-            "amount": "80",
-            "created_at": "2020-06-25T16:54:12.000000Z",
-            "updated_at": "2020-06-25T12:25:49.000000Z"
-          }
+          // result.payload.wallet = {
+          //   "id": 1,
+          //   "user_id": 50,
+          //   "amount": "80",
+          //   "created_at": "2020-06-25T16:54:12.000000Z",
+          //   "updated_at": "2020-06-25T12:25:49.000000Z"
+          // }
           this.userService.wallet.next(result.payload.wallet);
         })
       },
@@ -523,6 +600,17 @@ export class demandViewComponent implements OnInit {
     };
   }
 
+  hireAgency(id) {
+    this.loader.startLoading();
+    this.userService.hire(id).subscribe((data: any) => {
+      this.loader.stopLoading();
+      if (data) {
+        this.ngOnInit();
+      }
+    })
+
+  }
+
 
   demandBid(content) {
 
@@ -534,17 +622,24 @@ export class demandViewComponent implements OnInit {
   }
 
   checkPlanAndWallet(content) {
-    this.userService.wallet.subscribe((data) => {
-      this.bidAmount = Number(data.amount);
+    this.userService.wallet.subscribe((data: any) => {
+      if (!data) {
+        this.bidAmount = 0;
+      } else {
+        this.bidAmount = Number(data);
+      }
     })
+
     let bidAmount = this.demandData.total_demands;
     if (bidAmount > 50) {
       bidAmount = 50;
     }
+
     this.pendingAmount = Number(bidAmount) - Number(this.bidAmount);
     this.bidtotalAmount = Number(bidAmount);
     this.finalAmount = this.pendingAmount;
     this.demandBid(content);
+
 
   }
 
@@ -556,7 +651,7 @@ export class demandViewComponent implements OnInit {
 
   onBidFormSubmit(content) {
     const data = this.bidForm.value;
-    if (!this.process && !this.paymentMethod && data.accept == "yes" && !this.plan) {
+    if (!this.process && !this.paymentMethod && data.accept == "yes" && this.plan == 'Free') {
       this.checkPlanAndWallet(content);
       return;
     }

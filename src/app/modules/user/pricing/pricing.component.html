@@ -1,11 +1,6 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor pricingPage"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor pricingPage"
+    id="kt_content">
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
         <div class="kt-subheader__main">
@@ -23,339 +18,134 @@
             <div class="kt-portlet__body">
               <div class="">
                 <div class="row text-center align-items-end">
-                  <!-- Pricing Table-->
-                  <div class="col-lg-3 mb-5 mb-lg-0">
+                  <div class="col-lg-3 mb-5 mb-lg-0" *ngFor="let data of plan; let value=index;">
                     <div class="bg-white p-4 rounded-lg shadow">
                       <h1 class="h6 text-uppercase font-weight-bold">
-                        Starter
+                        {{data.name}}
                       </h1>
-                      <small>Prepaid -Pay Per Quote (PPQ)</small>
+                      <small *ngIf="data.name=='Free'">Prepaid -Pay Per Quote (PPQ)</small>
+                      <small *ngIf="data.name!='Free'">Subscription</small>
                       <h2 class="h1 font-weight-bold">
-                        $0<span class="text-small font-weight-normal ml-2"
-                          >/ month</span
-                        >
+                        <sup *ngIf="data.name!='Free'"><small>Starting</small></sup>
+                        ${{data.amount_monthly}}<span class="text-small font-weight-normal ml-2">/ month</span>
                       </h2>
-                      <div
-                        class="custom-separator my-4 mx-auto bg-primary"
-                      ></div>
+                      <div class="custom-separator my-4 mx-auto bg-primary"></div>
                       <ul class="list-unstyled my-5 text-small text-left">
-                        <li class="mb-3">
+                        <li class="mb-3" *ngIf="data.name=='Free'">
                           <i class="fa fa-check mr-2 text-primary"></i>
                           1 to 50 $ Price per Quote
+                        </li>
+                        <li class="mb-3" *ngIf="data.name!='Free'">
+                          <i class="fa fa-check mr-2 text-primary"></i>
+                          $0 Price per Quote
                         </li>
                         <li class="mb-3">
                           <i class="fa fa-check mr-2 text-primary"></i>
                           Limited Access to business opportunities
                         </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on our listing pages</del>
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.featured_listing">
+                          <i class="fa fa-check mr-2"></i>
+                          Get featured on our listing pages
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.featured_listing">
+                          <i class="fa fa-times mr-2" *ngIf="!data.permissions.featured_listing"></i>
+                          <del *ngIf="!data.permissions.featured_listing">Get featured on our listing pages</del>
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.crm_integrations">
+                          <i class="fa fa-check mr-2"></i>
+                          CRM integrations
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.crm_integrations">
                           <i class="fa fa-times mr-2"></i>
                           <del>CRM integrations</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.certification">
+                          <i class="fa fa-check mr-2"></i>
+                          Access to Certification
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.certification">
                           <i class="fa fa-times mr-2"></i>
                           <del>Access to Certification</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.reports_metrics">
+                          <i class="fa fa-check mr-2"></i>
+                          Reports & Metrics
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.reports_metrics">
                           <i class="fa fa-times mr-2"></i>
                           <del>Reports & Metrics</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.pcl">
+                          <i class="fa fa-check mr-2"></i>
+                          Access to PCL
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.pcl">
                           <i class="fa fa-times mr-2"></i>
                           <del>Access to PCL</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.psl">
+                          <i class="fa fa-check mr-2"></i>
+                          Access to PSL
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.psl">
                           <i class="fa fa-times mr-2"></i>
                           <del>Access to PSL</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.preferential_rates_for_certification">
+                          <i class="fa fa-check mr-2"></i>
+                          Preferential rates for certification
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.preferential_rates_for_certification">
                           <i class="fa fa-times mr-2"></i>
                           <del>Preferential rates for certification</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.remove_competitors">
+                          <i class="fa fa-check mr-2"></i>
+                          Remove competitors from your profile
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.remove_competitors">
                           <i class="fa fa-times mr-2"></i>
                           <del>Remove competitors from your profile</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.featured_home_page">
+                          <i class="fa fa-check mr-2"></i>
+                          Get featured on Supplio local home page
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.featured_home_page">
                           <i class="fa fa-times mr-2"></i>
                           <del>Get featured on Supplio local home page</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.featured_comparison_list">
+                          <i class="fa fa-check mr-2"></i>
+                          Get featured on the comparison list
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.featured_comparison_list">
                           <i class="fa fa-times mr-2"></i>
                           <del>Get featured on the comparison list</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.view_employer_name">
+                          <i class="fa fa-check mr-2"></i>
+                          View employer name on the demand
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.view_employer_name">
                           <i class="fa fa-times mr-2"></i>
                           <del>View employer name on the demand</del>
                         </li>
-                        <li class="mb-3 text-muted">
+                        <li class="mb-3 text-muted" *ngIf="data.permissions.see_competitors">
+                          <i class="fa fa-check mr-2"></i>
+                          See competitors' offers
+                        </li>
+                        <li class="mb-3 text-muted" *ngIf="!data.permissions.see_competitors">
                           <i class="fa fa-times mr-2"></i>
                           <del>See competitors' offers</del>
                         </li>
                       </ul>
-                      <a
-                        href="#"
-                        class="btn btn-primary btn-block p-2 shadow rounded-pill"
-                        >Subscribe</a
-                      >
+                      <a (click)="setPlan(data.paypal_id)"
+                        class="btn btn-primary btn-block p-2 shadow rounded-pill">Subscribe</a>
                     </div>
                   </div>
-                  <!-- END -->
 
-                  <div class="col-lg-3 mb-5 mb-lg-0">
-                    <div class="bg-white p-4 rounded-lg shadow">
-                      <h1 class="h6 text-uppercase font-weight-bold">Agency</h1>
-                      <small>Subscription</small>
-                      <h2 class="h1 font-weight-bold">
-                        <sup><small>Starting</small></sup>
-                        $213<span class="text-small font-weight-normal ml-2"
-                          >/ month</span
-                        >
-                      </h2>
 
-                      <div
-                        class="custom-separator my-4 mx-auto bg-primary"
-                      ></div>
-
-                      <ul class="list-unstyled my-5 text-small text-left">
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          0$ Price per Quote
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to business opportunities
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Get featured on our listing pages (Basic)
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          CRM integrations
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to Certification
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Reports & Metrics
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to PCL
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Access to PSL</del>
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Preferential rates for certification</del>
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Remove competitors from your profile</del>
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on Supplio local home page</del>
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on the comparison list</del>
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          View employer name on the demand
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          See competitors' offers
-                        </li>
-                      </ul>
-                      <a
-                        href="#"
-                        class="btn btn-primary btn-block p-2 shadow rounded-pill"
-                        >Subscribe</a
-                      >
-                    </div>
-                  </div>
-                  <!-- END -->
-
-                  <!-- Pricing Table-->
-                  <div class="col-lg-3 mb-5 mb-lg-0">
-                    <div class="bg-white p-4 rounded-lg shadow">
-                      <h1 class="h6 text-uppercase font-weight-bold">
-                        Agency +
-                      </h1>
-                      <small>Subscription</small>
-                      <h2 class="h1 font-weight-bold">
-                        <sup><small>Starting</small></sup>
-                        $319<span class="text-small font-weight-normal ml-2"
-                          >/ month</span
-                        >
-                      </h2>
-
-                      <div
-                        class="custom-separator my-4 mx-auto bg-primary"
-                      ></div>
-
-                      <ul class="list-unstyled my-5 text-small text-left">
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          0$ Price per Quote
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to business opportunities
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Get featured on our listing pages (Basic)
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          CRM integrations
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to Certification
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Reports & Metrics
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to PCL
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to PSL
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Preferential rates for certification
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Remove competitors from your profile</del>
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on Supplio local home page</del>
-                        </li>
-                        <li class="mb-3 text-muted">
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on the comparison list</del>
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          View employer name on the demand
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          See competitors' offers
-                        </li>
-                      </ul>
-                      <a
-                        href="#"
-                        class="btn btn-primary btn-block p-2 shadow rounded-pill"
-                        >Subscribe</a
-                      >
-                    </div>
-                  </div>
-                  <!-- END -->
-
-                  <!-- Pricing Table-->
-                  <div class="col-lg-3">
-                    <div class="bg-white p-4 rounded-lg shadow">
-                      <h1 class="h6 text-uppercase font-weight-bold">
-                        Orgnization
-                      </h1>
-                      <small>Subscription</small>
-                      <h2 class="h1 font-weight-bold">
-                        <sup><small>Starting</small></sup>
-                        $638<span class="text-small font-weight-normal ml-2"
-                          >/ month</span
-                        >
-                      </h2>
-
-                      <div
-                        class="custom-separator my-4 mx-auto bg-primary"
-                      ></div>
-
-                      <ul class="list-unstyled my-5 text-small text-left">
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          0$ Price per Quote
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to business opportunities
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Get featured on our listing pages (Basic)
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          CRM integrations
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to Certification
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Reports & Metrics
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to PCL
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Access to PSL
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Preferential rates for certification
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Remove competitors from your profile
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Get featured on Supplio local home page
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Get featured on the comparison list
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          View employer name on the demand
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          See competitors' offers
-                        </li>
-                      </ul>
-                      <a
-                        href="#"
-                        class="btn btn-primary btn-block p-2 shadow rounded-pill"
-                        >Subscribe</a
-                      >
-                    </div>
-                  </div>
-                  <!-- END -->
                 </div>
               </div>
             </div>

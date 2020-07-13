@@ -20,7 +20,7 @@ export class HasTokenResolver {
   ) { }
   resolve(): any {
     if (this.authService.IsAuthUser()) {
-      this.router.navigate(["/user"]);
+      this.router.navigate(["/users"]);
     }
   }
 }

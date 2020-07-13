@@ -96,7 +96,8 @@
                                 </div>
                             </div>
                             <div class="kt-widget__footer">
-                                <button type="button" class="btn btn-label-success btn-lg btn-upper">write
+                                <button type="button" (click)="messageOpen(appData,contentmessage)"
+                                    class="btn btn-label-success btn-lg btn-upper">write
                                     message</button>
                             </div>
                         </div>
@@ -358,3 +359,42 @@
         <!-- end:: Content -->
     </div>
 </div>
+
+<ng-template #contentmessage let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Send message to ageny</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="messageForm" (ngSubmit)="onSubmit(mode)">
+
+            <div class="form-group">
+                <label for="amount">Subject</label>
+                <input type="text" formControlName="subject" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" />
+                <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+                    <div *ngIf="f.subject.errors.required">Subject is required</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea formControlName="description" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+                <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                    <div *ngIf="f.description.errors.required">Description is required</div>
+                </div>
+            </div>
+
+            <div class="mt-2">
+                <button class="btn btn-md btn-primary btn-submit btn-radius">Send</button>
+            </div>
+
+        </form>
+    </div>
+    <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      </div> -->
+</ng-template>

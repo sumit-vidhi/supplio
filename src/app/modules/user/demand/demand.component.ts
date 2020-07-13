@@ -108,6 +108,7 @@ export class DemandComponent implements OnInit {
       extraPlugins: 'divarea',
       forcePasteAsPlainText: true,
     };
+    
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.route.params.subscribe((params) => {
       this.id = params.id;

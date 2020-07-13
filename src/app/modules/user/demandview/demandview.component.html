@@ -74,6 +74,7 @@
                       <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
                         *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
                         Edit</a>&nbsp;
+                      <a class="btn btn-success btn-sm btn-upper" (click)="print()">Print</a>
                       <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
                         data-target="#allbids" type="button" *ngIf="
                           appData.role == 'Agency' && proposalData.length == 0
@@ -314,7 +315,7 @@
         <div class="kt-portlet__body" id="allbids" *ngIf="agencyData">
           <div class="offer-list">
             <div class="offer-list-item align-items-center row" *ngFor="let data of agencyData let i=index;">
-              <div class="col-md-2">
+              <div class="col-md-1">
                 <img src="../../../../assets/media/company-logos/logo-1.png" />
               </div>
               <div class="col-md-2">
@@ -326,11 +327,24 @@
               <div class="col-md-2">
                 <a href="#"> {{data.countWork}} Work</a>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-1">
                 Ratings
               </div>
-              <div class="col-md-2 text-center">
-                <a routerLink="/user/profile/{{data.id}}" class="btn" href="#">View Agency</a>
+              <div class="col-md-4 text-center">
+                <a routerLink="/user/profile/{{data.id}}" style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper" href="#">View
+                  Agency</a>
+                <a *ngIf="demandData.proposals[i].accept==0 && !acceptAgeny"
+                  (click)="hireAgency(demandData.proposals[i].id)" style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper">Hire
+                  Agency</a>
+                <a *ngIf="demandData.proposals[i].accept==0 && acceptAgeny" style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper" style="color:grey!important;">Hire
+                  Agency</a>
+                <a *ngIf="demandData.proposals[i].accept==1" style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper">Accepted</a>
+                <a (click)="messageOpen(data,contentmessage)" class="btn btn-success btn-sm btn-upper">Message
+                  Agency</a>
               </div>
             </div>
 
@@ -494,10 +508,8 @@
       (click)="payment(template2)">
       Add money in wallet
     </button>
-    <button type="button" *ngIf="plan" class="btn btn-outline-dark btn-secondary" (click)="submitform('plan')">
-      Continue with {{plan}} plan
-    </button>
-    <button type="button" *ngIf="!plan" class="btn btn-outline-dark btn-secondary" (click)="upgradePlan(template)">
+    <button type="button" *ngIf="plan=='Free'" class="btn btn-outline-dark btn-secondary"
+      (click)="upgradePlan(template)">
       Upgrade Plan
     </button>
   </div>
@@ -512,15 +524,15 @@
     </button>
   </div>
   <div class="modal-body" style="height: 450px; overflow-y: auto; background-color: lightblue;">
-    <!-- <app-pricing></app-pricing> -->
+    <app-pricing (setsubscription)="setsubscription($event)"></app-pricing>
     <div class="row col-md-12 align-items-center justify-content-center">
 
-      <div class="col">
+      <!-- <div class="col">
         <select id="ddlplan" [(ngModel)]="planId">
           <option value="">Select Plan </option>
           <option value="P-5H884452VP862852NL33W5XQ">SINGLE DEVICE MONTHLY </option>
           <option value="P-9UK310826W2821412L33W6CY">SINGLE DEVICE QUARTERLY</option>
-        </select></div>
+        </select></div> -->
       <div class="col">
 
         <ngx-paypal [config]="payPalConfigSubscription"></ngx-paypal>
@@ -584,4 +596,219 @@
       Ok
     </button>
   </div>
+</ng-template>
+<div id="print-section" style="display:none;">
+  <h1>{{ demandData.title }}</h1>
+  <p><strong>Posted on: </strong>{{ demandData.created_at | date: 'mediumDate' }}</p>
+  <p><strong>Country: </strong>{{
+                        demandData.hire_country
+                          ? getcountry(demandData.hire_country)
+                          : '-'
+                      }}</p>
+  <p><strong>Total Demands: </strong>{{
+                        demandData.total_demands ? demandData.total_demands : '-'
+                      }}</p>
+
+  <h3>Demands</h3>
+  <table border="1px" *ngIf="demandData && demandData.demand_category.length > 0">
+    <thead>
+      <th>Sno</th>
+      <th>Sector</th>
+      <th>Categories</th>
+      <th>Quantity</th>
+      <th>Salary</th>
+      <th>Gender</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let array of demandData.demand_category; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ getCategoryname(array.parent_category_id) }}</td>
+        <td>{{ array.category_name }}</td>
+        <td>{{ array.quantity }}</td>
+        <td>{{ array.salary }}</td>
+        <td>{{ array.gender }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>Benefits</h3>
+  <table>
+    <tr>
+      <td>
+        <ul class="nostyle alignMe">
+          <li>
+            <strong> Accommodation </strong>
+            {{
+                demandData.accommodation ? demandData.accommodation : '-'
+              }}
+          </li>
+
+          <li>
+            <strong> Visa Sponsorship</strong>
+            {{
+                demandData.visa_sponsorship
+                  ? demandData.visa_sponsorship
+                  : '-'
+              }}
+          </li>
+
+          <li>
+            <strong> Transportation </strong>{{
+                demandData.transportation ? demandData.transportation : '-'
+              }}
+          </li>
+
+          <li>
+            <strong> Food </strong>
+            {{ demandData.food ? demandData.food : '-' }}
+          </li>
+
+          <li>
+            <strong>Contract duration </strong>{{
+                demandData.contract_duration
+                  ? demandData.contract_duration
+                  : '-'
+              }}
+          </li>
+
+          <li>
+            <strong>Working hours per day </strong>{{
+                demandData.working_hours_day
+                  ? demandData.working_hours_day
+                  : '-'
+              }}
+          </li>
+
+          <li>
+            <strong>Working days per week </strong>{{
+                demandData.working_hours_week
+                  ? demandData.working_hours_week
+                  : '-'
+              }}
+          </li>
+
+          <li>
+            <strong>Probation period </strong>{{
+                demandData.probation_period
+                  ? demandData.probation_period
+                  : '-'
+              }}
+          </li>
+
+          <li>
+            <strong>Overtime </strong>{{ demandData.overtime ? demandData.overtime : '-' }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul class="nostyle alignMe">
+          <li>
+            <strong> Medical Insurance </strong>{{
+                demandData.medical_insurance
+                  ? demandData.medical_insurance
+                  : '-'
+              }}
+          </li>
+          <li>
+            <strong> Joining Ticket </strong>{{
+                demandData.joining_ticket ? demandData.joining_ticket : '-'
+              }}
+          </li>
+          <li>
+            <strong> Paid leaves </strong>{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
+          </li>
+          <li>
+            <strong> Leave ticket </strong>{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
+          </li>
+          <li>
+            <strong> Uniform & PPEs </strong>{{ demandData.uniform ? demandData.uniform : '-' }}
+          </li>
+          <li>
+            <strong> Other benefits </strong>{{
+                demandData.other_benefits ? demandData.other_benefits : '-'
+              }}
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <h3>Terms & Conditions</h3>
+  <table>
+    <tr>
+      <td>
+        <ul class="nostyle alignMe">
+          <li>
+            <strong> Mode of interview </strong>{{
+                demandData.mode_of_interview
+                  ? demandData.mode_of_interview
+                  : '-'
+              }}
+          </li>
+          <li>
+            <strong> No. of delegates for interview </strong>{{
+                demandData.no_of_delegates
+                  ? demandData.no_of_delegates
+                  : '-'
+              }}
+          </li>
+        </ul>
+      </td>
+      <td>
+        <ul class="nostyle alignMe">
+          <li>
+            <strong> Flights for delegates </strong>{{
+                demandData.flights_for_delegates
+                  ? demandData.flights_for_delegates
+                  : '-'
+              }}
+          </li>
+          <li>
+            <strong> Hotels for delegates </strong>{{
+                demandData.hotels_for_delegates
+                  ? demandData.hotels_for_delegates
+                  : '-'
+              }}
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #contentmessage let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Send message to ageny</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit(mode)">
+
+      <div class="form-group">
+        <label for="amount">Subject</label>
+        <input type="text" formControlName="subject" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" />
+        <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
+          <div *ngIf="f.subject.errors.required">Subject is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea formControlName="description" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+          <div *ngIf="f.description.errors.required">Description is required</div>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <button class="btn btn-md btn-primary btn-submit btn-radius">Send</button>
+      </div>
+
+    </form>
+  </div>
+  <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
 </ng-template>
