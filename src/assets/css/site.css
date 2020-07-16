@@ -770,6 +770,29 @@ ul.nostyle {
   position: absolute;
   right: 10px;
 }
+.progress-outer {
+  width: 96% !important;
+  margin: 10px 0% !important;
+  padding: 0 !important;
+  background-color: #f4f4f4 !important;
+  border: 0 !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+  text-align: center !important;
+}
+.progress-inner {
+  min-width: 15% !important;
+  min-height: 10px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  padding: 0px !important;
+  border-radius: 20px !important;
+  height: 10px !important;
+  font-size: 0px !important;
+}
+.pointer {
+  cursor: pointer;
+}
 .cke_bottom {
   display: none !important;
 }
@@ -920,4 +943,13 @@ label {
   margin-bottom: 20px;
   border-bottom: 1px solid #eee;
   padding-bottom: 20px;
+}
+.profileStepsList .completed i {
+  color: rgb(0, 203, 203);
+}
+.profileStepsList .completed span {
+  text-decoration: line-through;
+}
+.profileStepsList li span {
+  margin-left: 10px;
 }

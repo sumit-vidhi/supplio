@@ -1,6 +1,12 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
-  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content"
-    *ngIf="demandDataValue.length">
+<div
+  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
+  id="kt_body"
+>
+  <div
+    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor"
+    id="kt_content"
+    *ngIf="demandDataValue.length"
+  >
     <!-- begin:: Subheader -->
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
@@ -11,7 +17,11 @@
         </div>
         <div class="kt-subheader__toolbar">
           <div class="kt-subheader__wrapper">
-            <a routerLink="/user/demandlist" class="btn btn-primary btn-brand--icon" id="kt_search">
+            <a
+              routerLink="/user/demandlist"
+              class="btn btn-primary btn-brand--icon"
+              id="kt_search"
+            >
               <span>
                 <span>Demand List</span>
               </span>
@@ -24,7 +34,10 @@
     <!-- end:: Subheader -->
 
     <!-- begin:: Content -->
-    <div class="kt-container kt-grid__item kt-grid__item--fluid" *ngIf="demandData">
+    <div
+      class="kt-container kt-grid__item kt-grid__item--fluid"
+      *ngIf="demandData"
+    >
       <!--Begin::Dashboard 3-->
       <div class="kt-portlet">
         <div class="kt-portlet__body">
@@ -44,7 +57,10 @@
                     }}
                     <span class="detailed_list_label">Location</span>
                   </div>
-                  <div class="col-md-2" *ngIf="demandData && demandData.demand_category.length">
+                  <div
+                    class="col-md-2"
+                    *ngIf="demandData && demandData.demand_category.length"
+                  >
                     {{
                       categoryData.length > 1
                         ? categoryData.join(', ')
@@ -52,7 +68,10 @@
                     }}
                     <span class="detailed_list_label">Categories</span>
                   </div>
-                  <div class="col-md-2" *ngIf="demandData.demand_category.length == 0">
+                  <div
+                    class="col-md-2"
+                    *ngIf="demandData.demand_category.length == 0"
+                  >
                     -
                     <span class="detailed_list_label">Categories</span>
                   </div>
@@ -63,33 +82,68 @@
                     <span class="detailed_list_label">Total Demands</span>
                   </div>
                   <div class="col-md-2 text-center">
-                    <span class="btn btn-label-{{
+                    <span
+                      class="btn btn-label-{{
                         demandData.status == 1 ? 'success' : 'danger'
-                      }} btn-sm btn-bold btn-upper status">{{
+                      }} btn-sm btn-bold btn-upper status"
+                      >{{
                         demandData.status == 1 ? 'Published' : 'Draft'
-                      }}</span>
+                      }}</span
+                    >
                   </div>
                   <div class="col-md-2 text-center">
                     <div class="kt-widget__action">
-                      <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
-                        *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
-                        Edit</a>&nbsp;
-                      <a class="btn btn-success btn-sm btn-upper" (click)="print()">Print</a>
-                      <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
-                        data-target="#allbids" type="button" *ngIf="
+                      <a
+                        type="button"
+                        class="btn btn-sm btn-upper"
+                        style="background: #edeff6;"
+                        *ngIf="appData.role == 'Employer'"
+                        routerLink="/user/demand/{{ demandData.id }}"
+                      >
+                        Edit</a
+                      >&nbsp;
+                      <a
+                        class="btn btn-success btn-sm btn-upper"
+                        (click)="print()"
+                        >Print</a
+                      >
+                      <a
+                        class="collapseBtn collapsed btn btn-success btn-sm btn-upper"
+                        data-toggle="collapse"
+                        data-target="#allbids"
+                        type="button"
+                        *ngIf="
                           appData.role == 'Agency' && proposalData.length == 0
-                        ">
+                        "
+                      >
                         Bid
                       </a>
-                      <a class="btn btn-success btn-sm btn-upper" data-toggle="collapse" type="button"
-                        *ngIf="appData.role == 'Agency' && proposalData.length && proposalData[0].status==0">
+                      <a
+                        class="btn btn-success btn-sm btn-upper"
+                        data-toggle="collapse"
+                        type="button"
+                        *ngIf="
+                          appData.role == 'Agency' &&
+                          proposalData.length &&
+                          proposalData[0].status == 0
+                        "
+                      >
                         Bid Applied
                       </a>
 
-                      <a class="btn btn-success btn-sm btn-upper" data-toggle="collapse" type="button"
-                        *ngIf="appData.role == 'Agency' && proposalData.length && proposalData[0].status==1">
+                      <a
+                        class="btn btn-success btn-sm btn-upper"
+                        data-toggle="collapse"
+                        type="button"
+                        *ngIf="
+                          appData.role == 'Agency' &&
+                          proposalData.length &&
+                          proposalData[0].status == 1
+                        "
+                      >
                         Accepted
-                      </a> </div>
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -103,7 +157,12 @@
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
               Demand Details
-              <a type="button" class="collapseBtn collapsed" data-toggle="collapse" data-target="#demandDetails">
+              <a
+                type="button"
+                class="collapseBtn collapsed"
+                data-toggle="collapse"
+                data-target="#demandDetails"
+              >
                 <i class="fa fa-chevron-circle-down"></i>
               </a>
             </h3>
@@ -111,7 +170,10 @@
         </div>
         <div class="kt-portlet__body" id="demandDetails">
           <h4>Demands</h4>
-          <table class="table table-bordered" *ngIf="demandData && demandData.demand_category.length > 0">
+          <table
+            class="table table-bordered"
+            *ngIf="demandData && demandData.demand_category.length > 0"
+          >
             <thead>
               <th>Sno</th>
               <th>Sector</th>
@@ -122,7 +184,9 @@
               <th>More</th>
             </thead>
             <tbody>
-              <tr *ngFor="let array of demandData.demand_category; let i = index">
+              <tr
+                *ngFor="let array of demandData.demand_category; let i = index"
+              >
                 <td>{{ i + 1 }}</td>
                 <td>{{ getCategoryname(array.parent_category_id) }}</td>
                 <td>{{ array.category_name }}</td>
@@ -130,31 +194,34 @@
                 <td>{{ array.salary }}</td>
                 <td>{{ array.gender }}</td>
                 <td>
-                  <a (click)="showDetails(i)">Details</a>
+                  <a class="pointer" (click)="showDetails(i)">Details</a>
                   <div *ngIf="showDetailData[i]">
-                    <p>
-                      Age Brackets:{{
-                        array.age_bracket ? array.age_bracket : '-'
-                      }}
-                    </p>
-                    <p>
-                      Qualification:{{
-                        array.qualification ? array.qualification : '-'
-                      }}
-                    </p>
-                    <p>
-                      Years Of Experience:{{
-                        array.years_of_experience
-                          ? array.years_of_experience
-                          : '-'
-                      }}
-                    </p>
-                    <p>
-                      Driver License:{{
-                        array.driver_license ? array.driver_license : '-'
-                      }}
-                    </p>
-                    <p>Job Desc:{{ array.job_desc ? array.job_desc : '-' }}</p>
+                    <ul class="nostyle alignMe">
+                      <li>
+                        <strong>Age Brackets</strong
+                        >{{ array.age_bracket ? array.age_bracket : '-' }}
+                      </li>
+                      <li>
+                        <strong>Qualification</strong
+                        >{{ array.qualification ? array.qualification : '-' }}
+                      </li>
+                      <li>
+                        <strong>Years Of Experience</strong
+                        >{{
+                          array.years_of_experience
+                            ? array.years_of_experience
+                            : '-'
+                        }}
+                      </li>
+                      <li>
+                        <strong>Driver License</strong
+                        >{{ array.driver_license ? array.driver_license : '-' }}
+                      </li>
+                      <li>
+                        <strong>Job Desc</strong
+                        >{{ array.job_desc ? array.job_desc : '-' }}
+                      </li>
+                    </ul>
                   </div>
                 </td>
               </tr>
@@ -183,7 +250,8 @@
                 </li>
 
                 <li>
-                  <strong> Transportation </strong>{{
+                  <strong> Transportation </strong
+                  >{{
                     demandData.transportation ? demandData.transportation : '-'
                   }}
                 </li>
@@ -194,7 +262,8 @@
                 </li>
 
                 <li>
-                  <strong>Contract duration </strong>{{
+                  <strong>Contract duration </strong
+                  >{{
                     demandData.contract_duration
                       ? demandData.contract_duration
                       : '-'
@@ -202,7 +271,8 @@
                 </li>
 
                 <li>
-                  <strong>Working hours per day </strong>{{
+                  <strong>Working hours per day </strong
+                  >{{
                     demandData.working_hours_day
                       ? demandData.working_hours_day
                       : '-'
@@ -210,7 +280,8 @@
                 </li>
 
                 <li>
-                  <strong>Working days per week </strong>{{
+                  <strong>Working days per week </strong
+                  >{{
                     demandData.working_hours_week
                       ? demandData.working_hours_week
                       : '-'
@@ -218,7 +289,8 @@
                 </li>
 
                 <li>
-                  <strong>Probation period </strong>{{
+                  <strong>Probation period </strong
+                  >{{
                     demandData.probation_period
                       ? demandData.probation_period
                       : '-'
@@ -226,35 +298,42 @@
                 </li>
 
                 <li>
-                  <strong>Overtime </strong>{{ demandData.overtime ? demandData.overtime : '-' }}
+                  <strong>Overtime </strong
+                  >{{ demandData.overtime ? demandData.overtime : '-' }}
                 </li>
               </ul>
             </div>
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Medical Insurance </strong>{{
+                  <strong> Medical Insurance </strong
+                  >{{
                     demandData.medical_insurance
                       ? demandData.medical_insurance
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Joining Ticket </strong>{{
+                  <strong> Joining Ticket </strong
+                  >{{
                     demandData.joining_ticket ? demandData.joining_ticket : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Paid leaves </strong>{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
+                  <strong> Paid leaves </strong
+                  >{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
                 </li>
                 <li>
-                  <strong> Leave ticket </strong>{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
+                  <strong> Leave ticket </strong
+                  >{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
                 </li>
                 <li>
-                  <strong> Uniform & PPEs </strong>{{ demandData.uniform ? demandData.uniform : '-' }}
+                  <strong> Uniform & PPEs </strong
+                  >{{ demandData.uniform ? demandData.uniform : '-' }}
                 </li>
                 <li>
-                  <strong> Other benefits </strong>{{
+                  <strong> Other benefits </strong
+                  >{{
                     demandData.other_benefits ? demandData.other_benefits : '-'
                   }}
                 </li>
@@ -268,14 +347,16 @@
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Mode of interview </strong>{{
+                  <strong> Mode of interview </strong
+                  >{{
                     demandData.mode_of_interview
                       ? demandData.mode_of_interview
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> No. of delegates for interview </strong>{{
+                  <strong> No. of delegates for interview </strong
+                  >{{
                     demandData.no_of_delegates
                       ? demandData.no_of_delegates
                       : '-'
@@ -286,14 +367,16 @@
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Flights for delegates </strong>{{
+                  <strong> Flights for delegates </strong
+                  >{{
                     demandData.flights_for_delegates
                       ? demandData.flights_for_delegates
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Hotels for delegates </strong>{{
+                  <strong> Hotels for delegates </strong
+                  >{{
                     demandData.hotels_for_delegates
                       ? demandData.hotels_for_delegates
                       : '-'
@@ -305,12 +388,20 @@
         </div>
       </div>
 
-      <div class="kt-portlet kt-portlet--mobile" *ngIf="appData.role == 'Employer'">
+      <div
+        class="kt-portlet kt-portlet--mobile"
+        *ngIf="appData.role == 'Employer'"
+      >
         <div class="kt-portlet__head">
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
               All Offers
-              <a type="button" class="collapseBtn collapsed" data-toggle="collapse" data-target="#allbids">
+              <a
+                type="button"
+                class="collapseBtn collapsed"
+                data-toggle="collapse"
+                data-target="#allbids"
+              >
                 <i class="fa fa-chevron-circle-down"></i>
               </a>
             </h3>
@@ -318,50 +409,78 @@
         </div>
         <div class="kt-portlet__body" id="allbids" *ngIf="agencyData">
           <div class="offer-list">
-            <div class="offer-list-item align-items-center row" *ngFor="let data of agencyData let i=index;">
+            <div
+              class="offer-list-item align-items-center row"
+              *ngFor="let data of agencyData; let i = index"
+            >
               <div class="col-md-1">
                 <img src="../../../../assets/media/company-logos/logo-1.png" />
               </div>
               <div class="col-md-2">
-                <h5>{{data.agency_name}}</h5>
+                <h5>{{ data.agency_name }}</h5>
               </div>
               <div class="col-md-2">
-                <a href="#"> {{data.count}} Experience</a>
+                <a href="#"> {{ data.count }} Experience</a>
               </div>
               <div class="col-md-2">
-                <a href="#"> {{data.countWork}} Work</a>
+                <a href="#"> {{ data.countWork }} Work</a>
               </div>
               <div class="col-md-1">
                 Ratings
               </div>
               <div class="col-md-4 text-center">
-                <a routerLink="/user/profile/{{data.id}}" style="margin: 0px 12px 0px 10px;"
-                  class="btn btn-success btn-sm btn-upper" href="#">View
-                  Agency</a>
-                <a *ngIf="demandData.proposals[i].accept==0 && !acceptAgeny"
-                  (click)="hireAgency(demandData.proposals[i].id)" style="margin: 0px 12px 0px 10px;"
-                  class="btn btn-success btn-sm btn-upper">Hire
-                  Agency</a>
-                <a *ngIf="demandData.proposals[i].accept==0 && acceptAgeny" style="margin: 0px 12px 0px 10px;"
-                  class="btn btn-success btn-sm btn-upper" style="color:grey!important;">Hire
-                  Agency</a>
-                <a *ngIf="demandData.proposals[i].accept==1" style="margin: 0px 12px 0px 10px;"
-                  class="btn btn-success btn-sm btn-upper">Accepted</a>
-                <a (click)="messageOpen(data,contentmessage)" class="btn btn-success btn-sm btn-upper">Message
-                  Agency</a>
+                <a
+                  routerLink="/user/profile/{{ data.id }}"
+                  style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper"
+                  href="#"
+                  >View Agency</a
+                >
+                <a
+                  *ngIf="demandData.proposals[i].accept == 0 && !acceptAgeny"
+                  (click)="hireAgency(demandData.proposals[i].id)"
+                  style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper"
+                  >Hire Agency</a
+                >
+                <a
+                  *ngIf="demandData.proposals[i].accept == 0 && acceptAgeny"
+                  style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper"
+                  style="color: grey !important;"
+                  >Hire Agency</a
+                >
+                <a
+                  *ngIf="demandData.proposals[i].accept == 1"
+                  style="margin: 0px 12px 0px 10px;"
+                  class="btn btn-success btn-sm btn-upper"
+                  >Accepted</a
+                >
+                <a
+                  (click)="messageOpen(data, contentmessage)"
+                  class="btn btn-success btn-sm btn-upper"
+                  >Message Agency</a
+                >
               </div>
             </div>
-
           </div>
         </div>
       </div>
 
-      <div class="kt-portlet kt-portlet--mobile" *ngIf="appData.role == 'Agency'">
+      <div
+        class="kt-portlet kt-portlet--mobile"
+        *ngIf="appData.role == 'Agency'"
+      >
         <div class="kt-portlet__head">
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
               Offering Selection
-              <a type="button" class="collapseBtn collapsed" data-toggle="collapse" data-target="#allbids">
+              <a
+                type="button"
+                class="collapseBtn collapsed"
+                data-toggle="collapse"
+                data-target="#allbids"
+              >
                 <i class="fa fa-chevron-circle-down"></i>
               </a>
             </h3>
@@ -376,14 +495,16 @@
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Mode of interview </strong>{{
+                  <strong> Mode of interview </strong
+                  >{{
                     demandData.mode_of_interview
                       ? demandData.mode_of_interview
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> No. of delegates for interview </strong>{{
+                  <strong> No. of delegates for interview </strong
+                  >{{
                     demandData.no_of_delegates
                       ? demandData.no_of_delegates
                       : '-'
@@ -394,14 +515,16 @@
             <div class="col-md-6">
               <ul class="nostyle alignMe">
                 <li>
-                  <strong> Flights for delegates </strong>{{
+                  <strong> Flights for delegates </strong
+                  >{{
                     demandData.flights_for_delegates
                       ? demandData.flights_for_delegates
                       : '-'
                   }}
                 </li>
                 <li>
-                  <strong> Hotels for delegates </strong>{{
+                  <strong> Hotels for delegates </strong
+                  >{{
                     demandData.hotels_for_delegates
                       ? demandData.hotels_for_delegates
                       : '-'
@@ -413,10 +536,20 @@
           <form [formGroup]="bidForm" (ngSubmit)="onBidFormSubmit(content)">
             <div class="form-group">
               <label for="usr"> Do you want to bid this demand?:</label>
-              <input type="radio" formControlName="accept" name="accept" value="yes"
-                (change)="checkQuest($event)" />Accept
-              <input type="radio" formControlName="accept" name="accept" value="no"
-                (change)="checkQuest($event)" />Reject
+              <input
+                type="radio"
+                formControlName="accept"
+                name="accept"
+                value="yes"
+                (change)="checkQuest($event)"
+              />Accept
+              <input
+                type="radio"
+                formControlName="accept"
+                name="accept"
+                value="no"
+                (change)="checkQuest($event)"
+              />Reject
               <div *ngIf="bidSubmitted && bid.accept.errors">
                 <div *ngIf="bid.accept.errors.required" style="color: red;">
                   Selectin is required.
@@ -425,23 +558,34 @@
             </div>
             <div class="form-group">
               <label>{{ selectionTitle }}</label>
-              <textarea formControlName="comments" class="form-control" rows="5"></textarea>
+              <textarea
+                formControlName="comments"
+                class="form-control"
+                rows="5"
+              ></textarea>
               <div *ngIf="bidSubmitted && bid.comments.errors">
                 <div *ngIf="bid.comments.errors.required" style="color: red;">
                   Comment is required.
                 </div>
               </div>
             </div>
-            <button type="submit"
+            <button
+              type="submit"
               class="pull-right btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-              data-ktwizard-type="action-submit" *ngIf="proposalData.length == 0">
+              data-ktwizard-type="action-submit"
+              *ngIf="proposalData.length == 0"
+            >
               <span>
                 <span>Bid Apply</span>
               </span>
             </button>
-            <button type="submit"
+            <button
+              type="submit"
               class="pull-right btn btn-success btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
-              data-ktwizard-type="action-submit" *ngIf="proposalData.length" [disabled]="true">
+              data-ktwizard-type="action-submit"
+              *ngIf="proposalData.length"
+              [disabled]="true"
+            >
               <span>
                 <span>Bid Applied</span>
               </span>
@@ -450,8 +594,7 @@
         </div>
       </div>
     </div>
-    <div #myDiv id="tutor-price" (click)="paymentGateway(template4)">
-    </div>
+    <div #myDiv id="tutor-price" (click)="paymentGateway(template4)"></div>
     <!-- end:: Content -->
   </div>
 </div>
@@ -488,32 +631,51 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Bid amount deduct</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="ticket-content mb-4">
       <p>
-        If you are using wallet ${{bidtotalAmount}} amount will deduct in your wallet account or if you are using
-        subscription
-        {{plan}} then deduct bid in your {{plan}} plan.
+        If you are using wallet ${{ bidtotalAmount }} amount will deduct in your
+        wallet account or if you are using subscription {{ plan }} then deduct
+        bid in your {{ plan }} plan.
       </p>
     </div>
-    <p style="color:red;" *ngIf="bidAmount<bidtotalAmount">Wallet amount is low wallet amount is {{bidAmount}}</p>
+    <p style="color: red;" *ngIf="bidAmount < bidtotalAmount">
+      Wallet amount is low wallet amount is {{ bidAmount }}
+    </p>
   </div>
   <div class="modal-footer">
-    <button type="button" *ngIf="bidAmount>bidtotalAmount" class="btn btn-outline-dark mr-auto"
-      (click)="submitform('wallet')">
-      Continue With wallet amount(${{bidAmount}})
+    <button
+      type="button"
+      *ngIf="bidAmount > bidtotalAmount"
+      class="btn btn-outline-dark mr-auto"
+      (click)="submitform('wallet')"
+    >
+      Continue With wallet amount(${{ bidAmount }})
     </button>
 
-    <button type="button" *ngIf="bidAmount<bidtotalAmount" class="btn btn-outline-dark mr-auto"
-      (click)="payment(template2)">
+    <button
+      type="button"
+      *ngIf="bidAmount < bidtotalAmount"
+      class="btn btn-outline-dark mr-auto"
+      (click)="payment(template2)"
+    >
       Add money in wallet
     </button>
-    <button type="button" *ngIf="plan=='Free'" class="btn btn-outline-dark btn-secondary"
-      (click)="upgradePlan(template)">
+    <button
+      type="button"
+      *ngIf="plan == 'Free'"
+      class="btn btn-outline-dark btn-secondary"
+      (click)="upgradePlan(template)"
+    >
       Upgrade Plan
     </button>
   </div>
@@ -523,14 +685,21 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Plan</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body" style="height: 450px; overflow-y: auto; background-color: lightblue;">
+  <div
+    class="modal-body"
+    style="height: 450px; overflow-y: auto; background-color: lightblue;"
+  >
     <app-pricing (setsubscription)="setsubscription($event)"></app-pricing>
     <div class="row col-md-12 align-items-center justify-content-center">
-
       <!-- <div class="col">
         <select id="ddlplan" [(ngModel)]="planId">
           <option value="">Select Plan </option>
@@ -538,14 +707,16 @@
           <option value="P-9UK310826W2821412L33W6CY">SINGLE DEVICE QUARTERLY</option>
         </select></div> -->
       <div class="col">
-
         <ngx-paypal [config]="payPalConfigSubscription"></ngx-paypal>
       </div>
-
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="payment(template2)">
+    <button
+      type="button"
+      class="btn btn-outline-dark btn-secondary"
+      (click)="payment(template2)"
+    >
       Payment Procced
     </button>
   </div>
@@ -555,31 +726,42 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Payment Process</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="modal-body">
       <div class="ticket-content mb-4">
-
-        <input type="number" [(ngModel)]="finalAmount" style="padding-bottom: 10px;">
+        <input
+          type="number"
+          [(ngModel)]="finalAmount"
+          style="padding-bottom: 10px;"
+        />
         <p>
           <ngx-paypal [config]="payPalConfig"></ngx-paypal>
         </p>
       </div>
     </div>
   </div>
-  <div class="modal-footer">
-
-  </div>
+  <div class="modal-footer"></div>
 </ng-template>
 <ng-template #template4 let-modal class="modal-dialog-centered">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">
       <span>Payment Success</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -596,25 +778,34 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="modal.dismiss('Cross click')">
+    <button
+      type="button"
+      class="btn btn-outline-dark btn-secondary"
+      (click)="modal.dismiss('Cross click')"
+    >
       Ok
     </button>
   </div>
 </ng-template>
-<div id="print-section" style="display:none;">
+<div id="print-section" style="display: none;">
   <h1>{{ demandData.title }}</h1>
-  <p><strong>Posted on: </strong>{{ demandData.created_at | date: 'mediumDate' }}</p>
-  <p><strong>Country: </strong>{{
-                        demandData.hire_country
-                          ? getcountry(demandData.hire_country)
-                          : '-'
-                      }}</p>
-  <p><strong>Total Demands: </strong>{{
-                        demandData.total_demands ? demandData.total_demands : '-'
-                      }}</p>
+  <p>
+    <strong>Posted on: </strong>{{ demandData.created_at | date: 'mediumDate' }}
+  </p>
+  <p>
+    <strong>Country: </strong
+    >{{ demandData.hire_country ? getcountry(demandData.hire_country) : '-' }}
+  </p>
+  <p>
+    <strong>Total Demands: </strong
+    >{{ demandData.total_demands ? demandData.total_demands : '-' }}
+  </p>
 
   <h3>Demands</h3>
-  <table border="1px" *ngIf="demandData && demandData.demand_category.length > 0">
+  <table
+    border="1px"
+    *ngIf="demandData && demandData.demand_category.length > 0"
+  >
     <thead>
       <th>Sno</th>
       <th>Sector</th>
@@ -641,24 +832,19 @@
         <ul class="nostyle alignMe">
           <li>
             <strong> Accommodation </strong>
-            {{
-                demandData.accommodation ? demandData.accommodation : '-'
-              }}
+            {{ demandData.accommodation ? demandData.accommodation : '-' }}
           </li>
 
           <li>
             <strong> Visa Sponsorship</strong>
             {{
-                demandData.visa_sponsorship
-                  ? demandData.visa_sponsorship
-                  : '-'
-              }}
+              demandData.visa_sponsorship ? demandData.visa_sponsorship : '-'
+            }}
           </li>
 
           <li>
-            <strong> Transportation </strong>{{
-                demandData.transportation ? demandData.transportation : '-'
-              }}
+            <strong> Transportation </strong
+            >{{ demandData.transportation ? demandData.transportation : '-' }}
           </li>
 
           <li>
@@ -667,69 +853,68 @@
           </li>
 
           <li>
-            <strong>Contract duration </strong>{{
-                demandData.contract_duration
-                  ? demandData.contract_duration
-                  : '-'
-              }}
+            <strong>Contract duration </strong
+            >{{
+              demandData.contract_duration ? demandData.contract_duration : '-'
+            }}
           </li>
 
           <li>
-            <strong>Working hours per day </strong>{{
-                demandData.working_hours_day
-                  ? demandData.working_hours_day
-                  : '-'
-              }}
+            <strong>Working hours per day </strong
+            >{{
+              demandData.working_hours_day ? demandData.working_hours_day : '-'
+            }}
           </li>
 
           <li>
-            <strong>Working days per week </strong>{{
-                demandData.working_hours_week
-                  ? demandData.working_hours_week
-                  : '-'
-              }}
+            <strong>Working days per week </strong
+            >{{
+              demandData.working_hours_week
+                ? demandData.working_hours_week
+                : '-'
+            }}
           </li>
 
           <li>
-            <strong>Probation period </strong>{{
-                demandData.probation_period
-                  ? demandData.probation_period
-                  : '-'
-              }}
+            <strong>Probation period </strong
+            >{{
+              demandData.probation_period ? demandData.probation_period : '-'
+            }}
           </li>
 
           <li>
-            <strong>Overtime </strong>{{ demandData.overtime ? demandData.overtime : '-' }}
+            <strong>Overtime </strong
+            >{{ demandData.overtime ? demandData.overtime : '-' }}
           </li>
         </ul>
       </td>
       <td>
         <ul class="nostyle alignMe">
           <li>
-            <strong> Medical Insurance </strong>{{
-                demandData.medical_insurance
-                  ? demandData.medical_insurance
-                  : '-'
-              }}
+            <strong> Medical Insurance </strong
+            >{{
+              demandData.medical_insurance ? demandData.medical_insurance : '-'
+            }}
           </li>
           <li>
-            <strong> Joining Ticket </strong>{{
-                demandData.joining_ticket ? demandData.joining_ticket : '-'
-              }}
+            <strong> Joining Ticket </strong
+            >{{ demandData.joining_ticket ? demandData.joining_ticket : '-' }}
           </li>
           <li>
-            <strong> Paid leaves </strong>{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
+            <strong> Paid leaves </strong
+            >{{ demandData.paid_leaves ? demandData.paid_leaves : '-' }}
           </li>
           <li>
-            <strong> Leave ticket </strong>{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
+            <strong> Leave ticket </strong
+            >{{ demandData.leave_ticket ? demandData.leave_ticket : '-' }}
           </li>
           <li>
-            <strong> Uniform & PPEs </strong>{{ demandData.uniform ? demandData.uniform : '-' }}
+            <strong> Uniform & PPEs </strong
+            >{{ demandData.uniform ? demandData.uniform : '-' }}
           </li>
           <li>
-            <strong> Other benefits </strong>{{
-                demandData.other_benefits ? demandData.other_benefits : '-'
-              }}
+            <strong> Other benefits </strong
+            >{{ demandData.other_benefits ? demandData.other_benefits : '-' }}
           </li>
         </ul>
       </td>
@@ -741,36 +926,34 @@
       <td>
         <ul class="nostyle alignMe">
           <li>
-            <strong> Mode of interview </strong>{{
-                demandData.mode_of_interview
-                  ? demandData.mode_of_interview
-                  : '-'
-              }}
+            <strong> Mode of interview </strong
+            >{{
+              demandData.mode_of_interview ? demandData.mode_of_interview : '-'
+            }}
           </li>
           <li>
-            <strong> No. of delegates for interview </strong>{{
-                demandData.no_of_delegates
-                  ? demandData.no_of_delegates
-                  : '-'
-              }}
+            <strong> No. of delegates for interview </strong
+            >{{ demandData.no_of_delegates ? demandData.no_of_delegates : '-' }}
           </li>
         </ul>
       </td>
       <td>
         <ul class="nostyle alignMe">
           <li>
-            <strong> Flights for delegates </strong>{{
-                demandData.flights_for_delegates
-                  ? demandData.flights_for_delegates
-                  : '-'
-              }}
+            <strong> Flights for delegates </strong
+            >{{
+              demandData.flights_for_delegates
+                ? demandData.flights_for_delegates
+                : '-'
+            }}
           </li>
           <li>
-            <strong> Hotels for delegates </strong>{{
-                demandData.hotels_for_delegates
-                  ? demandData.hotels_for_delegates
-                  : '-'
-              }}
+            <strong> Hotels for delegates </strong
+            >{{
+              demandData.hotels_for_delegates
+                ? demandData.hotels_for_delegates
+                : '-'
+            }}
           </li>
         </ul>
       </td>
@@ -781,17 +964,25 @@
 <ng-template #contentmessage let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Send message to ageny</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <form [formGroup]="messageForm" (ngSubmit)="onSubmit(mode)">
-
       <div class="form-group">
         <label for="amount">Subject</label>
-        <input type="text" formControlName="subject" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.subject.errors }" />
+        <input
+          type="text"
+          formControlName="subject"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.subject.errors }"
+        />
         <div *ngIf="submitted && f.subject.errors" class="invalid-feedback">
           <div *ngIf="f.subject.errors.required">Subject is required</div>
         </div>
@@ -799,17 +990,23 @@
 
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea formControlName="description" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+        <textarea
+          formControlName="description"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+        ></textarea>
         <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-          <div *ngIf="f.description.errors.required">Description is required</div>
+          <div *ngIf="f.description.errors.required">
+            Description is required
+          </div>
         </div>
       </div>
 
       <div class="mt-2">
-        <button class="btn btn-md btn-primary btn-submit btn-radius">Send</button>
+        <button class="btn btn-md btn-primary btn-submit btn-radius">
+          Send
+        </button>
       </div>
-
     </form>
   </div>
   <!-- <div class="modal-footer">
