@@ -44,7 +44,7 @@ export class demandViewComponent implements OnInit {
   searchForm: FormGroup;
   showDetailData = [false];
   categoryData = [];
-  acceptAgeny=false;
+  acceptAgeny = false;
   countries = [
     { name: 'Afghanistan', code: 'AF' },
     { name: 'Åland Islands', code: 'AX' },
@@ -322,6 +322,7 @@ export class demandViewComponent implements OnInit {
   planId: any;
   subcripId: any;
   messageForm: FormGroup;
+  reviewForm: FormGroup;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
@@ -333,6 +334,12 @@ export class demandViewComponent implements OnInit {
       subject: ['', [Validators.required]],
       description: ['', Validators.required]
     });
+
+    this.reviewForm = this.formBuilder.group({
+      rating: ['', [Validators.required]],
+      review: ['', Validators.required]
+    });
+
     this.userService.getSubcategoies().subscribe((result: any) => {
       this.category = result.payload.categories;
     });
@@ -418,19 +425,41 @@ export class demandViewComponent implements OnInit {
 
   }
 
+  sendReview(template) {
+    this.open(template)
+  }
+
   get f() { return this.messageForm.controls; }
+
+  get r() { return this.reviewForm.controls; }
 
   messageOpen(data, template) {
     this.open(template);
   }
 
+  onReviewSubmit(mode) {
+    this.submitted = true;
+    if (this.reviewForm.invalid) {
+      return;
+    }
+    const formData = this.reviewForm.value;
+    // this.loader.startLoading();
+    // this.userService.addEmail(formData).subscribe((result) => {
+    //   this.loader.stopLoading();
+    //   if (result.status == 'success') {
+    //     alert("Message sent to all users");
+    //   } else {
+    //     alert(result.message);
+    //   }
+    // })
+  }
   onSubmit(mode) {
     this.submitted = true;
     if (this.messageForm.invalid) {
       return;
     }
     const formData = this.messageForm.value;
-    this.loader.startLoading();
+    // this.loader.startLoading();
     // this.userService.addEmail(formData).subscribe((result) => {
     //   this.loader.stopLoading();
     //   if (result.status == 'success') {

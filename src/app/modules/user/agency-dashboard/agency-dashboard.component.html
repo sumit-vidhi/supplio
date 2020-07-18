@@ -1,3 +1,36 @@
+<div class="kt-portlet kt-portlet--mobile">
+  <!-- <div class="kt-portlet__head">
+    <div class="kt-portlet__head-label">
+      <h3 class="kt-portlet__head-title">
+        
+      </h3>
+    </div>
+  </div> -->
+  <div class="kt-portlet__body">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Complete your profile ({{stepComplete}}/{{steps.length}})</h5>
+        <progress-bar *ngIf="appData.is_welcome == 1" [progress]="progress" [color-degraded]="{
+            '0': '#00cbcb',
+            '15': '#f9c3d3',
+            '25': '#fd8c8e'
+          }">
+        </progress-bar>
+        <ul class="nostyle profileStepsList">
+          <li [ngClass]="{'completed':data[1]['completed']}" *ngFor="let data of steps">
+            <i class="flaticon2-checkmark" aria-hidden="true"></i>
+            <span>{{data[1]['name']}}</span>
+          </li>
+          <!-- <li>
+            <i class="flaticon2-checkmark" aria-hidden="true"></i>
+            <span>Locations</span>
+          </li> -->
+        </ul>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-md-3">
     <div class="kt-portlet kt-iconbox kt-iconbox--wave">
@@ -91,41 +124,26 @@
     <div class="kt-portlet kt-portlet--mobile">
       <div class="kt-portlet__head nopad">
         <div class="kt-portlet__head-label tabBtnContainer">
-          <a
-            (click)="selectAgency('newDemand')"
-            [ngClass]="{
+          <a (click)="selectAgency('newDemand')" [ngClass]="{
               active: show('newDemand'),
               deactive: !show('newDemand')
-            }"
-            class="tabBtn"
-            id="kt_search"
-          >
+            }" class="tabBtn" id="kt_search">
             <span>
               <span>New Demands</span>
             </span>
           </a>
-          <a
-            (click)="selectAgency('quotesSent')"
-            [ngClass]="{
+          <a (click)="selectAgency('quotesSent')" [ngClass]="{
               active: show('quotesSent'),
               deactive: !show('quotesSent')
-            }"
-            class="tabBtn"
-            id="kt_search"
-          >
+            }" class="tabBtn" id="kt_search">
             <span>
               <span>Quotes Sent</span>
             </span>
           </a>
-          <a
-            (click)="selectAgency('demandWon')"
-            [ngClass]="{
+          <a (click)="selectAgency('demandWon')" [ngClass]="{
               active: show('demandWon'),
               deactive: !show('demandWon')
-            }"
-            class="tabBtn"
-            id="kt_search"
-          >
+            }" class="tabBtn" id="kt_search">
             <span>
               <span>Demands Won</span>
             </span>
@@ -134,13 +152,10 @@
       </div>
       <div class="kt-portlet__body">
         <div class="detailed_list">
-          <div
-            class="detailed_list_item row"
-            [ngClass]="{
+          <div class="detailed_list_item row" [ngClass]="{
               isShow: show('newDemand'),
               isHide: !show('newDemand')
-            }"
-          >
+            }">
             <div class="col-md-3 detailed_list_title">
               <h5>
                 DEMO
@@ -165,11 +180,7 @@
               <span class="detailed_list_label">Total Demands</span>
             </div>
             <div class="col-md-2 text-center">
-              <a
-                href=" #"
-                class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                data-toggle="dropdown"
-              >
+              <a href=" #" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                 <i class="flaticon-more-1"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
@@ -203,13 +214,10 @@
               </div>
             </div>
           </div>
-          <div
-            class="detailed_list_item row"
-            [ngClass]="{
+          <div class="detailed_list_item row" [ngClass]="{
               isShow: show('quotesSent'),
               isHide: !show('quotesSent')
-            }"
-          >
+            }">
             <div class="col-md-3 detailed_list_title">
               <h5>
                 DEMO44
@@ -234,11 +242,7 @@
               <span class="detailed_list_label">Total Demands</span>
             </div>
             <div class="col-md-2 text-center">
-              <a
-                href=" #"
-                class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                data-toggle="dropdown"
-              >
+              <a href=" #" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                 <i class="flaticon-more-1"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
@@ -272,13 +276,10 @@
               </div>
             </div>
           </div>
-          <div
-            class="detailed_list_item row"
-            [ngClass]="{
+          <div class="detailed_list_item row" [ngClass]="{
               isShow: show('demandWon'),
               isHide: !show('demandWon')
-            }"
-          >
+            }">
             <div class="col-md-3 detailed_list_title">
               <h5>
                 DEMO22
@@ -303,11 +304,7 @@
               <span class="detailed_list_label">Total Demands</span>
             </div>
             <div class="col-md-2 text-center">
-              <a
-                href=" #"
-                class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                data-toggle="dropdown"
-              >
+              <a href=" #" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                 <i class="flaticon-more-1"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">

@@ -278,6 +278,11 @@ export class EmployerDashboardComponent implements OnInit {
   total_demands: any;
   total_active_agencies: any;
   total_agencies: any;
+  progress: number;
+  newdata: any = [];
+  select: any = 'newDemand';
+  stepComplete: any = [];
+  steps: any = 0;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal, private renderer: Renderer2) {
   }
@@ -299,7 +304,15 @@ export class EmployerDashboardComponent implements OnInit {
             return v.category_name;
           })
         })
-        console.log(this.category);
+        this.newdata = result.payload.dashboard.profileSteps;
+        this.steps = Object.entries(this.newdata);
+        this.stepComplete = Object.entries(this.newdata).filter((data) => {
+          return data[1]["completed"];
+        })
+        console.log(this.stepComplete);
+        this.stepComplete = this.stepComplete.length;
+        let percentage = Number(100) / Number(this.steps.length);
+        this.progress = Math.round(Number(percentage) * Number(this.stepComplete));
       }
     })
   }

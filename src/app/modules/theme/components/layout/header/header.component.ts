@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LoaderService } from '@core/services/loader-service';
 import { Observable, interval } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { APP_USER } from '@configs/app-settings.config';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,8 @@ export class HeaderComponent implements OnInit {
   router: string;
   user_dropdown: boolean = false;
   blogPage: any;
-
+  appData: any;
+  compayLogo = [];
   private _trialEndsAt;
 
   public _diff: number;
@@ -65,12 +67,18 @@ export class HeaderComponent implements OnInit {
     this.loader.blogData.subscribe((value) => {
       this.blogPage = value;
     });
+    this.appData = JSON.parse(window.localStorage[APP_USER]);
+    console.log(this.appData);
+    this.compayLogo = this.appData.files.filter((data) => {
+      return data.file_key == 'company_logo';
+    });
+    //console.log(compayLogo);
   }
 
   capitalize(s) {
     if (typeof s !== 'string') return ''
     return s.charAt(0).toUpperCase();
-}
+  }
 
   openUserDropdown() {
     this.user_dropdown = !this.user_dropdown;
@@ -78,7 +86,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     let plan = '';
-  
+
 
   }
 

@@ -276,11 +276,14 @@ export class AgencyDashboardComponent implements OnInit {
   demandData: any = [];;
   category: any = [];
   total_active_demands: any;
-  total_qoutes_demands:any;
+  total_qoutes_demands: any;
   demands_lost: any;
   demands_won: any;
-  //total_agencies: any;
+  progress: number;
+  newdata: any = [];
   select: any = 'newDemand';
+  stepComplete: any = [];
+  steps: any = 0;
   constructor(private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal, private renderer: Renderer2) {
   }
@@ -297,8 +300,15 @@ export class AgencyDashboardComponent implements OnInit {
         this.total_active_demands = result.payload.dashboard.total_active_demands;
         this.demands_lost = result.payload.dashboard.demands_lost;
         this.demands_won = result.payload.dashboard.demands_won;
-        // this.total_agencies = result.payload.dashboard.total_agencies;
-
+        this.newdata = result.payload.dashboard.profileSteps;
+        this.steps = Object.entries(this.newdata);
+        this.stepComplete = Object.entries(this.newdata).filter((data) => {
+          return data[1]["completed"];
+        })
+        console.log(this.stepComplete);
+        this.stepComplete = this.stepComplete.length;
+        let percentage = Number(100) / Number(this.steps.length);
+        this.progress = Math.round(Number(percentage) * Number(this.stepComplete));
       }
     })
   }
