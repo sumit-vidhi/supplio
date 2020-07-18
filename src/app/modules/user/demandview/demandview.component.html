@@ -347,12 +347,12 @@
               <div class="col-md-4 text-center">
                 <a routerLink="/user/profile/{{ data.id }}" style="margin: 0px 12px 0px 10px;"
                   class="btn btn-success btn-sm btn-upper" href="#">View Agency</a>
-                <a *ngIf="demandData.proposals[i].accept == 0 && !acceptAgeny"
+                <a *ngIf="demandData.proposals[i].status == 0 && !acceptAgeny"
                   (click)="hireAgency(demandData.proposals[i].id)" style="margin: 0px 12px 0px 10px;"
                   class="btn btn-success btn-sm btn-upper">Hire Agency</a>
-                <a *ngIf="demandData.proposals[i].accept == 0 && acceptAgeny" style="margin: 0px 12px 0px 10px;"
+                <a *ngIf="demandData.proposals[i].status == 0 && acceptAgeny" style="margin: 0px 12px 0px 10px;"
                   class="btn btn-success btn-sm btn-upper" style="color: grey !important;">Hire Agency</a>
-                <a *ngIf="demandData.proposals[i].accept == 1" style="margin: 0px 12px 0px 10px;"
+                <a *ngIf="demandData.proposals[i].status == 1" style="margin: 0px 12px 0px 10px;"
                   class="btn btn-success btn-sm btn-upper">Accepted</a>
                 <a (click)="messageOpen(data, contentmessage)" class="btn btn-success btn-sm btn-upper">Message
                   Agency</a>

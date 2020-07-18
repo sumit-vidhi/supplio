@@ -383,8 +383,9 @@ export class demandViewComponent implements OnInit {
             if (this.demandDataValue[0].proposals.length) {
 
               this.proposalData = this.demandDataValue[0].proposals.filter((value, index) => {
-                return value.user_id == this.loginService.getLoginUserId() && value.accept == "1";
+                return value.user_id == this.loginService.getLoginUserId();
               });
+              console.log(this.proposalData);
               if (this.proposalData[0].accept == 1) {
                 this.proposalData[0].accept = "yes";
               }
@@ -402,7 +403,7 @@ export class demandViewComponent implements OnInit {
               return data.user;
             });
             var newData = this.demandData.proposals.filter((data) => {
-              return data.accept == 1;
+              return data.status == 1;
             })
 
             if (newData.length) {
@@ -666,10 +667,11 @@ export class demandViewComponent implements OnInit {
 
   checkPlanAndWallet(content) {
     this.userService.wallet.subscribe((data: any) => {
+      console.log(data);
       if (!data) {
         this.bidAmount = 0;
       } else {
-        this.bidAmount = Number(data);
+        this.bidAmount = Number(data.amount);
       }
     })
 
