@@ -40,7 +40,29 @@ export class ProfileComponent implements OnInit {
     { type: "png", icon: "fa fa-file-image-o" }
   ];
 
-
+  starsCount: number = 2;
+  my_reviews = [
+    {
+      "id": 2,
+      "user_id": 51,
+      "to_user_id": 50,
+      "demand_id": null,
+      "review": "Great Wokr",
+      "rating": 5,
+      "created_at": "2020-07-13T06:13:40.000000Z",
+      "updated_at": "2020-07-13T06:13:40.000000Z"
+    },
+    {
+      "id": 3,
+      "user_id": 32,
+      "to_user_id": 50,
+      "demand_id": 22,
+      "review": "Nice",
+      "rating": 4,
+      "created_at": null,
+      "updated_at": null
+    }
+  ];
   getFileExtension(filename) { // this will give you icon class name
     //console.log(filename);
     if (filename) {

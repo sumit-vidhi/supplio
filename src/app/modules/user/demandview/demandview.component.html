@@ -75,7 +75,8 @@
                         *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
                         Edit</a>&nbsp;
                       <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
-                        *ngIf="appData.role == 'Employer'" (click)="sendReview(templateReview)">
+                        *ngIf="appData.role == 'Employer' && demandData.status==2 && acceptAgeny"
+                        (click)="sendReview(templateReview)">
                         Complete</a>&nbsp;
                       <a class="btn btn-success btn-sm btn-upper" (click)="print()">Print</a>
                       <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
@@ -340,7 +341,8 @@
                 <a href="#"> {{ data.countWork }} Work</a>
               </div>
               <div class="col-md-1">
-                Ratings
+                <bar-rating disabled [(rate)]="data.overall_rating.avg_rating" [max]="5">
+                </bar-rating>
               </div>
               <div class="col-md-4 text-center">
                 <a routerLink="/user/profile/{{ data.id }}" style="margin: 0px 12px 0px 10px;"
@@ -765,11 +767,12 @@
     <form [formGroup]="reviewForm" (ngSubmit)="onReviewSubmit()">
       <div class="form-group">
         <label for="amount">Rating</label>
-        <input type="text" formControlName="rating" class="form-control"
+        <bar-rating name="rating" formControlName="rating" [max]="5" required disabled></bar-rating>
+        <!-- <input type="text" formControlName="rating" class="form-control"
           [ngClass]="{ 'is-invalid': submitted && r.rating.errors }" />
         <div *ngIf="submitted && r.rating.errors" class="invalid-feedback">
           <div *ngIf="r.rating.errors.required">Rating is required</div>
-        </div>
+        </div> -->
       </div>
 
       <div class="form-group">

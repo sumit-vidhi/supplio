@@ -41,6 +41,12 @@ export class UserService {
   agencyeditProfile(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.agencyeditProfile, data);
   }
+  addReview(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.addReview, data);
+  }
+  addComplete(data): Observable<ApiResponseModel> {
+    return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.addComplete, data);
+  }
 
   getProfile(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getdata);

@@ -323,6 +323,7 @@ export class demandViewComponent implements OnInit {
   subcripId: any;
   messageForm: FormGroup;
   reviewForm: FormGroup;
+  revieId: any;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
@@ -403,10 +404,13 @@ export class demandViewComponent implements OnInit {
             var newData = this.demandData.proposals.filter((data) => {
               return data.accept == 1;
             })
-            console.log(newData);
+
             if (newData.length) {
+              this.revieId = newData;
               this.acceptAgeny = true;
             }
+
+            console.log(this.revieId);
             var count = [];
             var countWork = [];
             for (let i = 0; i < data.length; i++) {
@@ -426,7 +430,15 @@ export class demandViewComponent implements OnInit {
   }
 
   sendReview(template) {
-    this.open(template)
+    this.loader.startLoading();
+    this.userService.addComplete({ id: this.demandData.id }).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.demand) {
+        this.open(template)
+        this.ngOnInit();
+      }
+    })
+
   }
 
   get f() { return this.messageForm.controls; }
@@ -443,15 +455,17 @@ export class demandViewComponent implements OnInit {
       return;
     }
     const formData = this.reviewForm.value;
-    // this.loader.startLoading();
-    // this.userService.addEmail(formData).subscribe((result) => {
-    //   this.loader.stopLoading();
-    //   if (result.status == 'success') {
-    //     alert("Message sent to all users");
-    //   } else {
-    //     alert(result.message);
-    //   }
-    // })
+    formData.to_user_id = this.revieId[0].user_id;
+    this.loader.startLoading();
+    this.userService.addReview(formData).subscribe((result: any) => {
+      this.loader.stopLoading();
+      if (result.payload.review) {
+        this.modalReference.close();
+        this.ngOnInit();
+      } else {
+        alert(result.message);
+      }
+    })
   }
   onSubmit(mode) {
     this.submitted = true;

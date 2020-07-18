@@ -18,6 +18,8 @@ export const appApiUrl: CommonBase = {
         emailCheck: 'users/emailValidation',
         getDashboardData: 'users/dashboard',
         agencyProfile: 'agency/getAgencyProfile',
+        addReview: 'review/create',
+        addComplete: 'demands/complete',
         creatDemand: 'demands/createEmptyDemand',
         hireAgency: 'proposal/accept',
         demandList: 'demands/myList',
