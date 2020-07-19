@@ -11,10 +11,27 @@ import { demandViewComponent } from './demandview/demandview.component';
 import { AgencyProfileComponent } from './agency-profile/agency-profile.component';
 import { PricingComponent } from './pricing/pricing.component';
 import { ProfileComponent } from './profile/profile.component'
+import { DocumentComponent } from './document/document.component';
+import { PslComponent } from './psl/psl.component';
+import { PclComponent } from './pcl/pcl.component';
 const routes: Routes = [
   {
     path: 'edit-profile', component: EditProfileComponent,
     data: { title: 'My account' },
+    canActivate: [AuthGuard]
+  }, {
+    path: 'document', component: DocumentComponent,
+    data: { title: 'My account' },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'pcl', component: PclComponent,
+    data: { title: 'PCL' },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'psl', component: PslComponent,
+    data: { title: 'PSL' },
     canActivate: [AuthGuard]
   },
   {

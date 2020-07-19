@@ -3,7 +3,6 @@ import {
   OnInit,
   ViewChild,
   ElementRef,
-  Renderer2,
   AfterViewInit,
 } from '@angular/core';
 import {
@@ -23,14 +22,25 @@ import {
   ModalDismissReasons,
   NgbModalRef,
 } from '@ng-bootstrap/ng-bootstrap';
+
 import { APP_USER } from '@configs/app-settings.config';
+import * as $ from 'jquery';
 @Component({
-  selector: 'app-agency-dashboard',
-  templateUrl: './agency-dashboard.component.html',
-  styleUrls: ['./agency-dashboard.component.scss'],
+  selector: 'app-document',
+  templateUrl: './document.component.html',
+  styleUrls: ['./document.component.scss'],
 })
-export class AgencyDashboardComponent implements OnInit {
+export class DocumentComponent implements OnInit {
   public sendMessage: boolean;
+  dashboardData: any;
+  mmeFreeurlForm: FormGroup;
+  submitted = false;
+  formCard: FormGroup;
+  modalReference: NgbModalRef;
+  submittedForm: boolean = false;
+  demandData: any;
+  category: any;
+  searchForm: FormGroup;
   countries = [
     { name: 'Afghanistan', code: 'AF' },
     { name: 'Åland Islands', code: 'AX' },
@@ -285,89 +295,125 @@ export class AgencyDashboardComponent implements OnInit {
     { name: 'Zambia', code: 'ZM' },
     { name: 'Zimbabwe', code: 'ZW' },
   ];
-  dashboardData: any;
-  mmeFreeurlForm: FormGroup;
-  submitted = false;
-  formCard: FormGroup;
-  modalReference: NgbModalRef;
-  submittedForm: boolean = false;
+  myDateValue: Date;
+  myDateValue2: Date;
   appData: any;
-  demandData: any = [];
-  category: any = [];
-  total_active_demands: any;
-  total_quotes_demands: any;
-  demands_lost: any;
-  demands_won: any;
-  progress: number;
-  newdata: any = [];
-  select: any = 'newDemand';
-  stepComplete: any = [];
-  steps: any = 0;
-  latestQuotesSentcategory = [];
-  demandsWoncategory = [];
+  config: any;
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
     private loader: LoaderService,
     public loginService: JWTAuthService,
-    public modalService: NgbModal,
-    private renderer: Renderer2
+    public modalService: NgbModal
   ) { }
 
   ngOnInit() {
     this.appData = JSON.parse(window.localStorage[APP_USER]);
-    this.loader.startLoading();
-    this.userService.getDashboardData().subscribe((result: any) => {
-      this.loader.stopLoading();
-      console.log(result.payload.dashboard);
-      if (result.payload.dashboard) {
-        this.demandData = result.payload.dashboard;
-        this.category = this.demandData.latestDemands.map((value, index) => {
-          return value.demand_category.map((v, i) => {
-            return v.category_name;
-          });
-        });
-        this.latestQuotesSentcategory = this.demandData.latestQuotesSent.map((value, index) => {
-          return value.demand.demand_category.map((v, i) => {
-            return v.category_name;
-          });
-        });
-        this.demandsWoncategory = this.demandData.demandsWon.map((value, index) => {
-          return value.demand.demand_category.map((v, i) => {
-            return v.category_name;
-          });
-        });
-        this.total_active_demands =
-          result.payload.dashboard.total_active_demands;
-        this.total_quotes_demands =
-          result.payload.dashboard.total_quotes_demands;
-        this.demands_lost = result.payload.dashboard.demands_lost;
-        this.demands_won = result.payload.dashboard.demands_won;
-        this.newdata = result.payload.dashboard.profileSteps;
-        this.steps = Object.entries(this.newdata);
-        this.stepComplete = Object.entries(this.newdata).filter((data) => {
-          return data[1]['completed'];
-        });
-        console.log(this.stepComplete);
-        this.stepComplete = this.stepComplete.length;
-        let percentage = Number(100) / Number(this.steps.length);
-        this.progress = Math.round(
-          Number(percentage) * Number(this.stepComplete)
-        );
-      }
+    this.searchForm = this.formBuilder.group({
+      startDate: [''],
+      postDate: [''],
+      hire_type: [''],
+      hire_country: [''],
+      demand_type: [''],
+      status: [''],
     });
+    this.loader.startLoading();
+    const data = {
+      hire_type: '',
+      hire_country: '',
+      demand_type: '',
+      status: '',
+      startDate: '',
+      postDate: '',
+      page: 1,
+    };
+    if (this.appData.role == 'Agency') {
+      this.userService.documentList().subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.documents) {
+          this.demandData = result.payload.documents;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand.demand_category.map((v, i) => {
+              return v.category_name;
+            });
+          });
+          this.config = {
+            itemsPerPage: 10,
+            currentPage: 1,
+            totalItems: Number(result.payload.demand.total),
+          };
+        }
+      });
+    }
   }
-  selectAgency(name) {
-    this.select = name;
+
+  getData(config) {
+    const data = {
+      hire_type: '',
+      hire_country: '',
+      demand_type: '',
+      status: '',
+      startDate: '',
+      postDate: '',
+      page: config.currentPage,
+    };
+    this.loader.startLoading();
+
+    if (this.appData.role == 'Agency') {
+      this.userService.documentList().subscribe((result: any) => {
+        this.loader.stopLoading();
+        if (result.payload.documents) {
+          this.demandData = result.payload.documents;
+          this.category = this.demandData.map((value, index) => {
+            return value.demand.demand_category.map((v, i) => {
+              return v.category_name;
+            });
+          });
+        }
+      });
+    }
   }
-  show(name) {
-    return this.select == name;
+
+
+  onDateChange(newDate: Date) {
+    console.log(newDate);
+  }
+
+
+
+  getType(i) {
+    if (this.demandData.length > 0 && this.demandData[i].demand_type) {
+      if (this.demandData[i].demand_type == 1) {
+        return 'PSL';
+      }
+      if (this.demandData[i].demand_type == 2) {
+        return 'Context';
+      }
+    } else {
+      return '-';
+    }
   }
   getcountry(code) {
     const counrty = this.countries.findIndex((value) => {
       return value.code == code;
     });
     return this.countries[counrty]['name'];
+  }
+  open(content) {
+    this.modalReference = this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      windowClass: 'ticket-modal',
+    });
+  }
+  genrateDocument(id) {
+    this.loader.startLoading();
+    this.userService.genrateDocument(id).subscribe((result: any) => {
+      this.loader.stopLoading();
+      console.log(result);
+      let file = new Blob([result], { type: 'application/pdf' });
+      var fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+    })
   }
 }

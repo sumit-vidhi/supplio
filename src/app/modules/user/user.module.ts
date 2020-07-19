@@ -22,18 +22,21 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { EmployerDashboardComponent } from './employer-dashboard/employer-dashboard.component';
 import { AgencyDashboardComponent } from './agency-dashboard/agency-dashboard.component';
 import { PricingComponent } from './pricing/pricing.component';
+import { DocumentComponent } from './document/document.component';
+import { PclComponent } from './pcl/pcl.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpModule } from '@angular/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {ProgressBarModule} from "angular-progress-bar";
-import { ProfileComponent } from './profile/profile.component'
+import { ProgressBarModule } from "angular-progress-bar";
+import { ProfileComponent } from './profile/profile.component';
+import { PslComponent } from './psl/psl.component';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { BarRatingModule } from "ngx-bar-rating";
 @NgModule({
-  declarations: [AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent, ProfileComponent],
+  declarations: [PclComponent, PslComponent, DocumentComponent, AgencyProfileComponent, demandViewComponent, demandListComponent, DemandComponent, AutocompleteComponent, EditProfileComponent, UserNavComponent, UserDashboardComponent, ChangePasswordComponent, EmployerDashboardComponent, AgencyDashboardComponent, PricingComponent, ProfileComponent],
   imports: [
     CommonModule,
     BarRatingModule,

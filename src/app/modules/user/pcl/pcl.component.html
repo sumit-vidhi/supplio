@@ -1,0 +1,64 @@
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+      <div class="kt-container">
+        <div class="kt-subheader__main" *ngIf="appData.role == 'Employer'">
+          <h3 class="kt-subheader__title">
+            PCL
+          </h3>
+        </div>
+        <div class="kt-subheader__main" *ngIf="appData.role == 'Agency'">
+          <h3 class="kt-subheader__title">
+            PCL
+          </h3>
+        </div>
+        <div class="kt-subheader__main"></div>
+
+      </div>
+    </div>
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="kt-portlet kt-portlet--mobile">
+
+            <div class="kt-portlet__body">
+
+
+              <div class="kt-separator kt-separator--border-dashed kt-separator--space-md"></div>
+              <div class="detailed_list">
+                <div class="kt-portlet kt-portlet--mobile">
+                 
+                  <div class="kt-portlet__body" id="allbids" *ngIf="demandData">
+                    <div class="offer-list">
+                      <div class="offer-list-item align-items-center row"
+                        *ngFor="let data of demandData; let i = index">
+                        <div class="col-md-2">
+                          <img src="../../../../assets/media/company-logos/logo-1.png" />
+                        </div>
+                        <div class="col-md-2">
+                          <h5>{{ data.employer.agency_name }}</h5>
+                        </div>
+                        <div class="col-md-2">
+                          <a href="#"> {{ data.employer.count }} Experience</a>
+                        </div>
+                        <div class="col-md-2">
+                          <a href="#"> {{ data.employer.countWork }} Work</a>
+                        </div>
+                        <div class="col-md-4">
+                          <bar-rating disabled [(rate)]="data.employer.overall_rating.avg_rating" [max]="5">
+                          </bar-rating>
+                        </div>
+                     
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Content -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+      <div class="kt-container">
+        <div class="kt-subheader__main" *ngIf="appData.role == 'Employer'">
+          <h3 class="kt-subheader__title">
+            Documents
+          </h3>
+        </div>
+        <div class="kt-subheader__main" *ngIf="appData.role == 'Agency'">
+          <h3 class="kt-subheader__title">
+            Documents
+          </h3>
+        </div>
+        <div class="kt-subheader__main"></div>
+
+      </div>
+    </div>
+    <div class="kt-container kt-grid__item kt-grid__item--fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="kt-portlet kt-portlet--mobile">
+
+            <div class="kt-portlet__body">
+
+
+              <div class="kt-separator kt-separator--border-dashed kt-separator--space-md"></div>
+              <div class="detailed_list">
+                <div class="detailed_list_item row" *ngFor="let arrayItem of demandData; let i = index">
+                  <div class="col-md-3 detailed_list_title">
+                    <h5>
+                      <a routerLink="/user/demandview/{{ arrayItem.demand.id }}">{{
+                        arrayItem.demand.title ? arrayItem.demand.title : '-'
+                      }}</a>
+                    </h5>
+                  </div>
+
+                  <div class="col-md-2">
+                    {{ arrayItem.demand.created_at | date: 'mediumDate' }}
+                    <span class="detailed_list_label">Posted Date</span>
+                  </div>
+                  <div class="col-md-2">
+                    {{
+                      arrayItem.demand.hire_country
+                        ? getcountry(arrayItem.demand.hire_country)
+                        : '-'
+                    }}
+                    <span class="detailed_list_label">Location</span>
+                  </div>
+
+                  <div class="col-md-2" *ngIf="category[i].length">
+                    {{
+                      category[i].length > 1
+                        ? category[i].join(', ')
+                        : category[i][0]
+                    }}
+                    <span class="detailed_list_label">Categories</span>
+                  </div>
+                  <div class="col-md-2" *ngIf="category[i].length==0">
+                    -
+                    <span class="detailed_list_label">Categories</span>
+                  </div>
+
+                  <div class="col-md-1">
+                    {{
+                      arrayItem.demand.total_demands ? arrayItem.demand.total_demands : '-'
+                    }}
+                    <span class="detailed_list_label">Total Demands</span>
+                  </div>
+                  <div class="col-md-2 text-center">
+                    <button class="btn btn-secondary btn-secondary--icon" (click)="genrateDocument(arrayItem.demand.id)">Genrate Document</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end:: Content -->
+    </div>
+  </div>
+</div>
