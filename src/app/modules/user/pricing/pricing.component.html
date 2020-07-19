@@ -1,11 +1,6 @@
-<div
-  class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch"
-  id="kt_body"
->
-  <div
-    class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor pricingPage"
-    id="kt_content"
-  >
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+  <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor pricingPage"
+    id="kt_content">
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
       <div class="kt-container">
         <div class="kt-subheader__main">
@@ -28,10 +23,7 @@
                       <tbody>
                         <tr>
                           <td width="30%" class="pricing-table-text"></td>
-                          <td
-                            width="20%"
-                            *ngFor="let data of plan; let value = index"
-                          >
+                          <td width="20%" *ngFor="let data of plan; let value = index">
                             <div class="pricing-table-item">
                               <div class="pricing-table-item-head">
                                 <p>{{ data.name }}</p>
@@ -39,19 +31,14 @@
                               </div>
                               <div class="pricing-table-item-price">
                                 <p>
-                                  <span><small>Starting</small></span
-                                  >${{ data.amount_monthly }}
+                                  <span><small>Starting</small></span>${{ data.amount_monthly }}
                                 </p>
 
-                                <small *ngIf="data.name == 'Free'"
-                                  >Prepaid -Pay Per Quote (PPQ)</small
-                                >
-                                <small *ngIf="data.name != 'Free'"
-                                  >Subscription</small
-                                >
+                                <small *ngIf="data.name == 'Free'">Prepaid -Pay Per Quote (PPQ)</small>
+                                <small *ngIf="data.name != 'Free'">Subscription</small>
                               </div>
                               <div class="pricing-table-item-purchase">
-                                <button class="btn btn-success btn-block">
+                                <button class="btn btn-success btn-block" (click)="setPlan(data.paypal_id,template)">
                                   Upgrade
                                 </button>
                               </div>
@@ -66,237 +53,105 @@
                           <td>Free</td>
                         </tr>
                         <tr class="pricing-table-list">
-                          <td>Free Domain</td>
-                          <td><i class="fa fa-check mr-2 text-primary"></i></td>
-                          <td><i class="fa fa-check mr-2 text-primary"></i></td>
-                          <td><i class="fa fa-times mr-2 text-primary"></i></td>
+                          <td>Limited Access to business opportunities</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary"
+                              *ngIf="data.permissions.business_opportunities"></i>
+                            <i class="fa fa-times mr-2 text-primary"
+                              *ngIf="!data.permissions.business_opportunities"></i>
+                          </td>
+
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Get featured on our listing pages</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.featured_listing"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.featured_listing"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>CRM integrations</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.crm_integrations"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.crm_integrations"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Access to Certification</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.certification"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.certification"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Reports & Metrics</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.reports_metrics"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.reports_metrics"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Access to PCL</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.pcl"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.pcl"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Access to PSL</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.psl"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.psl"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Preferential rates for certification</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary"
+                              *ngIf="data.permissions.preferential_rates_for_certification"></i>
+                            <i class="fa fa-times mr-2 text-primary"
+                              *ngIf="!data.permissions.preferential_rates_for_certification"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Remove competitors from your profile</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.remove_competitors"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.remove_competitors"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>Get featured on Supplio local home page</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.featured_home_page"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.featured_home_page"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td> Get featured on the comparison list</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary"
+                              *ngIf="data.permissions.featured_comparison_list"></i>
+                            <i class="fa fa-times mr-2 text-primary"
+                              *ngIf="!data.permissions.featured_comparison_list"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td> View employer name on the demand</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.view_employer_name"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.view_employer_name"></i>
+                          </td>
+                        </tr>
+                        <tr class="pricing-table-list">
+                          <td>See competitors' offers</td>
+                          <td *ngFor="let data of plan; let value = index">
+                            <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.see_competitors"></i>
+                            <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.see_competitors"></i>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
-                  </div>
-                  <div
-                    class="col-lg-3 mb-5 mb-lg-0"
-                    *ngFor="let data of plan; let value = index"
-                  >
-                    <div class="bg-white p-4 rounded-lg shadow">
-                      <h1 class="h6 text-uppercase font-weight-bold">
-                        {{ data.name }}
-                      </h1>
-                      <small *ngIf="data.name == 'Free'"
-                        >Prepaid -Pay Per Quote (PPQ)</small
-                      >
-                      <small *ngIf="data.name != 'Free'">Subscription</small>
-                      <h2 class="h1 font-weight-bold">
-                        <sup *ngIf="data.name != 'Free'"
-                          ><small>Starting</small></sup
-                        >
-                        ${{ data.amount_monthly
-                        }}<span class="text-small font-weight-normal ml-2"
-                          >/ month</span
-                        >
-                      </h2>
-                      <div
-                        class="custom-separator my-4 mx-auto bg-primary"
-                      ></div>
-                      <ul class="list-unstyled my-5 text-small text-left">
-                        <li class="mb-3" *ngIf="data.name == 'Free'">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          1 to 50 $ Price per Quote
-                        </li>
-                        <li class="mb-3" *ngIf="data.name != 'Free'">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          $0 Price per Quote
-                        </li>
-                        <li class="mb-3">
-                          <i class="fa fa-check mr-2 text-primary"></i>
-                          Limited Access to business opportunities
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.featured_listing"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Get featured on our listing pages
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.featured_listing"
-                        >
-                          <i
-                            class="fa fa-times mr-2"
-                            *ngIf="!data.permissions.featured_listing"
-                          ></i>
-                          <del *ngIf="!data.permissions.featured_listing"
-                            >Get featured on our listing pages</del
-                          >
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.crm_integrations"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          CRM integrations
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.crm_integrations"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>CRM integrations</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.certification"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Access to Certification
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.certification"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Access to Certification</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.reports_metrics"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Reports & Metrics
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.reports_metrics"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Reports & Metrics</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.pcl"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Access to PCL
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.pcl"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Access to PCL</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.psl"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Access to PSL
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.psl"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Access to PSL</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="
-                            data.permissions
-                              .preferential_rates_for_certification
-                          "
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Preferential rates for certification
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="
-                            !data.permissions
-                              .preferential_rates_for_certification
-                          "
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Preferential rates for certification</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.remove_competitors"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Remove competitors from your profile
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.remove_competitors"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Remove competitors from your profile</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.featured_home_page"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Get featured on Supplio local home page
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.featured_home_page"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on Supplio local home page</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.featured_comparison_list"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          Get featured on the comparison list
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.featured_comparison_list"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>Get featured on the comparison list</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.view_employer_name"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          View employer name on the demand
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.view_employer_name"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>View employer name on the demand</del>
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="data.permissions.see_competitors"
-                        >
-                          <i class="fa fa-check mr-2"></i>
-                          See competitors' offers
-                        </li>
-                        <li
-                          class="mb-3 text-muted"
-                          *ngIf="!data.permissions.see_competitors"
-                        >
-                          <i class="fa fa-times mr-2"></i>
-                          <del>See competitors' offers</del>
-                        </li>
-                      </ul>
-                      <a
-                        (click)="setPlan(data.paypal_id)"
-                        class="btn btn-primary btn-block p-2 shadow rounded-pill"
-                        >Subscribe</a
-                      >
-                    </div>
                   </div>
                 </div>
               </div>
@@ -308,4 +163,50 @@
       </div>
     </div>
   </div>
+  <div #myDiv id="tutor-price" (click)="paymentGateway(template4)"></div>
 </div>
+
+<ng-template #template let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Plan</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click ')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="height: 450px; overflow-y: auto; background-color: lightblue;">
+    <div class="row col-md-12 align-items-center justify-content-center" id="paymenttarget">
+      <div class="col">
+        <ngx-paypal [config]="payPalConfigSubscription"></ngx-paypal>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #template4 let-modal class="modal-dialog-centered">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      <span>Payment Success</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="modal-body">
+      <div class="ticket-content mb-4">
+        <p>
+          If you add amount then show message amount is added in your wallet
+          account or you upgarde the plan message your plan is upgraded
+          successfully.Now you can bid on demand please bid the demand that
+          showing on your screen.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark btn-secondary" (click)="modal.dismiss('Cross click')">
+      Ok
+    </button>
+  </div>
+</ng-template>

@@ -185,10 +185,26 @@
                       </div>
                     </div>
                   </a>
+                  <a href="#" class="kt-notification__item">
+                    <div class="kt-notification__item-icon">
+                      <i class="flaticon2-gear kt-font-success"></i>
+                    </div>
+                    <div class="kt-notification__item-details">
+                      <div class="kt-notification__item-title kt-font-bold">
+                        Wallet amount / Subscription plan
+                      </div>
+                      <div class="kt-notification__item-time">
+                        <p *ngIf="appData.wallet">{{appData.wallet.amount}}</p>
+                        <p *ngIf="!appData.wallet">0</p>
+                        <p *ngIf="appData.package">{{appData.package.name}}</p>
+                      </div>
+                    </div>
+                  </a>
                   <div class="kt-notification__custom kt-space-between">
                     <a (click)="loginService.logout()" target="_blank"
                       class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
-                    <a href="#" target="_blank" class="btn btn-clean btn-sm btn-bold">Upgrade Membership</a>
+                    <a routerLink="/user/pricing" class="btn btn-clean btn-sm btn-bold">Upgrade
+                      Membership</a>
                   </div>
                 </div>
 

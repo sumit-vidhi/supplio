@@ -430,6 +430,10 @@ export class demandViewComponent implements OnInit {
 
   }
 
+  bdApply(el: HTMLElement) {
+    const element = document.querySelector("#target")
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
   sendReview(template) {
     this.loader.startLoading();
     this.userService.addComplete({ id: this.demandData.id }).subscribe((result: any) => {
@@ -487,7 +491,8 @@ export class demandViewComponent implements OnInit {
 
   setsubscription(event) {
     this.planId = event;
-    console.log(this.planId);
+    const element = document.querySelector("#paymenttarget")
+    if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
   print(): void {
@@ -547,7 +552,7 @@ export class demandViewComponent implements OnInit {
         console.log(data);
         self.modalReference.close();
         self.myDiv.nativeElement.click();
-        data["package_id"] = this.planId;
+        data["package_id"] = self.planId;
         self.loader.startLoading();
         const id = self.appData.id;
         self.userService.addsubscription(data).subscribe((result: any) => {
@@ -692,11 +697,12 @@ export class demandViewComponent implements OnInit {
     this.modalReference.close();
     this.process = true;
     this.paymentMethod = payMethod;
+    this.onBidFormSubmit()
   }
 
-  onBidFormSubmit(content) {
+  onBidFormSubmit(content?) {
     const data = this.bidForm.value;
-    if (!this.process && !this.paymentMethod && data.accept == "yes" && this.plan == 'Free') {
+    if (!this.process && !this.paymentMethod && this.plan == 'Free') {
       this.checkPlanAndWallet(content);
       return;
     }
@@ -769,6 +775,7 @@ export class demandViewComponent implements OnInit {
       return '-';
     }
   }
+
   getcountry(code) {
     const counrty = this.countries.findIndex((value) => {
       return value.code == code;

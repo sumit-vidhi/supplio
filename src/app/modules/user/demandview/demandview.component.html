@@ -80,7 +80,7 @@
                         Complete</a>&nbsp;
                       <a class="btn btn-success btn-sm btn-upper" (click)="print()">Print</a>
                       <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
-                        data-target="#allbids" type="button" *ngIf="
+                        data-target="#allbids" type="button" (click)="bdApply(target)" *ngIf="
                           appData.role == 'Agency' && proposalData.length == 0
                         ">
                         Bid
@@ -340,7 +340,7 @@
               <div class="col-md-2">
                 <a href="#"> {{ data.countWork }} Work</a>
               </div>
-              <div class="col-md-1">
+              <div class="col-md-1" class="admin-controls">
                 <bar-rating disabled [(rate)]="data.overall_rating.avg_rating" [max]="5">
                 </bar-rating>
               </div>
@@ -362,7 +362,7 @@
         </div>
       </div>
 
-      <div class="kt-portlet kt-portlet--mobile" *ngIf="appData.role == 'Agency'">
+      <div class="kt-portlet kt-portlet--mobile" *ngIf="appData.role == 'Agency'" id="target">
         <div class="kt-portlet__head">
           <div class="kt-portlet__head-label">
             <h3 class="kt-portlet__head-title">
@@ -535,8 +535,8 @@
     </button>
   </div>
   <div class="modal-body" style="height: 450px; overflow-y: auto; background-color: lightblue;">
-    <app-pricing (setsubscription)="setsubscription($event)"></app-pricing>
-    <div class="row col-md-12 align-items-center justify-content-center">
+    <app-pricing (setsubscription)="setsubscription($event)" [page]="'pricing'"></app-pricing>
+    <div class="row col-md-12 align-items-center justify-content-center" id="paymenttarget">
       <!-- <div class="col">
         <select id="ddlplan" [(ngModel)]="planId">
           <option value="">Select Plan </option>

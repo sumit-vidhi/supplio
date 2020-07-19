@@ -68,7 +68,9 @@
                     <span class="detailed_list_label">Total Demands</span>
                   </div>
                   <div class="col-md-2 text-center">
-                    <button class="btn btn-secondary btn-secondary--icon" (click)="genrateDocument(arrayItem.demand.id)">Genrate Document</button>
+                    <a class="btn btn-secondary btn-secondary--icon" target="_blank"
+                      href='https://supplio.resolvehost.com/backoffice/public/api/documents/generateDocument?id={{arrayItem.demand.id}}'>Genrate
+                      Document</a>
                   </div>
                 </div>
               </div>

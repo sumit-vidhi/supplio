@@ -44,7 +44,7 @@
                                     <a href="#" class="kt-widget__username">
                                         {{appData.agency_name}}
                                     </a>
-                                    <span class="kt-widget__desc">
+                                    <span class="kt-widget__desc" class="admin-controls">
                                         <bar-rating [disabled]="true" [(rate)]="appData.overall_rating.avg_rating"
                                             [max]="5">
                                         </bar-rating>
@@ -182,7 +182,7 @@
                                         <span href="#" class="kt-widget4__title kt-widget4__title--light">
                                             {{data.review}} <p>{{data.created_at |  date: 'medium'}}</p>
                                         </span>
-                                        <span class="kt-widget4__number kt-font-info">
+                                        <span class="kt-widget4__number kt-font-info" class="admin-controls">
                                             <bar-rating [disabled]="true" [(rate)]="data.rating" [max]="5"></bar-rating>
                                         </span>
                                     </div>
