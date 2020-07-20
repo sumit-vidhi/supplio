@@ -9,17 +9,24 @@
   <div class="kt-portlet__body">
     <div class="row">
       <div class="col-md-6">
-        <h5>Complete your profile ({{stepComplete}}/{{steps.length}})</h5>
-        <progress-bar *ngIf="appData.is_welcome == 1" [progress]="progress" [color-degraded]="{
+        <h5>Complete your profile ({{ stepComplete }}/{{ steps.length }})</h5>
+        <progress-bar
+          *ngIf="appData.is_welcome == 1"
+          [progress]="progress"
+          [color-degraded]="{
             '0': '#00cbcb',
             '15': '#f9c3d3',
             '25': '#fd8c8e'
-          }">
+          }"
+        >
         </progress-bar>
         <ul class="nostyle profileStepsList">
-          <li [ngClass]="{'completed':data[1]['completed']}" *ngFor="let data of steps">
+          <li
+            [ngClass]="{ completed: data[1]['completed'] }"
+            *ngFor="let data of steps"
+          >
             <i class="flaticon2-checkmark" aria-hidden="true"></i>
-            <span>{{data[1]['name']}}</span>
+            <span>{{ data[1]['name'] }}</span>
           </li>
         </ul>
       </div>
@@ -38,7 +45,7 @@
           <div class="kt-iconbox__desc">
             <h3 class="kt-iconbox__title">
               <a class="kt-link" href="#">{{
-                total_active_demands ? total_active_demands : '-'
+                total_active_demands ? total_active_demands : '0'
               }}</a>
             </h3>
             <div class="kt-iconbox__content">
@@ -59,7 +66,7 @@
           <div class="kt-iconbox__desc">
             <h3 class="kt-iconbox__title">
               <a class="kt-link" href="#">{{
-                total_demands ? total_demands : '-'
+                total_demands ? total_demands : '0'
               }}</a>
             </h3>
             <div class="kt-iconbox__content">
@@ -80,7 +87,7 @@
           <div class="kt-iconbox__desc">
             <h3 class="kt-iconbox__title">
               <a class="kt-link" href="#">{{
-                total_active_agencies ? total_active_agencies : '-'
+                total_active_agencies ? total_active_agencies : '0'
               }}</a>
             </h3>
             <div class="kt-iconbox__content">
@@ -101,7 +108,7 @@
           <div class="kt-iconbox__desc">
             <h3 class="kt-iconbox__title">
               <a class="kt-link" href="#">{{
-                total_agencies ? total_agencies : '-'
+                total_agencies ? total_agencies : '0'
               }}</a>
             </h3>
             <div class="kt-iconbox__content">
@@ -123,7 +130,11 @@
           <h3 class="kt-portlet__head-title">
             Latest Demands
           </h3>
-          <a (click)="createDemand(template)" class="btn btn-primary btn-brand--icon pull-right mleft20" id="kt_search">
+          <a
+            (click)="createDemand(template)"
+            class="btn btn-primary btn-brand--icon pull-right mleft20"
+            id="kt_search"
+          >
             <span>
               <span>Create Demand</span>
             </span>
@@ -132,11 +143,15 @@
       </div>
       <div class="kt-portlet__body">
         <div class="detailed_list" *ngIf="demandData && demandData.length">
-          <div class="detailed_list_item row" *ngFor="let arrayItem of demandData; let i = index">
+          <div
+            class="detailed_list_item row"
+            *ngFor="let arrayItem of demandData; let i = index"
+          >
             <div class="col-md-3 detailed_list_title">
               <h5>
                 <a routerLink="/user/demandview/{{ arrayItem.id }}">
-                  {{ arrayItem.title ? arrayItem.title : '-' }}</a>
+                  {{ arrayItem.title ? arrayItem.title : '-' }}</a
+                >
               </h5>
             </div>
 
@@ -168,28 +183,45 @@
               <span class="detailed_list_label">Total Demands</span>
             </div>
             <div class="col-md-2 text-center">
-              <span class="btn btn-label-{{
+              <span
+                class="btn btn-label-{{
                   arrayItem.status == 1 ? 'success' : 'danger'
-                }} btn-sm btn-bold btn-upper status">{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span>
-              <a href=" #" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
+                }} btn-sm btn-bold btn-upper status"
+                >{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span
+              >
+              <a
+                href=" #"
+                class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
+                data-toggle="dropdown"
+              >
                 <i class="flaticon-more-1"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                 <ul class="kt-nav">
                   <li class="kt-nav__item">
-                    <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.id }}">
+                    <a
+                      href="#"
+                      class="kt-nav__link"
+                      routerLink="/user/demandview/{{ arrayItem.id }}"
+                    >
                       <i class="kt-nav__link-icon flaticon-eye"></i>
                       <span class="kt-nav__link-text">View</span>
                     </a>
                   </li>
                   <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
+                    <a
+                      routerLink="/user/demand/{{ arrayItem.id }}"
+                      class="kt-nav__link"
+                    >
                       <i class="kt-nav__link-icon flaticon-edit"></i>
                       <span class="kt-nav__link-text">Edit</span>
                     </a>
                   </li>
                   <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
+                    <a
+                      (click)="createDuplicateDemand(arrayItem.id)"
+                      class="kt-nav__link"
+                    >
                       <i class="kt-nav__link-icon flaticon2-copy"></i>
                       <span class="kt-nav__link-text">Duplicate</span>
                     </a>
@@ -214,7 +246,12 @@
     <h4 class="modal-title" id="modal-basic-title">
       <span>Create demand</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(' Cross click ')">
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss(' Cross click ')"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
