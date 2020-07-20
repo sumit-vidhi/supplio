@@ -1,154 +1,89 @@
-<div
-  id="kt_header_mobile"
-  class="kt-header-mobile kt-header-mobile--fixed"
-  *ngIf="loginService.IsAuthUser()"
->
+<div id="kt_header_mobile" class="kt-header-mobile kt-header-mobile--fixed" *ngIf="loginService.IsAuthUser()">
   <div class="kt-header-mobile__logo">
     <a href="?page=index">
       <img alt="Logo" src="/assets/img/logo-final.png" />
     </a>
   </div>
   <div class="kt-header-mobile__toolbar">
-    <button
-      class="kt-header-mobile__toolbar-toggler"
-      id="kt_header_mobile_toggler"
-    >
+    <button class="kt-header-mobile__toolbar-toggler" id="kt_header_mobile_toggler">
       <span></span>
     </button>
-    <button
-      class="kt-header-mobile__toolbar-topbar-toggler"
-      id="kt_header_mobile_topbar_toggler"
-    >
+    <button class="kt-header-mobile__toolbar-topbar-toggler" id="kt_header_mobile_topbar_toggler">
       <i class="flaticon-more-1"></i>
     </button>
   </div>
 </div>
 <!-- end:: Header Mobile -->
-<div
-  class="kt-grid kt-grid--hor kt-grid--root"
-  *ngIf="loginService.IsAuthUser()"
->
+<div class="kt-grid kt-grid--hor kt-grid--root" *ngIf="loginService.IsAuthUser()">
   <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
-    <div
-      class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper"
-      id="kt_wrapper"
-    >
+    <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper" id="kt_wrapper">
       <!-- begin:: Header -->
-      <div
-        id="kt_header"
-        class="kt-header kt-header--fixed"
-        data-ktheader-minimize="on"
-      >
+      <div id="kt_header" class="kt-header kt-header--fixed" data-ktheader-minimize="on">
         <div class="kt-container">
           <!-- begin:: Brand -->
           <div class="kt-header__brand kt-grid__item" id="kt_header_brand">
             <a class="kt-header__brand-logo" href="?page=index">
-              <img
-                alt="Logo"
-                src="/assets/img/logo-final.png"
-                class="kt-header__brand-logo-default"
-              />
-              <img
-                alt="Logo"
-                src="/assets/img/logo-final.png"
-                class="kt-header__brand-logo-sticky"
-              />
+              <img alt="Logo" src="/assets/img/logo-final.png" class="kt-header__brand-logo-default" />
+              <img alt="Logo" src="/assets/img/logo-final.png" class="kt-header__brand-logo-sticky" />
             </a>
           </div>
           <!-- end:: Brand -->
           <!-- begin: Header Menu -->
-          <button
-            class="kt-header-menu-wrapper-close"
-            id="kt_header_menu_mobile_close_btn"
-          >
+          <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn">
             <i class="la la-close"></i>
           </button>
-          <div
-            class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid"
-            id="kt_header_menu_wrapper"
-          >
-            <div
-              id="kt_header_menu"
-              class="kt-header-menu kt-header-menu-mobile"
-            >
-              <ul
-                class="kt-menu__nav"
-                *ngIf="loginService.getRole() === 'Employer'"
-              >
+          <div class="kt-header-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_header_menu_wrapper">
+            <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile">
+              <ul class="kt-menu__nav" *ngIf="loginService.getRole() === 'Employer'">
                 <li class="kt-menu__item">
-                  <a routerLink="/user" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Dashboard</span></a
-                  >
+                  <a routerLink="/user" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Dashboard</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a
-                    routerLink="/user/demandlist"
-                    class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Demands</span></a
-                  >
+                  <a routerLink="/user/demandlist" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Demands</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Calender</span></a
-                  >
+                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Calender</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Documents</span></a
-                  >
+                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Documents</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a
-                    routerLink="/user/psl"
-                    class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">PSL</span></a
-                  >
+                  <a routerLink="/user/psl" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">PSL</span></a>
                 </li>
               </ul>
-              <ul
-                class="kt-menu__nav"
-                *ngIf="loginService.getRole() === 'Agency'"
-              >
+              <ul class="kt-menu__nav" *ngIf="loginService.getRole() === 'Agency'">
                 <li class="kt-menu__item">
-                  <a routerLink="/user" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Dashboard</span></a
-                  >
+                  <a routerLink="/user" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Dashboard</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a
-                    routerLink="/user/demandlist"
-                    class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Demands</span></a
-                  >
+                  <a routerLink="/user/demandlist" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Demands</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a routerLink="/user" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">ATS</span></a
-                  >
+                  <a routerLink="/user" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">ATS</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Calender</span></a
-                  >
+                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Calender</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a
-                    routerLink="/user/document"
-                    class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Documents</span></a
-                  >
+                  <a routerLink="/user/document" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Documents</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a
-                    routerLink="/user/pcl"
-                    class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">PCL</span></a
-                  >
+                  <a routerLink="/user/pcl" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">PCL</span></a>
                 </li>
                 <li class="kt-menu__item">
-                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"
-                    ><span class="kt-menu__link-text">Certification</span></a
-                  >
+                  <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span
+                      class="kt-menu__link-text">Certification</span></a>
                 </li>
               </ul>
             </div>
@@ -160,68 +95,42 @@
           <div class="kt-header__topbar kt-grid__item">
             <!--begin: User bar -->
             <div class="kt-header__topbar-item kt-header__topbar-item--user">
-              <div
-                class="kt-header__topbar-wrapper"
-                data-toggle="dropdown"
-                data-offset="10px,0px"
-              >
+              <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,0px">
                 <span class="kt-header__topbar-welcome"> Hi,</span>
                 <span class="kt-header__topbar-username">{{
                   loginService.getFirstUserName()
                 }}</span>
 
-                <span class="kt-header__topbar-icon" *ngIf="compayLogo.length"
-                  ><img alt="Pic" src="{{ compayLogo[0].filepath }}" class=""
-                /></span>
-                <span
-                  class="kt-header__topbar-icon"
-                  *ngIf="compayLogo.length == 0"
-                >
+                <span class="kt-header__topbar-icon" *ngIf="compayLogo.length"><img alt="Pic"
+                    src="{{ compayLogo[0].filepath }}" class="" /></span>
+                <span class="kt-header__topbar-icon" *ngIf="compayLogo.length == 0">
                   {{ loginService.getFirstUserName() }}
                   {{ loginService.getLastUserName() }}
                 </span>
               </div>
               <!-- <p><small>As Agency</small></p> -->
-              <div
-                class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl"
-              >
+              <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
                 <!--begin: Head -->
-                <div
-                  class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
-                  style="background-image: url(/assets/media/misc/bg-1.jpg);"
-                >
+                <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
+                  style="background-image: url(/assets/media/misc/bg-1.jpg);">
                   <div class="kt-user-card__avatar">
-                    <img
-                      *ngIf="compayLogo.length"
-                      alt="Pic"
-                      src="{{ compayLogo[0].filepath }}"
-                    />
+                    <img *ngIf="compayLogo.length" alt="Pic" src="{{ compayLogo[0].filepath }}" />
 
                     <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                    <span
-                      *ngIf="!compayLogo.length"
-                      class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success"
-                      >{{ capitalize(loginService.getFirstUserName()) }}</span
-                    >
+                    <span *ngIf="!compayLogo.length"
+                      class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">{{ capitalize(loginService.getFirstUserName()) }}</span>
                   </div>
                   <div class="kt-user-card__name">
                     {{ loginService.getFirstUserName() }}
                     {{ loginService.getLastUserName() }}
                     <p *ngIf="loginService.getRole() === 'Agency'">
-                      <span class="label label-success" *ngIf="appData.package">
+                      <span class="label label-success" *ngIf="appData && appData.package">
                         {{ appData.package.name }}
                       </span>
                     </p>
                   </div>
-                  <div
-                    class="kt-user-card__badge"
-                    *ngIf="loginService.getRole() === 'Agency'"
-                  >
-                    <a
-                      class="btn btn-success btn-sm btn-bold btn-font-md"
-                      routerLink="/user/profile"
-                      >View Profile</a
-                    >
+                  <div class="kt-user-card__badge" *ngIf="loginService.getRole() === 'Agency'">
+                    <a class="btn btn-success btn-sm btn-bold btn-font-md" routerLink="/user/profile">View Profile</a>
                   </div>
                 </div>
 
@@ -229,11 +138,8 @@
 
                 <!--begin: Navigation -->
                 <div class="kt-notification">
-                  <a
-                    *ngIf="loginService.getRole() === 'Employer'"
-                    routerLink="/user/edit-profile"
-                    class="kt-notification__item"
-                  >
+                  <a *ngIf="loginService.getRole() === 'Employer'" routerLink="/user/edit-profile"
+                    class="kt-notification__item">
                     <div class="kt-notification__item-icon">
                       <i class="flaticon2-calendar-3 kt-font-success"></i>
                     </div>
@@ -246,11 +152,8 @@
                       </div>
                     </div>
                   </a>
-                  <a
-                    *ngIf="loginService.getRole() === 'Agency'"
-                    routerLink="/user/agency-profile"
-                    class="kt-notification__item"
-                  >
+                  <a *ngIf="loginService.getRole() === 'Agency'" routerLink="/user/agency-profile"
+                    class="kt-notification__item">
                     <div class="kt-notification__item-icon">
                       <i class="flaticon2-calendar-3 kt-font-success"></i>
                     </div>
@@ -276,10 +179,7 @@
                       </div>
                     </div>
                   </a>
-                  <a
-                    routerLink="user/change-password"
-                    class="kt-notification__item"
-                  >
+                  <a routerLink="user/change-password" class="kt-notification__item">
                     <div class="kt-notification__item-icon">
                       <i class="flaticon2-lock kt-font-success"></i>
                     </div>
@@ -292,11 +192,7 @@
                       </div>
                     </div>
                   </a>
-                  <a
-                    href="#"
-                    class="kt-notification__item"
-                    *ngIf="loginService.getRole() === 'Agency'"
-                  >
+                  <a href="#" class="kt-notification__item" *ngIf="loginService.getRole() === 'Agency'">
                     <div class="kt-notification__item-icon">
                       <i class="flaticon-piggy-bank kt-font-success"></i>
                     </div>
@@ -316,18 +212,10 @@
                     </div>
                   </a>
                   <div class="kt-notification__custom kt-space-between">
-                    <a
-                      (click)="loginService.logout()"
-                      target="_blank"
-                      class="btn btn-label btn-label-brand btn-sm btn-bold"
-                      >Sign Out</a
-                    >
-                    <a
-                      *ngIf="loginService.getRole() === 'Agency'"
-                      routerLink="/user/pricing"
-                      class="btn btn-clean btn-sm btn-bold"
-                      >Upgrade Membership</a
-                    >
+                    <a (click)="loginService.logout()" target="_blank"
+                      class="btn btn-label btn-label-brand btn-sm btn-bold">Sign Out</a>
+                    <a *ngIf="loginService.getRole() === 'Agency'" routerLink="/user/pricing"
+                      class="btn btn-clean btn-sm btn-bold">Upgrade Membership</a>
                   </div>
                 </div>
 

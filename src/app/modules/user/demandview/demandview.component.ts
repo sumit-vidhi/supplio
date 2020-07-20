@@ -325,7 +325,9 @@ export class demandViewComponent implements OnInit {
   messageForm: FormGroup;
   reviewForm: FormGroup;
   revieId: any;
-  packageName:any;
+  packageName: any;
+  cate: any;
+  work: any;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
@@ -416,18 +418,39 @@ export class demandViewComponent implements OnInit {
             console.log(this.revieId);
             var count = [];
             var countWork = [];
+            var cate = [];
+            var work = [];
+            let rt, er, df;
             for (let i = 0; i < data.length; i++) {
+              rt = data[i].experience_categories_ids.map((data66) => {
+                return data66.name;
+              })
+              er = data[i].experience_industries_ids.map((data44) => {
+                return data44.name;
+              })
+              df = data[i].agency_work.map((data22) => {
+                return data22.description;
+              });
               data[i]["agencyId"] = this.demandData.proposals[i].id;
               count[i] = data[i].experience_industries_ids.length + data[i].experience_categories_ids.length;
               countWork[i] = data[i].agency_work.length;
+              cate[i] = rt.join(",") + "," + er.join(",");
+              work[i] = df.join(",");
               data[i]["count"] = count[i];
-              data[i]["countWork"] = countWork[i];
+              data[i]["count"] = count[i];
+              data[i]["cate"] = cate[i];
+              data[i]["work"] = work[i];
             }
             this.agencyData = data;
+            console.log(this.agencyData);
+
           }
         }
       });
     });
+
+
+
     this.loader.startLoading();
     this.userService.getAllPlan().subscribe((result: any) => {
       this.loader.stopLoading();
@@ -436,6 +459,15 @@ export class demandViewComponent implements OnInit {
     });
     this.initConfig();
 
+  }
+
+  experience(data, template) {
+    this.cate = data;
+    this.open(template)
+  }
+  workdata(data, template) {
+    this.work = data;
+    this.open(template)
   }
 
   bdApply(el: HTMLElement) {
@@ -500,8 +532,8 @@ export class demandViewComponent implements OnInit {
   setsubscription(event) {
     this.planId = event;
     console.log(this.plans);
-  const keys=this.plans.findIndex(data=>data.paypal_id==this.planId);
-  this.packageName=this.plans[keys];
+    const keys = this.plans.findIndex(data => data.paypal_id == this.planId);
+    this.packageName = this.plans[keys];
     const element = document.querySelector("#paymenttarget")
     if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
