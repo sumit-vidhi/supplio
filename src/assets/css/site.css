@@ -1273,3 +1273,26 @@ button[aria-label][data-balloon-pos] {
 [aria-label][data-balloon-pos][data-balloon-length='fit']:after {
   width: 100%;
 }
+.kt-widget.kt-widget--user-profile-2
+  .kt-widget__head
+  .kt-widget__media
+  .kt-widget__img {
+  max-width: 90px;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+}
+.profile-social-links {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.profile-social-links li {
+  display: inline;
+  margin-right: 5px;
+  font-size: 26px;
+  padding: 5px;
+}
+.profile-social-links li:first-child {
+  padding-left: 0;
+}
