@@ -328,12 +328,12 @@ export class PslComponent implements OnInit {
       postDate: '',
       page: 1,
     };
-    if (this.appData.role == 'Agency') {
+    if (this.appData.role == 'Employer') {
       this.userService.getPsl().subscribe((result: any) => {
         this.loader.stopLoading();
-        if (result.payload.psl) {
-        //  this.demandData = result.payload.documents;
-          this.demandData = result.payload.psl;
+        if (result.payload.pcl) {
+          //  this.demandData = result.payload.documents;
+          this.demandData = result.payload.pcl;
           this.config = {
             itemsPerPage: 10,
             currentPage: 1,

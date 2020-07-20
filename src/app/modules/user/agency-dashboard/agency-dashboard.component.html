@@ -8,9 +8,9 @@
   </div> -->
   <div class="kt-portlet__body">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="appData.is_welcome == 0">
         <h5>Complete your profile ({{ stepComplete }}/{{ steps.length }})</h5>
-        <progress-bar *ngIf="appData.is_welcome == 1" [progress]="progress" [color-degraded]="{
+        <progress-bar [progress]="progress" [color-degraded]="{
             '0': '#00cbcb',
             '15': '#f9c3d3',
             '25': '#fd8c8e'
@@ -360,40 +360,9 @@
               <span class="detailed_list_label">Total Demands</span>
             </div>
             <div class="col-md-2 text-center">
-              <span class="btn btn-label-{{
-                  arrayItem.demand.status == 1 ? 'success' : 'danger'
-                }} btn-sm btn-bold btn-upper status">{{ arrayItem.demand.status == 1 ? 'Published' : 'Draft' }}</span>
-              <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
-                <i class="flaticon-more-1"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
-                <ul class="kt-nav">
-                  <li class="kt-nav__item">
-                    <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.demand.id }}">
-                      <i class="kt-nav__link-icon flaticon-eye"></i>
-                      <span class="kt-nav__link-text">View</span>
-                    </a>
-                  </li>
-                  <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a routerLink="/user/demand/{{ arrayItem.demand.id }}" class="kt-nav__link">
-                      <i class="kt-nav__link-icon flaticon-edit"></i>
-                      <span class="kt-nav__link-text">Edit</span>
-                    </a>
-                  </li>
-                  <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a (click)="createDuplicateDemand(arrayItem.demand.id)" class="kt-nav__link">
-                      <i class="kt-nav__link-icon flaticon2-copy"></i>
-                      <span class="kt-nav__link-text">Duplicate</span>
-                    </a>
-                  </li>
-                  <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a href="#" class="kt-nav__link">
-                      <i class="kt-nav__link-icon flaticon2-trash"></i>
-                      <span class="kt-nav__link-text">Delete</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              <a class="btn btn-secondary btn-secondary--icon" target="_blank"
+                href='https://supplio.resolvehost.com/backoffice/public/api/documents/generateDocument?id={{arrayItem.demand.id}}'>Genrate
+                Document</a>
             </div>
           </div>
         </div>

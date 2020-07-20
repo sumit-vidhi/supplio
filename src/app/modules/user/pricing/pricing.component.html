@@ -1,4 +1,5 @@
-<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+<div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body"
+  *ngIf="page!='pricing'">
   <div class="kt-content kt-content--fit-top kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor pricingPage"
     id="kt_content">
     <div class="kt-subheader kt-grid__item" id="kt_subheader">
@@ -165,6 +166,135 @@
   </div>
   <div #myDiv id="tutor-price" (click)="paymentGateway(template4)"></div>
 </div>
+
+
+<table class="pricing-table" *ngIf="page=='pricing'">
+  <tbody>
+    <tr>
+      <td width="30%" class="pricing-table-text"></td>
+      <td width="20%" *ngFor="let data of plan; let value = index">
+        <div class="pricing-table-item">
+          <div class="pricing-table-item-head">
+            <p>{{ data.name }}</p>
+            <span>Great for startups</span>
+          </div>
+          <div class="pricing-table-item-price">
+            <p>
+              <span><small>Starting</small></span>${{ data.amount_monthly }}
+            </p>
+
+            <small *ngIf="data.name == 'Free'">Prepaid -Pay Per Quote (PPQ)</small>
+            <small *ngIf="data.name != 'Free'">Subscription</small>
+          </div>
+          <div class="pricing-table-item-purchase">
+            <button class="btn btn-success btn-block" (click)="setPlan(data.paypal_id,template)">
+              Upgrade
+            </button>
+          </div>
+        </div>
+      </td>
+    </tr>
+
+    <tr class="pricing-table-list">
+      <td>1 to 50 $ Price per Quote</td>
+      <td>Free</td>
+      <td>Free</td>
+      <td>Free</td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Limited Access to business opportunities</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.business_opportunities"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.business_opportunities"></i>
+      </td>
+
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Get featured on our listing pages</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.featured_listing"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.featured_listing"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>CRM integrations</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.crm_integrations"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.crm_integrations"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Access to Certification</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.certification"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.certification"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Reports & Metrics</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.reports_metrics"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.reports_metrics"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Access to PCL</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.pcl"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.pcl"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Access to PSL</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.psl"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.psl"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Preferential rates for certification</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.preferential_rates_for_certification"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.preferential_rates_for_certification"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Remove competitors from your profile</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.remove_competitors"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.remove_competitors"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>Get featured on Supplio local home page</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.featured_home_page"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.featured_home_page"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td> Get featured on the comparison list</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.featured_comparison_list"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.featured_comparison_list"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td> View employer name on the demand</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.view_employer_name"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.view_employer_name"></i>
+      </td>
+    </tr>
+    <tr class="pricing-table-list">
+      <td>See competitors' offers</td>
+      <td *ngFor="let data of plan; let value = index">
+        <i class="fa fa-check mr-2 text-primary" *ngIf="data.permissions.see_competitors"></i>
+        <i class="fa fa-times mr-2 text-primary" *ngIf="!data.permissions.see_competitors"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <ng-template #template let-modal class="modal-dialog-centered">
   <div class="modal-header">

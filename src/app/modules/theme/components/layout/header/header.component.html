@@ -185,7 +185,7 @@
                       </div>
                     </div>
                   </a>
-                  <a href="#" class="kt-notification__item">
+                  <a href="#" class="kt-notification__item" *ngIf="loginService.getRole() === 'Agency'">
                     <div class="kt-notification__item-icon">
                       <i class="flaticon2-gear kt-font-success"></i>
                     </div>

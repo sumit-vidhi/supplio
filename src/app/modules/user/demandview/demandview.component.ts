@@ -315,6 +315,7 @@ export class demandViewComponent implements OnInit {
   pendingAmount: any;
   bidtotalAmount: any;
   plan: any = "";
+  plans = [];
   process = false;
   paymentMethod: any = "";
   @ViewChild('myDiv', { static: false }) myDiv: ElementRef<HTMLElement>;
@@ -324,6 +325,7 @@ export class demandViewComponent implements OnInit {
   messageForm: FormGroup;
   reviewForm: FormGroup;
   revieId: any;
+  packageName:any;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
@@ -426,6 +428,12 @@ export class demandViewComponent implements OnInit {
         }
       });
     });
+    this.loader.startLoading();
+    this.userService.getAllPlan().subscribe((result: any) => {
+      this.loader.stopLoading();
+      this.plans = Object.assign([], result);
+      console.log(this.plans);
+    });
     this.initConfig();
 
   }
@@ -491,6 +499,9 @@ export class demandViewComponent implements OnInit {
 
   setsubscription(event) {
     this.planId = event;
+    console.log(this.plans);
+  const keys=this.plans.findIndex(data=>data.paypal_id==this.planId);
+  this.packageName=this.plans[keys];
     const element = document.querySelector("#paymenttarget")
     if (element) element.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
@@ -721,6 +732,11 @@ export class demandViewComponent implements OnInit {
     this.userService.saveBid(data).subscribe((result: any) => {
       if (result.payload.proposal) {
         this.loader.stopLoading();
+        const id = this.appData.id;
+        this.userService.getProfiledata(id).subscribe((resul: any) => {
+          result.payload.user["authToken"] = this.appData.authToken;
+          this.loginService.setLoginUserDetail(result.payload.agency);
+        })
         alert("Bid Placed");
         this.ngOnInit();
       }
