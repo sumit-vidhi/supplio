@@ -346,11 +346,11 @@
                 </h5>
               </div>
               <div class="col-md-2">
-                <a href="#" aria-label="Whats up!" data-balloon-pos="up">
+                <a (click)="experience(data.cate,contentexperience)" data-balloon-pos="up">
                   {{ data.count }} Experience</a>
               </div>
               <div class="col-md-2">
-                <a href="#" aria-label="Whats up!" data-balloon-pos="up">
+                <a (click)="workdata(data.work,contentwork)" data-balloon-pos="up">
                   {{ data.countWork }} Work</a>
               </div>
               <div class="col-md-1 admin-controls">
@@ -849,4 +849,34 @@
   <!-- <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
     </div> -->
+</ng-template>
+
+<ng-template #contentexperience let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Experiences</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{cate}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
+</ng-template>
+
+<ng-template #contentwork let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Work</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    {{work}}
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+  </div>
 </ng-template>

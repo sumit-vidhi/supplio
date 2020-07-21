@@ -24,24 +24,24 @@
             <div class="kt-portlet__body" id="allbids" *ngIf="demandData">
               <div class="offer-list">
                 <div class="offer-list-item align-items-center row" *ngFor="let data of demandData; let i = index">
-                  <div class="col-md-2" *ngIf="data.employer.files.length==0">
+                  <div class="col-md-2" *ngIf="data.agency.files.length==0">
                     <img src="../../../../assets/media/company-logos/logo-1.png" />
                   </div>
-                  <div class="col-md-2" *ngIf="data.employer.files.length">
+                  <div class="col-md-2" *ngIf="data.agency && data.agency.files.length">
                     <img style="width: 128px;
-                    height: 66px;" src="{{ data.employer.files[2].filepath }}" />
+                    height: 66px;" src="{{ data.agency.files[2].filepath }}" />
                   </div>
                   <div class="col-md-2">
-                    <h5>{{ data.employer.agency_name }}</h5>
+                    <h5>{{ data.agency.agency_name }}</h5>
                   </div>
                   <div class="col-md-2">
-                    <a href="#"> {{ data.employer.count }} Experience</a>
+                    <a href="#"> {{ data.count }} Experience</a>
                   </div>
                   <div class="col-md-2">
-                    <a href="#"> {{ data.employer.countWork }} Work</a>
+                    <a href="#"> {{ data.countWork }} Work</a>
                   </div>
                   <div class="col-md-4" class="admin-controls">
-                    <bar-rating disabled [(rate)]="data.employer.overall_rating.avg_rating" [max]="5">
+                    <bar-rating disabled [(rate)]="data.agency.overall_rating.avg_rating" [max]="5">
                     </bar-rating>
                   </div>
 

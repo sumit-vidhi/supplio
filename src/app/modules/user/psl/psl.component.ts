@@ -334,6 +334,16 @@ export class PslComponent implements OnInit {
         if (result.payload.pcl) {
           //  this.demandData = result.payload.documents;
           this.demandData = result.payload.pcl;
+          var count = [];
+          var countWork = [];
+          for (let i = 0; i < this.demandData.length; i++) {
+            count[i] = this.demandData[i].agency.experience_industries_ids.length + this.demandData[i].agency.experience_categories_ids.length;
+
+            countWork[i] = this.demandData[i].agency.agency_work.length;
+            this.demandData[i]["count"] = count[i];
+            this.demandData[i]["countWork"] = countWork[i];
+          }
+          console.log(this.demandData);
           this.config = {
             itemsPerPage: 10,
             currentPage: 1,
