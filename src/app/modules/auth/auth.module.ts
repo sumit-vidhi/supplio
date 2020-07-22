@@ -21,4 +21,6 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
   ],
   providers: [AuthRoutingModule.providers]
 })
+
+
 export class AuthModule { }
