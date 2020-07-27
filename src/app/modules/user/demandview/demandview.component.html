@@ -74,12 +74,12 @@
                       <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;"
                         *ngIf="appData.role == 'Employer'" routerLink="/user/demand/{{ demandData.id }}">
                         Edit</a>&nbsp;
-                      <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;" *ngIf="
+                      <!-- <a type="button" class="btn btn-sm btn-upper" style="background: #edeff6;" *ngIf="
                           appData.role == 'Employer' &&
                           demandData.status == 2 &&
                           acceptAgeny
                         " (click)="sendReview(templateReview)">
-                        Complete</a>&nbsp;
+                        Complete</a>&nbsp; -->
                       <a class="btn btn-success btn-sm btn-upper" (click)="print()">Print</a>
                       <a class="collapseBtn collapsed btn btn-success btn-sm btn-upper" data-toggle="collapse"
                         data-target="#allbids" type="button" (click)="bdApply(target)" *ngIf="
@@ -362,7 +362,7 @@
                   class="btn btn-success btn-sm btn-upper" href="#">View
                 </a>
                 <a *ngIf="demandData.proposals[i].status == 0 && !acceptAgeny"
-                  (click)="hireAgency(demandData.proposals[i].id)" style="margin: 0px 12px 0px 10px;"
+                  (click)="hireAgency(demandData.proposals[i].id,templateReview)" style="margin: 0px 12px 0px 10px;"
                   class="btn btn-success btn-sm btn-upper">Hire
                 </a>
                 <a *ngIf="demandData.proposals[i].status == 0 && acceptAgeny" style="margin: 0px 12px 0px 10px;"

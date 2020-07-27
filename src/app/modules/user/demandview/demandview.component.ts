@@ -328,6 +328,7 @@ export class demandViewComponent implements OnInit {
   packageName: any;
   cate: any;
   work: any;
+  package_id: any;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private userService: UserService,
     private router: Router, private loader: LoaderService, public loginService: JWTAuthService, public modalService: NgbModal) {
@@ -530,7 +531,8 @@ export class demandViewComponent implements OnInit {
   }
 
   setsubscription(event) {
-    this.planId = event;
+    this.planId = event.plan;
+    this.package_id = event.id;
     console.log(this.plans);
     const keys = this.plans.findIndex(data => data.paypal_id == this.planId);
     this.packageName = this.plans[keys];
@@ -595,7 +597,7 @@ export class demandViewComponent implements OnInit {
         console.log(data);
         self.modalReference.close();
         self.myDiv.nativeElement.click();
-        data["package_id"] = self.planId;
+        data["package_id"] = self.package_id;
         self.loader.startLoading();
         const id = self.appData.id;
         self.userService.addsubscription(data).subscribe((result: any) => {
@@ -692,12 +694,13 @@ export class demandViewComponent implements OnInit {
     };
   }
 
-  hireAgency(id) {
+  hireAgency(id, template) {
     this.loader.startLoading();
     this.userService.hire(id).subscribe((data: any) => {
       this.loader.stopLoading();
       if (data) {
         this.ngOnInit();
+        this.open(template);
       }
     })
 
@@ -769,7 +772,7 @@ export class demandViewComponent implements OnInit {
           result.payload.user["authToken"] = this.appData.authToken;
           this.loginService.setLoginUserDetail(result.payload.agency);
         })
-        alert("Bid Placed");
+        this.router.navigate(['/user/demand']);
         this.ngOnInit();
       }
     })

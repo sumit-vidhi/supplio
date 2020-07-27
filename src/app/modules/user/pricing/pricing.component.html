@@ -39,8 +39,22 @@
                                 <small *ngIf="data.name != 'Free'">Subscription</small>
                               </div>
                               <div class="pricing-table-item-purchase">
-                                <button class="btn btn-success btn-block" (click)="setPlan(data.paypal_id,template)">
+                                <button *ngIf="data.amount_monthly==0" class="btn btn-success btn-block"
+                                  (click)="setPlan(data.paypal_id,data.id,template)">
+                                  Downgrade
+                                </button>
+                                <button class="btn btn-success btn-block"
+                                  *ngIf="appData.package_id!=data.id && data.amount_monthly!=0"
+                                  (click)="setPlan(data.paypal_id,data.id,template)">
                                   Upgrade
+                                </button>
+                                <button *ngIf="appData.package_id==data.id && data.amount_monthly!=0"
+                                  class="btn btn-success btn-block">
+                                  Current Plan
+                                </button>
+                                <button *ngIf="appData.package_id==data.id && data.amount_monthly==0"
+                                  class="btn btn-success btn-block">
+                                  Current
                                 </button>
                               </div>
                             </div>

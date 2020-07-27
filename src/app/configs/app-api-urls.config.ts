@@ -44,7 +44,7 @@ export const appApiUrl: CommonBase = {
         editProfile: 'basic-information',
         agencyeditProfile: 'agency/completeProfile',
         getSubcategory: "master/getAllCategories",
-        getAllSubcategory: "master/getAllSubCategoriesByParent",
+        getAllSubcategory: "master/getAllSubCategories",
         getdata: 'user/getProfile',
         getdashboradData: 'user/getdashboradData',
         updatePassword: 'users/changePassword',

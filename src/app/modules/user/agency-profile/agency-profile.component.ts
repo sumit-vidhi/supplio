@@ -545,10 +545,10 @@ export class AgencyProfileComponent implements OnInit {
   get accociationName() { return this.a.name as FormArray; }
   onSelectChange(id, name) {
     this.loader.startLoading();
-    this.userService.getAllSubcategoies(id).subscribe((result: any) => {
+    this.userService.getAllSubcategoies().subscribe((result: any) => {
       this.loader.stopLoading();
-      this.subcategory = [{ label: name, items: result.payload.categories }];
-      this.subcategoryData = [...this.subcategoryData, ...this.subcategory];
+      this.subcategory = result.payload.categories;
+      this.subcategoryData = this.subcategory;
     });
   }
   onChangeCountry(value) {
@@ -643,7 +643,7 @@ export class AgencyProfileComponent implements OnInit {
         this.loginService.setLoginUserDetailData(result.payload.user);
         this.appData = JSON.parse(window.localStorage[APP_USER]);
 
-      //  this.setAssociation();
+        //  this.setAssociation();
 
         this.toastr.success(result.payload.message, 'Update Profile');
       }
@@ -829,29 +829,22 @@ export class AgencyProfileComponent implements OnInit {
   //  get wokName() { return this.w.name as FormArray; }
 
   onSelectsubcategory(event) {
-    let getIndex = -1;
-    if (this.selectedSubItem) {
-      getIndex = this.selectedSubItem.findIndex((data) => data.id == this.selected);
-    }
-    if (getIndex == -1 && event.target.value) {
+    if (event.target.value) {
       let rt;
-      for (let i = 0; i < this.subcategoryData.length; i++) {
-        rt = this.getdata(i);
-        if (rt.length) {
-          this.setSubCategory = rt[0];
-        }
+      rt = this.getdata(this.selected);
+
+      if (rt == -1) {
+        const keyValue = this.subcategoryData.findIndex(data => data.id == this.selected);
+        console.log(keyValue);
+        console.log(this.subcategoryData);
+        this.setSubCategory = this.subcategoryData[keyValue];
+        this.addSubCategory(this.setSubCategory);
       }
-      this.addSubCategory(this.setSubCategory);
-      this.selected = "";
-    } else {
-      this.selected = "";
     }
-    console.log(this.selected);
+    console.log(this.setSubCategory);
   }
-  getdata(i) {
-    const er = this.subcategoryData[i].items.filter((data) => {
-      return data.id == this.selected;
-    });
+  getdata(value) {
+    const er = this.selectedSubItem.findIndex(data => data.id == value);
     if (er) {
       return er;
     }
@@ -874,7 +867,7 @@ export class AgencyProfileComponent implements OnInit {
     }
     if (item && getIndex == -1) {
       this.selectedItem.push(item);
-      this.subcategoryData = [...this.subcategoryData, ...this.subcategory];
+      this.subcategoryData = this.subcategory;
     }
   }
 
@@ -891,9 +884,9 @@ export class AgencyProfileComponent implements OnInit {
 
     if (getIndex == -1 && this.selectedCity) {
       this.loader.startLoading();
-      this.userService.getAllSubcategoies(item.id).subscribe((result: any) => {
+      this.userService.getAllSubcategoies().subscribe((result: any) => {
         this.loader.stopLoading();
-        this.subcategory = [{ label: item.name, items: result.payload.categories }];
+        this.subcategory = result.payload.categories;
         this.addCategory(item);
         this.selectedCity = "";
       });
@@ -1383,6 +1376,7 @@ export class AgencyProfileComponent implements OnInit {
   }
 
   getAddress(place: object, i) {
+    console.log(place);
     if (Object.keys(place).length > 0) {
       this.address = place['formatted_address'];
       this.formattedAddress = place['formatted_address'];

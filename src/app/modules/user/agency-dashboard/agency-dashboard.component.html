@@ -10,20 +10,14 @@
     <div class="row">
       <div class="col-md-6">
         <h5>Complete your profile ({{ stepComplete }}/{{ steps.length }})</h5>
-        <progress-bar
-          [progress]="progress"
-          [color-degraded]="{
+        <progress-bar [progress]="progress" [color-degraded]="{
             '0': '#00cbcb',
             '15': '#f9c3d3',
             '25': '#fd8c8e'
-          }"
-        >
+          }">
         </progress-bar>
         <ul class="nostyle profileStepsList">
-          <li
-            [ngClass]="{ completed: data[1]['completed'] }"
-            *ngFor="let data of steps"
-          >
+          <li [ngClass]="{ completed: data[1]['completed'] }" *ngFor="let data of steps">
             <i class="flaticon2-checkmark" aria-hidden="true"></i>
             <span>{{ data[1]['name'] }}</span>
           </li>
@@ -33,7 +27,10 @@
           </li> -->
         </ul>
       </div>
-      <div class="col-md-6"></div>
+      <div class="col-md-6">
+        <a class="pull-right btn btn-brand btn-md btn-tall btn-wide kt-font-bold kt-font-transform-u"
+          routerLink="/user/profile">Complete Profile</a>
+      </div>
     </div>
   </div>
 </div>
@@ -130,58 +127,46 @@
     <div class="kt-portlet kt-portlet--mobile">
       <div class="kt-portlet__head nopad">
         <div class="kt-portlet__head-label tabBtnContainer">
-          <a
-            (click)="selectAgency('newDemand')"
-            [ngClass]="{
+          <a (click)="selectAgency('newDemand')" [ngClass]="{
               active: show('newDemand'),
               deactive: !show('newDemand')
-            }"
-            class="tabBtn"
-            id="kt_search"
-          >
+            }" class="tabBtn" id="kt_search">
             <span>
               <span>New Demands</span>
             </span>
           </a>
-          <a
-            (click)="selectAgency('quotesSent')"
-            [ngClass]="{
+          <a (click)="selectAgency('quotesSent')" [ngClass]="{
               active: show('quotesSent'),
               deactive: !show('quotesSent')
-            }"
-            class="tabBtn"
-            id="kt_search"
-          >
+            }" class="tabBtn" id="kt_search">
             <span>
               <span>Quotes Sent</span>
             </span>
           </a>
-          <a
-            (click)="selectAgency('demandWon')"
-            [ngClass]="{
+          <a (click)="selectAgency('demandWon')" [ngClass]="{
               active: show('demandWon'),
               deactive: !show('demandWon')
-            }"
-            class="tabBtn"
-            id="kt_search"
-          >
+            }" class="tabBtn" id="kt_search">
             <span>
               <span>Demands Won</span>
             </span>
           </a>
         </div>
       </div>
-      <div class="kt-portlet__body">
+      <div class="kt-portlet__body" *ngIf="appData.is_welcome == 1">
         <div class="detailed_list">
-          <div
-            class="detailed_list_item row"
-            [ngClass]="{
+          <div class="detailed_list_item row" [ngClass]="{
               isShow: show('newDemand'),
               isHide: !show('newDemand')
-            }"
-            *ngFor="let arrayItem of demandData.latestDemands; let i = index"
-          >
-            <div class="col-md-3 detailed_list_title">
+            }" *ngFor="let arrayItem of demandData.latestDemands; let i = index">
+            <!-- <div class="col-md-1" *ngIf="arrayItem.demand.files && arrayItem.demand.files.length==0">
+            <img src="../../../../assets/media/company-logos/logo-1.png" />
+          </div>
+          <div class="col-md-1" *ngIf="arrayItem.demand.files.length">
+            <img style="width: 128px;
+            height: 66px;" src="{{ arrayItem.demand.files[2].filepath }}" />
+          </div> -->
+            <div class="col-md-2 detailed_list_title">
               <h5>
                 <a routerLink="/user/demandview/{{ arrayItem.id }}">{{
                   arrayItem.title ? arrayItem.title : '-'
@@ -208,10 +193,7 @@
               }}
               <span class="detailed_list_label">Categories</span>
             </div>
-            <div
-              class="col-md-2"
-              *ngIf="category[i] && category[i].length == 0"
-            >
+            <div class="col-md-2" *ngIf="category[i] && category[i].length == 0">
               -
               <span class="detailed_list_label">Categories</span>
             </div>
@@ -227,39 +209,25 @@
                 }} btn-sm btn-bold btn-upper status"
                 >{{ arrayItem.status == 1 ? 'Published' : 'Draft' }}</span
               > -->
-              <a
-                href="#"
-                class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                data-toggle="dropdown"
-              >
+              <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                 <i class="flaticon-more-1"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                 <ul class="kt-nav">
                   <li class="kt-nav__item">
-                    <a
-                      href="#"
-                      class="kt-nav__link"
-                      routerLink="/user/demandview/{{ arrayItem.id }}"
-                    >
+                    <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.id }}">
                       <i class="kt-nav__link-icon flaticon-eye"></i>
                       <span class="kt-nav__link-text">View</span>
                     </a>
                   </li>
                   <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a
-                      routerLink="/user/demand/{{ arrayItem.id }}"
-                      class="kt-nav__link"
-                    >
+                    <a routerLink="/user/demand/{{ arrayItem.id }}" class="kt-nav__link">
                       <i class="kt-nav__link-icon flaticon-edit"></i>
                       <span class="kt-nav__link-text">Edit</span>
                     </a>
                   </li>
                   <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a
-                      (click)="createDuplicateDemand(arrayItem.id)"
-                      class="kt-nav__link"
-                    >
+                    <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
                       <i class="kt-nav__link-icon flaticon2-copy"></i>
                       <span class="kt-nav__link-text">Duplicate</span>
                     </a>
@@ -275,15 +243,18 @@
             </div>
           </div>
 
-          <div
-            class="detailed_list_item row"
-            [ngClass]="{
+          <div class="detailed_list_item row" [ngClass]="{
               isShow: show('quotesSent'),
               isHide: !show('quotesSent')
-            }"
-            *ngFor="let arrayItem of demandData.latestQuotesSent; let i = index"
-          >
-            <div class="col-md-3 detailed_list_title">
+            }" *ngFor="let arrayItem of demandData.latestQuotesSent; let i = index">
+            <!-- <div class="col-md-1" *ngIf="arrayItem.demand.files && arrayItem.demand.files.length==0">
+            <img src="../../../../assets/media/company-logos/logo-1.png" />
+          </div>
+          <div class="col-md-1" *ngIf="arrayItem.demand.files.length">
+            <img style="width: 128px;
+            height: 66px;" src="{{ arrayItem.demand.files[2].filepath }}" />
+          </div> -->
+            <div class="col-md-2 detailed_list_title">
               <h5>
                 <a routerLink="/user/demandview/{{ arrayItem.demand.id }}">{{
                   arrayItem.demand.title ? arrayItem.demand.title : '-'
@@ -304,13 +275,10 @@
               <span class="detailed_list_label">Location</span>
             </div>
 
-            <div
-              class="col-md-2"
-              *ngIf="
+            <div class="col-md-2" *ngIf="
                 latestQuotesSentcategory[i] &&
                 latestQuotesSentcategory[i].length
-              "
-            >
+              ">
               {{
                 latestQuotesSentcategory[i].length > 1
                   ? latestQuotesSentcategory[i].join(', ')
@@ -318,13 +286,10 @@
               }}
               <span class="detailed_list_label">Categories</span>
             </div>
-            <div
-              class="col-md-2"
-              *ngIf="
+            <div class="col-md-2" *ngIf="
                 latestQuotesSentcategory[i] &&
                 latestQuotesSentcategory[i].length == 0
-              "
-            >
+              ">
               -
               <span class="detailed_list_label">Categories</span>
             </div>
@@ -346,39 +311,25 @@
                   arrayItem.demand.status == 1 ? 'Published' : 'Draft'
                 }}</span
               > -->
-              <a
-                href="#"
-                class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn"
-                data-toggle="dropdown"
-              >
+              <a href="#" class="btn btn-clean btn-sm btn-icon btn-icon-md options_btn" data-toggle="dropdown">
                 <i class="flaticon-more-1"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right">
                 <ul class="kt-nav">
                   <li class="kt-nav__item">
-                    <a
-                      href="#"
-                      class="kt-nav__link"
-                      routerLink="/user/demandview/{{ arrayItem.demand.id }}"
-                    >
+                    <a href="#" class="kt-nav__link" routerLink="/user/demandview/{{ arrayItem.demand.id }}">
                       <i class="kt-nav__link-icon flaticon-eye"></i>
                       <span class="kt-nav__link-text">View</span>
                     </a>
                   </li>
                   <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a
-                      routerLink="/user/demand/{{ arrayItem.demand.id }}"
-                      class="kt-nav__link"
-                    >
+                    <a routerLink="/user/demand/{{ arrayItem.demand.id }}" class="kt-nav__link">
                       <i class="kt-nav__link-icon flaticon-edit"></i>
                       <span class="kt-nav__link-text">Edit</span>
                     </a>
                   </li>
                   <li class="kt-nav__item" *ngIf="appData.role == 'Employer'">
-                    <a
-                      (click)="createDuplicateDemand(arrayItem.id)"
-                      class="kt-nav__link"
-                    >
+                    <a (click)="createDuplicateDemand(arrayItem.id)" class="kt-nav__link">
                       <i class="kt-nav__link-icon flaticon2-copy"></i>
                       <span class="kt-nav__link-text">Duplicate</span>
                     </a>
@@ -393,15 +344,18 @@
               </div>
             </div>
           </div>
-          <div
-            class="detailed_list_item row"
-            [ngClass]="{
+          <div class="detailed_list_item row" [ngClass]="{
               isShow: show('demandWon'),
               isHide: !show('demandWon')
-            }"
-            *ngFor="let arrayItem of demandData.demandsWon; let i = index"
-          >
-            <div class="col-md-3 detailed_list_title">
+            }" *ngFor="let arrayItem of demandData.demandsWon; let i = index">
+            <!-- <div class="col-md-1" *ngIf="arrayItem.demand.files && arrayItem.demand.files.length==0">
+            <img src="../../../../assets/media/company-logos/logo-1.png" />
+          </div>
+          <div class="col-md-1" *ngIf="arrayItem.demand.files.length">
+            <img style="width: 128px;
+            height: 66px;" src="{{ arrayItem.demand.files[2].filepath }}" />
+          </div> -->
+            <div class="col-md-2 detailed_list_title">
               <h5>
                 <a routerLink="/user/demandview/{{ arrayItem.demand.id }}">{{
                   arrayItem.demand.title ? arrayItem.demand.title : '-'
@@ -422,10 +376,7 @@
               <span class="detailed_list_label">Location</span>
             </div>
 
-            <div
-              class="col-md-2"
-              *ngIf="demandsWoncategory[i] && demandsWoncategory[i].length"
-            >
+            <div class="col-md-2" *ngIf="demandsWoncategory[i] && demandsWoncategory[i].length">
               {{
                 demandsWoncategory[i].length > 1
                   ? demandsWoncategory[i].join(', ')
@@ -433,10 +384,7 @@
               }}
               <span class="detailed_list_label">Categories</span>
             </div>
-            <div
-              class="col-md-2"
-              *ngIf="demandsWoncategory[i] && demandsWoncategory[i].length == 0"
-            >
+            <div class="col-md-2" *ngIf="demandsWoncategory[i] && demandsWoncategory[i].length == 0">
               -
               <span class="detailed_list_label">Categories</span>
             </div>
@@ -450,14 +398,9 @@
               <span class="detailed_list_label">Total Demands</span>
             </div>
             <div class="col-md-2 text-center">
-              <a
-                class="btn btn-secondary btn-secondary--icon"
-                target="_blank"
-                href="https://supplio.resolvehost.com/backoffice/public/api/documents/generateDocument?id={{
+              <a class="btn btn-secondary btn-secondary--icon" target="_blank" href="https://supplio.resolvehost.com/backoffice/public/api/documents/generateDocument?id={{
                   arrayItem.demand.id
-                }}"
-                >Genrate Document</a
-              >
+                }}">Genrate Document</a>
             </div>
           </div>
         </div>

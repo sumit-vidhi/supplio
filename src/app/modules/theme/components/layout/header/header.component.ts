@@ -32,7 +32,8 @@ export class HeaderComponent implements OnInit {
 
   public _seconds: number;
   commingSoon = false;
-  image: any = '/assets/images/defaultProfile.jpg';
+  plan = "Free";
+  image: any = '/assets/img/defaultuser.png';
   constructor(public loginService: JWTAuthService, private loader: LoaderService, public _router: Router,
     public userservice: UserService) {
   }
@@ -42,37 +43,12 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    let plan = 'basic';
-    this._trialEndsAt = "2020-02-15";
-    //console.log(this.loginService.get)
-    interval(3000).pipe(map((x) => {
-      this._diff = Date.parse(this._trialEndsAt) - Date.parse(new Date().toString());
-    })).subscribe((x) => {
-      this._days = this.getDays(this._diff);
-      this._hours = this.getHours(this._diff);
-      this._minutes = this.getMinutes(this._diff);
-      this._seconds = this.getSeconds(this._diff);
-      if (this._days <= 0 && this._hours <= 0 && this._minutes <= 0 && this._seconds <= 0) {
-        this.commingSoon = true;
-      }
+    this.loginService.getImage();
+    this.loginService.image.subscribe((data) => {
+      console.log(2323);
+      this.image = data;
     });
 
-    if (this.loginService.getImage()) {
-      this.image = this.loginService.getImage();
-
-    }
-    if (this.loginService.getUserAccessToken()) {
-      plan = this.loginService.getPlan();
-    }
-    this.loader.blogData.subscribe((value) => {
-      this.blogPage = value;
-    });
-    this.appData = JSON.parse(window.localStorage[APP_USER]);
-    console.log(this.appData);
-    this.compayLogo = this.appData.files.filter((data) => {
-      return data.file_key == 'company_logo';
-    });
-    //console.log(compayLogo);
   }
 
   capitalize(s) {

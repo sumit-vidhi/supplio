@@ -288,7 +288,7 @@ export class DemandComponent implements OnInit {
 
   getSubcategory(id, i) {
     this.loader.startLoading();
-    this.userService.getAllSubcategoies(id).subscribe((result: any) => {
+    this.userService.getAllSubcategoies().subscribe((result: any) => {
       this.loader.stopLoading();
       this.subcategory[i] = result.payload.categories;
     });
@@ -296,7 +296,7 @@ export class DemandComponent implements OnInit {
 
   categoryChange(event, i) {
     this.loader.startLoading();
-    this.userService.getAllSubcategoies(event.target.value).subscribe((result: any) => {
+    this.userService.getAllSubcategoies().subscribe((result: any) => {
       this.loader.stopLoading();
       this.subcategory[i] = result.payload.categories;
     });

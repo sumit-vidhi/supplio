@@ -95,8 +95,8 @@ export class UserService {
   getSubcategoies(): Observable<ApiResponseModel> {
     return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getSubcategory);
   }
-  getAllSubcategoies(id): Observable<ApiResponseModel> {
-    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getAllSubcategory + "?parent=" + id);
+  getAllSubcategoies(): Observable<ApiResponseModel> {
+    return this.commonHttp.get<ApiResponseModel>(appApiUrl.auth.getAllSubcategory);
   }
   createCopyDemand(data): Observable<ApiResponseModel> {
     return this.commonHttp.post<ApiResponseModel>(appApiUrl.auth.duplicate, data);

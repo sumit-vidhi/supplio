@@ -15,6 +15,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 })
 export class PricingComponent implements OnInit {
   plan = [];
+  package_id;
   @Input() page;
   basicAuth = 'Basic AVpPmq8qGICC4JBKLoN6SJp5fwkXiicz96B4-w30wrci06ShOIpSn0bWJsF8z6VowmojdjmFx2b_uHfWEICOP0zkMQ7K_vMs_VGqrb9eRmBTTFQ0VKSeQx92mz0auQwMz359WR2QbOMXQ1Gp3iRiZMqStvd_qm6p';  //Pass your ClientId + scret key
   planId: any;
@@ -51,14 +52,16 @@ export class PricingComponent implements OnInit {
         console.log(data);
         self.modalReference.close();
         self.myDiv.nativeElement.click();
-        data["package_id"] = self.planId;
+        data["package_id"] = self.package_id;
         self.loader.startLoading();
         const id = self.appData.id;
         self.userService.addsubscription(data).subscribe((result: any) => {
-          self.userService.getProfiledata(id).subscribe((resul: any) => {
-            result.payload.user["authToken"] = this.appData.authToken;
-            self.loginService.setLoginUserDetail(result.payload.agency);
+          self.userService.getProfiledata(id).subscribe((resultdata: any) => {
+            console.log(self.appData);
+            resultdata.payload.agency["authToken"] = self.appData.authToken;
+            self.loginService.setLoginUserDetail(resultdata.payload.agency);
             self.loader.stopLoading();
+            self.ngOnInit();
           })
         })
       },
@@ -73,12 +76,17 @@ export class PricingComponent implements OnInit {
     };
   }
 
-  setPlan(plan, template) {
+  setPlan(plan, id, template) {
     if (this.page == 'pricing') {
-      this.setsubscription.emit(plan);
+      const data = {
+        plan: plan,
+        id: id
+      }
+      this.setsubscription.emit(data);
     } else {
-      this.createSubscription();
       this.planId = plan;
+      this.package_id = id;
+      this.createSubscription();
       this.open(template);
     }
 

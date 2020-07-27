@@ -12,12 +12,13 @@ import { Observable, of as observableOf } from 'rxjs';
 
 import { APP_USER } from '@configs/app-settings.config';
 import { CommonBase } from '@core/interfaces/common-base';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: "root"
 })
 export class JWTAuthService {
+  public image = new BehaviorSubject<any>(null);
   constructor(
     private router: Router
   ) { }
@@ -68,19 +69,21 @@ export class JWTAuthService {
   */
   setLoginUserDetail(obj: CommonBase): void {
     window.localStorage[APP_USER] = JSON.stringify(obj);
+    this.getImage();
     this.router.navigate(["/user"]);
   }
-   /**
-  * @function setLoginUserDetail
-  * @description
-  * Set login user details in local storage
-  * @param {obj} {CommonBase}
-  * @returns none
-  */
- setLoginUserDetailData(obj: CommonBase): void {
-  window.localStorage[APP_USER] = JSON.stringify(obj);
-  //this.router.navigate(["user"]);
-}
+  /**
+ * @function setLoginUserDetail
+ * @description
+ * Set login user details in local storage
+ * @param {obj} {CommonBase}
+ * @returns none
+ */
+  setLoginUserDetailData(obj: CommonBase): void {
+    window.localStorage[APP_USER] = JSON.stringify(obj);
+    this.getImage();
+    //this.router.navigate(["user"]);
+  }
 
   /**
   * @function
@@ -118,11 +121,11 @@ export class JWTAuthService {
   * @returns {void}
   */
   deleteUserAccessToken(redirect: boolean = true): void {
-  const type=localStorage.getItem("userType");
+    const type = localStorage.getItem("userType");
     window.localStorage.clear();
     console.log(redirect);
     if (redirect === true) {
-      this.router.navigate(["auth/login/"+type]);
+      this.router.navigate(["auth/login/" + type]);
       // window.location.reload();
     }
   }
@@ -181,9 +184,17 @@ export class JWTAuthService {
   * Get login user id
   * @returns {CommonBase}
   */
-  getPlan() {
-    if (window.localStorage[APP_USER]) {
-      return JSON.parse(window.localStorage[APP_USER]).type;
+  getsPackage() {
+    if (window.localStorage[APP_USER] && JSON.parse(window.localStorage[APP_USER]).package) {
+      return JSON.parse(window.localStorage[APP_USER]).package.name;
+    }
+  }
+
+  getWallet() {
+    if (window.localStorage[APP_USER] && JSON.parse(window.localStorage[APP_USER]).package) {
+      if (JSON.parse(window.localStorage[APP_USER]).package.amount_monthly == 0) {
+        return JSON.parse(window.localStorage[APP_USER]).package.wallet;
+      }
     }
   }
 
@@ -236,7 +247,11 @@ export class JWTAuthService {
  */
   getImage(): CommonBase {
     if (window.localStorage[APP_USER]) {
-      return JSON.parse(window.localStorage[APP_USER]).image;
+      if (JSON.parse(window.localStorage[APP_USER]).files.length) {
+        this.image.next(JSON.parse(window.localStorage[APP_USER]).files[2].filepath);
+        return JSON.parse(window.localStorage[APP_USER]).files[2].filepath;
+      }
+
     }
   }
 

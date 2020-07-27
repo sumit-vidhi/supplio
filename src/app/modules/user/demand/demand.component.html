@@ -708,11 +708,28 @@
                       <label>Working hours per day</label>
                     </div>
                     <div class="form-group col-md-8">
+                      <select id="accommodation" class="form-control" formControlName="working_hours_day" [ngClass]="{
+                        'is-invalid': submitted && f.working_hours_day.errors
+                      }">
+                        <option [ngValue]="null">Select Contract Type</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                      </select>
                       <!-- <label>Working hours per day</label> -->
-                      <input type="text" class="form-control" id="" placeholder="x hours"
+                      <!-- <input type="text" class="form-control" id="" placeholder="x hours"
                         formControlName="working_hours_day" [ngClass]="{
                           'is-invalid': submitted && f.working_hours_day.errors
-                        }" />
+                        }" /> -->
                       <div *ngIf="submitted && f.working_hours_day.errors" class="invalid-feedback">
                         <div *ngIf="f.working_hours_day.errors.required">
                           Working hours day is required
@@ -725,11 +742,24 @@
                       <label>Working days per week</label>
                     </div>
                     <div class="form-group col-md-8">
+
+                      <select id="accommodation" class="form-control" formControlName="working_hours_week" [ngClass]="{
+                        'is-invalid': submitted && f.working_hours_week.errors
+                      }">
+                        <option [ngValue]="null">Select Contract Type</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                      </select>
                       <!-- <label>Working days per week</label> -->
-                      <input type="text" class="form-control" id="" placeholder="x days"
+                      <!-- <input type="text" class="form-control" id="" placeholder="x days"
                         formControlName="working_hours_week" [ngClass]="{
                           'is-invalid': submitted && f.working_hours_week.errors
-                        }" />
+                        }" /> -->
                       <div *ngIf="submitted && f.working_hours_week.errors" class="invalid-feedback">
                         <div *ngIf="f.working_hours_week.errors.required">
                           Working hours week is required
@@ -742,10 +772,18 @@
                       <label>Probation period</label>
                     </div>
                     <div class="form-group col-md-8">
-                      <input type="text" class="form-control" id="" placeholder="x months"
-                        formControlName="probation_period" [ngClass]="{
-                          'is-invalid': submitted && f.probation_period.errors
-                        }" />
+                      <select id="accommodation" class="form-control" formControlName="probation_period" [ngClass]="{
+                        'is-invalid': submitted && f.probation_period.errors
+                      }">
+                        <option [ngValue]="null">Probation period</option>
+                        <option value="1">1 month</option>
+                        <option value="2">2 month</option>
+                        <option value="3">3 month</option>
+                        <option value="4">4 month</option>
+                        <option value="5">5 month</option>
+                        <option value="6">6 month</option>
+                      </select>
+
                       <div *ngIf="submitted && f.probation_period.errors" class="invalid-feedback">
                         <div *ngIf="f.probation_period.errors.required">
                           Probation period is required
@@ -816,10 +854,19 @@
                       <label>Paid Leaves</label>
                     </div>
                     <div class="form-group col-md-4">
-                      <input type="text" class="form-control" id="" placeholder="Paid Leaves"
+
+                      <select id="accommodation" class="form-control" formControlName="paid_leaves" [ngClass]="{
+                        'is-invalid': submitted && f.paid_leaves.errors
+                      }">
+                        <option [ngValue]="null">Select</option>
+
+                        <option value="1">1</option>
+                      </select>
+
+                      <!-- <input type="text" class="form-control" id="" placeholder="Paid Leaves"
                         formControlName="paid_leaves" [ngClass]="{
                           'is-invalid': submitted && f.paid_leaves.errors
-                        }" />
+                        }" /> -->
                       <div *ngIf="submitted && f.paid_leaves.errors" class="invalid-feedback">
                         <div *ngIf="f.paid_leaves.errors.required">
                           Paid leaves is required
@@ -1382,7 +1429,7 @@
                       <span class="kt-option__label">
                         <span class="kt-option__head">
                           <span class="kt-option__title">
-                            Start a Context
+                            Start a Contest
                           </span>
                           <span class="kt-option__focus">
                             <i class="fa fa-globe" aria-hidden="true"></i>

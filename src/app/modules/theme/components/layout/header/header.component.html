@@ -101,12 +101,11 @@
                   loginService.getFirstUserName()
                 }}</span>
 
-                <span class="kt-header__topbar-icon" *ngIf="compayLogo.length"><img alt="Pic"
-                    src="{{ compayLogo[0].filepath }}" class="" /></span>
-                <span class="kt-header__topbar-icon" *ngIf="compayLogo.length == 0">
+                <span class="kt-header__topbar-icon" *ngIf="image"><img alt="Pic" src="{{ image }}" class="" /></span>
+                <!-- <span class="kt-header__topbar-icon" *ngIf="!image">
                   {{ loginService.getFirstUserName() }}
                   {{ loginService.getLastUserName() }}
-                </span>
+                </span> -->
               </div>
               <!-- <p><small>As Agency</small></p> -->
               <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
@@ -114,18 +113,18 @@
                 <div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x"
                   style="background-image: url(/assets/media/misc/bg-1.jpg);">
                   <div class="kt-user-card__avatar">
-                    <img *ngIf="compayLogo.length" alt="Pic" src="{{ compayLogo[0].filepath }}" />
+                    <img *ngIf="image" alt="Pic" src="{{ image }}" />
 
                     <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
-                    <span *ngIf="!compayLogo.length"
+                    <span *ngIf="!image"
                       class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">{{ capitalize(loginService.getFirstUserName()) }}</span>
                   </div>
                   <div class="kt-user-card__name">
                     {{ loginService.getFirstUserName() }}
                     {{ loginService.getLastUserName() }}
-                    <p *ngIf="loginService.getRole() === 'Agency'">
-                      <span class="label label-success" *ngIf="appData && appData.package">
-                        {{ appData.package.name }}
+                    <p *ngIf="loginService.getRole() === 'Agency' && loginService.getsPackage()">
+                      <span class="label label-success">
+                        {{ loginService.getsPackage() }}
                       </span>
                     </p>
                   </div>
@@ -192,7 +191,8 @@
                       </div>
                     </div>
                   </a>
-                  <a href="#" class="kt-notification__item" *ngIf="loginService.getRole() === 'Agency'">
+                  <a href="#" class="kt-notification__item"
+                    *ngIf="loginService.getRole() === 'Agency' && loginService.getWallet()">
                     <div class="kt-notification__item-icon">
                       <i class="flaticon-piggy-bank kt-font-success"></i>
                     </div>
@@ -201,13 +201,9 @@
                         Wallet
                       </div>
                       <div class="kt-notification__item-time">
-                        <p *ngIf="appData.wallet">
-                          $ {{ appData.wallet.amount }}
+                        <p>
+                          $ {{ loginService.getWallet() }}
                         </p>
-                        <p *ngIf="!appData.wallet">0</p>
-                        <!-- <p *ngIf="appData.package">
-                          {{ appData.package.name }}
-                        </p> -->
                       </div>
                     </div>
                   </a>
